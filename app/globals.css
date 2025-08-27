@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+
+:root{
+  --primary-black: #344450;
+  --primary-white: #fcfcfc;
+  --gradient-primary-from: #d93732;
+  --gradient-primary-to: #492f32;
+  --gradient-secondary-from: #593a19;
+  --gradient-secondary-to: #d8793a;
+  --accent-yellow: #fdad00;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body,#root{
+  height:100%;
+}
+
+.bg-gradient-primary{
+  background: linear-gradient(90deg,var(--gradient-primary-from),var(--gradient-primary-to));
+}
+.bg-gradient-secondary{
+  background: linear-gradient(90deg,var(--gradient-secondary-from),var(--gradient-secondary-to));
+}
+
+.glass {
+  backdrop-filter: blur(6px);
+  background-color: rgba(255,255,255,0.04);
+}
+
+.btn-primary{
+  background: linear-gradient(90deg,var(--gradient-primary-from),var(--gradient-primary-to));
+  color: white;
+}
+
+.btn-gradient-primer{
+  background: linear-gradient(90deg,var(--gradient-primary-from),var(--gradient-primary-to));
+}
+
+.shadow-soft{
+  box-shadow: 0 6px 24px rgba(16,24,40,0.12);
+}
+
+.brand-font{font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
