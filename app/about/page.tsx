@@ -24,7 +24,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="pt-24 min-h-screen bg-white">
+    <div className="pt-12 md:pt-24 min-h-screen bg-white">
       {/* Professional Header Section */}
       <div className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-6">
@@ -38,10 +38,10 @@ export default function AboutPage() {
           </nav>
 
           {/* Main Hero Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-0 md:mb-24">
             {/* Left: Headline and Description */}
-            <div className="space-y-8">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+            <div className="order-2 lg:order-1 space-y-8">
+              <h1 className="text-4xl md:text-4xl lg:text-7xl font-bold text-gray-900 leading-tight">
                 <span className="text-gray-900">We build bridges</span>
                 <br />
                 <span className="text-gray-700">between companies</span>
@@ -52,10 +52,25 @@ export default function AboutPage() {
               <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
                 To build software that gives customer-facing teams at small- and medium-sized businesses the ability to create fruitful and enduring relationships with customers.
               </p>
+              <button
+                type="button"
+                onClick={() => {
+                  const section = document.getElementById("about-hei-section");
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-[#d93732] text-[#d93732] font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-[#d93732] hover:to-[#492f32] hover:text-white w-full md:w-auto mx-auto"
+              >
+                Learn More
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             </div>
 
             {/* Right: Main Visual */}
-            <div className="relative">
+            <div className="order-1 lg:order-2 relative">
               <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden shadow-2xl overflow-hidden">
                 <Image
                   src="/images/image-export-2.jpg"
@@ -71,11 +86,11 @@ export default function AboutPage() {
       </div>
 
       {/* About HEI Section */}
-      <div className="bg-gray-50 py-20">
+      <div id="about-hei-section" className="bg-gray-50 py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left: Content */}
-            <div className="space-y-8">
+            <div className="order-2 lg:order-1 space-y-8">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
                 Together we are strong
               </h2>
@@ -98,13 +113,13 @@ export default function AboutPage() {
               <div className="flex flex-col sm:flex-row gap-6 pt-6">
               <Link
                   href="/registration/exhibitor"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   Book Your Space!
                 </Link>
                 <Link
                   href="/exhibition"
-                  className="inline-flex items-center px-8 py-4 border-2 border-[#d93732] text-[#d93732] font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-[#d93732] hover:to-[#492f32] hover:text-white"
+                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-[#d93732] text-[#d93732] font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-[#d93732] hover:to-[#492f32] hover:text-white"
                 >
                   See Exhibition
                 </Link>
@@ -112,7 +127,7 @@ export default function AboutPage() {
             </div>
 
             {/* Right: Image */}
-            <div className="relative">
+            <div className="order-1 lg:order-2 relative">
               <div className="aspect-square bg-white rounded-2xl p-8 flex items-center justify-center shadow-xl">
                 <Image
                   src="/images/hexi_logo.png"
@@ -129,7 +144,7 @@ export default function AboutPage() {
 
       {/* Full Width Image Section - 16:6 Aspect Ratio */}
       <div className="relative">
-          <div className="aspect-[16/6] flex items-center justify-center overflow-hidden">
+          <div className="aspect-[16/9] md:aspect-[16/6] flex items-center justify-center overflow-hidden">
             <Image
               src="/images/image-export-3.jpg"
               alt="Halal Expo Indonesia Exhibition Hall"
@@ -147,7 +162,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             {/* Right: Content */}
-            <div className="space-y-8">
+            <div className="order-2 lg:order-1 space-y-8">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
                 The Organizer
               </h2>
@@ -200,7 +215,7 @@ export default function AboutPage() {
                   href="https://www.skyconnection.co.id/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 w-full md:w-auto mx-auto"
                 >
                   See Organizer Profile
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -210,7 +225,7 @@ export default function AboutPage() {
               </div>
             </div>
              {/* Right: Image Slider */}
-<div className="relative">
+<div className="order-1 lg:order-2 relative">
   <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden shadow-2xl">
     {/* Slider Container */}
     <div className="relative w-full h-full overflow-hidden">
@@ -286,7 +301,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
               href="/registration/exhibitor"
-              className="inline-flex items-center px-10 py-4 bg-white text-[#d93732] font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center justify-center px-10 py-4 bg-white text-[#d93732] font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 w-full md:w-auto"
             >
               Register as Exhibitor
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -295,7 +310,7 @@ export default function AboutPage() {
             </Link>
             <Link
               href="/registration/buyer"
-              className="inline-flex items-center px-10 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#d93732] transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center justify-center px-10 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#d93732] transition-all duration-300 hover:scale-105 w-full md:w-auto"
             >
               Register as Buyer
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
