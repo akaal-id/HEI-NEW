@@ -1,7 +1,28 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function AboutPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const goToNext = () => {
+    setCurrentSlide((prev) => (prev === 2 ? 0 : prev + 1));
+  };
+
+  const goToPrevious = () => {
+    setCurrentSlide((prev) => (prev === 0 ? 2 : prev - 1));
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(goToNext, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="pt-24 min-h-screen bg-white">
       {/* Professional Header Section */}
@@ -73,16 +94,19 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* CTA Button */}
-              <div className="pt-6">
-                <Link
-                  href="/exhibition"
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-6 pt-6">
+              <Link
+                  href="/registration/exhibitor"
                   className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
-                  Learn More About HEI
-                  <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  Book Your Space!
+                </Link>
+                <Link
+                  href="/exhibition"
+                  className="inline-flex items-center px-8 py-4 border-2 border-[#d93732] text-[#d93732] font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-[#d93732] hover:to-[#492f32] hover:text-white"
+                >
+                  See Exhibition
                 </Link>
               </div>
             </div>
@@ -121,18 +145,6 @@ export default function AboutPage() {
       <div className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Image */}
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 flex items-center justify-center shadow-xl">
-                <Image
-                  src="/images/main logo_compile.png"
-                  alt="PT Angan Kreasi Semesta - The Organizer"
-                  width={400}
-                  height={400}
-                  className="w-full h-auto max-w-sm"
-                />
-              </div>
-            </div>
 
             {/* Right: Content */}
             <div className="space-y-8">
@@ -165,6 +177,15 @@ export default function AboutPage() {
                 </div>
               </div>
 
+              <div className="flex flex-row items-start justify-start gap-12 mb-4 pt-6">
+              <Link href="https://www.skyconnection.co.id/" className="flex flex-row items-start justify-start gap-12 mb-4" target="_blank" rel="noopener noreferrer">
+              <img src="/images/Angkasa-1.png" alt="Organization Logo" className="items-left w-auto max-h-16 mb-4 hover:-translate-y-1 transition-all duration-300" />
+              </Link>
+              <Link href="https://www.skyconnection.co.id/" className="flex flex-row items-start justify-start gap-12 mb-4" target="_blank" rel="noopener noreferrer">
+              <img src="/images/skyconnection.png" alt="Organization Logo" className="items-left w-auto max-h-16 mb-4 hover:-translate-y-1 transition-all duration-300" />
+              </Link>
+              </div>
+
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p className="text-lg">
                   PT Angan Kreasi Semesta, the organizer of Halal Expo Indonesia, is an event planning and organizing company specializing in Meetings, Incentives, Conferences, and Exhibitions (MICE). Beyond MICE, we also manage various events such as corporate gatherings, product launches, festivals, seminars, workshops, and more.
@@ -174,7 +195,81 @@ export default function AboutPage() {
                   Established in 2010, our company is led by a dynamic professional leader and supported by a team of young, creative, and experienced talents. With passion and expertise, we are committed to delivering impactful and memorable events for our clients.
                 </p>
               </div>
+              <div className="pt-6">
+                <Link
+                  href="https://www.skyconnection.co.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+                >
+                  See Organizer Profile
+                  <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
             </div>
+             {/* Right: Image Slider */}
+<div className="relative">
+  <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden shadow-2xl">
+    {/* Slider Container */}
+    <div className="relative w-full h-full overflow-hidden">
+      {/* Slides */}
+      <div 
+        className="flex transition-transform duration-500 ease-in-out h-full"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {['/images/IMG_0914.JPG', '/images/IMG_7166.JPG', '/images/IMG_7352.JPG'].map((src, index) => (
+          <div key={src} className="w-full h-full flex-shrink-0">
+            <Image
+              src={src}
+              alt={`Halal Expo Indonesia ${index + 1}`}
+              width={600}
+              height={600}
+              className="w-full h-full object-cover object-center hover:scale-110 transition-all duration-300"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={goToPrevious}
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md transition-all duration-200"
+        aria-label="Previous slide"
+      >
+        <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button
+        onClick={goToNext}
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md transition-all duration-200"
+        aria-label="Next slide"
+      >
+        <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {[1, 2, 3].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-200 ${
+              currentSlide === index ? 'bg-white' : 'bg-white/50'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
