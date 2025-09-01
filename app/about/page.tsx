@@ -1,10 +1,11 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function AboutPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const aboutSectionRef = useRef<HTMLDivElement>(null);
 
   const goToNext = () => {
     setCurrentSlide((prev) => (prev === 2 ? 0 : prev + 1));
@@ -52,21 +53,6 @@ export default function AboutPage() {
               <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
                 To build software that gives customer-facing teams at small- and medium-sized businesses the ability to create fruitful and enduring relationships with customers.
               </p>
-              <button
-                type="button"
-                onClick={() => {
-                  const section = document.getElementById("about-hei-section");
-                  if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-[#d93732] text-[#d93732] font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-[#d93732] hover:to-[#492f32] hover:text-white w-full md:w-auto mx-auto"
-              >
-                Learn More
-                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
             </div>
 
             {/* Right: Main Visual */}
@@ -82,11 +68,25 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+          <div className="flex justify-center">
+          <button
+                 type="button"
+                 onClick={() => {
+                   aboutSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+                 }}
+                 className="inline-flex items-center justify-center px-8 py-4 text-[#d93732] border-t-2 font-semibold hover:text-[#492f32] hover:underline transition-all duration-300 w-full mx-auto mt-8 md:mt-0"
+               >
+                 Learn More
+                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                 </svg>
+               </button>
+          </div>
         </div>
       </div>
 
       {/* About HEI Section */}
-      <div id="about-hei-section" className="bg-gray-50 py-20">
+             <div ref={aboutSectionRef} className="bg-gray-50 py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left: Content */}
@@ -168,10 +168,10 @@ export default function AboutPage() {
               </h2>
               
               {/* Company Stats */}
-              <div className="grid grid-cols-5 pt-6">
+              <div className="grid grid-cols-5 pt-6 justify-items-center">
                 <div className="text-center hover:-translate-y-1 transition-all duration-300">
                   <img src="/images/established.png" alt="Year Established" className="w-12 h-12 mb-4 mx-auto" />
-                  <div className="text-3xl font-bold text-[#d93732] mb-2">2010</div>
+                  <div className="text-2xl font-bold text-[#d93732] mb-2">2010</div>
                   <div className="text-sm text-gray-600">Year Est.</div>
                 </div>
                 <div className="flex items-center justify-center">
@@ -179,7 +179,7 @@ export default function AboutPage() {
                 </div>
                 <div className="text-center hover:-translate-y-1 transition-all duration-300">
                   <img src="/images/event-organizer.png" alt="Specialization" className="w-12 h-12 mb-4 mx-auto" />
-                  <div className="text-3xl font-bold text-[#d93732] mb-2">MICE</div>
+                  <div className="text-2xl font-bold text-[#d93732] mb-2">MICE</div>
                   <div className="text-sm text-gray-600">Specialization</div>
                 </div>
                 <div className="flex items-center justify-center">
@@ -187,7 +187,7 @@ export default function AboutPage() {
                 </div>
                 <div className="text-center hover:-translate-y-1 transition-all duration-300">
                   <img src="/images/clients.png" alt="Clients" className="w-12 h-12 mb-4 mx-auto" />
-                  <div className="text-3xl font-bold text-[#d93732] mb-2">1000</div>
+                  <div className="text-2xl font-bold text-[#d93732] mb-2">1000</div>
                   <div className="text-sm text-gray-600">Clients</div>
                 </div>
               </div>

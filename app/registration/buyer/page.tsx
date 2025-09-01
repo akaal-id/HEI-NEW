@@ -1,7 +1,9 @@
 "use client"
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function BuyerPage() {
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [form, setForm] = useState({
     title: '',
     fullName: '',
@@ -62,7 +64,7 @@ export default function BuyerPage() {
         })
 
         // Since no-cors doesn't give us response details, we assume success
-        alert('Registration submitted successfully!')
+        setShowSuccessModal(true)
         
         // Reset form
         setForm({
@@ -94,7 +96,21 @@ export default function BuyerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#8B4513] to-[#654321] pt-24">
+    <div className="min-h-screen bg-gradient-to-b from-[#8B4513] to-[#654321] pt-12 md:pt-0">
+      {/* Full Width Image */}
+      <div className="relative w-full">
+        <div className="aspect-[16/6] flex items-center justify-center overflow-hidden">
+          <Image
+            src="/images/image-export-2.jpg"
+            alt="Halal Expo Indonesia Exhibition"
+            width={1920}
+            height={720}
+            className="w-full h-full object-cover object-center"
+            priority
+          />
+        </div>
+      </div>
+      
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Title */}
         <div className="text-center mb-12">
@@ -516,6 +532,61 @@ export default function BuyerPage() {
           </form>
         </div>
       </div>
+      
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center">
+            {/* Success Icon */}
+            <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            
+            {/* Title */}
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Registration Successful!
+            </h3>
+            
+            {/* Message */}
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              Thank you for registering as a buyer! Our committee will review your application and contact you within 2-3 business days to discuss your requirements and connect you with relevant exhibitors.
+            </p>
+            
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="flex-1 bg-[#d49e00] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#b88a00] transition-colors duration-300"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => {
+                  setShowSuccessModal(false)
+                  // Reset form for another submission
+                  setForm({
+                    title: '',
+                    fullName: '',
+                    mobileNumber: '',
+                    email: '',
+                    country: '',
+                    company: '',
+                    jobTitle: '',
+                    companyNumber: '',
+                    companyWebsite: ''
+                  })
+                  setErrors({})
+                }}
+                className="flex-1 border-2 border-[#d49e00] text-[#d49e00] font-semibold py-3 px-6 rounded-lg hover:bg-[#d49e00] hover:text-white transition-all duration-300"
+              >
+                Submit Another
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

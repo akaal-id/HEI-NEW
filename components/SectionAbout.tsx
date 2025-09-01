@@ -13,7 +13,7 @@ export default function SectionAbout() {
       className="bg-gray-50 py-20"
       id="about"
     >
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6 md:px-0">
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
@@ -44,7 +44,7 @@ export default function SectionAbout() {
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-12">
           {/* Left: Content */}
-          <div className="space-y-6">
+          <div className="order-2 lg:order-1 space-y-6">
             <h3 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
               We build bridges between companies and customers
             </h3>
@@ -74,7 +74,7 @@ export default function SectionAbout() {
           </div>
 
           {/* Right: Image */}
-          <div className="relative">
+          <div className="order-1 lg:order-2 relative">
             <div className="aspect-square rounded-2xl flex items-center justify-center shadow-xl overflow-hidden">
               <Image
                 src="/images/image-export-1.jpg"

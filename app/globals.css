@@ -39,6 +39,25 @@ html,body,#root{
   background: linear-gradient(90deg,var(--gradient-primary-from),var(--gradient-primary-to));
 }
 
+.btn-gradient-secondary{
+  background: linear-gradient(90deg,var(--gradient-secondary-from),var(--gradient-secondary-to));
+}
+
+.btn-border-white{
+  border: 1px solid white;
+  color: white;
+}
+
+.btn-white{
+  background: white;
+  color: var(--gradient-primary-from);
+}
+
+.btn-yellow{
+  background: var(--accent-yellow);
+  color: var(--primary-black);
+}
+
 .shadow-soft{
   box-shadow: 0 6px 24px rgba(16,24,40,0.12);
 }
