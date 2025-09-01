@@ -13,7 +13,7 @@ export default function SectionContact(){
 
   return (
     <motion.section initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }} className="py-16 bg-primaryWhite">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold">Contact Us</h2>
         <form onSubmit={submit} className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           <input required placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} className="p-3 border rounded" />

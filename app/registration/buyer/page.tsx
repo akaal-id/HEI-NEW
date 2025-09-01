@@ -1308,7 +1308,7 @@ export default function BuyerPage() {
                 REGISTER AS BUYER
               </button>
             </div>
-          </form>
+        </form>
         </div>
       </div>
     </div>

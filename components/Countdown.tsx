@@ -50,54 +50,54 @@ export default function Countdown() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Left Section - Promotional Text */}
           <div className="text-center lg:text-left">
-            <h1 className="text-2xl lg:text-3xl font-light text-white leading-tight">
-              <span className="text-white">Get ready to join the largest </span>
-              <span className="text-[#d49e00] font-semibold text-4xl lg:text-4xl">B2B Halal Export Exhibition</span>
+            <h1 className="text-2xl font-light text-white leading-tight">
+              <span className="text-white text-3xl">Get ready to join the largest </span>
+              <span className="text-[#d49e00] font-semibold text-4xl">B2B Halal Export Exhibition</span>
               <span className="text-white"> in the country</span>
             </h1>
           </div>
 
           {/* Right Section - Countdown Timer */}
-          <div className="flex flex-row relative items-center gap-6 px-2 md:px-0">
+          <div className="flex flex-row relative items-center gap-6 px-2 md:px-0 xl:gap-5">
             {/* Days */}
             <div className="text-center">
-              <div className="text-4xl lg:text-7xl font-medium text-[#d49e00] leading-none md:w-16 w-12 lg:w-24 text-center">
+              <div className="text-4xl lg:text-7xl font-medium text-[#d49e00] leading-none md:w-16 w-12 lg:w-24 text-center xl:text-6xl xl:w-20">
                 {formatNumber(timeLeft.days)}
               </div>
-              <div className="text-white text-sm lg:text-base mt-1">Days</div>
+              <div className="text-white text-sm lg:text-base mt-1 xl:text-sm">Days</div>
             </div>
 
             {/* Separator */}
-            <div className="w-px md:h-32 h-24 bg-white"></div>
+            <div className="w-px md:h-32 h-24 bg-white xl:h-28"></div>
 
             {/* Hours */}
             <div className="text-center">
-              <div className="text-4xl lg:text-7xl font-medium text-[#d49e00] leading-none md:w-16 w-12 lg:w-24 text-center">
+              <div className="text-4xl lg:text-7xl font-medium text-[#d49e00] leading-none md:w-16 w-12 lg:w-24 text-center xl:text-6xl xl:w-20">
                 {formatNumber(timeLeft.hours)}
               </div>
-              <div className="text-white text-sm lg:text-base mt-1">Hours</div>
+              <div className="text-white text-sm lg:text-base mt-1 xl:text-sm">Hours</div>
             </div>
 
             {/* Separator */}
-            <div className="w-px md:h-32 h-24 bg-white"></div>
+            <div className="w-px md:h-32 h-24 bg-white xl:h-28"></div>
 
             {/* Minutes */}
             <div className="text-center">
-              <div className="text-4xl lg:text-7xl font-medium text-[#d49e00] leading-none md:w-16 w-12 lg:w-24 text-center">
+              <div className="text-4xl lg:text-7xl font-medium text-[#d49e00] leading-none md:w-16 w-12 lg:w-24 text-center xl:text-6xl xl:w-20">
                 {formatNumber(timeLeft.minutes)}
               </div>
-              <div className="text-white text-sm lg:text-base mt-1">Minutes</div>
+              <div className="text-white text-sm lg:text-base mt-1 xl:text-sm">Minutes</div>
             </div>
 
             {/* Separator */}
-            <div className="w-px md:h-32 h-24 bg-white"></div>
+            <div className="w-px md:h-32 h-24 bg-white xl:h-28"></div>
 
             {/* Seconds */}
             <div className="text-center">
-              <div className="text-4xl lg:text-7xl font-medium text-[#d49e00] leading-none md:w-16 w-12 lg:w-24 text-center">
+              <div className="text-4xl lg:text-7xl font-medium text-[#d49e00] leading-none md:w-16 w-12 lg:w-24 text-center xl:text-6xl xl:w-20">
                 {formatNumber(timeLeft.seconds)}
               </div>
-              <div className="text-white text-sm lg:text-base mt-1">Second</div>
+              <div className="text-white text-sm lg:text-base mt-1 xl:text-sm">Second</div>
             </div>
           </div>
         </div>

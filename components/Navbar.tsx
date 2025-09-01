@@ -22,19 +22,19 @@ export default function Navbar() {
     >
       <div className="bg-white mx-auto px-0 flex items-center justify-between md:h-[72px] h-[48px]">
         {/* logo container */}
-        <div className="md:h-[160px] h-[80px] relative flex items-start md:py-10 py-2">
-          <div className="md:w-[220px] w-[140px] md:h-[120px] h-[96px] bg-white flex items-center justify-center px-3 shadow-2xl">
+        <div className="md:h-[160px] h-[80px] relative flex items-start md:py-10 py-2 xl:h-[140px] xl:py-8">
+          <div className="md:w-[220px] w-[140px] md:h-[120px] h-[96px] bg-white flex items-center justify-center px-3 shadow-2xl xl:w-[200px] xl:h-[110px] xl:px-2.5">
             <Link href="/" className="flex items-center justify-center">
               <img
                 src="/images/logo-hei.png"
                 alt="hei logo"
-                className="md:h-[72px] h-[48px]"
+                className="md:h-[72px] h-[48px] xl:h-[68px]"
               />
             </Link>
           </div>
           {/* gradient accent bottom - Desktop */}
           <div
-            className="absolute left-0 bottom-0 w-[220px] h-2 hidden md:block"
+            className="absolute left-0 -bottom-2 w-[220px] h-2 hidden md:block xl:w-[200px]"
             style={{
               background: "linear-gradient(90deg,#d93732,#492f32)",
             }}
@@ -49,8 +49,8 @@ export default function Navbar() {
         </div>
 
         {/* center menu - Desktop */}
-        <nav className="hidden md:flex flex-1 items-center justify-center h-[72px]">
-          <ul className="flex gap-10 items-center text-lg font-normal relative">
+        <nav className="hidden md:flex flex-1 items-center justify-center h-[72px] xl:h-[68px]">
+          <ul className="flex gap-10 items-center text-lg font-normal relative xl:gap-8 xl:text-base">
             <li className="relative group">
               <Link href="/" className={`transition-colors ${pathname === "/" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`}>
                 HOME
@@ -130,17 +130,17 @@ export default function Navbar() {
               )}
               
               {/* Dropdown Menu */}
-              <div className="absolute top-full left-0 mt-6 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div className="absolute top-8 left-0 mt-6 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 xl:mt-5 xl:w-60">
                 <div className="py-2">
                   <Link 
                     href="/registration/exhibitor" 
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors xl:px-3 xl:py-2.5"
                   >
                     Register as Exhibitor
                   </Link>
                   <Link 
                     href="/registration/buyer" 
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors xl:px-3 xl:py-2.5"
                   >
                     Register as Buyer
                   </Link>
@@ -148,7 +148,7 @@ export default function Navbar() {
                     href="https://2025.tradexpoindonesia.com/register" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors xl:px-3 xl:py-2.5"
                   >
                     Register as Visitor
                   </a>
@@ -159,7 +159,7 @@ export default function Navbar() {
         </nav>
 
         {/* contact button - Desktop */}
-        <div className="hidden md:flex items-center h-[72px] mr-6">
+        <div className="hidden md:flex items-center h-[72px] mr-6 xl:h-[68px] xl:mr-5">
           <div
             className="rounded-lg p-0.5"
             style={{
@@ -168,14 +168,15 @@ export default function Navbar() {
           >
             <button
               onClick={() => setOpen(true)}
-              className="flex items-center gap-3 bg-gradient-to-r from-[#d93732] to-[#492f32] rounded-md px-4 py-2 text-white font-semibold hover:bg-gradient-to-r hover:from-[#492f32] hover:to-[#d93732] transition-all duration-300"
+              className="flex items-center gap-3 bg-gradient-to-r from-[#d93732] to-[#492f32] rounded-md px-4 py-2 text-white font-semibold hover:bg-gradient-to-r hover:from-[#492f32] hover:to-[#d93732] transition-all duration-300 xl:gap-2.5 xl:px-3.5 xl:py-1.5"
             >
               <img
                 src="/images/phone-icon.png"
                 alt="phone"
                 style={{ height: 20 }}
+                className="xl:h-[18px]"
               />
-              <span className="uppercase text-sm">Contact Us</span>
+              <span className="uppercase text-sm xl:text-xs">Contact Us</span>
             </button>
           </div>
         </div>

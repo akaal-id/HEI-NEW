@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xl': '1280px', // MacBook Pro M2 13" breakpoint
+      },
       colors: {
         black: '#344450',
         white: '#fcfcfc',

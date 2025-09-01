@@ -686,7 +686,7 @@ export default function ExhibitorPage() {
                 REGISTER AS EXHIBITOR
               </button>
             </div>
-          </form>
+        </form>
         </div>
       </div>
     </div>
