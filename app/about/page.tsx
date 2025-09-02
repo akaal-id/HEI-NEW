@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 export default function AboutPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -25,7 +26,13 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="pt-12 md:pt-24 min-h-screen bg-white">
+    <motion.div 
+      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeIn" }}
+      className="pt-12 md:pt-24 min-h-screen bg-white"
+    >
       {/* Professional Header Section */}
       <div className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-6">
@@ -320,6 +327,6 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import GoogleFormHelper from '../../../components/GoogleFormHelper'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 
 export default function ExhibitorPage() {
@@ -165,7 +166,13 @@ export default function ExhibitorPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#492f32] to-[#2a1a1c]">
+    <motion.div 
+      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeIn" }}
+      className="min-h-screen bg-gradient-to-r from-[#492f32] to-[#2a1a1c]"
+    >
       {/* Full Width Image */}
       <div className="relative w-full">
         <div className="aspect-[1/1] md:aspect-[16/6] flex items-center justify-center overflow-hidden">
@@ -828,6 +835,6 @@ export default function ExhibitorPage() {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }

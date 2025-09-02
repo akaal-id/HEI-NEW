@@ -6,10 +6,10 @@ import Link from 'next/link';
 export default function SectionAbout() {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.8, ease: "easeIn" }}
       className="bg-gray-50 py-20"
       id="about"
     >
@@ -25,36 +25,36 @@ export default function SectionAbout() {
           <div className="text-center p-8 bg-white rounded-2xl border-2 border-gray-200 hover:shadow-lg transition-all duration-300">
             <img src="/images/export.png" alt="B2B" className="w-16 h-16 mb-3 mx-auto" />
             <div className="text-lg font-semibold text-gray-800 mb-2">Halal Export Platform</div>
-            <div className="text-gray-600">Connecting providers with consumers</div>
+            <div className="text-gray-600">Empowering Global Halal Market & Trade Connections</div>
           </div>
           
           <div className="text-center p-8 bg-white rounded-2xl border-2 border-gray-200 hover:shadow-lg transition-all duration-300">
             <img src="/images/halal.png" alt="Halal" className="w-16 h-16 mb-3 mx-auto" />
-            <div className="text-lg font-semibold text-gray-800 mb-2">Halal Industry</div>
-            <div className="text-gray-600">Food, cosmetics, pharmaceuticals & more</div>
+            <div className="text-lg font-semibold text-gray-800 mb-2">Halal Exhibitor Diversity</div>
+            <div className="text-gray-600">FnB's Logistics, Ingredients, Certification & Technology</div>
           </div>
           
           <div className="text-center p-8 bg-white rounded-2xl border-2 border-gray-200 hover:shadow-lg transition-all duration-300">
             <img src="/images/global.png" alt="Global" className="w-16 h-16 mb-3 mx-auto" />
             <div className="text-lg font-semibold text-gray-800 mb-2">Global Reach</div>
-            <div className="text-gray-600">Southeast Asia's premier exhibition</div>
+            <div className="text-gray-600">Gateway to Worldwide & Southeast Asia's Halal Markets</div>
           </div>
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: Content */}
           <div className="order-2 lg:order-1 space-y-6">
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-              We build bridges between companies and customers
+            <h3 className="text-3xl md:text-4xl font-bold pr-6 text-gray-900 leading-tight">
+              We build bridges between <span className="text-[#d93732]">Companies & Customers</span>
             </h3>
             
-            <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p className="text-lg">
+            <div className="space-y-4 text-md text-gray-600 leading-relaxed">
+              <p className="">
                 As the world's largest Muslim-majority country, Indonesia has a rapidly growing demand for halal products and services. Halal Expo Indonesia is a B2B platform designed to meet this demand by connecting providers with consumers and businesses.
               </p>
               
-              <p className="text-lg">
+              <p className="">
                 The halal industry is not limited to food and beverages — it also includes cosmetics, pharmaceuticals, fashion, tourism, and finance. This exhibition brings together players from across these sectors, creating stronger business networks and driving the growth of the halal economy in Indonesia and beyond.
               </p>
             </div>

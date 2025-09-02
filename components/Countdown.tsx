@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function Countdown() {
   const [timeLeft, setTimeLeft] = useState({
@@ -45,7 +46,13 @@ export default function Countdown() {
   };
 
   return (
-    <section className="bg-[#492f32] py-12 px-2 md:px-0">
+    <motion.section 
+      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeIn" }}
+      className="bg-[#492f32] py-12 px-2 md:px-0"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Left Section - Promotional Text */}
@@ -102,6 +109,6 @@ export default function Countdown() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

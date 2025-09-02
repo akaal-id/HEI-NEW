@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 // TypeScript interfaces
 interface AgendaItem {
@@ -84,20 +85,26 @@ export default function ExhibitionPage() {
     if (isActive) {
       return `${baseClasses} scale-100 opacity-100 z-20 left-1/2 transform -translate-x-1/2`;
     } else if (isLeft) {
-      return `${baseClasses} scale-85 opacity-20 blur-md z-10 left-1/2 transform -translate-x-full -translate-x-8`;
+      return `${baseClasses} scale-85 opacity-30 blur-md z-10 left-1/2 transform -translate-x-full -translate-x-8`;
     } else if (isRight) {
-      return `${baseClasses} scale-85 opacity-20 blur-md z-10 left-1/2 transform translate-x-8`;
+      return `${baseClasses} scale-85 opacity-30 blur-md z-10 left-1/2 transform translate-x-8`;
     } else if (isFarLeft) {
-      return `${baseClasses} scale-85 opacity-20 blur-md z-5 left-1/2 transform -translate-x-full -translate-x-16`;
+      return `${baseClasses} scale-85 opacity-30 blur-md z-5 left-1/2 transform -translate-x-full -translate-x-16`;
     } else if (isFarRight) {
-      return `${baseClasses} scale-85 opacity-20 blur-md z-5 left-1/2 transform translate-x-8`;
+      return `${baseClasses} scale-85 opacity-30 blur-md z-5 left-1/2 transform translate-x-8`;
     } else {
-      return `${baseClasses} scale-85 opacity-20 blur-md z-0 left-1/2 transform -translate-x-1/2`;
+      return `${baseClasses} scale-85 opacity-30 blur-md z-0 left-1/2 transform -translate-x-1/2`;
     }
   };
 
   return (
-    <div className="py-24 min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <motion.div 
+      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeIn" }}
+      className="py-24 min-h-screen bg-gradient-to-b from-gray-50 to-white"
+    >
       {/* Header Section */}
       <div className="max-w-4xl mx-auto px-6 py-16 text-left md:text-center">
         <h1 className="mb-6">
@@ -113,12 +120,12 @@ export default function ExhibitionPage() {
       </div>
 
       {/* Carousel Section */}
-      <div className="items-center justify-center max-w-6xl mx-auto px-8">
+      <div className="items-center justify-center max-w-6xl mx-auto">
         <div className="relative">
           {/* Navigation Buttons */}
           <button
             onClick={prevCard}
-            className="absolute left-4 md:left-24 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white text-gray-700 hover:text-[#d93732] p-2 md:p-3 rounded-full shadow-lg transition-all duration-300"
+            className="absolute left-2 md:left-24 top-40 md:top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-gray-700 hover:text-[#d93732] p-2 md:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
             aria-label="Previous card"
           >
             <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,7 +135,7 @@ export default function ExhibitionPage() {
           
           <button
             onClick={nextCard}
-            className="absolute right-4 md:right-24 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white text-gray-700 hover:text-[#d93732] p-2 md:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+            className="absolute right-2 md:right-24 top-40 md:top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-gray-700 hover:text-[#d93732] p-2 md:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
             aria-label="Next card"
           >
             <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,16 +144,16 @@ export default function ExhibitionPage() {
           </button>
 
           {/* Cards Container */}
-          <div className="flex items-center justify-center px-8">
-            <div className="relative w-full max-w-7xl h-[500px] md:h-[600px]">
+          <div className="flex items-center justify-center overflow-hidden md:overflow-visible">
+            <div className="relative w-screen h-[500px] md:h-[600px]">
               {agendaItems.map((item, index) => (
                 <div
                   key={item.id}
                   className={getCardClasses(index)}
-                  style={{ width: 'clamp(280px, 80vw, 720px)' }}
+                  style={{ width: 'clamp(346px, 80vw, 820px)' }}
                 >
                 <div className={`relative items-center justify-center aspect-square md:aspect-[16/9] rounded-xl overflow-hidden cursor-pointer transition-all duration-700 ${
-                  index === activeIndex ? 'shadow-xl shadow-[#d93732]/20' : 'shadow-lg'
+                  index === activeIndex ? 'shadow-xl shadow-[#d93732]/60' : 'shadow-lg'
                 }`}
                      onClick={() => goToCard(index)}>
                   {/* Background Image */}
@@ -163,10 +170,10 @@ export default function ExhibitionPage() {
                   
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-10 text-white">
-                    <h3 className="text-4xl font-bold mb-4 text-left">
+                    <h3 className="text-2xl md:text-4xl font-bold mb-4 text-left">
                       {item.title}
                     </h3>
-                    <p className="text-xl opacity-90 text-left leading-relaxed">
+                    <p className="text-md md:text-xl opacity-90 text-left leading-relaxed">
                       {item.shortDescription}
                     </p>
                   </div>
@@ -177,7 +184,7 @@ export default function ExhibitionPage() {
           </div>
 
           {/* Card Indicators */}
-          <div className="flex justify-center -mt-40 space-x-3">
+          <div className="flex justify-center -mt-32 md:-mt-24 space-x-3">
             {agendaItems.map((_, index) => (
               <button
                 key={index}
@@ -195,21 +202,142 @@ export default function ExhibitionPage() {
       </div>
 
       {/* Detailed Description Section */}
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-4xl mx-auto">
         <div className="p-8 md:p-12">
           <div
             key={activeIndex}
             className="animate-fade-in"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-6">
               {agendaItems[activeIndex].title}
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-md md:text-lg text-gray-600 leading-relaxed">
               {agendaItems[activeIndex].fullDescription}
             </p>
           </div>
         </div>
       </div>
+      
+      {/* Exhibitor Categories */}
+      <div className="w-full mx-auto px-6 py-16 text-center bg-gradient-to-b from-[#492f32] to-[#160609]">
+        <div className="max-w-2xl mx-auto mb-12">
+        <h2 className="text-4xl md:text-5xl font-normal text-white leading-tight mb-4">Halal Export Indonesia <span className="text-5xl md:text-6xl font-bold text-yellow">Exhibitor Categories</span></h2>
+        <p className="text-md md:text-lg text-white/90 leading-relaxed">
+          Halal Export Indonesia is a platform for businesses to showcase their products and services to global buyers.
+        </p>
+        </div>
+      {/* Exhibitor Categories Cards */}
+      <div className="max-w-6xl mx-auto grid grid-rows-1 md:grid-rows-none md:grid-cols-3 gap-8 px-0 md:px-6 py-0 mb-16">
+        <div
+          className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
+          style={{
+            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '260px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            zIndex: 1,
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-red-900 via-red-500/30 to-transparent" />
+          <div className="relative z-10">
+            <div className="text-left text-lg font-semibold text-white pr-24">Halal Logistics & Supply Chain</div>
+          </div>
+        </div>
+        <div
+          className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
+          style={{
+            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '260px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            zIndex: 1,
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow via-yellow/10 to-transparent" />
+          <div className="relative z-10">
+            <div className="text-left text-lg font-semibold text-white pr-24">Processing & Packaging Technology</div>
+          </div>
+        </div>
+        <div
+          className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
+          style={{
+            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '260px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            zIndex: 1,
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-red-900 via-red-500/30 to-transparent" />
+          <div className="relative z-10">
+            <div className="text-left text-lg font-semibold text-white pr-24">Halal Raw Materials & Ingredients</div>
+          </div>
+        </div>
+        <div
+          className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
+          style={{
+            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '260px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            zIndex: 1,
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow via-yellow/10 to-transparent" />
+          <div className="relative z-10">
+            <div className="text-left text-lg font-semibold text-white pr-24">Certification & Consulting</div>
+          </div>
+        </div>
+        <div
+          className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
+          style={{
+            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '260px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            zIndex: 1,
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-red-900 via-red-500/30 to-transparent" />
+          <div className="relative z-10">
+            <div className="text-left text-lg font-semibold text-white pr-24">Halal Logistics & Supply Chain</div>
+          </div>
+        </div>
+        <div
+          className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
+          style={{
+            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '260px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            zIndex: 1,
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow via-yellow/10 to-transparent" />
+          <div className="relative z-10">
+            <div className="text-left text-lg font-semibold text-white pr-24">Digital Platforms & Export E-Commerce</div>
+          </div>
+        </div>
+        </div>
+        </div>
 
       {/* Contact Section */}
       <div className="bg-gradient-to-r from-[#d93732] to-[#492f32] py-20">
@@ -242,8 +370,8 @@ export default function ExhibitionPage() {
               Contact Marketing
             </a>
           </div>
-        </div>
       </div>
+    </div>
 
       {/* Custom CSS for animations */}
       <style jsx>{`
@@ -262,6 +390,6 @@ export default function ExhibitionPage() {
           animation: fade-in 0.6s ease-out;
         }
       `}</style>
-    </div>
+    </motion.div>
   );
 }

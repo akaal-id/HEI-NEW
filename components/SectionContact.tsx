@@ -12,7 +12,13 @@ export default function SectionContact(){
   }
 
   return (
-    <motion.section initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }} className="py-16 bg-primaryWhite">
+    <motion.section 
+      initial={{ filter: "blur(10px)", opacity:0, y:20 }} 
+      whileInView={{ filter: "blur(0px)", opacity:1, y:0 }} 
+      viewport={{ once:true }} 
+      transition={{ duration:0.8, ease: "easeIn" }} 
+      className="py-16 bg-primaryWhite"
+    >
       <div className="mx-auto bg-gradient-to-r from-[#d93732] to-[#492f32] py-16 px-6 md:px-0">
         <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-semibold text-white">Contact Us</h2>
