@@ -24,6 +24,11 @@ export default function ExhibitorPage() {
 
   const [errors, setErrors] = useState<{[key: string]: string}>({})
 
+  // Helper function to format numbers (remove non-numeric characters)
+  const formatNumber = (value: string) => {
+    return value.replace(/[^0-9]/g, '')
+  }
+
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {}
     
@@ -149,6 +154,10 @@ export default function ExhibitorPage() {
   }
 
   const handleInputChange = (field: string, value: string) => {
+    // Format numbers for mobile number field
+    if (field === 'mobileNumber') {
+      value = formatNumber(value)
+    }
     setForm(prev => ({ ...prev, [field]: value }))
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }))
@@ -242,59 +251,50 @@ export default function ExhibitorPage() {
                 <label className="block text-white text-sm font-medium mb-2">
                   Mobile Number*
                 </label>
-                <div className="flex">
-                  <div className="flex-shrink-0 w-28 px-3 py-3 bg-white rounded-l-lg border border-r-0 border-gray-300">
+                <div className="flex w-full">
+                  <div className="flex-shrink-0 w-16 px-1 py-3 bg-white rounded-l-lg border border-r-0 border-gray-300">
                     <select
                       value={form.countryCode}
                       onChange={(e) => handleInputChange('countryCode', e.target.value)}
-                      className="w-full text-sm font-medium text-gray-700 focus:outline-none focus:ring-0 border-0 p-0"
+                      className="w-full text-xs font-medium text-gray-700 focus:outline-none focus:ring-0 border-0 p-0"
                     >
-                      <option value="+62">🇮🇩 +62 (Indonesia)</option>
-                      <option value="+60">🇲🇾 +60 (Malaysia)</option>
-                      <option value="+65">🇸🇬 +65 (Singapore)</option>
-                      <option value="+66">🇹🇭 +66 (Thailand)</option>
-                      <option value="+63">🇵🇭 +63 (Philippines)</option>
-                      <option value="+84">🇻🇳 +84 (Vietnam)</option>
-                      <option value="+673">🇧🇳 +673 (Brunei)</option>
-                      <option value="+95">🇲🇲 +95 (Myanmar)</option>
-                      <option value="+856">🇱🇦 +856 (Laos)</option>
-                      <option value="+855">🇰🇭 +855 (Cambodia)</option>
-                      <option value="+91">🇮🇳 +91 (India)</option>
-                      <option value="+86">🇨🇳 +86 (China)</option>
-                      <option value="+81">🇯🇵 +81 (Japan)</option>
-                      <option value="+82">🇰🇷 +82 (South Korea)</option>
-                      <option value="+1">🇺🇸 +1 (USA)</option>
-                      <option value="+44">🇬🇧 +44 (UK)</option>
-                      <option value="+49">🇩🇪 +49 (Germany)</option>
-                      <option value="+33">🇫🇷 +33 (France)</option>
-                      <option value="+39">🇮🇹 +39 (Italy)</option>
-                      <option value="+34">🇪🇸 +34 (Spain)</option>
-                      <option value="+31">🇳🇱 +31 (Netherlands)</option>
-                      <option value="+32">🇧🇪 +32 (Belgium)</option>
-                      <option value="+41">🇨🇭 +41 (Switzerland)</option>
-                      <option value="+46">🇸🇪 +46 (Sweden)</option>
-                      <option value="+47">🇳🇴 +47 (Norway)</option>
-                      <option value="+45">🇩🇰 +45 (Denmark)</option>
-                      <option value="+358">🇫🇮 +358 (Finland)</option>
-                      <option value="+354">🇮🇸 +354 (Iceland)</option>
-                      <option value="+48">🇵🇱 +48 (Poland)</option>
-                      <option value="+420">🇨🇿 +420 (Czech Republic)</option>
-                      <option value="+36">🇭🇺 +36 (Hungary)</option>
-                      <option value="+43">🇦🇹 +43 (Austria)</option>
-                      <option value="+351">🇵🇹 +351 (Portugal)</option>
-                      <option value="+30">🇬🇷 +30 (Greece)</option>
-                      <option value="+90">🇹🇷 +90 (Turkey)</option>
-                      <option value="+7">🇷🇺 +7 (Russia)</option>
-                      <option value="+380">🇺🇦 +380 (Ukraine)</option>
-                      <option value="+48">🇵🇱 +48 (Poland)</option>
-                      <option value="+420">🇨🇿 +420 (Czech Republic)</option>
-                      <option value="+36">🇭🇺 +36 (Hungary)</option>
-                      <option value="+43">🇦🇹 +43 (Austria)</option>
-                      <option value="+351">🇵🇹 +351 (Portugal)</option>
-                      <option value="+30">🇬🇷 +30 (Greece)</option>
-                      <option value="+90">🇹🇷 +90 (Turkey)</option>
-                      <option value="+7">🇷🇺 +7 (Russia)</option>
-                      <option value="+380">🇺🇦 +380 (Ukraine)</option>
+                      <option value="+62">+62 (Indonesia)</option>
+                      <option value="+60">+60 (Malaysia)</option>
+                      <option value="+65">+65 (Singapore)</option>
+                      <option value="+66">+66 (Thailand)</option>
+                      <option value="+63">+63 (Philippines)</option>
+                      <option value="+84">+84 (Vietnam)</option>
+                      <option value="+673">+673 (Brunei)</option>
+                      <option value="+95">+95 (Myanmar)</option>
+                      <option value="+856">+856 (Laos)</option>
+                      <option value="+855">+855 (Cambodia)</option>
+                      <option value="+91">+91 (India)</option>
+                      <option value="+86">+86 (China)</option>
+                      <option value="+81">+81 (Japan)</option>
+                      <option value="+82">+82 (South Korea)</option>
+                      <option value="+1">+1 (USA)</option>
+                      <option value="+44">+44 (UK)</option>
+                      <option value="+49">+49 (Germany)</option>
+                      <option value="+33">+33 (France)</option>
+                      <option value="+39">+39 (Italy)</option>
+                      <option value="+34">+34 (Spain)</option>
+                      <option value="+31">+31 (Netherlands)</option>
+                      <option value="+32">+32 (Belgium)</option>
+                      <option value="+41">+41 (Switzerland)</option>
+                      <option value="+46">+46 (Sweden)</option>
+                      <option value="+47">+47 (Norway)</option>
+                      <option value="+45">+45 (Denmark)</option>
+                      <option value="+358">+358 (Finland)</option>
+                      <option value="+354">+354 (Iceland)</option>
+                      <option value="+48">+48 (Poland)</option>
+                      <option value="+420">+420 (Czech Republic)</option>
+                      <option value="+36">+36 (Hungary)</option>
+                      <option value="+43">+43 (Austria)</option>
+                      <option value="+351">+351 (Portugal)</option>
+                      <option value="+30">+30 (Greece)</option>
+                      <option value="+90">+90 (Turkey)</option>
+                      <option value="+7">+7 (Russia)</option>
+                      <option value="+380">+380 (Ukraine)</option>
                     </select>
                   </div>
                   <input
