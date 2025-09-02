@@ -24,6 +24,11 @@ export default function ExhibitorPage() {
 
   const [errors, setErrors] = useState<{[key: string]: string}>({})
 
+  // Helper function to format numbers (remove non-numeric characters)
+  const formatNumber = (value: string) => {
+    return value.replace(/[^0-9]/g, '')
+  }
+
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {}
     
@@ -149,6 +154,10 @@ export default function ExhibitorPage() {
   }
 
   const handleInputChange = (field: string, value: string) => {
+    // Format numbers for mobile number field
+    if (field === 'mobileNumber') {
+      value = formatNumber(value)
+    }
     setForm(prev => ({ ...prev, [field]: value }))
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }))
