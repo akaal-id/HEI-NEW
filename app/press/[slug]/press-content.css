@@ -1,0 +1,161 @@
+/* Custom styles for press article content */
+.press-content {
+  line-height: 1.7;
+  color: #374151;
+}
+
+.press-content p {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.press-content h1,
+.press-content h2,
+.press-content h3,
+.press-content h4,
+.press-content h5,
+.press-content h6 {
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.press-content h1 {
+  font-size: 2rem;
+}
+
+.press-content h2 {
+  font-size: 1.75rem;
+}
+
+.press-content h3 {
+  font-size: 1.5rem;
+}
+
+.press-content h4 {
+  font-size: 1.25rem;
+}
+
+.press-content ul,
+.press-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.press-content li {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.press-content strong,
+.press-content b {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.press-content em,
+.press-content i {
+  font-style: italic;
+}
+
+.press-content a {
+  color: #dc2626;
+  text-decoration: underline;
+}
+
+.press-content a:hover {
+  color: #b91c1c;
+}
+
+/* Google Docs specific formatting - Enhanced */
+.press-content span[style*="font-weight: bold"],
+.press-content span[style*="font-weight:bold"],
+.press-content span[style*="font-weight: 700"],
+.press-content span[style*="font-weight:700"],
+.press-content span[style*="font-weight: bold;"],
+.press-content span[style*="font-weight:bold;"] {
+  font-weight: 700 !important;
+}
+
+.press-content span[style*="font-style: italic"],
+.press-content span[style*="font-style:italic"],
+.press-content span[style*="font-style: italic;"],
+.press-content span[style*="font-style:italic;"] {
+  font-style: italic !important;
+}
+
+.press-content span[style*="text-decoration: underline"],
+.press-content span[style*="text-decoration:underline"],
+.press-content span[style*="text-decoration: underline;"],
+.press-content span[style*="text-decoration:underline;"] {
+  text-decoration: underline !important;
+}
+
+/* Google Docs class-based formatting */
+.press-content .c0,
+.press-content .c1,
+.press-content .c2,
+.press-content .c3,
+.press-content .c4,
+.press-content .c5,
+.press-content .c6,
+.press-content .c7,
+.press-content .c8,
+.press-content .c9 {
+  /* These are Google Docs content classes - preserve their styling */
+}
+
+/* Force bold for any span with bold-related classes or styles */
+.press-content span[class*="bold"],
+.press-content span[class*="Bold"],
+.press-content span[class*="strong"],
+.press-content span[class*="Strong"] {
+  font-weight: 700 !important;
+}
+
+/* Force italic for any span with italic-related classes or styles */
+.press-content span[class*="italic"],
+.press-content span[class*="Italic"],
+.press-content span[class*="em"],
+.press-content span[class*="Em"] {
+  font-style: italic !important;
+}
+
+/* Text alignment */
+.press-content p[style*="text-align: center"],
+.press-content p[style*="text-align:center"],
+.press-content div[style*="text-align: center"],
+.press-content div[style*="text-align:center"] {
+  text-align: center !important;
+}
+
+.press-content p[style*="text-align: right"],
+.press-content p[style*="text-align:right"],
+.press-content div[style*="text-align: right"],
+.press-content div[style*="text-align:right"] {
+  text-align: right !important;
+}
+
+.press-content p[style*="text-align: justify"],
+.press-content p[style*="text-align:justify"],
+.press-content div[style*="text-align: justify"],
+.press-content div[style*="text-align:justify"] {
+  text-align: justify !important;
+}
+
+/* Ensure proper spacing for paragraphs */
+.press-content p:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+/* Style for bullet points */
+.press-content ul li {
+  list-style-type: disc;
+}
+
+.press-content ol li {
+  list-style-type: decimal;
+}
