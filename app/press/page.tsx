@@ -1,5 +1,8 @@
 import PressCard from "@/components/PressCard";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 interface PressArticle {
   id: string;
   title: string;

@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import "./press-content.css";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 interface PressArticle {
   id: string;
   title: string;
@@ -166,25 +169,4 @@ export default async function PressArticlePage({ params }: PressArticlePageProps
   );
 }
 
-// Generate static params for all articles
-export async function generateStaticParams() {
-  try {
-    // Use environment variable or fallback to localhost for development
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const response = await fetch(`${baseUrl}/api/press`, {
-      cache: 'no-store'
-    });
-    
-    if (!response.ok) {
-      return [];
-    }
-    
-    const articles = await response.json();
-    return articles.map((article: PressArticle) => ({
-      slug: article.slug,
-    }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
-}
+// Note: generateStaticParams removed because we're using dynamic rendering
