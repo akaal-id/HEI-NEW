@@ -24,10 +24,20 @@ interface PressArticlePageProps {
 
 async function getPressArticle(slug: string): Promise<PressArticle | null> {
   try {
-    // Use absolute URL for both development and production
-    const baseUrl = process.env.NODE_ENV === 'production' 
-      ? process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000' // Use environment variable or fallback
-      : 'http://localhost:3000';
+    // Get the base URL - use environment variable or construct from request
+    let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    
+    if (!baseUrl) {
+      // Fallback: construct URL based on environment
+      if (process.env.NODE_ENV === 'production') {
+        // In production, we need to use the actual domain
+        // This will be set by your deployment platform
+        baseUrl = 'https://the2nd-hei-git-main-akaals-projects.vercel.app';
+      } else {
+        baseUrl = 'http://localhost:3000';
+      }
+    }
+    
     const response = await fetch(`${baseUrl}/api/press/${slug}`, {
       cache: 'no-store' // Always fetch fresh data
     });
