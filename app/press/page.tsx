@@ -11,7 +11,9 @@ interface PressArticle {
 
 async function getPressData(): Promise<PressArticle[]> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/press`, {
+    // Use environment variable or fallback to localhost for development
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/press`, {
       cache: 'no-store' // Always fetch fresh data
     });
     

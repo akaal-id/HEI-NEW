@@ -21,7 +21,9 @@ interface PressArticlePageProps {
 
 async function getPressArticle(slug: string): Promise<PressArticle | null> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/press/${slug}`, {
+    // Use environment variable or fallback to localhost for development
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/press/${slug}`, {
       cache: 'no-store' // Always fetch fresh data
     });
     
@@ -167,7 +169,9 @@ export default async function PressArticlePage({ params }: PressArticlePageProps
 // Generate static params for all articles
 export async function generateStaticParams() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/press`, {
+    // Use environment variable or fallback to localhost for development
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/press`, {
       cache: 'no-store'
     });
     
