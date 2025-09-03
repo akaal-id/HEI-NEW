@@ -22,6 +22,7 @@ export default function Home() {
       <Hero />
       <Countdown />
       <SectionAbout />
+      <SectionPress />
       <SectionContact />
       </motion.div>
     </div>
