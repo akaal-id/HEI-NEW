@@ -1,5 +1,8 @@
 import PressCard from "@/components/PressCard";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 interface PressArticle {
   id: string;
   title: string;
@@ -11,15 +14,33 @@ interface PressArticle {
 
 async function getPressData(): Promise<PressArticle[]> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/press`, {
+    // Get the base URL - use environment variable or construct from request
+    let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    
+    if (!baseUrl) {
+      // Fallback: construct URL based on environment
+      if (process.env.NODE_ENV === 'production') {
+        // In production, we need to use the actual domain
+        // This will be set by your deployment platform
+        baseUrl = 'https://the2nd-hei-git-main-akaals-projects.vercel.app';
+      } else {
+        baseUrl = 'http://localhost:3000';
+      }
+    }
+    
+    console.log('Fetching press data from:', `${baseUrl}/api/press`);
+    const response = await fetch(`${baseUrl}/api/press`, {
       cache: 'no-store' // Always fetch fresh data
     });
     
     if (!response.ok) {
-      throw new Error('Failed to fetch press data');
+      console.error('API response not OK:', response.status, response.statusText);
+      throw new Error(`Failed to fetch press data: ${response.status} ${response.statusText}`);
     }
     
-    return await response.json();
+    const data = await response.json();
+    console.log('Successfully fetched press data:', data.length, 'articles');
+    return data;
   } catch (error) {
     console.error('Error fetching press data:', error);
     // Return empty array as fallback
