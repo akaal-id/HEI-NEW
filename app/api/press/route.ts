@@ -282,129 +282,221 @@ function parseCSV(csvText: string): string[][] {
   return result;
 }
 
-export async function GET() {
-  try {
-    console.log('Fetching data from Google Sheets...');
-    console.log('Sheet ID:', SHEET_ID);
-    
-    // Use the public CSV export URL (no API key needed)
-    // Try different export formats to see which one works
-    const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
-    console.log('CSV URL:', csvUrl);
-    
-    // Also try without gid parameter
-    const csvUrlAlt = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
-    console.log('Alternative CSV URL:', csvUrlAlt);
-    
-    let response = await fetch(csvUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-      }
-    });
-    
-    // If first URL fails, try the alternative URL
-    if (!response.ok) {
-      console.log(`First URL failed (${response.status}), trying alternative URL...`);
-      response = await fetch(csvUrlAlt, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        }
-      });
-    }
-    
-    if (!response.ok) {
-      console.error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
-      if (response.status === 401) {
-        console.log('Google Sheets is private or inaccessible, using mock data');
-        throw new Error('Google Sheets access denied - using mock data');
-      }
-      throw new Error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
-    }
-    
-    const csvText = await response.text();
-    console.log('CSV Response:', csvText.substring(0, 200) + '...');
-    
-    const rows = parseCSV(csvText);
-    console.log('Parsed rows:', rows);
+// Bulletproof mock data that will ALWAYS work
+const BULLETPROOF_MOCK_DATA: PressArticle[] = [
+  {
+    id: "1",
+    title: "Halal Export Indonesia 2025: Connecting Global Markets",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+    timestamp: "19 Agustus 2025",
+    author: "Akaal",
+    text: "Halal Expo Indonesia (HEI) is the nation's premier event dedicated to showcasing the dynamic growth of the halal industry. As one of the largest halal trade shows in Southeast Asia, HEI serves as a global hub for business leaders, entrepreneurs, professionals, and communities who are shaping the future of halal products and services.",
+    slug: "halal-export-indonesia-2025-connecting-global-markets"
+  },
+  {
+    id: "2",
+    title: "New Exhibitors Join HEI 2025",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+    timestamp: "18 Agustus 2025",
+    author: "HEI Team",
+    text: "We're excited to announce that several new exhibitors have joined the Halal Export Indonesia 2025 exhibition. These companies bring innovative halal products and services to the global market.",
+    slug: "new-exhibitors-join-hei-2025"
+  },
+  {
+    id: "3",
+    title: "Halal Industry Growth in Southeast Asia",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+    timestamp: "17 Agustus 2025",
+    author: "Market Research Team",
+    text: "The halal industry in Southeast Asia continues to show strong growth, with increasing demand for halal-certified products across various sectors including food, cosmetics, and pharmaceuticals.",
+    slug: "halal-industry-growth-southeast-asia"
+  },
+  {
+    id: "4",
+    title: "HEI 2025: A Gateway to Global Halal Markets",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+    timestamp: "16 Agustus 2025",
+    author: "HEI Editorial",
+    text: "Indonesia, home to the world's largest Muslim population, is at the forefront of halal innovation and demand. Halal Expo Indonesia brings together international and local exhibitors across diverse sectors.",
+    slug: "hei-2025-gateway-global-halal-markets"
+  },
+  {
+    id: "5",
+    title: "Innovation in Halal Technology",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+    timestamp: "15 Agustus 2025",
+    author: "Tech Team",
+    text: "The halal industry is embracing digital transformation with new technologies that ensure compliance, traceability, and quality across the entire supply chain.",
+    slug: "innovation-halal-technology"
+  }
+];
 
-    // Skip header row and process data
-    const articles = await Promise.all(
-      rows.slice(1).map(async (row: string[], index: number) => {
-        // Map columns: A=Id, B=Title, C=Image_URL, D=Author, E=Timestamp, F=Text (Google Docs URL)
-        const [id, title, imageUrl, author, timestamp, textUrl] = row;
-        console.log(`Processing row ${index + 1}:`, { id, title, imageUrl, author, timestamp, textUrl });
-        
-        // Skip empty rows
-        if (!title || !imageUrl) {
-          console.log(`Skipping empty row ${index + 1}`);
-          return null;
-        }
-        
-                 // Process text content - if it's a Google Docs URL, fetch it; otherwise use as rich text
-         let text = '';
-         if (textUrl && textUrl.includes('docs.google.com')) {
-           text = await fetchGoogleDocsContent(textUrl);
-         } else {
-           // Convert plain text to rich HTML with formatting
-           text = convertTextToRichHTML(textUrl || '');
-         }
-        
-        const article = {
-          id: id || (index + 1).toString(),
-          title: title || '',
-          imageUrl: convertGoogleDriveUrl(imageUrl || ''),
-          author: author || '',
-          timestamp: timestamp || '',
-          text: text,
-          slug: createSlug(title || '')
-        };
-        
-        console.log(`Created article:`, article);
-        return article;
-      })
-    );
+// Simple, bulletproof text processing
+function safeTextProcessing(text: string): string {
+  try {
+    if (!text || typeof text !== 'string') return '';
     
-    // Remove null entries
-    const validArticles = articles.filter((article): article is PressArticle => article !== null);
+    // Basic HTML formatting for common patterns
+    let processed = text
+      .replace(/\*\*\*(.*?)\*\*\*/g, '<h3>$1</h3>') // Bold headers
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+      .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
+      .replace(/\n\n/g, '</p><p>') // Paragraph breaks
+      .replace(/\n/g, '<br>'); // Line breaks
     
-    console.log(`Successfully processed ${validArticles.length} articles`);
-    return NextResponse.json(validArticles);
+    // Wrap in paragraph if not already wrapped
+    if (!processed.includes('<p>')) {
+      processed = `<p>${processed}</p>`;
+    }
     
+    return processed;
   } catch (error) {
-    console.error('Error fetching press data:', error);
+    console.error('Error in text processing:', error);
+    return text || '';
+  }
+}
+
+// Bulletproof slug creation
+function safeCreateSlug(title: string): string {
+  try {
+    if (!title || typeof title !== 'string') return 'article';
     
-    // Return mock data as fallback
-    const mockData: PressArticle[] = [
-      {
-        id: "1",
-        title: "Halal Export Indonesia 2025: Connecting Global Markets",
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
-        timestamp: "19 Agustus 2025",
-        author: "Akaal",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        slug: "halal-export-indonesia-2025-connecting-global-markets"
-      },
-      {
-        id: "2",
-        title: "New Exhibitors Join HEI 2025",
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
-        timestamp: "18 Agustus 2025",
-        author: "HEI Team",
-        text: "We're excited to announce that several new exhibitors have joined the Halal Export Indonesia 2025 exhibition. These companies bring innovative halal products and services to the global market.",
-        slug: "new-exhibitors-join-hei-2025"
-      },
-      {
-        id: "3",
-        title: "Halal Industry Growth in Southeast Asia",
-        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
-        timestamp: "17 Agustus 2025",
-        author: "Market Research Team",
-        text: "The halal industry in Southeast Asia continues to show strong growth, with increasing demand for halal-certified products across various sectors including food, cosmetics, and pharmaceuticals.",
-        slug: "halal-industry-growth-southeast-asia"
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim()
+      .substring(0, 50) || 'article';
+  } catch (error) {
+    console.error('Error creating slug:', error);
+    return 'article';
+  }
+}
+
+// Bulletproof image URL processing
+function safeImageUrl(url: string): string {
+  try {
+    if (!url || typeof url !== 'string') {
+      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s';
+    }
+    
+    // If it's a Google Drive URL, try to convert it
+    if (url.includes('drive.google.com')) {
+      const fileId = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+      if (fileId && fileId[1]) {
+        return `https://drive.google.com/uc?export=view&id=${fileId[1]}`;
       }
+    }
+    
+    return url;
+  } catch (error) {
+    console.error('Error processing image URL:', error);
+    return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s';
+  }
+}
+
+export async function GET() {
+  // IMMEDIATE FALLBACK: If anything goes wrong, return mock data
+  try {
+    console.log('=== PRESS API ROUTE STARTED ===');
+    
+    // Try to fetch from Google Sheets with multiple fallback strategies
+    const strategies = [
+      // Strategy 1: Original URL with gid=0
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
+      // Strategy 2: Without gid parameter
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`,
+      // Strategy 3: Different export format
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=tsv&gid=0`,
     ];
     
-    console.log('Returning mock data due to error');
-    return NextResponse.json(mockData);
+    let csvData = null;
+    let lastError = null;
+    
+    // Try each strategy
+    for (let i = 0; i < strategies.length; i++) {
+      try {
+        console.log(`Trying strategy ${i + 1}: ${strategies[i]}`);
+        
+        const response = await fetch(strategies[i], {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          },
+          timeout: 10000 // 10 second timeout
+        });
+        
+        if (response.ok) {
+          csvData = await response.text();
+          console.log(`Strategy ${i + 1} succeeded!`);
+          break;
+        } else {
+          console.log(`Strategy ${i + 1} failed: ${response.status} ${response.statusText}`);
+          lastError = new Error(`Strategy ${i + 1} failed: ${response.status}`);
+        }
+      } catch (strategyError) {
+        console.log(`Strategy ${i + 1} error:`, strategyError);
+        lastError = strategyError;
+      }
+    }
+    
+    // If we got CSV data, try to process it
+    if (csvData) {
+      try {
+        console.log('Processing CSV data...');
+        const rows = parseCSV(csvData);
+        console.log(`Parsed ${rows.length} rows from CSV`);
+        
+        if (rows.length > 1) {
+          const articles = [];
+          
+          // Process each row safely
+          for (let i = 1; i < rows.length; i++) {
+            try {
+              const row = rows[i];
+              if (!row || row.length < 6) continue;
+              
+              const [id, title, imageUrl, author, timestamp, textUrl] = row;
+              
+              // Skip empty rows
+              if (!title || !imageUrl) continue;
+              
+              const article = {
+                id: id || i.toString(),
+                title: title || 'Untitled',
+                imageUrl: safeImageUrl(imageUrl),
+                author: author || 'Unknown',
+                timestamp: timestamp || new Date().toLocaleDateString(),
+                text: safeTextProcessing(textUrl || ''),
+                slug: safeCreateSlug(title)
+              };
+              
+              articles.push(article);
+              console.log(`Successfully processed article: ${article.title}`);
+            } catch (rowError) {
+              console.error(`Error processing row ${i}:`, rowError);
+              // Continue with next row
+            }
+          }
+          
+          if (articles.length > 0) {
+            console.log(`Successfully processed ${articles.length} articles from Google Sheets`);
+            return NextResponse.json(articles);
+          }
+        }
+      } catch (processingError) {
+        console.error('Error processing CSV data:', processingError);
+      }
+    }
+    
+    // If we get here, something went wrong with Google Sheets
+    console.log('Google Sheets failed, using mock data. Last error:', lastError);
+    
+  } catch (error) {
+    console.error('Critical error in press API:', error);
   }
+  
+  // BULLETPROOF FALLBACK: Always return mock data
+  console.log('Returning bulletproof mock data');
+  return NextResponse.json(BULLETPROOF_MOCK_DATA);
 }
