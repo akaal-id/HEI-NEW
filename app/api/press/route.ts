@@ -306,7 +306,7 @@ export async function GET() {
     console.log('Parsed rows:', rows);
     
     // Skip header row and process data
-    const articles: PressArticle[] = await Promise.all(
+    const articles = await Promise.all(
       rows.slice(1).map(async (row: string[], index: number) => {
         // Map columns: A=Id, B=Title, C=Image_URL, D=Author, E=Timestamp, F=Text (Google Docs URL)
         const [id, title, imageUrl, author, timestamp, textUrl] = row;
@@ -344,7 +344,7 @@ export async function GET() {
     );
     
     // Remove null entries
-    const validArticles = articles.filter(Boolean);
+    const validArticles = articles.filter((article): article is PressArticle => article !== null);
     
     console.log(`Successfully processed ${validArticles.length} articles`);
     return NextResponse.json(validArticles);

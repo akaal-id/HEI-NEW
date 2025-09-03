@@ -272,10 +272,11 @@ function parseCSV(csvText: string): string[][] {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
+  const { slug } = await params;
+  
   try {
-    const { slug } = params;
     console.log(`Fetching article with slug: ${slug}`);
 
     // Use the public CSV export URL (no API key needed)
@@ -295,7 +296,7 @@ export async function GET(
     const rows = parseCSV(csvText);
     
     // Process data and find the article with matching slug
-    const articles: PressArticle[] = await Promise.all(
+    const articles = await Promise.all(
       rows.slice(1).map(async (row: string[], index: number) => {
         // Map columns: A=Id, B=Title, C=Image_URL, D=Author, E=Timestamp, F=Text (Google Docs URL)
         const [id, title, imageUrl, author, timestamp, textUrl] = row;
@@ -327,7 +328,7 @@ export async function GET(
     );
     
     // Remove null entries
-    const validArticles = articles.filter(Boolean);
+    const validArticles = articles.filter((article): article is PressArticle => article !== null);
     
     const article = validArticles.find(item => item.slug === slug);
     

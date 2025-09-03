@@ -14,9 +14,9 @@ interface PressArticle {
 }
 
 interface PressArticlePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 async function getPressArticle(slug: string): Promise<PressArticle | null> {
@@ -40,7 +40,8 @@ async function getPressArticle(slug: string): Promise<PressArticle | null> {
 }
 
 export default async function PressArticlePage({ params }: PressArticlePageProps) {
-  const article = await getPressArticle(params.slug);
+  const { slug } = await params;
+  const article = await getPressArticle(slug);
 
   if (!article) {
     notFound();
