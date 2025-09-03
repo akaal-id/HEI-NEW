@@ -14,9 +14,9 @@ interface PressArticle {
 
 async function getPressData(): Promise<PressArticle[]> {
   try {
-    // Use relative URL for production, absolute for development
+    // Use absolute URL for both development and production
     const baseUrl = process.env.NODE_ENV === 'production' 
-      ? '' // Use relative URL in production
+      ? process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000' // Use environment variable or fallback
       : 'http://localhost:3000';
     const response = await fetch(`${baseUrl}/api/press`, {
       cache: 'no-store' // Always fetch fresh data
