@@ -304,13 +304,12 @@ export async function GET() {
     
     const rows = parseCSV(csvText);
     console.log('Parsed rows:', rows);
-    
+
     // Skip header row and process data
-    const articles: PressArticle[] = await Promise.all(
+    const articles = await Promise.all(
       rows.slice(1).map(async (row: string[], index: number) => {
         // Map columns: A=Id, B=Title, C=Image_URL, D=Author, E=Timestamp, F=Text (Google Docs URL)
         const [id, title, imageUrl, author, timestamp, textUrl] = row;
-        
         console.log(`Processing row ${index + 1}:`, { id, title, imageUrl, author, timestamp, textUrl });
         
         // Skip empty rows
