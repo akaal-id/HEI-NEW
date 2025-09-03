@@ -219,13 +219,14 @@ export default function ExhibitionPage() {
       </div>
       
       {/* Exhibitor Categories */}
-      <div className="w-full mx-auto px-6 py-16 text-center bg-gradient-to-b from-[#492f32] to-[#160609]">
+      <div className="w-full mx-auto px-6 py-48 text-center bg-gradient-to-b from-[#492f32] to-[#160609]">
         <div className="max-w-2xl mx-auto mb-12">
         <h2 className="text-4xl md:text-5xl font-normal text-white leading-tight mb-4">Halal Export Indonesia <span className="text-5xl md:text-6xl font-bold text-yellow">Exhibitor Categories</span></h2>
         <p className="text-md md:text-lg text-white/90 leading-relaxed">
           Halal Export Indonesia is a platform for businesses to showcase their products and services to global buyers.
         </p>
         </div>
+      
       {/* Exhibitor Categories Cards */}
       <div className="max-w-6xl mx-auto grid grid-rows-1 md:grid-rows-none md:grid-cols-3 gap-8 px-0 md:px-6 py-0 mb-16">
         <div
@@ -335,6 +336,48 @@ export default function ExhibitionPage() {
           <div className="relative z-10">
             <div className="text-left text-lg font-semibold text-white pr-24">Digital Platforms & Export E-Commerce</div>
           </div>
+        </div>
+        </div>
+        </div>
+
+              
+      {/* Why Exhibit? */}
+      <div className="w-full mx-auto px-6 py-48 text-center bg-white">
+        <div className="max-w-4xl mx-auto mb-12">
+        <h2 className="text-4xl md:text-5xl font-normal text-gray-900 leading-tight mb-4">Why Your Business <br /><span className="text-6xl md:text-7xl font-bold text-[#d93732]">Should Exhibit?</span></h2>
+        <p className="text-md md:text-lg text-gray-600 leading-relaxed">
+          Exhibiting at Halal Export Indonesia gives your business direct access to international buyers, new markets, and valuable industry connections. Showcase your products, build brand credibility, and stay ahead in the rapidly growing global halal industry.
+        </p>
+        </div>
+      
+      {/* Why Exhibit? Cards */}
+      <div className="max-w-6xl mx-auto grid grid-rows-1 md:grid-rows-none md:grid-cols-3 gap-8 px-0 md:px-6 py-0 mb-8">
+        <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+            <div className="text-6xl font-bold text-yellow mb-4 mx-auto">01</div>
+            <div className="text-lg font-semibold text-gray-800 mb-2">Targeted International Exposure</div>
+            <div className="text-gray-600">Showcase your products to potential buyers, importers, distributors, and investors from various countries actively seeking high-quality halal products.</div>
+        </div>
+        <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+            <div className="text-6xl font-bold text-yellow mb-4 mx-auto">02</div>
+            <div className="text-lg font-semibold text-gray-800 mb-2">Enhanced Brand Credibility</div>
+            <div className="text-gray-600">Joining a nationally curated pavilion by Halal Export Indonesia adds significant value to your brand in the eyes of the global market</div>
+        </div>
+        <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+            <div className="text-6xl font-bold text-yellow mb-4 mx-auto">03</div>
+            <div className="text-lg font-semibold text-gray-800 mb-2">Access to Strategic Networks</div>
+            <div className="text-gray-600">Meet directly with key halal industry stakeholders—including certification bodies, relevant ministries, logistics partners, and digital export platforms</div>
+        </div>
+        </div>
+        <div className="max-w-6xl mx-auto grid grid-rows-1 md:grid-rows-none md:grid-cols-2 gap-8 px-0 md:px-6 py-0 mb-16">
+        <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+            <div className="text-6xl font-bold text-yellow mb-4 mx-auto">04</div>
+            <div className="text-lg font-semibold text-gray-800 mb-2">Collaboration and Business Partnership Opportunities</div>
+            <div className="text-gray-600">Exchange ideas and explore potential business synergies with fellow exhibitors and international visitors</div>
+        </div>
+        <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+            <div className="text-6xl font-bold text-yellow mb-4 mx-auto">05</div>
+            <div className="text-lg font-semibold text-gray-800 mb-2">Halal Export Education and Insights</div>
+            <div className="text-gray-600">Participate in discussions and consultation sessions that provide practical insights into the international halal market, regulations, and go-global strategies</div>
         </div>
         </div>
         </div>

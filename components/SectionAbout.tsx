@@ -22,19 +22,19 @@ export default function SectionAbout() {
         </div>
          {/* Quick Stats */}
          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 mb-16">
-          <div className="text-center p-8 bg-white rounded-2xl border-2 border-gray-200 hover:shadow-lg transition-all duration-300">
+          <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <img src="/images/export.png" alt="B2B" className="w-16 h-16 mb-3 mx-auto" />
             <div className="text-lg font-semibold text-gray-800 mb-2">Halal Export Platform</div>
             <div className="text-gray-600">Empowering Global Halal Market & Trade Connections</div>
           </div>
           
-          <div className="text-center p-8 bg-white rounded-2xl border-2 border-gray-200 hover:shadow-lg transition-all duration-300">
+          <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <img src="/images/halal.png" alt="Halal" className="w-16 h-16 mb-3 mx-auto" />
             <div className="text-lg font-semibold text-gray-800 mb-2">Halal Exhibitor Diversity</div>
             <div className="text-gray-600">FnB's Logistics, Ingredients, Certification & Technology</div>
           </div>
           
-          <div className="text-center p-8 bg-white rounded-2xl border-2 border-gray-200 hover:shadow-lg transition-all duration-300">
+          <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <img src="/images/global.png" alt="Global" className="w-16 h-16 mb-3 mx-auto" />
             <div className="text-lg font-semibold text-gray-800 mb-2">Global Reach</div>
             <div className="text-gray-600">Gateway to Worldwide & Southeast Asia's Halal Markets</div>
