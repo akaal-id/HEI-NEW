@@ -270,6 +270,71 @@ function parseCSV(csvText: string): string[][] {
   return result;
 }
 
+// Bulletproof text processing
+function safeTextProcessing(text: string): string {
+  try {
+    if (!text || typeof text !== 'string') return '';
+    
+    // Basic HTML formatting for common patterns
+    let processed = text
+      .replace(/\*\*\*(.*?)\*\*\*/g, '<h3>$1</h3>') // Bold headers
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+      .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
+      .replace(/\n\n/g, '</p><p>') // Paragraph breaks
+      .replace(/\n/g, '<br>'); // Line breaks
+    
+    // Wrap in paragraph if not already wrapped
+    if (!processed.includes('<p>')) {
+      processed = `<p>${processed}</p>`;
+    }
+    
+    return processed;
+  } catch (error) {
+    console.error('Error in text processing:', error);
+    return text || '';
+  }
+}
+
+// Bulletproof slug creation
+function safeCreateSlug(title: string): string {
+  try {
+    if (!title || typeof title !== 'string') return 'article';
+    
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim()
+      .substring(0, 50) || 'article';
+  } catch (error) {
+    console.error('Error creating slug:', error);
+    return 'article';
+  }
+}
+
+// Bulletproof image URL processing
+function safeImageUrl(url: string): string {
+  try {
+    if (!url || typeof url !== 'string') {
+      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s';
+    }
+    
+    // If it's a Google Drive URL, try to convert it
+    if (url.includes('drive.google.com')) {
+      const fileId = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+      if (fileId && fileId[1]) {
+        return `https://drive.google.com/uc?export=view&id=${fileId[1]}`;
+      }
+    }
+    
+    return url;
+  } catch (error) {
+    console.error('Error processing image URL:', error);
+    return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s';
+  }
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
@@ -278,40 +343,159 @@ export async function GET(
   
   console.log(`=== FETCHING ARTICLE: ${slug} ===`);
   
-  // SIMPLE APPROACH: Just return a working article based on slug
-  const articles = [
-    {
-      id: "1",
-      title: "Halal Export Indonesia 2025: Connecting Global Markets",
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
-      timestamp: "19 Agustus 2025",
-      author: "Akaal",
-      text: "Halal Expo Indonesia (HEI) is the nation's premier event dedicated to showcasing the dynamic growth of the halal industry. As one of the largest halal trade shows in Southeast Asia, HEI serves as a global hub for business leaders, entrepreneurs, professionals, and communities who are shaping the future of halal products and services.",
-      slug: "halal-export-indonesia-2025-connecting-global-markets"
-    },
-    {
-      id: "2",
-      title: "New Exhibitors Join HEI 2025",
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
-      timestamp: "18 Agustus 2025",
-      author: "HEI Team",
-      text: "We're excited to announce that several new exhibitors have joined the Halal Export Indonesia 2025 exhibition. These companies bring innovative halal products and services to the global market.",
-      slug: "new-exhibitors-join-hei-2025"
-    },
-    {
-      id: "3",
-      title: "Halal Industry Growth in Southeast Asia",
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
-      timestamp: "17 Agustus 2025",
-      author: "Market Research Team",
-      text: "The halal industry in Southeast Asia continues to show strong growth, with increasing demand for halal-certified products across various sectors including food, cosmetics, and pharmaceuticals.",
-      slug: "halal-industry-growth-southeast-asia"
+  try {
+    // Try to fetch from Google Sheets first
+    console.log('Attempting to fetch from Google Sheets...');
+    
+    // Try multiple CSV export URL formats
+    const csvUrls = [
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`
+    ];
+    
+    let response: Response | null = null;
+    let csvUrl = '';
+    
+    // Try each URL format until one works
+    for (const url of csvUrls) {
+      console.log('Trying CSV URL:', url);
+      try {
+        response = await fetch(url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+        });
+        
+        if (response.ok) {
+          csvUrl = url;
+          console.log('Successfully connected to:', url);
+          break;
+        } else {
+          console.log(`Failed with status ${response.status}: ${response.statusText}`);
+        }
+      } catch (error) {
+        console.log(`Error with URL ${url}:`, error);
+      }
     }
-  ];
-  
-  // Find article by slug or return first one
-  const article = articles.find(item => item.slug === slug) || articles[0];
-  
-  console.log(`Returning article: ${article.title}`);
-  return NextResponse.json(article);
+    
+    if (!response || !response.ok) {
+      throw new Error(`Failed to fetch Google Sheets from any URL. Last status: ${response?.status} ${response?.statusText}`);
+    }
+    
+    const csvText = await response.text();
+    console.log('Successfully fetched CSV data, length:', csvText.length);
+    
+    // Parse CSV data
+    const rows = parseCSV(csvText);
+    console.log('Parsed CSV rows:', rows.length);
+    
+    if (rows.length < 2) {
+      throw new Error('No data rows found in spreadsheet');
+    }
+    
+    // Skip header row and process data
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      console.log(`Processing row ${i}:`, row);
+      
+      if (row.length < 6) {
+        console.log(`Skipping row ${i} - insufficient columns`);
+        continue;
+      }
+      
+      const [id, title, imageUrl, timestamp, author, text, docsUrl] = row;
+      
+      if (!title || title.trim() === '') {
+        console.log(`Skipping row ${i} - no title`);
+        continue;
+      }
+      
+      const articleSlug = safeCreateSlug(title);
+      
+      // Check if this is the article we're looking for
+      if (articleSlug === slug) {
+        console.log(`Found matching article: ${title}`);
+        
+        let processedText = text || '';
+        
+        // If there's a Google Docs URL, try to fetch content from it
+        if (docsUrl && docsUrl.trim() !== '') {
+          console.log(`Fetching content from Google Docs: ${docsUrl}`);
+          try {
+            const docsContent = await fetchGoogleDocsContent(docsUrl);
+            if (docsContent && docsContent !== 'Content not available - please ensure the Google Doc is publicly accessible') {
+              processedText = docsContent;
+            }
+          } catch (error) {
+            console.error(`Failed to fetch Google Docs content for row ${i}:`, error);
+            // Continue with the text field as fallback
+          }
+        }
+        
+        const article: PressArticle = {
+          id: id || `article-${i}`,
+          title: title.trim(),
+          imageUrl: safeImageUrl(imageUrl),
+          timestamp: timestamp || new Date().toLocaleDateString('id-ID', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          }),
+          author: author || 'HEI Team',
+          text: safeTextProcessing(processedText),
+          slug: articleSlug
+        };
+        
+        console.log(`Returning article from Google Sheets: ${article.title}`);
+        return NextResponse.json(article);
+      }
+    }
+    
+    // If no article found with matching slug, return 404
+    console.log(`No article found with slug: ${slug}`);
+    return NextResponse.json({ error: 'Article not found' }, { status: 404 });
+    
+  } catch (error) {
+    console.error('Error fetching from Google Sheets:', error);
+    console.log('Falling back to mock data');
+    
+    // Fallback to mock data
+    const mockArticles = [
+      {
+        id: "1",
+        title: "Halal Export Indonesia 2025: Connecting Global Markets",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+        timestamp: "19 Agustus 2025",
+        author: "Akaal",
+        text: "Halal Expo Indonesia (HEI) is the nation's premier event dedicated to showcasing the dynamic growth of the halal industry. As one of the largest halal trade shows in Southeast Asia, HEI serves as a global hub for business leaders, entrepreneurs, professionals, and communities who are shaping the future of halal products and services.",
+        slug: "halal-export-indonesia-2025-connecting-global-markets"
+      },
+      {
+        id: "2",
+        title: "New Exhibitors Join HEI 2025",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+        timestamp: "18 Agustus 2025",
+        author: "HEI Team",
+        text: "We're excited to announce that several new exhibitors have joined the Halal Export Indonesia 2025 exhibition. These companies bring innovative halal products and services to the global market.",
+        slug: "new-exhibitors-join-hei-2025"
+      },
+      {
+        id: "3",
+        title: "Halal Industry Growth in Southeast Asia",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+        timestamp: "17 Agustus 2025",
+        author: "Market Research Team",
+        text: "The halal industry in Southeast Asia continues to show strong growth, with increasing demand for halal-certified products across various sectors including food, cosmetics, and pharmaceuticals.",
+        slug: "halal-industry-growth-southeast-asia"
+      }
+    ];
+    
+    // Find article by slug or return first one
+    const article = mockArticles.find(item => item.slug === slug) || mockArticles[0];
+    
+    console.log(`Returning fallback article: ${article.title}`);
+    return NextResponse.json(article);
+  }
 }

@@ -399,8 +399,137 @@ function safeImageUrl(url: string): string {
 export async function GET() {
   console.log('=== PRESS API ROUTE STARTED ===');
   
-  // SIMPLE APPROACH: Just return mock data immediately
-  // This guarantees the API will always work
-  console.log('Returning guaranteed working mock data');
-  return NextResponse.json(BULLETPROOF_MOCK_DATA);
+  try {
+    // Try to fetch from Google Sheets first
+    console.log('Attempting to fetch from Google Sheets...');
+    
+    // Try multiple CSV export URL formats
+    const csvUrls = [
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`
+    ];
+    
+    let response: Response | null = null;
+    let csvUrl = '';
+    
+    // Try each URL format until one works
+    for (const url of csvUrls) {
+      console.log('Trying CSV URL:', url);
+      try {
+        response = await fetch(url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+        });
+        
+        if (response.ok) {
+          csvUrl = url;
+          console.log('Successfully connected to:', url);
+          break;
+        } else {
+          console.log(`Failed with status ${response.status}: ${response.statusText}`);
+        }
+      } catch (error) {
+        console.log(`Error with URL ${url}:`, error);
+      }
+    }
+    
+    if (!response || !response.ok) {
+      throw new Error(`Failed to fetch Google Sheets from any URL. Last status: ${response?.status} ${response?.statusText}`);
+    }
+    
+    const csvText = await response.text();
+    console.log('Successfully fetched CSV data, length:', csvText.length);
+    
+    // Parse CSV data
+    const rows = parseCSV(csvText);
+    console.log('Parsed CSV rows:', rows.length);
+    
+    if (rows.length < 2) {
+      throw new Error('No data rows found in spreadsheet');
+    }
+    
+    // Skip header row and process data
+    const articles: PressArticle[] = [];
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      console.log(`Processing row ${i}:`, row);
+      
+      if (row.length < 6) {
+        console.log(`Skipping row ${i} - insufficient columns`);
+        continue;
+      }
+      
+      const [id, title, imageUrl, timestamp, author, text, docsUrl] = row;
+      
+      if (!title || title.trim() === '') {
+        console.log(`Skipping row ${i} - no title`);
+        continue;
+      }
+      
+      let processedText = text || '';
+      
+      // If there's a Google Docs URL, try to fetch content from it
+      if (docsUrl && docsUrl.trim() !== '') {
+        console.log(`Fetching content from Google Docs: ${docsUrl}`);
+        try {
+          const docsContent = await fetchGoogleDocsContent(docsUrl);
+          if (docsContent && docsContent !== 'Content not available - please ensure the Google Doc is publicly accessible') {
+            processedText = docsContent;
+          }
+        } catch (error) {
+          console.error(`Failed to fetch Google Docs content for row ${i}:`, error);
+          // Continue with the text field as fallback
+        }
+      }
+      
+      const article: PressArticle = {
+        id: id || `article-${i}`,
+        title: title.trim(),
+        imageUrl: safeImageUrl(imageUrl),
+        timestamp: timestamp || new Date().toLocaleDateString('id-ID', { 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        }),
+        author: author || 'HEI Team',
+        text: safeTextProcessing(processedText),
+        slug: safeCreateSlug(title)
+      };
+      
+      articles.push(article);
+      console.log(`Added article: ${article.title}`);
+    }
+    
+    if (articles.length === 0) {
+      throw new Error('No valid articles found in spreadsheet');
+    }
+    
+    console.log(`Successfully processed ${articles.length} articles from Google Sheets`);
+    return NextResponse.json(articles);
+    
+  } catch (error) {
+    console.error('Error fetching from Google Sheets:', error);
+    console.log('Falling back to mock data');
+    
+    // Log detailed error information for debugging
+    const errorInfo = {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV,
+      sheetId: SHEET_ID
+    };
+    
+    console.error('Detailed error info:', errorInfo);
+    
+    // Return mock data as fallback with error info in headers
+    const response = NextResponse.json(BULLETPROOF_MOCK_DATA);
+    response.headers.set('X-Error-Info', JSON.stringify(errorInfo));
+    response.headers.set('X-Data-Source', 'fallback-mock');
+    
+    return response;
+  }
 }
