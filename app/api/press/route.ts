@@ -285,17 +285,39 @@ function parseCSV(csvText: string): string[][] {
 export async function GET() {
   try {
     console.log('Fetching data from Google Sheets...');
+    console.log('Sheet ID:', SHEET_ID);
     
     // Use the public CSV export URL (no API key needed)
+    // Try different export formats to see which one works
     const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+    console.log('CSV URL:', csvUrl);
     
-    const response = await fetch(csvUrl, {
+    // Also try without gid parameter
+    const csvUrlAlt = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+    console.log('Alternative CSV URL:', csvUrlAlt);
+    
+    let response = await fetch(csvUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
       }
     });
     
+    // If first URL fails, try the alternative URL
     if (!response.ok) {
+      console.log(`First URL failed (${response.status}), trying alternative URL...`);
+      response = await fetch(csvUrlAlt, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+      });
+    }
+    
+    if (!response.ok) {
+      console.error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
+      if (response.status === 401) {
+        console.log('Google Sheets is private or inaccessible, using mock data');
+        throw new Error('Google Sheets access denied - using mock data');
+      }
       throw new Error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
     }
     
@@ -361,6 +383,24 @@ export async function GET() {
         author: "Akaal",
         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         slug: "halal-export-indonesia-2025-connecting-global-markets"
+      },
+      {
+        id: "2",
+        title: "New Exhibitors Join HEI 2025",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+        timestamp: "18 Agustus 2025",
+        author: "HEI Team",
+        text: "We're excited to announce that several new exhibitors have joined the Halal Export Indonesia 2025 exhibition. These companies bring innovative halal products and services to the global market.",
+        slug: "new-exhibitors-join-hei-2025"
+      },
+      {
+        id: "3",
+        title: "Halal Industry Growth in Southeast Asia",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s",
+        timestamp: "17 Agustus 2025",
+        author: "Market Research Team",
+        text: "The halal industry in Southeast Asia continues to show strong growth, with increasing demand for halal-certified products across various sectors including food, cosmetics, and pharmaceuticals.",
+        slug: "halal-industry-growth-southeast-asia"
       }
     ];
     

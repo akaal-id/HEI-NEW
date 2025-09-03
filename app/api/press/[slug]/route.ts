@@ -289,6 +289,11 @@ export async function GET(
     });
     
     if (!response.ok) {
+      console.error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
+      if (response.status === 401) {
+        console.log('Google Sheets is private or inaccessible, using mock data');
+        throw new Error('Google Sheets access denied - using mock data');
+      }
       throw new Error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
     }
     
