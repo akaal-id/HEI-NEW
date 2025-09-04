@@ -39,7 +39,8 @@ export default function SectionPress() {
             imageUrl: "/images/image-export-1.jpg",
             timestamp: "2 days ago",
             author: "HEI Team",
-            slug: "halal-export-indonesia-2025"
+            slug: "halal-export-indonesia-2025",
+            text: "Join us for the most comprehensive halal export exhibition in Indonesia, featuring over 500 exhibitors and connecting global halal markets."
           },
           {
             id: "2", 
@@ -47,7 +48,8 @@ export default function SectionPress() {
             imageUrl: "/images/image-export-2.jpg",
             timestamp: "1 week ago",
             author: "HEI Team",
-            slug: "partnership-announcements-hei-2025"
+            slug: "partnership-announcements-hei-2025",
+            text: "Major industry partnerships announced during the HEI 2025 exhibition, strengthening the global halal ecosystem."
           },
           {
             id: "3",
@@ -55,7 +57,8 @@ export default function SectionPress() {
             imageUrl: "/images/image-export-3.jpg", 
             timestamp: "2 weeks ago",
             author: "HEI Team",
-            slug: "halal-business-summit-2025"
+            slug: "halal-business-summit-2025",
+            text: "Top industry leaders and experts convened to discuss the future of halal business and market opportunities."
           }
         ]);
       } finally {
