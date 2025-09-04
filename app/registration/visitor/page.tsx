@@ -1,5 +1,6 @@
 "use client"
 import { useState } from 'react'
+import { trackRegistration } from '@/lib/facebook-pixel'
 
 export default function VisitorPage(){
   const [form, setForm] = useState({ 
@@ -14,7 +15,19 @@ export default function VisitorPage(){
     countryCode: '+62' // Add country code state
   })
   
-  const submit = (e:any)=>{ e.preventDefault(); alert('Submitted (demo)') }
+  const submit = (e:any)=>{ 
+    e.preventDefault()
+    
+    // Track registration completion
+    trackRegistration({
+      content_category: 'Visitor Registration',
+      content_name: 'HEI 2025 Visitor Registration',
+      value: 1,
+      currency: 'USD'
+    })
+    
+    alert('Submitted (demo)')
+  }
   
   return (
     <div className="pt-24 min-h-screen">

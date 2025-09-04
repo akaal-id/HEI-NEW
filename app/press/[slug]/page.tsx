@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
+import SocialShareButtons from "../../../components/SocialShareButtons";
+import PressArticleTracker from "../../../components/PressArticleTracker";
 import "./press-content.css";
 
 // Force dynamic rendering
@@ -14,12 +17,78 @@ interface PressArticle {
   author: string;
   text: string;
   slug: string;
+  description?: string;
 }
 
 interface PressArticlePageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+// Generate metadata for each article
+export async function generateMetadata({ params }: PressArticlePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await getPressArticle(slug);
+
+  if (!article) {
+    return {
+      title: 'Article Not Found - Halal Export Indonesia',
+      description: 'The requested article could not be found.',
+    };
+  }
+
+  // Get the current URL for sharing
+  let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  if (!baseUrl) {
+    if (process.env.NODE_ENV === 'production') {
+      baseUrl = 'https://the2nd-hei-git-main-akaals-projects.vercel.app';
+    } else {
+      baseUrl = 'http://localhost:3000';
+    }
+  }
+  const shareUrl = `${baseUrl}/press/${slug}`;
+
+  // Use description from API or generate from text
+  const description = article.description || article.text
+    .replace(/<[^>]*>/g, '') // Remove HTML tags
+    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+    .trim()
+    .substring(0, 160) + '...';
+
+  return {
+    title: `${article.title} - Halal Export Indonesia`,
+    description: description,
+    openGraph: {
+      title: article.title,
+      description: description,
+      url: shareUrl,
+      siteName: 'Halal Export Indonesia',
+      images: [
+        {
+          url: article.imageUrl,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+      locale: 'en_US',
+      type: 'article',
+      publishedTime: article.timestamp,
+      authors: [article.author],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: description,
+      images: [article.imageUrl],
+      creator: '@HalalExportID',
+      site: '@HalalExportID',
+    },
+    alternates: {
+      canonical: shareUrl,
+    },
+  };
 }
 
 async function getPressArticle(slug: string): Promise<PressArticle | null> {
@@ -64,8 +133,22 @@ export default async function PressArticlePage({ params }: PressArticlePageProps
     notFound();
   }
 
+  // Get the current URL for sharing
+  let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  if (!baseUrl) {
+    if (process.env.NODE_ENV === 'production') {
+      baseUrl = 'https://the2nd-hei-git-main-akaals-projects.vercel.app';
+    } else {
+      baseUrl = 'http://localhost:3000';
+    }
+  }
+  const shareUrl = `${baseUrl}/press/${slug}`;
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Track article view */}
+      <PressArticleTracker articleTitle={article.title} articleSlug={article.slug} />
+      
       {/* Main Content */}
       <div className="pt-20 pb-16">
         <div className="max-w-4xl mx-auto px-6 py-12">
@@ -134,7 +217,7 @@ export default async function PressArticlePage({ params }: PressArticlePageProps
           </div>
 
           {/* Featured Image */}
-          <div className="relative h-96 mb-8 rounded-lg overflow-hidden">
+          <div className="relative aspect-video mb-8 rounded-lg overflow-hidden">
             <Image
               src={article.imageUrl}
               alt={article.title}
@@ -144,7 +227,7 @@ export default async function PressArticlePage({ params }: PressArticlePageProps
           </div>
 
           {/* Article Content */}
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none mb-16">
             <div 
               className="press-content"
               dangerouslySetInnerHTML={{ __html: article.text }}
@@ -152,29 +235,13 @@ export default async function PressArticlePage({ params }: PressArticlePageProps
           </div>
 
           {/* Share Section */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Share this article</h3>
-            <div className="flex gap-4">
-              <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                </svg>
-                Twitter
-              </button>
-              <button className="flex items-center gap-2 px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-                Facebook
-              </button>
-              <button className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-                LinkedIn
-              </button>
-            </div>
-          </div>
+          <SocialShareButtons 
+            title={article.title}
+            url={shareUrl}
+            description={article.description || "Check out this article from Halal Export Indonesia"}
+            articleContent={article.text}
+            imageUrl={article.imageUrl}
+          />
         </div>
       </div>
     </div>

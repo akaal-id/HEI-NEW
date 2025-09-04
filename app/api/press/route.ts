@@ -11,6 +11,7 @@ interface PressArticle {
   author: string;
   text: string;
   slug: string;
+  description?: string;
 }
 
 // Function to create slug from title
@@ -485,6 +486,13 @@ export async function GET() {
         }
       }
       
+      // Generate description from text content
+      const description = processedText
+        .replace(/<[^>]*>/g, '') // Remove HTML tags
+        .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+        .trim()
+        .substring(0, 160) + '...';
+
       const article: PressArticle = {
         id: id || `article-${i}`,
         title: title.trim(),
@@ -496,7 +504,8 @@ export async function GET() {
         }),
         author: author || 'HEI Team',
         text: safeTextProcessing(processedText),
-        slug: safeCreateSlug(title)
+        slug: safeCreateSlug(title),
+        description: description
       };
       
       articles.push(article);

@@ -1,9 +1,22 @@
 "use client"
 import { useState } from 'react'
+import { trackContact } from '@/lib/facebook-pixel'
 
 export default function ContactPage(){
   const [form, setForm] = useState({ name:'', email:'', message:'' })
-  const submit = (e:any)=>{ e.preventDefault(); alert('Sent (demo)') }
+  const submit = (e:any)=>{ 
+    e.preventDefault()
+    
+    // Track contact form submission
+    trackContact({
+      content_category: 'Contact Form',
+      content_name: 'Contact Page Form',
+      value: 1,
+      currency: 'USD'
+    })
+    
+    alert('Sent (demo)')
+  }
   return (
     <div className="pt-24 min-h-screen">
       <div className="max-w-3xl mx-auto px-6 py-16">

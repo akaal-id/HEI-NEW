@@ -3,6 +3,7 @@ import { useState } from 'react'
 import GoogleFormHelper from '../../../components/GoogleFormHelper'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { trackRegistration } from '@/lib/facebook-pixel'
 
 
 export default function ExhibitorPage() {
@@ -117,6 +118,14 @@ export default function ExhibitorPage() {
           
           // Show success modal
           setShowSuccessModal(true)
+          
+          // Track registration completion
+          trackRegistration({
+            content_category: 'Exhibitor Registration',
+            content_name: 'HEI 2025 Exhibitor Registration',
+            value: 1,
+            currency: 'USD'
+          })
           
           // Reset form
           setForm({
