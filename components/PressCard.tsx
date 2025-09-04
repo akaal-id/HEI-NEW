@@ -3,6 +3,20 @@ import { useState, memo, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+// Utility function to strip HTML tags and clean text
+function stripHtmlTags(html: string): string {
+  if (!html) return '';
+  return html
+    .replace(/<[^>]*>/g, '') // Remove HTML tags
+    .replace(/&nbsp;/g, ' ') // Replace &nbsp; with spaces
+    .replace(/&amp;/g, '&') // Replace &amp; with &
+    .replace(/&lt;/g, '<') // Replace &lt; with <
+    .replace(/&gt;/g, '>') // Replace &gt; with >
+    .replace(/&quot;/g, '"') // Replace &quot; with "
+    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+    .trim();
+}
+
 interface PressCardProps {
   id: string;
   title: string;
@@ -11,6 +25,7 @@ interface PressCardProps {
   author: string;
   slug: string;
   text?: string;
+  category?: string;
   priority?: boolean;
 }
 
@@ -22,6 +37,7 @@ const PressCard = memo(function PressCard({
   author, 
   slug,
   text,
+  category,
   priority = false
 }: PressCardProps) {
   const [isHovered, setIsHovered] = useState(false);
@@ -56,6 +72,15 @@ const PressCard = memo(function PressCard({
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
           />
+          
+          {/* Category Badge - Top Right Corner */}
+          {category && (
+            <div className="absolute top-3 right-3">
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white text-gray-800 border border-gray-200 shadow-sm">
+                {category}
+              </span>
+            </div>
+          )}
         </div>
         
         {/* Bottom Section - Content */}
@@ -75,7 +100,7 @@ const PressCard = memo(function PressCard({
           {/* Text Content */}
           <div className="h-[4.5rem] flex items-start">
             <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 overflow-hidden">
-              {text || "No content available."}
+              {text ? stripHtmlTags(text) : "No content available."}
             </p>
           </div>
           

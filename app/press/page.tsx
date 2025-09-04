@@ -18,6 +18,7 @@ interface PressArticle {
   author: string;
   text: string;
   slug: string;
+  category?: string;
 }
 
 interface MediaItem {
@@ -33,12 +34,12 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 function getPressData(): Promise<PressArticle[]> {
   return new Promise(async (resolve) => {
     try {
-      // Check cache first
-      if (pressDataCache && cacheTimestamp && Date.now() - cacheTimestamp < CACHE_DURATION) {
-        console.log('Using cached press data');
-        resolve(pressDataCache);
-        return;
-      }
+      // Temporarily disable cache to get fresh data
+      // if (pressDataCache && cacheTimestamp && Date.now() - cacheTimestamp < CACHE_DURATION) {
+      //   console.log('Using cached press data');
+      //   resolve(pressDataCache);
+      //   return;
+      // }
 
       // Get the base URL - use environment variable or construct from request
       let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -56,8 +57,8 @@ function getPressData(): Promise<PressArticle[]> {
       
       console.log('Fetching press data from:', `${baseUrl}/api/press`);
       const response = await fetch(`${baseUrl}/api/press`, {
-        cache: 'force-cache', // Use cache for better performance
-        next: { revalidate: 300 } // Revalidate every 5 minutes
+        cache: 'no-store', // Temporarily disable cache to get fresh data
+        next: { revalidate: 0 } // No revalidation
       });
       
       if (!response.ok) {
@@ -67,6 +68,7 @@ function getPressData(): Promise<PressArticle[]> {
       
       const data = await response.json();
       console.log('Successfully fetched press data:', data.length, 'articles');
+      console.log('First article data:', data[0]);
       
       // Update cache
       pressDataCache = data;
@@ -117,7 +119,8 @@ export default function PressPage() {
       article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       article.text.toLowerCase().includes(searchTerm.toLowerCase()) ||
       article.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.timestamp.toLowerCase().includes(searchTerm.toLowerCase())
+      article.timestamp.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (article.category && article.category.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   }, [pressData, searchTerm]);
 
@@ -196,7 +199,7 @@ export default function PressPage() {
               <SearchBar
                 searchTerm={searchTerm}
                 onSearchChange={handleSearchChange}
-                placeholder="Search articles by title, date, or content..."
+                placeholder="Search articles by title, date, content, category..."
               />
             </>
           )}

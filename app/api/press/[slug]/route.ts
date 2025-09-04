@@ -12,6 +12,7 @@ interface PressArticle {
   text: string;
   slug: string;
   description?: string;
+  category?: string;
 }
 
 // Function to create slug from title
@@ -406,7 +407,27 @@ export async function GET(
         continue;
       }
       
-      const [id, title, imageUrl, timestamp, author, text, docsUrl] = row;
+      // Handle dynamic column mapping - same as main press API
+      const [id, title, imageUrl, timestamp, author, text, docsUrl, category] = row;
+      
+      // If category is actually a URL (like "Media Release" being treated as URL), 
+      // it means the column order has changed. Let's find the actual category and docsUrl
+      let actualDocsUrl = docsUrl;
+      let actualCategory = category;
+      
+      // Check if category looks like a URL (contains http or drive.google.com)
+      if (category && (category.includes('http') || category.includes('drive.google.com'))) {
+        // Category is actually a URL, so shift everything
+        actualDocsUrl = category;
+        actualCategory = row[8] || 'General'; // Try next column for category
+      }
+      
+      // Check if docsUrl looks like a category (doesn't contain http)
+      if (docsUrl && !docsUrl.includes('http') && !docsUrl.includes('drive.google.com')) {
+        // docsUrl is actually a category
+        actualCategory = docsUrl;
+        actualDocsUrl = row[6] || ''; // Try previous column for docsUrl
+      }
       
       if (!title || title.trim() === '') {
         console.log(`Skipping row ${i} - no title`);
@@ -422,10 +443,10 @@ export async function GET(
         let processedText = text || '';
         
         // If there's a Google Docs URL, try to fetch content from it
-        if (docsUrl && docsUrl.trim() !== '') {
-          console.log(`Fetching content from Google Docs: ${docsUrl}`);
+        if (actualDocsUrl && actualDocsUrl.trim() !== '' && actualDocsUrl.includes('http')) {
+          console.log(`Fetching content from Google Docs: ${actualDocsUrl}`);
           try {
-            const docsContent = await fetchGoogleDocsContent(docsUrl);
+            const docsContent = await fetchGoogleDocsContent(actualDocsUrl);
             if (docsContent && docsContent !== 'Content not available - please ensure the Google Doc is publicly accessible') {
               processedText = docsContent;
             }
@@ -454,7 +475,8 @@ export async function GET(
           author: author || 'HEI Team',
           text: safeTextProcessing(processedText),
           slug: articleSlug,
-          description: description
+          description: description,
+          category: actualCategory || 'General'
         };
         
         console.log(`Returning article from Google Sheets: ${article.title}`);
@@ -479,7 +501,8 @@ export async function GET(
         timestamp: "19 Agustus 2025",
         author: "Akaal",
         text: "Halal Expo Indonesia (HEI) is the nation's premier event dedicated to showcasing the dynamic growth of the halal industry. As one of the largest halal trade shows in Southeast Asia, HEI serves as a global hub for business leaders, entrepreneurs, professionals, and communities who are shaping the future of halal products and services.",
-        slug: "halal-export-indonesia-2025-connecting-global-markets"
+        slug: "halal-export-indonesia-2025-connecting-global-markets",
+        category: "Event News"
       },
       {
         id: "2",
@@ -488,7 +511,8 @@ export async function GET(
         timestamp: "18 Agustus 2025",
         author: "HEI Team",
         text: "We're excited to announce that several new exhibitors have joined the Halal Export Indonesia 2025 exhibition. These companies bring innovative halal products and services to the global market.",
-        slug: "new-exhibitors-join-hei-2025"
+        slug: "new-exhibitors-join-hei-2025",
+        category: "Exhibitor Updates"
       },
       {
         id: "3",
@@ -497,7 +521,8 @@ export async function GET(
         timestamp: "17 Agustus 2025",
         author: "Market Research Team",
         text: "The halal industry in Southeast Asia continues to show strong growth, with increasing demand for halal-certified products across various sectors including food, cosmetics, and pharmaceuticals.",
-        slug: "halal-industry-growth-southeast-asia"
+        slug: "halal-industry-growth-southeast-asia",
+        category: "Market Analysis"
       }
     ];
     
