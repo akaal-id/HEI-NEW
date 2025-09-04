@@ -2,6 +2,9 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { trackRegistration } from '@/lib/facebook-pixel'
+// Remove the import of trackRegistration if the module does not exist or is not needed
+// import { trackRegistration } from '../../lib/facebook-pixel'
 
 export default function BuyerPage() {
   const [showSuccessModal, setShowSuccessModal] = useState(false)
@@ -107,6 +110,14 @@ export default function BuyerPage() {
 
         // Since no-cors doesn't give us response details, we assume success
         setShowSuccessModal(true)
+        
+        // Track registration completion
+        trackRegistration({
+          content_category: 'Buyer Registration',
+          content_name: 'HEI 2025 Buyer Registration',
+          value: 1,
+          currency: 'USD'
+        })
         
         // Reset form
         setForm({

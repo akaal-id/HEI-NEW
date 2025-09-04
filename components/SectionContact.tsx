@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { trackContact } from '../lib/facebook-pixel'
 
 export default function SectionContact(){
   const [form, setForm] = useState({ name:'', email:'', message:'' })
@@ -8,6 +9,15 @@ export default function SectionContact(){
 
   const submit = (e:any) => {
     e.preventDefault()
+    
+    // Track contact form submission
+    trackContact({
+      content_category: 'Contact Form',
+      content_name: 'Main Contact Form',
+      value: 1,
+      currency: 'USD'
+    })
+    
     setStatus('Sent (demo)')
   }
 

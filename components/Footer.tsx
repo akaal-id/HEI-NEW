@@ -1,5 +1,7 @@
+"use client"
 import Link from 'next/link';
 import Image from 'next/image';
+import { trackNewsletterSubscription } from '../lib/facebook-pixel';
 
 export default function Footer() {
   return (
@@ -136,7 +138,15 @@ export default function Footer() {
                 placeholder="Enter your email"
                 className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent xl:px-3 xl:py-2.5 xl:text-sm"
               />
-              <button className="bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 xl:py-2.5 xl:px-5 xl:text-sm">
+              <button 
+                onClick={() => {
+                  const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
+                  if (emailInput && emailInput.value) {
+                    trackNewsletterSubscription(emailInput.value);
+                  }
+                }}
+                className="bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 xl:py-2.5 xl:px-5 xl:text-sm"
+              >
                 Subscribe
               </button>
             </div>
