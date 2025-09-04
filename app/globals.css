@@ -48,6 +48,33 @@ html,body,#root{
   color: white;
 }
 
+/* Infinite scroll animations */
+@keyframes scroll-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-right {
+  animation: scroll-right 20s linear infinite;
+}
+
+.animate-scroll-left {
+  animation: scroll-left 20s linear infinite;
+}
+
 .btn-white{
   background: white;
   color: var(--gradient-primary-from);
@@ -93,6 +120,15 @@ html,body,#root{
 
 .loader-bounce {
   animation: loader-bounce 1.4s ease-in-out infinite both;
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 
 /* MacBook Pro M2 13" Responsive Adjustments (1280px) */

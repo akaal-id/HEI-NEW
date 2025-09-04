@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import PressCard from "@/components/PressCard";
 import "./press-content.css";
 
 // Force dynamic rendering
@@ -56,9 +57,46 @@ async function getPressArticle(slug: string): Promise<PressArticle | null> {
   }
 }
 
+async function getRandomPressArticles(currentSlug: string): Promise<PressArticle[]> {
+  try {
+    // Get the base URL - use environment variable or construct from request
+    let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    
+    if (!baseUrl) {
+      // Fallback: construct URL based on environment
+      if (process.env.NODE_ENV === 'production') {
+        baseUrl = 'https://the2nd-hei-git-main-akaals-projects.vercel.app';
+      } else {
+        baseUrl = 'http://localhost:3000';
+      }
+    }
+    
+    const response = await fetch(`${baseUrl}/api/press`, {
+      cache: 'no-store' // Always fetch fresh data
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch press articles');
+    }
+    
+    const allArticles = await response.json();
+    
+    // Filter out current article and randomize
+    const otherArticles = allArticles.filter((article: PressArticle) => article.slug !== currentSlug);
+    
+    // Shuffle and take first 3
+    const shuffled = otherArticles.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 3);
+  } catch (error) {
+    console.error('Error fetching random press articles:', error);
+    return [];
+  }
+}
+
 export default async function PressArticlePage({ params }: PressArticlePageProps) {
   const { slug } = await params;
   const article = await getPressArticle(slug);
+  const randomArticles = await getRandomPressArticles(slug);
 
   if (!article) {
     notFound();
@@ -151,8 +189,45 @@ export default async function PressArticlePage({ params }: PressArticlePageProps
             />
           </div>
 
-          {/* Share Section */}
+          {/* See Other Press Articles Section */}
           <div className="mt-12 pt-8 border-t border-gray-200">
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold text-gray-800">See other press articles</h3>
+                <Link
+                  href="/press"
+                  className="text-gray-500 hover:text-gray-700 transition-colors duration-200 flex items-center gap-1"
+                >
+                  back to press
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+              
+              {/* 3x1 Grid of Press Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {randomArticles.map((randomArticle) => (
+                  <PressCard
+                    key={randomArticle.id}
+                    id={randomArticle.id}
+                    title={randomArticle.title}
+                    imageUrl={randomArticle.imageUrl}
+                    timestamp={randomArticle.timestamp}
+                    author={randomArticle.author}
+                    slug={randomArticle.slug}
+                    text={randomArticle.text}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Separator */}
+          <div className="mt-12 pt-8 border-t border-gray-200"></div>
+
+          {/* Share Section */}
+          <div className="mt-8">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Share this article</h3>
             <div className="flex gap-4">
               <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">

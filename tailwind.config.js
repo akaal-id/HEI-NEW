@@ -24,6 +24,9 @@ module.exports = {
         'gradient-primary': 'linear-gradient(135deg, #d93732, #492f32)',
         'gradient-secondary': 'linear-gradient(135deg, #593a19, #d8793a)',
       },
+      scale: {
+        '120': '1.2',
+      },
     },
   },
   plugins: [],
