@@ -236,7 +236,7 @@ export default function AboutPage() {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <a 
-                  href="https://maps.app.goo.gl/LbXZMbpkHWmRZ8st8" 
+                  href="https://maps.app.goo.gl/HdvdrLgwDbECeoNP7" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex-1 bg-[#d93732] text-white px-6 py-3 rounded-lg text-center font-medium hover:bg-[#c02d28] transition-colors duration-300"

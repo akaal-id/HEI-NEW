@@ -148,7 +148,7 @@ export default function SectionPress() {
                     {/* Text Content */}
                     <div className="h-[4.5rem] flex items-start">
                       <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 overflow-hidden">
-                        {article.text || "No content available."}
+                        {article.text ? article.text.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim() : "No content available."}
                       </p>
                     </div>
                     
