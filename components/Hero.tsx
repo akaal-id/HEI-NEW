@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-[#fcfcfc]" id="home">
+    <section className="relative min-h-screen bg-transparent" id="home">
       {/* Main Content */}
       <div className="relative z-10">
         {/* Desktop Layout */}

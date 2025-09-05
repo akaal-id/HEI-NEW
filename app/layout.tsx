@@ -9,9 +9,9 @@ export const metadata = {
   title: 'Halal Export Indonesia - Halal Expo Indonesia',
   description: 'Global Halal Gateway: Empowering Indonesia\'s Food & Beverage Industry',
   icons: {
-    icon: '/images/logo-hei.png',
-    shortcut: '/images/logo-hei.png',
-    apple: '/images/logo-hei.png',
+    icon: '/images/HEI logo.png',
+    shortcut: '/images/HEI logo.png',
+    apple: '/images/HEI logo.png',
   },
 }
 
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <MetaPixel />
       </head>
-      <body className="font-plusjakarta bg-[#fcfcfc] text-primary">
+      <body className="font-plusjakarta text-primary">
         <Loader />
         <Navbar />
         <main>

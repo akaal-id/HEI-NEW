@@ -98,9 +98,9 @@ export default function SectionExhibition() {
       whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeIn" }}
-      className="py-20 bg-gradient-to-b from-gray-50 to-white"
+      className="py-20 bg-transparent"
     >
-      <div className="max-w-6xl mx-auto px-0 md:px-6">
+      <div className="mx-auto px-0 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
@@ -194,7 +194,7 @@ export default function SectionExhibition() {
         </div>
 
         {/* Learn More Button */}
-        <div className="text-center">
+        <div className="text-center mt-12">
           <Link
             href="/exhibition"
             className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
@@ -204,6 +204,67 @@ export default function SectionExhibition() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
+        </div>
+
+        {/* Brochure Section */}
+        <div className="w-full mx-auto px-6 py-16 text-center bg-gray-100 mt-16">
+          <div className="mb-12">
+            <div className="mx-auto flex w-24 h-24 justify-center items-center bg-gradient-to-r from-[#d93732] to-[#492f32] rounded-full p-6 mb-8">
+            <svg className="w-12 h-12 mx-auto" fill="none" stroke="white" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-normal text-gray-900 leading-tight mb-4">
+              Download Exhibition <br />
+              <span className="text-6xl md:text-7xl font-bold text-[#d93732]">Brochure</span>
+            </h2>
+            <p className="text-md md:text-lg text-gray-600 leading-relaxed mb-8">
+              Read our brochure to learn more about <br /> <span className="text-[#d93732] font-bold">Halal Export Indonesia</span><span className="text-gray-600"> and </span><span className="text-[#d93732] font-bold">Halal Expo Indonesia</span>.
+            </p>
+            
+            {/* Brochure Buttons Container */}
+            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+              {/* Halal Expo Indonesia 2026 Brochure */}
+              <motion.button
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/brochures/Halal Expo Indonesia 2026.pdf';
+                  link.download = 'Halal-Expo-Indonesia-2026-Brochure.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-4 px-8 w-full md:w-auto md:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 justify-center"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Halal Expo Indonesia 2026</span>
+              </motion.button>
+
+              {/* The 2nd Halal Export Indonesia Brochure */}
+              <motion.button
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/brochures/The 2nd Halal Export Indonesia.pdf';
+                  link.download = 'The-2nd-Halal-Export-Indonesia-Brochure.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-[#d93732] text-[#d93732] font-semibold py-4 px-8 w-full md:w-auto md:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 justify-center"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>The 2nd Halal Export Indonesia</span>
+              </motion.button>
+            </div>
+          </div>
         </div>
       </div>
     </motion.section>

@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react'
-import { trackSocialShare } from '../lib/facebook-pixel'
+import { trackSocialShare } from '@/lib/facebook-pixel'
 
 interface SocialShareButtonsProps {
   title: string

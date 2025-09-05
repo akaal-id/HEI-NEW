@@ -10,7 +10,7 @@ export default function SectionAbout() {
       whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeIn" }}
-      className="bg-gray-50 py-20"
+      className="bg-transparent py-20"
       id="about"
     >
       <div className="max-w-6xl mx-auto px-6 md:px-0">
@@ -21,7 +21,7 @@ export default function SectionAbout() {
           </h2>
         </div>
          {/* Quick Stats */}
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 mb-16">
+         <div className="grid grid-cols-1 md:grid-cols-3 bg-[#FEFFFF] gap-8 mt-16 mb-16">
           <div className="text-center p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <img src="/images/export.png" alt="B2B" className="w-16 h-16 mb-3 mx-auto" />
             <div className="text-lg font-semibold text-gray-800 mb-2">Halal Export Platform</div>

@@ -75,7 +75,7 @@ export default function SectionPress() {
       whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeIn" }}
-      className="py-20 bg-gray-50"
+      className="py-20 bg-transparent"
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
