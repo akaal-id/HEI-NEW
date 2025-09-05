@@ -10,6 +10,7 @@ interface PressArticle {
   author: string;
   slug: string;
   text?: string;
+  category?: string;
 }
 
 interface VirtualizedGridProps {
@@ -69,6 +70,7 @@ const VirtualizedGrid = memo(function VirtualizedGrid({
           author={article.author}
           slug={article.slug}
           text={article.text}
+          category={article.category}
           priority={index < 4} // Prioritize first 4 images
         />
       ))}

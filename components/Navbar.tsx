@@ -105,7 +105,7 @@ export default function Navbar() {
             </li>
             <li className="relative group">
               <Link href="/press" className={`transition-colors ${pathname === "/press" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`}>
-                PRESS
+                PRESS AND MEDIA
               </Link>
               {/* Active underline - stick to bottom of navbar */}
               {pathname === "/press" && (
@@ -294,7 +294,7 @@ export default function Navbar() {
                       className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      PRESS
+                      PRESS AND MEDIA
                     </Link>
                   </li>
                   <li>

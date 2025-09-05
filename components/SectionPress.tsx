@@ -12,6 +12,7 @@ interface PressArticle {
   author: string;
   text: string;
   slug: string;
+  category?: string;
 }
 
 export default function SectionPress() {
@@ -40,7 +41,8 @@ export default function SectionPress() {
             timestamp: "2 days ago",
             author: "HEI Team",
             slug: "halal-export-indonesia-2025",
-            text: "Join us for the most comprehensive halal export exhibition in Indonesia, featuring over 500 exhibitors and connecting global halal markets."
+            text: "Join us for the most comprehensive halal export exhibition in Indonesia, featuring over 500 exhibitors and connecting global halal markets.",
+            category: "Event News"
           },
           {
             id: "2", 
@@ -49,7 +51,8 @@ export default function SectionPress() {
             timestamp: "1 week ago",
             author: "HEI Team",
             slug: "partnership-announcements-hei-2025",
-            text: "Major industry partnerships announced during the HEI 2025 exhibition, strengthening the global halal ecosystem."
+            text: "Major industry partnerships announced during the HEI 2025 exhibition, strengthening the global halal ecosystem.",
+            category: "Partnerships"
           },
           {
             id: "3",
@@ -58,7 +61,8 @@ export default function SectionPress() {
             timestamp: "2 weeks ago",
             author: "HEI Team",
             slug: "halal-business-summit-2025",
-            text: "Top industry leaders and experts convened to discuss the future of halal business and market opportunities."
+            text: "Top industry leaders and experts convened to discuss the future of halal business and market opportunities.",
+            category: "Industry Insights"
           }
         ]);
       } finally {
