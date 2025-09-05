@@ -51,7 +51,7 @@ export default function Countdown() {
       whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeIn" }}
-      className="bg-[#492f32] py-12 px-2 md:px-0"
+      className="bg-[#492f32] py-20 px-6"
     >
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">

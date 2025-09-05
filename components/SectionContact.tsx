@@ -27,21 +27,60 @@ export default function SectionContact(){
       whileInView={{ filter: "blur(0px)", opacity:1, y:0 }} 
       viewport={{ once:true }} 
       transition={{ duration:0.8, ease: "easeIn" }} 
-      className="py-16 bg-primaryWhite"
+      className="py-20 bg-transparent"
     >
-      <div className="mx-auto bg-gradient-to-r from-[#d93732] to-[#492f32] py-16 px-6 md:px-0">
-        <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-semibold text-white">Contact Us</h2>
-        <form onSubmit={submit} className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input required placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} className="p-3 border rounded" />
-          <input required placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} className="p-3 border rounded" />
-          <textarea required placeholder="Message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} className="p-3 border rounded md:col-span-2" />
-          <button className="btn-yellow px-6 py-3 rounded-md text-white md:col-span-2 hover:shadow-2xl hover:text-red-600 transition-all duration-300">Send</button>
-          {status && <p className="md:col-span-2">{status}</p>}
-        </form>
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="bg-gradient-to-r from-[#d93732] to-[#492f32] rounded-2xl p-12 md:p-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+              Contact <span className="text-white">Us</span>
+            </h2>
+            <p className="text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed">
+              Get in touch with us for any questions or inquiries about the Halal Export Indonesia exhibition
+            </p>
+          </motion.div>
+          
+          <form onSubmit={submit} className="max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <input 
+                required 
+                placeholder="Name" 
+                value={form.name} 
+                onChange={e=>setForm({...form,name:e.target.value})} 
+                className="p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d93732] focus:border-transparent transition-all duration-300" 
+              />
+              <input 
+                required 
+                placeholder="Email" 
+                value={form.email} 
+                onChange={e=>setForm({...form,email:e.target.value})} 
+                className="p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d93732] focus:border-transparent transition-all duration-300" 
+              />
+            </div>
+            <textarea 
+              required 
+              placeholder="Message" 
+              value={form.message} 
+              onChange={e=>setForm({...form,message:e.target.value})} 
+              className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d93732] focus:border-transparent transition-all duration-300 mb-6 h-32" 
+            />
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full bg-white text-[#d93732] font-semibold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+            >
+              Send Message
+            </motion.button>
+            {status && <p className="text-center text-white mt-4">{status}</p>}
+          </form>
         </div>
       </div>
-
     </motion.section>
   )
 }

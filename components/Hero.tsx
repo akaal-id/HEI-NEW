@@ -82,9 +82,9 @@ function DesktopHero() {
         initial={{ filter: "blur(10px)", opacity: 0 }}
         animate={{ filter: "blur(0px)", opacity: 1 }}
         transition={{ duration: 1, ease: "easeIn", delay: 3 }}
-        whileHover={{ scale: 1.02 }}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-4 px-6 rounded-lg text-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+        className="bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-4 px-6 rounded-lg text-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
       >
         BOOK SPACE NOW!
       </motion.button>
@@ -218,7 +218,7 @@ function MobileHero() {
 
           {/* CTA Button */}
           <motion.button
-            className="relative w-fit bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-3 px-4 rounded-lg text-sm shadow-lg hover:shadow-xl transition-all duration-300"
+            className="relative w-fit bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-3 px-4 rounded-lg text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             initial={{ filter: "blur(10px)", opacity: 0 }}
             animate={{ filter: "blur(0px)", opacity: 1 }}
             transition={{ duration: 1, ease: "easeIn", delay: 3 }}

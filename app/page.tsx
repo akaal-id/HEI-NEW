@@ -49,6 +49,10 @@ export default function Home() {
         </Suspense>
 
         <Suspense fallback={<SectionLoader />}>
+          <SectionVisit />
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
           <SectionVenue />
         </Suspense>
         

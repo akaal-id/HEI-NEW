@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 export default function SectionVenue() {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="py-16 bg-primaryWhite"
+      transition={{ duration: 0.8, ease: "easeIn" }}
+      className="py-20 bg-transparent"
     >
       {/*Venue Section*/}
       <div className="relative min-h-[720px] flex items-center justify-center overflow-hidden py-24 px-12">
@@ -81,22 +81,26 @@ export default function SectionVenue() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <a 
+                <motion.a 
                   href="https://maps.app.goo.gl/HdvdrLgwDbECeoNP7" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex-1 bg-[#d93732] text-white px-6 py-3 rounded-lg text-center font-medium hover:bg-[#c02d28] transition-colors duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex-1 bg-[#d93732] text-white px-6 py-3 rounded-lg text-center font-medium hover:bg-[#c02d28] transition-colors duration-300 hover:scale-105"
                 >
                   Get Directions
-                </a>
-                <a 
+                </motion.a>
+                <motion.a 
                   href="https://ice-indonesia.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex-1 bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg text-center font-medium hover:bg-white hover:text-gray-900 transition-colors duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex-1 bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg text-center font-medium hover:bg-white hover:text-gray-900 transition-colors duration-300 hover:scale-105"
                 >
                   Learn More
-                </a>
+                </motion.a>
               </div>
             </div>
           </div>
