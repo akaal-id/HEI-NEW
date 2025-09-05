@@ -50,15 +50,15 @@ export default function AboutPage() {
             {/* Left: Headline and Description */}
             <div className="order-2 lg:order-1 space-y-8">
               <h1 className="text-4xl md:text-4xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                <span className="text-gray-900">We build bridges</span>
+                <span className="text-gray-900">Empowering Halal Trade</span>
                 <br />
-                <span className="text-gray-700">between companies</span>
+                <span className="text-gray-700">Connecting Indonesia</span>
                 <br />
-                <span className="text-gray-700">and customers</span>
+                <span className="text-gray-700">to the Global Market</span>
               </h1>
               
               <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                To build software that gives customer-facing teams at small- and medium-sized businesses the ability to create fruitful and enduring relationships with customers.
+                Halal Export Indonesia (HEI) is dedicated to advancing Indonesia’s halal industry by bringing together businesses, innovators, and stakeholders from across the globe. Our mission is to showcase Indonesia’s halal excellence, foster international partnerships, and drive sustainable growth for the nation’s halal ecosystem.
               </p>
             </div>
 
