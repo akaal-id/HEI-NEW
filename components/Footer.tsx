@@ -63,7 +63,7 @@ export default function Footer() {
               <h3 className="text-lg font-bold text-gray-800 xl:text-base">Follow Us</h3>
               <div className="flex gap-3 xl:gap-2.5">
                 <Link 
-                  href="https://x.com" 
+                  href="https://x.com/halalexpoidn" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-transparent flex items-center justify-center hover:opacity-80 transition-opacity xl:w-9 xl:h-9"
@@ -78,7 +78,7 @@ export default function Footer() {
                   />
                 </Link>
                 <Link 
-                  href="https://facebook.com" 
+                  href="https://web.facebook.com/heihalalexpoindonesia" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-transparent flex items-center justify-center hover:opacity-80 transition-opacity xl:w-9 xl:h-9"
@@ -93,7 +93,7 @@ export default function Footer() {
                   />
                 </Link>
                 <Link 
-                  href="https://instagram.com" 
+                  href="https://www.instagram.com/halalexpoindonesia" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-transparent flex items-center justify-center hover:opacity-80 transition-opacity xl:w-9 xl:h-9"
@@ -108,7 +108,7 @@ export default function Footer() {
                   />
                 </Link>
                 <Link 
-                  href="https://linkedin.com" 
+                  href="https://www.linkedin.com/showcase/halal-expo-indonesia/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-transparent flex items-center justify-center hover:opacity-80 transition-opacity xl:w-9 xl:h-9"
