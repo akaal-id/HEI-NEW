@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import EventStructuredData from "../../components/StructuredData";
 
 // Animation variants
 const fadeInUp = {
@@ -88,6 +89,24 @@ export default function VisitTheExpoPage() {
 
   return (
     <div className="min-h-screen bg-transparent">
+      <EventStructuredData
+        name="Halal Expo Indonesia 2025 - Visit The Expo"
+        description="Discover why you should visit Indonesia's premier halal export exhibition. Experience unique halal products, gain industry insights, build valuable networks, and explore business opportunities in the global halal market."
+        startDate="2025-10-15T08:00:00+07:00"
+        endDate="2025-10-19T18:00:00+07:00"
+        location={{
+          name: "ICE BSD",
+          address: "Jl. BSD Grand Boulevard No.1, Pagedangan",
+          city: "Tangerang",
+          country: "Indonesia"
+        }}
+        organizer={{
+          name: "PT Angan Kreasi Semesta",
+          url: "https://www.skyconnection.co.id"
+        }}
+        url="https://halalexpoindonesia.com/visit-the-expo"
+        image="/images/mainkv.png"
+      />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}

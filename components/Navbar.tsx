@@ -49,10 +49,10 @@ export default function Navbar() {
         </div>
 
         {/* center menu - Desktop */}
-        <nav className="hidden md:flex flex-1 items-center justify-center h-[72px] xl:h-[68px]">
-          <ul className="flex gap-10 items-center text-lg font-normal relative xl:gap-8 xl:text-base">
-            <li className="relative group">
-              <Link href="/" className={`transition-colors ${pathname === "/" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`}>
+        <nav className="hidden md:flex flex-1 items-center justify-center h-[72px] xl:h-[68px]" aria-label="Main navigation">
+          <ul className="flex gap-10 items-center text-lg font-normal relative xl:gap-8 xl:text-base" role="menubar">
+            <li className="relative group" role="none">
+              <Link href="/" className={`transition-colors ${pathname === "/" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`} role="menuitem" aria-current={pathname === "/" ? "page" : undefined}>
                 HOME
               </Link>
               {/* Active underline - stick to bottom of navbar */}
@@ -64,8 +64,8 @@ export default function Navbar() {
                 <div className="absolute -bottom-6 left-0 w-0 h-1 bg-gradient-to-r from-[#d93732] to-[#492f32] group-hover:w-full transition-all duration-300"></div>
               )}
             </li>
-            <li className="relative group">
-              <div className={`transition-colors ${pathname === "/about" || pathname === "/the-organizer" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`}>
+            <li className="relative group" role="none">
+              <div className={`transition-colors ${pathname === "/about" || pathname === "/the-organizer" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`} role="menuitem" aria-haspopup="true" aria-expanded="false">
                 ABOUT
               </div>
               {/* Active underline - only show when active */}
@@ -78,25 +78,27 @@ export default function Navbar() {
               )}
               
               {/* Dropdown Menu */}
-              <div className="absolute top-8 left-0 mt-6 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 xl:mt-5 xl:w-60">
+              <div className="absolute top-8 left-0 mt-6 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 xl:mt-5 xl:w-60" role="menu" aria-label="About submenu">
                 <div className="py-2">
                   <Link 
                     href="/about" 
                     className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors xl:px-3 xl:py-2.5"
+                    role="menuitem"
                   >
                     About HEI
                   </Link>
                   <Link 
                     href="/the-organizer" 
                     className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors xl:px-3 xl:py-2.5"
+                    role="menuitem"
                   >
                     The Organizer
                   </Link>
                 </div>
               </div>
             </li>
-            <li className="relative group">
-              <Link href="/exhibition" className={`transition-colors ${pathname === "/exhibition" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`}>
+            <li className="relative group" role="none">
+              <Link href="/exhibition" className={`transition-colors ${pathname === "/exhibition" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`} role="menuitem" aria-current={pathname === "/exhibition" ? "page" : undefined}>
                 EXHIBITION
               </Link>
               {/* Active underline - stick to bottom of navbar */}
@@ -108,8 +110,8 @@ export default function Navbar() {
                 <div className="absolute -bottom-6 left-0 w-0 h-1 bg-gradient-to-r from-[#d93732] to-[#492f32] group-hover:w-full transition-all duration-300"></div>
               )}
             </li>
-            <li className="relative group">
-              <Link href="/visit-the-expo" className={`transition-colors ${pathname === "/visit-the-expo" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`}>
+            <li className="relative group" role="none">
+              <Link href="/visit-the-expo" className={`transition-colors ${pathname === "/visit-the-expo" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`} role="menuitem" aria-current={pathname === "/visit-the-expo" ? "page" : undefined}>
                 VISIT THE EXPO
               </Link>
               {/* Active underline - stick to bottom of navbar */}
@@ -121,8 +123,8 @@ export default function Navbar() {
                 <div className="absolute -bottom-6 left-0 w-0 h-1 bg-gradient-to-r from-[#d93732] to-[#492f32] group-hover:w-full transition-all duration-300"></div>
               )}
             </li>
-            <li className="relative group">
-              <Link href="/press" className={`transition-colors ${pathname === "/press" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`}>
+            <li className="relative group" role="none">
+              <Link href="/press" className={`transition-colors ${pathname === "/press" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`} role="menuitem" aria-current={pathname === "/press" ? "page" : undefined}>
                 PRESS AND MEDIA
               </Link>
               {/* Active underline - stick to bottom of navbar */}
@@ -134,8 +136,8 @@ export default function Navbar() {
                 <div className="absolute -bottom-6 left-0 w-0 h-1 bg-gradient-to-r from-[#d93732] to-[#492f32] group-hover:w-full transition-all duration-300"></div>
               )}
             </li>
-            <li className="relative group">
-              <div  className={`transition-colors ${pathname === "/registration/exhibitor" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`}>
+            <li className="relative group" role="none">
+              <div  className={`transition-colors ${pathname === "/registration/exhibitor" ? "text-red-600 font-semibold" : "text-black hover:text-red-600"}`} role="menuitem" aria-haspopup="true" aria-expanded="false">
                 REGISTRATION
               </div>
               {/* Active underline - only show when active */}
@@ -148,17 +150,19 @@ export default function Navbar() {
               )}
               
               {/* Dropdown Menu */}
-              <div className="absolute top-8 left-0 mt-6 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 xl:mt-5 xl:w-60">
+              <div className="absolute top-8 left-0 mt-6 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 xl:mt-5 xl:w-60" role="menu" aria-label="Registration submenu">
                 <div className="py-2">
                   <Link 
                     href="/registration/exhibitor" 
                     className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors xl:px-3 xl:py-2.5"
+                    role="menuitem"
                   >
                     Register as Exhibitor
                   </Link>
                   <Link 
                     href="/registration/buyer" 
                     className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors xl:px-3 xl:py-2.5"
+                    role="menuitem"
                   >
                     Register as Buyer
                   </Link>
@@ -167,6 +171,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors xl:px-3 xl:py-2.5"
+                    role="menuitem"
                   >
                     Register as Visitor
                   </a>
@@ -268,24 +273,26 @@ export default function Navbar() {
               </div>
 
               {/* Mobile menu items */}
-              <nav className="px-6 py-8">
-                <ul className="space-y-6">
-                  <li>
+              <nav className="px-6 py-8" aria-label="Mobile navigation">
+                <ul className="space-y-6" role="menubar">
+                  <li role="none">
                     <Link 
                       href="/" 
                       className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
                     >
                       HOME
                     </Link>
                   </li>
-                  <li>
-                    <div className="text-lg font-medium text-gray-900 mb-2">ABOUT</div>
-                    <div className="ml-4 space-y-2">
+                  <li role="none">
+                    <div className="text-lg font-medium text-gray-900 mb-2" role="menuitem" aria-haspopup="true">ABOUT</div>
+                    <div className="ml-4 space-y-2" role="menu" aria-label="About submenu">
                       <Link 
                         href="/about" 
                         className="block text-base text-gray-700 hover:text-red-600 transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
+                        role="menuitem"
                       >
                         About HEI
                       </Link>
@@ -293,63 +300,70 @@ export default function Navbar() {
                         href="/the-organizer" 
                         className="block text-base text-gray-700 hover:text-red-600 transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
+                        role="menuitem"
                       >
                         The Organizer
                       </Link>
                     </div>
                   </li>
-                  <li>
+                  <li role="none">
                     <Link 
                       href="/exhibition" 
                       className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
                     >
                       EXHIBITION
                     </Link>
                   </li>
-                  <li>
+                  <li role="none">
                     <Link 
                       href="/visit-the-expo" 
                       className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
                     >
                       VISIT THE EXPO
                     </Link>
                   </li>
-                  <li>
+                  <li role="none">
                     <Link 
                       href="/press" 
                       className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
                     >
                       PRESS AND MEDIA
                     </Link>
                   </li>
-                  <li>
+                  <li role="none">
                     <Link 
                       href="/registration/exhibitor" 
                       className="block text-lg font-semibold text-gray-900 hover:text-red-600 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
                     >
                       REGISTRATION AS EXHIBITOR
                     </Link>
                   </li>
-                  <li>
+                  <li role="none">
                     <Link 
                       href="/registration/buyer" 
                       className="block text-lg font-semibold text-gray-900 hover:text-red-600 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
                     >
                       REGISTRATION AS BUYER
                     </Link>
                   </li>
-                  <li>
+                  <li role="none">
                     <Link 
                       href="https://2025.tradexpoindonesia.com/register" 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block text-lg font-semibold text-gray-900 hover:text-red-600 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
                     >
                       REGISTRATION AS VISITOR
                     </Link>

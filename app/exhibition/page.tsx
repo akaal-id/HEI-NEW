@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import EventStructuredData from '../../components/StructuredData';
 
 // TypeScript interfaces
 interface AgendaItem {
@@ -105,6 +106,24 @@ export default function ExhibitionPage() {
       transition={{ duration: 0.8, ease: "easeIn" }}
       className="py-24 min-h-screen bg-gradient-to-b from-gray-50 to-white"
     >
+      <EventStructuredData
+        name="Halal Expo Indonesia 2025 - Exhibition"
+        description="Explore Indonesia's premier halal export exhibition featuring cutting-edge products, innovative technologies, and networking opportunities in the global halal industry."
+        startDate="2025-10-15T08:00:00+07:00"
+        endDate="2025-10-19T18:00:00+07:00"
+        location={{
+          name: "ICE BSD",
+          address: "Jl. BSD Grand Boulevard No.1, Pagedangan",
+          city: "Tangerang",
+          country: "Indonesia"
+        }}
+        organizer={{
+          name: "PT Angan Kreasi Semesta",
+          url: "https://www.skyconnection.co.id"
+        }}
+        url="https://halalexpoindonesia.com/exhibition"
+        image="/images/mainkv.png"
+      />
       {/* Header Section */}
       <div className="max-w-4xl mx-auto px-6 py-16 text-left md:text-center">
         <h1 className="mb-6">

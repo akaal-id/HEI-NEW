@@ -1,6 +1,7 @@
 "use client";
 import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
+import EventStructuredData from '../components/StructuredData';
 
 // Lazy load all sections
 const Hero = lazy(() => import('../components/Hero'));
@@ -27,6 +28,24 @@ const SectionLoader = () => (
 export default function Home() {
   return (
     <div className="space-y-0">
+      <EventStructuredData
+        name="Halal Expo Indonesia 2025"
+        description="Indonesia's premier halal export exhibition connecting businesses, fostering innovation, and driving growth in the global halal industry. Join thousands of industry professionals, entrepreneurs, and decision-makers from around the world."
+        startDate="2025-10-15T08:00:00+07:00"
+        endDate="2025-10-19T18:00:00+07:00"
+        location={{
+          name: "ICE BSD",
+          address: "Jl. BSD Grand Boulevard No.1, Pagedangan",
+          city: "Tangerang",
+          country: "Indonesia"
+        }}
+        organizer={{
+          name: "PT Angan Kreasi Semesta",
+          url: "https://www.skyconnection.co.id"
+        }}
+        url="https://halalexpoindonesia.com"
+        image="/images/mainkv.png"
+      />
       <motion.div
         initial={{ filter: "blur(10px)", opacity: 0, y: 24 }}
         animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
