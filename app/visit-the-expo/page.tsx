@@ -176,7 +176,7 @@ export default function VisitTheExpoPage() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center"
           >
             {whyVisitPoints.map((point, index) => (
               <motion.div
@@ -284,10 +284,10 @@ export default function VisitTheExpoPage() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/registration"
+                  href="/registration/exhibitor"
                   className="inline-flex items-center px-8 py-4 bg-white text-[#d93732] font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105"
                 >
-                  Register as Visitor
+                  Register as Exhibitor
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -298,10 +298,10 @@ export default function VisitTheExpoPage() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/registration/exhibitor"
+                  href="/registration/buyer"
                   className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#d93732] transition-all duration-300 hover:scale-105"
                 >
-                  Register as Exhibitor
+                  Register as Buyer
                 </Link>
               </motion.div>
             </div>
