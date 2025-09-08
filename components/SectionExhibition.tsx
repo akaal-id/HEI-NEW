@@ -137,7 +137,7 @@ export default function SectionExhibition() {
 
             {/* Cards Container */}
           <div className="flex items-center justify-center overflow-hidden md:overflow-visible">
-            <div className="relative w-screen h-[500px] md:h-[600px]">
+            <div className="relative w-screen h-[500px] md:h-[600px] z-10">
               {agendaItems.map((item, index) => (
                 <div
                   key={item.id}
@@ -176,7 +176,7 @@ export default function SectionExhibition() {
             </div>
 
             {/* Card Indicators */}
-            <div className="flex justify-center -mt-32 md:-mt-24 space-x-3">
+            <div className="flex justify-center -mt-32 md:-mt-24 space-x-3 relative z-20">
               {agendaItems.map((_, index) => (
                 <button
                   key={index}
@@ -194,14 +194,14 @@ export default function SectionExhibition() {
         </div>
 
         {/* Learn More Button */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 relative z-50">
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <Link
               href="/exhibition"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 relative z-50"
             >
               Learn More About Exhibition
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
