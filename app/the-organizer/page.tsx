@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import Head from 'next/head';
 
 export default function TheOrganizerPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -26,13 +27,29 @@ export default function TheOrganizerPage() {
   }, []);
 
   return (
-    <motion.div 
-      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
-      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: "easeIn" }}
-      className="py-12 md:py-12 min-h-screen bg-white mb-12"
-    >
+    <>
+      <Head>
+        <title>The Organizer - Halal Expo Indonesia</title>
+        <meta name="description" content="Meet PT Angan Kreasi Semesta (Skyconnection), the organizer of Halal Expo Indonesia. Learn about our expertise in event management and halal industry development." />
+        <meta name="keywords" content="halal expo organizer, PT Angan Kreasi Semesta, Skyconnection, halal event management, halal industry organizer, halal exhibition management" />
+        <meta property="og:title" content="The Organizer - Halal Expo Indonesia" />
+        <meta property="og:description" content="Meet PT Angan Kreasi Semesta (Skyconnection), the organizer of Halal Expo Indonesia. Learn about our expertise in event management and halal industry development." />
+        <meta property="og:url" content="/the-organizer" />
+        <meta property="og:image" content="/images/Angkasa-1.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Organizer - Halal Expo Indonesia" />
+        <meta name="twitter:description" content="Meet PT Angan Kreasi Semesta (Skyconnection), the organizer of Halal Expo Indonesia." />
+        <meta name="twitter:image" content="/images/Angkasa-1.png" />
+        <link rel="canonical" href="/the-organizer" />
+      </Head>
+      <motion.div 
+        initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+        whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeIn" }}
+        className="py-12 md:py-12 min-h-screen bg-white mb-12"
+      >
       {/* Hero Section with Background Image */}
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Hero Background Image */}
@@ -412,5 +429,6 @@ export default function TheOrganizerPage() {
         </div>
       </motion.div>
     </motion.div>
+    </>
   );
 }

@@ -286,25 +286,24 @@ export default function Navbar() {
                     </Link>
                   </li>
                   <li role="none">
-                    <div className="text-lg font-medium text-gray-900 mb-2" role="menuitem" aria-haspopup="true">ABOUT</div>
-                    <div className="ml-4 space-y-2" role="menu" aria-label="About submenu">
-                      <Link 
-                        href="/about" 
-                        className="block text-base text-gray-700 hover:text-red-600 transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                        role="menuitem"
-                      >
-                        About HEI
-                      </Link>
-                      <Link 
-                        href="/the-organizer" 
-                        className="block text-base text-gray-700 hover:text-red-600 transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                        role="menuitem"
-                      >
-                        The Organizer
-                      </Link>
-                    </div>
+                    <Link 
+                      href="/about" 
+                      className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
+                    >
+                      ABOUT HEI
+                    </Link>
+                  </li>
+                  <li role="none">
+                    <Link 
+                      href="/the-organizer" 
+                      className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                      role="menuitem"
+                    >
+                      THE ORGANIZER
+                    </Link>
                   </li>
                   <li role="none">
                     <Link 

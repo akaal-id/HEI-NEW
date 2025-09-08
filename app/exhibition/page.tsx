@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import EventStructuredData from '../../components/StructuredData';
+import Head from 'next/head';
 
 // TypeScript interfaces
 interface AgendaItem {
@@ -99,13 +100,29 @@ export default function ExhibitionPage() {
   };
 
   return (
-    <motion.div 
-      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
-      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: "easeIn" }}
-      className="py-24 min-h-screen bg-gradient-to-b from-gray-50 to-white"
-    >
+    <>
+      <Head>
+        <title>Exhibition - Halal Expo Indonesia</title>
+        <meta name="description" content="Join as exhibitors at Halal Expo Indonesia and showcase your halal products to global markets. Discover our comprehensive exhibition program and exhibitor categories." />
+        <meta name="keywords" content="halal exhibition indonesia, halal expo exhibitors, halal trade show, halal products exhibition, halal business indonesia, halal export exhibition, ice bsd exhibition, halal marketplace" />
+        <meta property="og:title" content="Exhibition - Halal Expo Indonesia" />
+        <meta property="og:description" content="Join as exhibitors at Halal Expo Indonesia and showcase your halal products to global markets. Discover our comprehensive exhibition program and exhibitor categories." />
+        <meta property="og:url" content="/exhibition" />
+        <meta property="og:image" content="/images/mainkv.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Exhibition - Halal Expo Indonesia" />
+        <meta name="twitter:description" content="Join as exhibitors at Halal Expo Indonesia and showcase your halal products to global markets." />
+        <meta name="twitter:image" content="/images/mainkv.png" />
+        <link rel="canonical" href="/exhibition" />
+      </Head>
+      <motion.div 
+        initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+        whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeIn" }}
+        className="py-24 min-h-screen bg-gradient-to-b from-gray-50 to-white"
+      >
       <EventStructuredData
         name="Halal Expo Indonesia 2025 - Exhibition"
         description="Explore Indonesia's premier halal export exhibition featuring cutting-edge products, innovative technologies, and networking opportunities in the global halal industry."
@@ -515,5 +532,6 @@ export default function ExhibitionPage() {
         }
       `}</style>
     </motion.div>
+    </>
   );
 }

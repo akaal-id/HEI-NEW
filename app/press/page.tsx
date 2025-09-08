@@ -6,6 +6,7 @@ import Pagination from "@/components/Pagination";
 import SearchBar from "@/components/SearchBar";
 import VirtualizedGrid from "@/components/VirtualizedGrid";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
+import Head from "next/head";
 
 // Lazy load heavy components
 const HeroSlider = lazy(() => import("@/components/HeroSlider"));
@@ -163,8 +164,24 @@ export default function PressPage() {
   }, []);
   
   return (
-    <div className="min-h-screen">
-      <PerformanceMonitor componentName="PressPage" />
+    <>
+      <Head>
+        <title>Press & Media - Halal Expo Indonesia</title>
+        <meta name="description" content="Stay updated with the latest news, press releases, and media coverage about Halal Expo Indonesia. Access press materials and media resources." />
+        <meta name="keywords" content="halal expo press, halal expo news, halal expo media, halal exhibition press release, halal industry news, halal trade media" />
+        <meta property="og:title" content="Press & Media - Halal Expo Indonesia" />
+        <meta property="og:description" content="Stay updated with the latest news, press releases, and media coverage about Halal Expo Indonesia. Access press materials and media resources." />
+        <meta property="og:url" content="/press" />
+        <meta property="og:image" content="/images/mainkv.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Press & Media - Halal Expo Indonesia" />
+        <meta name="twitter:description" content="Stay updated with the latest news, press releases, and media coverage about Halal Expo Indonesia." />
+        <meta name="twitter:image" content="/images/mainkv.png" />
+        <link rel="canonical" href="/press" />
+      </Head>
+      <div className="min-h-screen">
+        <PerformanceMonitor componentName="PressPage" />
       
       {/* Hero Slider Section */}
       <Suspense fallback={
@@ -271,5 +288,6 @@ export default function PressPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

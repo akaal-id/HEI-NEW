@@ -373,8 +373,7 @@ function safeCreateSlug(title: string): string {
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
-      .trim()
-      .substring(0, 50) || 'article';
+      .trim() || 'article';
   } catch (error) {
     console.error('Error creating slug:', error);
     return 'article';

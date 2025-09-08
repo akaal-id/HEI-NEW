@@ -3,12 +3,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
+import Head from 'next/head';
 
 export default function AboutPage() {
   const aboutSectionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <motion.div 
+    <>
+      <Head>
+        <title>About Halal Expo Indonesia | Halal Expo Indonesia</title>
+        <meta name="description" content="Learn about Halal Expo Indonesia, the premiere halal trade exhibition in Southeast Asia. Discover our mission to empower Indonesia's halal industry and connect businesses globally." />
+        <meta name="keywords" content="about halal expo indonesia, halal exhibition indonesia, halal trade indonesia, halal industry indonesia, halal business indonesia, halal export indonesia, ice bsd halal expo, halal marketplace indonesia" />
+        <meta property="og:title" content="About Halal Expo Indonesia" />
+        <meta property="og:description" content="Learn about Halal Expo Indonesia, the premiere halal trade exhibition in Southeast Asia. Discover our mission to empower Indonesia's halal industry and connect businesses globally." />
+        <meta property="og:url" content="/about" />
+        <meta property="og:image" content="/images/image-export-2.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Halal Expo Indonesia" />
+        <meta name="twitter:description" content="Learn about Halal Expo Indonesia, the premiere halal trade exhibition in Southeast Asia." />
+        <meta name="twitter:image" content="/images/image-export-2.jpg" />
+        <link rel="canonical" href="/about" />
+      </Head>
+      <motion.div 
       initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
       whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -272,5 +289,6 @@ export default function AboutPage() {
         </div>
       </div>
     </motion.div>
+    </>
   );
 }

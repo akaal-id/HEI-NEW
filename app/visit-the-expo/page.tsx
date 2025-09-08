@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import EventStructuredData from "../../components/StructuredData";
+import Head from "next/head";
 
 // Animation variants
 const fadeInUp = {
@@ -88,8 +89,24 @@ export default function VisitTheExpoPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent">
-      <EventStructuredData
+    <>
+      <Head>
+        <title>Visit The Expo - Halal Expo Indonesia</title>
+        <meta name="description" content="Plan your visit to Halal Expo Indonesia and discover the best halal products from Indonesia. Learn why you should attend this premier halal trade exhibition." />
+        <meta name="keywords" content="visit halal expo indonesia, halal exhibition visitors, halal trade show indonesia, halal products indonesia, halal business networking, ice bsd visit, halal marketplace indonesia" />
+        <meta property="og:title" content="Visit The Expo - Halal Expo Indonesia" />
+        <meta property="og:description" content="Plan your visit to Halal Expo Indonesia and discover the best halal products from Indonesia. Learn why you should attend this premier halal trade exhibition." />
+        <meta property="og:url" content="/visit-the-expo" />
+        <meta property="og:image" content="/images/mainkv.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Visit The Expo - Halal Expo Indonesia" />
+        <meta name="twitter:description" content="Plan your visit to Halal Expo Indonesia and discover the best halal products from Indonesia." />
+        <meta name="twitter:image" content="/images/mainkv.png" />
+        <link rel="canonical" href="/visit-the-expo" />
+      </Head>
+      <div className="min-h-screen bg-transparent">
+        <EventStructuredData
         name="Halal Expo Indonesia 2025 - Visit The Expo"
         description="Discover why you should visit Indonesia's premier halal export exhibition. Experience unique halal products, gain industry insights, build valuable networks, and explore business opportunities in the global halal market."
         startDate="2025-10-15T08:00:00+07:00"
@@ -328,5 +345,6 @@ export default function VisitTheExpoPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }
