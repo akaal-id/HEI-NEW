@@ -75,7 +75,7 @@ export default function SectionVenue() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Time</p>
-                    <p className="text-white font-medium">15.30 - Selesai</p>
+                    <p className="text-white font-medium">(GMT+7) 10.00 AM - End</p>
                   </div>
                 </div>
               </div>

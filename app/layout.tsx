@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Loader from '../components/Loader'
 import MetaPixel from '../components/MetaPixel'
+import ScrollToTop from '../components/ScrollToTop'
 
 export const metadata = {
   title: 'Halal Export Indonesia - Halal Expo Indonesia',
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   )

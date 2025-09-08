@@ -52,7 +52,7 @@ const agendaItems: AgendaItem[] = [
     title: 'Conference',
     shortDescription: 'High-level discussions on halal industry future',
     fullDescription: 'Join thought leaders, policymakers, and industry experts for in-depth discussions about the future of the halal industry. Our conference features keynote presentations, panel discussions, and interactive sessions covering topics such as sustainability, innovation, digital transformation, and global market expansion strategies.',
-    backgroundImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    backgroundImage: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
     imageAlt: 'Large conference hall with stage and audience'
   }
 ];
@@ -232,7 +232,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -250,7 +250,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -268,7 +268,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -286,7 +286,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -304,7 +304,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -322,7 +322,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/image-export-1.jpg')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
