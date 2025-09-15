@@ -300,7 +300,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/conference-3.jpeg')",
+            backgroundImage: "url('/images/logistic-1.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -318,7 +318,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/conference-4.jpeg')",
+            backgroundImage: "url('/images/halal product-1.jpg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -330,13 +330,13 @@ export default function ExhibitionPage() {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-yellow via-yellow/10 to-transparent" />
           <div className="relative z-10">
-            <div className="text-left text-lg font-semibold text-white pr-24">Processing & Packaging Technology</div>
+            <div className="text-left text-lg font-semibold text-white pr-24">Halal Products & Food</div>
           </div>
         </div>
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/event-1.jpeg')",
+            backgroundImage: "url('/images/halal material.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -354,7 +354,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/seminar-1.jpeg')",
+            backgroundImage: "url('/images/consulting.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -372,7 +372,7 @@ export default function ExhibitionPage() {
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/coaching clinic-1.jpeg')",
+            backgroundImage: "url('/images/packaging-1.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -384,13 +384,13 @@ export default function ExhibitionPage() {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-red-900 via-red-500/30 to-transparent" />
           <div className="relative z-10">
-            <div className="text-left text-lg font-semibold text-white pr-24">Halal Logistics & Supply Chain</div>
+            <div className="text-left text-lg font-semibold text-white pr-24">Halal Product Packaging & Branding</div>
           </div>
         </div>
         <div
           className="text-center p-8 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-700 relative"
           style={{
-            backgroundImage: "url('/images/conference-1.jpg')",
+            backgroundImage: "url('/images/halal certificate.jpg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '260px',
@@ -402,7 +402,7 @@ export default function ExhibitionPage() {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-yellow via-yellow/10 to-transparent" />
           <div className="relative z-10">
-            <div className="text-left text-lg font-semibold text-white pr-24">Digital Platforms & Export E-Commerce</div>
+            <div className="text-left text-lg font-semibold text-white pr-24">Halal Certification Services</div>
           </div>
         </div>
         </div>
