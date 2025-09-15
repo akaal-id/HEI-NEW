@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo, Suspense, lazy, useCallback } from "react";
 import PressMediaTabs from "@/components/PressMediaTabs";
 import MediaCard from "@/components/MediaCard";
+import MediaGallery from "@/components/MediaGallery";
 import Pagination from "@/components/Pagination";
 import SearchBar from "@/components/SearchBar";
 import VirtualizedGrid from "@/components/VirtualizedGrid";
@@ -25,6 +26,16 @@ interface PressArticle {
 interface MediaItem {
   id: string;
   imageUrl: string;
+  title: string;
+  description: string;
+}
+
+interface EventGallery {
+  id: string;
+  eventName: string;
+  year: string;
+  description: string;
+  mediaItems: MediaItem[];
 }
 
 // Cache for press data
@@ -84,11 +95,59 @@ function getPressData(): Promise<PressArticle[]> {
   });
 }
 
-// Mock media data
-const mockMediaData: MediaItem[] = Array.from({ length: 40 }, (_, index) => ({
-  id: `media-${index + 1}`,
-  imageUrl: `https://picsum.photos/400/400?random=${index + 1}`
-}));
+// Mock event galleries data
+const mockEventGalleries: EventGallery[] = [
+  {
+    id: 'hei-2025',
+    eventName: 'Halal Export Indonesia',
+    year: '2024',
+    description: 'The 4th Halal Expo Indonesia - The latest edition of our premier halal export exhibition featuring cutting-edge products, innovative technologies, and networking opportunities in the global halal industry.',
+    mediaItems: [
+      'IMG_0866.JPG','IMG_0915.JPG','IMG_0923.JPG','IMG_0929.JPG','IMG_0937.JPG','IMG_0939.JPG','IMG_0947.JPG','IMG_0984.JPG','IMG_1001.JPG','IMG_6887.JPG','IMG_6891.JPG','IMG_6894.JPG','IMG_6899.JPG','IMG_6913.JPG','IMG_6916.JPG','IMG_6927.JPG','IMG_6934.JPG','IMG_6936.JPG','IMG_6941.JPG','IMG_6982.JPG','IMG_6984.JPG','IMG_6986.JPG','IMG_6995.JPG','IMG_6999.JPG','IMG_7015.JPG','IMG_7053.JPG','IMG_7054.JPG','IMG_7064.JPG','IMG_7065.JPG','IMG_7071.JPG','IMG_7072.JPG','IMG_7078.JPG','IMG_7080.JPG','IMG_7083.JPG','IMG_7092.JPG','IMG_7097.JPG','IMG_7099.JPG','IMG_7102.JPG','IMG_7104.JPG','IMG_7108.JPG','IMG_7145.JPG','IMG_7146.JPG','IMG_7161.JPG','IMG_7270.JPG','IMG_7309.JPG'
+    ].map((name, idx) => ({
+      id: `hei-2024-${idx+1}`,
+      imageUrl: `/event/2024/${name}`,
+      title: `HEI 2024 Gallery Image ${idx+1}`,
+      description: 'Official photo from Halal Export Indonesia 2024.'
+    }))
+  },
+  {
+    id: 'hei-2023',
+    eventName: 'The 3rd Halal Expo Indonesia',
+    year: '2023',
+    description: 'A milestone year that marked significant growth in international participation and showcased the expanding potential of the halal market with innovative solutions and global partnerships.',
+    mediaItems: Array.from({ length: 10 }, (_, index) => ({
+      id: `hei-2023-${index + 1}`,
+      imageUrl: `https://picsum.photos/800/450?random=${index + 20}`,
+      title: `The 3rd HEI 2023 Gallery Image ${index + 1}`,
+      description: `Historic moments from The 3rd Halal Expo Indonesia 2023 that shaped the future of halal exports.`,
+    }))
+  },
+  {
+    id: 'hei-2019',
+    eventName: 'The 2nd Halal Expo Indonesia',
+    year: '2019',
+    description: 'Building on the success of our inaugural event, The 2nd Halal Expo Indonesia brought together industry leaders, innovators, and stakeholders to drive the halal economy forward.',
+    mediaItems: Array.from({ length: 15 }, (_, index) => ({
+      id: `hei-2019-${index + 1}`,
+      imageUrl: `https://picsum.photos/800/450?random=${index + 40}`,
+      title: `The 2nd HEI 2019 Gallery Image ${index + 1}`,
+      description: `Memorable moments from The 2nd Halal Expo Indonesia 2019 capturing the growth and innovation in the halal industry.`,
+    }))
+  },
+  {
+    id: 'hei-2018',
+    eventName: 'Halal Expo Indonesia',
+    year: '2018',
+    description: 'The inaugural Halal Expo Indonesia that started it all - establishing Indonesia as a key player in the global halal market and creating a platform for halal industry excellence.',
+    mediaItems: Array.from({ length: 8 }, (_, index) => ({
+      id: `hei-2018-${index + 1}`,
+      imageUrl: `https://picsum.photos/800/450?random=${index + 60}`,
+      title: `HEI 2018 Gallery Image ${index + 1}`,
+      description: `Historic moments from the inaugural Halal Expo Indonesia 2018 that launched our journey in the halal industry.`,
+    }))
+  }
+];
 
 export default function PressPage() {
   const [pressData, setPressData] = useState<PressArticle[]>([]);
@@ -273,16 +332,8 @@ export default function PressPage() {
                 </p>
               </div>
               
-              {/* Media Grid - 4x10 layout */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {mockMediaData.map((media) => (
-                  <MediaCard
-                    key={media.id}
-                    id={media.id}
-                    imageUrl={media.imageUrl}
-                  />
-                ))}
-              </div>
+              {/* New Media Gallery Layout */}
+              <MediaGallery eventGalleries={mockEventGalleries} />
             </>
           )}
         </div>

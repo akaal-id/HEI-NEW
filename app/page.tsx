@@ -14,6 +14,7 @@ const SectionRegistration = lazy(() => import('../components/SectionRegistration
 const SectionSponsor = lazy(() => import('../components/SectionSponsor'));
 const SectionPress = lazy(() => import('../components/SectionPress'));
 const SectionContact = lazy(() => import('../components/SectionContact'));
+const SectionPartners = lazy(() => import('../components/SectionPartners'));
 
 // Loading component
 const SectionLoader = () => (
@@ -74,6 +75,11 @@ export default function Home() {
         
         <Suspense fallback={<SectionLoader />}>
           <SectionPress />
+        </Suspense>
+
+        {/* Partners Section above footer */}
+        <Suspense fallback={<SectionLoader />}>
+          <SectionPartners />
         </Suspense>
         
       </motion.div>
