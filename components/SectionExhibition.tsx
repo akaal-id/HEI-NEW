@@ -19,41 +19,44 @@ const agendaItems: AgendaItem[] = [
     id: 'exhibition',
     title: 'Exhibition',
     shortDescription: 'Showcase your products and services to global buyers',
-    backgroundImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    backgroundImage: '/images/event-1.jpeg',
     imageAlt: 'Exhibition hall with booths and displays'
   },
   {
     id: 'coaching-clinic',
     title: 'Coaching Clinic',
     shortDescription: 'Expert guidance for business growth and development',
-    backgroundImage: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    backgroundImage: '/images/coaching clinic-1.jpeg',
     imageAlt: 'Professional coaching session in modern office'
   },
   {
     id: 'business-matching',
     title: 'Business Matching',
     shortDescription: 'Connect with potential partners and buyers',
-    backgroundImage: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80',
+    backgroundImage: '/images/conference-2.jpeg',
     imageAlt: 'Business professionals shaking hands in meeting'
   },
   {
     id: 'seminar-business',
     title: 'Seminar Business',
     shortDescription: 'Learn from industry leaders and market insights',
-    backgroundImage: 'https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    backgroundImage: '/images/seminar-1.jpeg',
     imageAlt: 'Business seminar with audience and presenter'
   },
   {
     id: 'conference',
     title: 'Conference',
     shortDescription: 'High-level discussions on halal industry future',
-    backgroundImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    backgroundImage: '/images/conference-1.jpg',
     imageAlt: 'Large conference hall with stage and audience'
   }
 ];
 
 export default function SectionExhibition() {
   const [activeIndex, setActiveIndex] = useState(0); // Exhibition card (first card) is default center
+  const [email, setEmail] = useState('');
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const nextCard = () => {
     setActiveIndex((prev) => (prev + 1) % agendaItems.length); // Infinite loop: 0->1->2->3->4->0
@@ -65,6 +68,35 @@ export default function SectionExhibition() {
 
   const goToCard = (index: number) => {
     setActiveIndex(index);
+  };
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Submit to Google Form
+      const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSd202Ipfbp2vUxCfUR5yimj_VHClfcgaPxRdoYZ_5h7nRKClg/formResponse';
+      const formData = new FormData();
+      formData.append('entry.1318524136', email); // Email field ID
+      
+      // Submit to Google Form using fetch
+      await fetch(googleFormUrl, {
+        method: 'POST',
+        mode: 'no-cors', // Required for Google Forms
+        body: formData
+      });
+      
+      setEmailSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting to Google Form:', error);
+      // Still mark as submitted even if Google Form fails
+      setEmailSubmitted(true);
+    }
+    
+    setIsSubmitting(false);
   };
 
   const getCardClasses = (index: number) => {
@@ -219,56 +251,130 @@ export default function SectionExhibition() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             </div>
-            <h2 className="text-3xl md:text-5xl font-normal text-gray-900 leading-tight mb-4">
-              Download Exhibition <br />
-              <span className="text-6xl md:text-7xl font-bold text-[#d93732]">Brochure</span>
+            <h2 className="text-3xl md:text-4xl font-normal text-gray-900 leading-tight mb-4">
+              Download Exhibition 
+              <span className="text-6xl md:text-4xl font-bold text-[#d93732]"> Brochure</span>
             </h2>
             <p className="text-md md:text-lg text-gray-600 leading-relaxed mb-8">
               Read our brochure to learn more about <br /> <span className="text-[#d93732] font-bold">Halal Export Indonesia</span><span className="text-gray-600"> and </span><span className="text-[#d93732] font-bold">Halal Expo Indonesia</span>.
             </p>
             
             {/* Brochure Buttons Container */}
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
               {/* Halal Expo Indonesia 2026 Brochure */}
-              <motion.button
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = '/brochures/Halal Expo Indonesia 2026.pdf';
-                  link.download = 'Halal-Expo-Indonesia-2026-Brochure.pdf';
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-4 px-8 w-full md:w-auto md:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 justify-center"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span>Halal Expo Indonesia 2026</span>
-              </motion.button>
+              <div className="flex flex-col items-center space-y-4">
+                <div className="w-full h-96 shadow-xl bg-white rounded-lg overflow-hidden relative">
+                  <Image
+                    src="/images/brochure-halal.png"
+                    alt="Halal Expo Indonesia 2026 Brochure"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <motion.button
+                  onClick={() => {
+                    if (!emailSubmitted) return;
+                    const link = document.createElement('a');
+                    link.href = '/brochures/Halal Expo Indonesia 2026.pdf';
+                    link.download = 'Halal-Expo-Indonesia-2026-Brochure.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  whileHover={{ scale: emailSubmitted ? 1.05 : 1 }}
+                  whileTap={{ scale: emailSubmitted ? 0.95 : 1 }}
+                  disabled={!emailSubmitted}
+                  className={`font-semibold py-4 px-12 w-full md:w-auto md:px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center space-x-2 justify-center ${
+                    emailSubmitted 
+                      ? 'bg-gradient-to-r from-[#d93732] to-[#492f32] text-white hover:shadow-xl' 
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }`}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span>Halal Expo Indonesia 2026</span>
+                </motion.button>
+              </div>
 
               {/* The 2nd Halal Export Indonesia Brochure */}
-              <motion.button
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = '/brochures/The 2nd Halal Export Indonesia.pdf';
-                  link.download = 'The-2nd-Halal-Export-Indonesia-Brochure.pdf';
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-[#d93732] text-[#d93732] font-semibold py-4 px-8 w-full md:w-auto md:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 justify-center"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span>The 2nd Halal Export Indonesia</span>
-              </motion.button>
+              <div className="flex flex-col items-center space-y-4">
+                <div className="w-full h-96 shadow-xl bg-white rounded-lg overflow-hidden relative">
+                  <Image
+                    src="/images/brochure-export.png"
+                    alt="The 2nd Halal Export Indonesia Brochure"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <motion.button
+                  onClick={() => {
+                    if (!emailSubmitted) return;
+                    const link = document.createElement('a');
+                    link.href = '/brochures/The 2nd Halal Export Indonesia.pdf';
+                    link.download = 'The-2nd-Halal-Export-Indonesia-Brochure.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  whileHover={{ scale: emailSubmitted ? 1.05 : 1 }}
+                  whileTap={{ scale: emailSubmitted ? 0.95 : 1 }}
+                  disabled={!emailSubmitted}
+                  className={`font-semibold py-4 px-7 w-auto md:w-auto md:px-4 rounded-lg shadow-lg transition-all duration-300 flex items-center space-x-2 justify-center ${
+                    emailSubmitted 
+                      ? 'border-2 border-[#d93732] text-[#d93732] hover:shadow-xl' 
+                      : 'border-2 border-gray-300 text-gray-500 cursor-not-allowed'
+                  }`}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span>The 2nd Halal Export Indonesia</span>
+                </motion.button>
+              </div>
             </div>
+            
+            {/* Email Form - Moved to last position */}
+            {!emailSubmitted ? (
+              <div className="max-w-md mx-auto mt-8">
+                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Enter your email to download brochures
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="your.email@example.com"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d93732] focus:border-transparent outline-none transition-all duration-300"
+                    />
+                  </div>
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting || !email.trim()}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit Email'}
+                  </motion.button>
+                </form>
+              </div>
+            ) : (
+              <div className="max-w-md mx-auto mt-8">
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Email submitted successfully! You can now download the brochures.
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

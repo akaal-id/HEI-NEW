@@ -1,9 +1,48 @@
 "use client"
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { trackNewsletterSubscription } from '../lib/facebook-pixel';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Submit to Google Form
+      const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSd202Ipfbp2vUxCfUR5yimj_VHClfcgaPxRdoYZ_5h7nRKClg/formResponse';
+      const formData = new FormData();
+      formData.append('entry.1318524136', email); // Email field ID
+      
+      // Submit to Google Form using fetch
+      await fetch(googleFormUrl, {
+        method: 'POST',
+        mode: 'no-cors', // Required for Google Forms
+        body: formData
+      });
+      
+      // Track newsletter subscription for Facebook Pixel
+      trackNewsletterSubscription(email);
+      
+      setSubmitted(true);
+      setEmail(''); // Clear the input
+    } catch (error) {
+      console.error('Error submitting to Google Form:', error);
+      // Still mark as submitted even if Google Form fails
+      setSubmitted(true);
+      setEmail(''); // Clear the input
+    }
+    
+    setIsSubmitting(false);
+  };
+
   return (
     <footer className="bg-white">
       {/* Top Section - Three Columns */}
@@ -132,24 +171,35 @@ export default function Footer() {
             <p className="text-sm text-gray-600 xl:text-xs">
               Stay updated with the latest news and updates from Halal Export Indonesia.
             </p>
-            <div className="flex flex-col space-y-3 xl:space-y-2.5">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent xl:px-3 xl:py-2.5 xl:text-sm"
-              />
-              <button 
-                onClick={() => {
-                  const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
-                  if (emailInput && emailInput.value) {
-                    trackNewsletterSubscription(emailInput.value);
-                  }
-                }}
-                className="bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 xl:py-2.5 xl:px-5 xl:text-sm"
-              >
-                Subscribe
-              </button>
-            </div>
+            
+            {!submitted ? (
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col space-y-3 xl:space-y-2.5">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent xl:px-3 xl:py-2.5 xl:text-sm"
+                />
+                <button 
+                  type="submit"
+                  disabled={isSubmitting || !email.trim()}
+                  className="bg-gradient-to-r from-[#d93732] to-[#492f32] text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed xl:py-2.5 xl:px-5 xl:text-sm"
+                >
+                  {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                </button>
+              </form>
+            ) : (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+                <div className="flex items-center">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm xl:text-xs">Successfully subscribed!</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

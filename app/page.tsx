@@ -67,9 +67,6 @@ export default function Home() {
           <SectionExhibition />
         </Suspense>
 
-        <Suspense fallback={<SectionLoader />}>
-          <SectionVisit />
-        </Suspense>
 
         <Suspense fallback={<SectionLoader />}>
           <SectionVenue />
@@ -79,9 +76,6 @@ export default function Home() {
           <SectionPress />
         </Suspense>
         
-        <Suspense fallback={<SectionLoader />}>
-          <SectionContact />
-        </Suspense>
       </motion.div>
     </div>
   )
