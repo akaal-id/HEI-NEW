@@ -21,10 +21,46 @@ const hostedBy: PartnerItem[] = [
   { name: "Kementerian Perdagangan", logo: "/images/logo-kemendag.png", href: "https://www.kemendag.go.id/" },
 ];
 
+const eventPartners: PartnerItem[] = [
+  { name: "Kementerian Pariwisata", logo: "/images/partner/eventpartner/logo-kemenpar.png", href: "https://kemenpar.go.id/" },
+  { name: "MIHAS", logo: "/images/partner/eventpartner/logo-mihas.png", href: "https://mihas.com.my/" },
+  { name: "Kolej Uniti", logo: "/images/partner/eventpartner/logo-kolejuniti.png", href: "https://uniti.edu.my/" },
+  { name: "Uniti Halal Centre", logo: "/images/partner/eventpartner/logo-uhac.png", href: "https://unitihalalcentre.com/" },
+  { name: "Halal Korea Center", logo: "/images/partner/eventpartner/logo-halalkorea.png", href: "https://halalkorea.center/" },
+  { name: "Jeddah Vision Exhibition Company", logo: "/images/partner/eventpartner/logo-JVEC.png", href: "https://jeddah-vision.com/" },
+  { name: "Talents Mapping", logo: "/images/partner/eventpartner/logo-tm.png", href: "https://talentsmapping.id/" },
+  { name: "Bisnis.com", logo: "/images/partner/eventpartner/logo-bisniscom.png", href: "https://www.bisnis.com/" },
+  { name: "ASEAN Expo", logo: "/images/partner/eventpartner/logo-aseanexpo.png", href: "#" },
+  { name: "New Madani", logo: "/images/partner/eventpartner/logo-newmadani.png", href: "#" },
+];
+
+const mediaPartners: PartnerItem[] = [
+  { name: "Medcom", logo: "/images/partner/mediapartner/logo-medcom.png", href: "https://www.medcom.id/" },
+  { name: "Metro TV News", logo: "/images/partner/mediapartner/logo-metrotvnews.png", href: "https://www.metrotvnews.com/" },
+  { name: "Metro TV", logo: "/images/partner/mediapartner/logo-metrotv.png", href: "https://www.metrotvnews.com/" },
+  { name: "Wasabih", logo: "/images/partner/mediapartner/logo-wasabih.png", href: "https://www.wasabih.com/" },
+  { name: "Halal Focus", logo: "/images/partner/mediapartner/logo-halalfocus.png", href: "https://halalfocus.com/" },
+  { name: "TopBusiness", logo: "/images/partner/mediapartner/logo-topbusiness.png", href: "https://www.topbusiness.id/" },
+  { name: "ITWorks", logo: "/images/partner/mediapartner/logo-itworks.png", href: "https://www.itworks.id/" },
+  { name: "CoreNews", logo: "/images/partner/mediapartner/logo-corenews.png", href: "https://corenews.id/" },
+  { name: "Scarf Media", logo: "/images/partner/mediapartner/logo-scarf media.png", href: "https://www.scmedia.id/about-us/" },
+];
+
+// Certain partner logos need to be displayed larger for better visual balance
+const LARGE_PARTNER_LOGOS = new Set<string>([
+  "ASEAN Expo",
+  "Bisnis.com",
+  "Kolej Uniti",
+  "Uniti Halal Centre",
+  "Kementerian Pariwisata",
+  "Halal Focus",
+  "MIHAS"
+]);
+
 export default function SectionPartners() {
   return (
-    <section className="py-16 md:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-16 md:py-20">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-24">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Our Institutional Partners</h2>
           <p className="text-gray-600 mt-2">Trusted organizations behind Halal Export Indonesia</p>
@@ -86,6 +122,56 @@ export default function SectionPartners() {
                 </motion.a>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Event Partners */}
+        <div className="mt-24">
+          <h3 className="text-center text-sm tracking-widest uppercase text-gray-500 mb-16">Event Partners</h3>
+          <div className="flex flex-wrap gap-12 md:gap-32 items-center justify-center">
+            {eventPartners.map((p) => (
+              <motion.a
+                key={p.name}
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-1"
+                whileHover={{ scale: 1.03 }}
+              >
+                <Image
+                  src={p.logo}
+                  alt={p.name}
+                  width={LARGE_PARTNER_LOGOS.has(p.name) ? 360 : 240}
+                  height={LARGE_PARTNER_LOGOS.has(p.name) ? 180 : 120}
+                  className={`object-contain w-auto ${LARGE_PARTNER_LOGOS.has(p.name) ? 'max-h-32' : 'max-h-24'} drop-shadow`}
+                />
+              </motion.a>
+            ))}
+          </div>
+        </div>
+
+        {/* Media Partners */}
+        <div className="mt-24">
+          <h3 className="text-center text-sm tracking-widest uppercase text-gray-500 mb-16 justify-center">Media Partners</h3>
+          <div className="flex flex-wrap gap-12 md:gap-32 py-12 items-center justify-center">
+            {mediaPartners.map((p) => (
+              <motion.a
+                key={p.name}
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-1"
+                whileHover={{ scale: 1.03 }}
+              >
+                <Image
+                  src={p.logo}
+                  alt={p.name}
+                  width={LARGE_PARTNER_LOGOS.has(p.name) ? 260 : 200}
+                  height={LARGE_PARTNER_LOGOS.has(p.name) ? 110 : 90}
+                  className={`object-contain w-auto ${LARGE_PARTNER_LOGOS.has(p.name) ? 'max-h-24' : 'max-h-16'} drop-shadow`}
+                />
+              </motion.a>
+            ))}
           </div>
         </div>
       </div>
