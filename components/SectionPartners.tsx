@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 interface PartnerItem {
   name: string;
@@ -62,6 +63,18 @@ const SMALL_PARTNER_LOGOS = new Set<string>([
 ]);
 
 export default function SectionPartners() {
+  const organizedByRef = useRef(null);
+  const strategicPartnersRef = useRef(null);
+  const hostedByRef = useRef(null);
+  const eventPartnersRef = useRef(null);
+  const mediaPartnersRef = useRef(null);
+
+  const isOrganizedByInView = useInView(organizedByRef, { once: true, margin: "-100px" });
+  const isStrategicPartnersInView = useInView(strategicPartnersRef, { once: true, margin: "-100px" });
+  const isHostedByInView = useInView(hostedByRef, { once: true, margin: "-100px" });
+  const isEventPartnersInView = useInView(eventPartnersRef, { once: true, margin: "-100px" });
+  const isMediaPartnersInView = useInView(mediaPartnersRef, { once: true, margin: "-100px" });
+
   return (
     <section className="py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-6">
@@ -72,16 +85,23 @@ export default function SectionPartners() {
 
         <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between gap-24 md:gap-16">
           {/* Organized By */}
-          <div className="w-full md:w-auto text-center md:text-left">
+          <div ref={organizedByRef} className="w-full md:w-auto text-center md:text-left">
             <h3 className="text-sm tracking-widest uppercase text-gray-500 mb-4">Organized by</h3>
             <div className="flex flex-col md:flex-row items-center md:items-end justify-center md:justify-start gap-8 md:gap-12">
-              {organizedBy.map((p) => (
+              {organizedBy.map((p, index) => (
                 <motion.a
                   key={p.name}
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group p-1"
+                  initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+                  animate={isOrganizedByInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 6, filter: "blur(4px)" }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.2, 
+                    ease: "easeOut" 
+                  }}
                   whileHover={{ scale: 1.03 }}
                 >
                   <Image src={p.logo} alt={p.name} width={240} height={100} className="object-contain w-auto max-h-20 drop-shadow-lg" />
@@ -91,16 +111,23 @@ export default function SectionPartners() {
           </div>
 
           {/* Strategic Partner */}
-          <div className="w-full md:w-auto text-center md:text-left">
+          <div ref={strategicPartnersRef} className="w-full md:w-auto text-center md:text-left">
             <h3 className="text-sm tracking-widest uppercase text-gray-500 mb-4">Strategic partner</h3>
             <div className="flex flex-col md:flex-row items-center md:items-end justify-center md:justify-start gap-8 md:gap-4">
-              {strategicPartners.map((p) => (
+              {strategicPartners.map((p, index) => (
                 <motion.a
                   key={p.name}
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group p-1"
+                  initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+                  animate={isStrategicPartnersInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 6, filter: "blur(4px)" }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.2, 
+                    ease: "easeOut" 
+                  }}
                   whileHover={{ scale: 1.03 }}
                 >
                   <Image src={p.logo} alt={p.name} width={220} height={90} className="object-contain w-auto max-h-16 drop-shadow-lg" />
@@ -110,16 +137,23 @@ export default function SectionPartners() {
           </div>
 
           {/* Hosted By */}
-          <div className="w-full md:w-auto text-center md:text-left">
+          <div ref={hostedByRef} className="w-full md:w-auto text-center md:text-left">
             <h3 className="text-sm tracking-widest uppercase text-gray-500 mb-4">Hosted by</h3>
             <div className="flex flex-col md:flex-row items-center md:items-end justify-center md:justify-start gap-8 md:gap-12">
-              {hostedBy.map((p) => (
+              {hostedBy.map((p, index) => (
                 <motion.a
                   key={p.name}
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group p-1"
+                  initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+                  animate={isHostedByInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 6, filter: "blur(4px)" }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.2, 
+                    ease: "easeOut" 
+                  }}
                   whileHover={{ scale: 1.03 }}
                 >
                   <Image src={p.logo} alt={p.name} width={220} height={90} className="object-contain w-auto max-h-16 drop-shadow-lg" />
@@ -130,16 +164,23 @@ export default function SectionPartners() {
         </div>
 
         {/* Event Partners */}
-        <div className="mt-24">
+        <div ref={eventPartnersRef} className="mt-24">
           <h3 className="text-center text-sm tracking-widest uppercase text-gray-500 mb-16">Event Partners</h3>
           <div className="flex flex-wrap gap-12 md:gap-32 items-center justify-center">
-            {eventPartners.map((p) => (
+            {eventPartners.map((p, index) => (
               <motion.a
                 key={p.name}
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-1"
+                initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+                animate={isEventPartnersInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 6, filter: "blur(4px)" }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.1, 
+                  ease: "easeOut" 
+                }}
                 whileHover={{ scale: 1.03 }}
               >
                 <Image
@@ -155,16 +196,23 @@ export default function SectionPartners() {
         </div>
 
         {/* Media Partners */}
-        <div className="mt-24">
+        <div ref={mediaPartnersRef} className="mt-24">
           <h3 className="text-center text-sm tracking-widest uppercase text-gray-500 mb-16 justify-center">Media Partners</h3>
           <div className="flex flex-wrap gap-12 md:gap-32 py-12 items-center justify-center">
-            {mediaPartners.map((p) => (
+            {mediaPartners.map((p, index) => (
               <motion.a
                 key={p.name}
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-1"
+                initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+                animate={isMediaPartnersInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 6, filter: "blur(4px)" }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.1, 
+                  ease: "easeOut" 
+                }}
                 whileHover={{ scale: 1.03 }}
               >
                 <Image
