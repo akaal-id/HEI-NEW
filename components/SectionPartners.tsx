@@ -26,24 +26,24 @@ const eventPartners: PartnerItem[] = [
   { name: "MIHAS", logo: "/images/partner/eventpartner/logo-mihas.png", href: "https://mihas.com.my/" },
   { name: "Kolej Uniti", logo: "/images/partner/eventpartner/logo-kolejuniti.png", href: "https://uniti.edu.my/" },
   { name: "Uniti Halal Centre", logo: "/images/partner/eventpartner/logo-uhac.png", href: "https://unitihalalcentre.com/" },
+  { name: "Wasabih", logo: "/images/partner/mediapartner/logo-wasabih.png", href: "https://www.wasabih.com/" },
   { name: "Halal Korea Center", logo: "/images/partner/eventpartner/logo-halalkorea.png", href: "https://halalkorea.center/" },
   { name: "Jeddah Vision Exhibition Company", logo: "/images/partner/eventpartner/logo-JVEC.png", href: "https://jeddah-vision.com/" },
   { name: "Talents Mapping", logo: "/images/partner/eventpartner/logo-tm.png", href: "https://talentsmapping.id/" },
-  { name: "Bisnis.com", logo: "/images/partner/eventpartner/logo-bisniscom.png", href: "https://www.bisnis.com/" },
   { name: "ASEAN Expo", logo: "/images/partner/eventpartner/logo-aseanexpo.png", href: "#" },
-  { name: "New Madani", logo: "/images/partner/eventpartner/logo-newmadani.png", href: "#" },
 ];
 
 const mediaPartners: PartnerItem[] = [
   { name: "Medcom", logo: "/images/partner/mediapartner/logo-medcom.png", href: "https://www.medcom.id/" },
   { name: "Metro TV News", logo: "/images/partner/mediapartner/logo-metrotvnews.png", href: "https://www.metrotvnews.com/" },
   { name: "Metro TV", logo: "/images/partner/mediapartner/logo-metrotv.png", href: "https://www.metrotvnews.com/" },
-  { name: "Wasabih", logo: "/images/partner/mediapartner/logo-wasabih.png", href: "https://www.wasabih.com/" },
   { name: "Halal Focus", logo: "/images/partner/mediapartner/logo-halalfocus.png", href: "https://halalfocus.com/" },
   { name: "TopBusiness", logo: "/images/partner/mediapartner/logo-topbusiness.png", href: "https://www.topbusiness.id/" },
   { name: "ITWorks", logo: "/images/partner/mediapartner/logo-itworks.png", href: "https://www.itworks.id/" },
   { name: "CoreNews", logo: "/images/partner/mediapartner/logo-corenews.png", href: "https://corenews.id/" },
   { name: "Scarf Media", logo: "/images/partner/mediapartner/logo-scarf media.png", href: "https://www.scmedia.id/about-us/" },
+  { name: "New Madani", logo: "/images/partner/eventpartner/logo-newmadani.png", href: "#" },
+  { name: "Bisnis.com", logo: "/images/partner/eventpartner/logo-bisniscom.png", href: "https://www.bisnis.com/" },
 ];
 
 // Certain partner logos need to be displayed larger for better visual balance
