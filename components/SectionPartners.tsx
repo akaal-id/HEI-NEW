@@ -39,7 +39,6 @@ const mediaPartners: PartnerItem[] = [
   { name: "Metro TV", logo: "/images/partner/mediapartner/logo-metrotv.png", href: "https://www.metrotvnews.com/" },
   { name: "Halal Focus", logo: "/images/partner/mediapartner/logo-halalfocus.png", href: "https://halalfocus.com/" },
   { name: "TopBusiness", logo: "/images/partner/mediapartner/logo-topbusiness.png", href: "https://www.topbusiness.id/" },
-  { name: "ITWorks", logo: "/images/partner/mediapartner/logo-itworks.png", href: "https://www.itworks.id/" },
   { name: "CoreNews", logo: "/images/partner/mediapartner/logo-corenews.png", href: "https://corenews.id/" },
   { name: "Scarf Media", logo: "/images/partner/mediapartner/logo-scarf media.png", href: "https://www.scmedia.id/about-us/" },
   { name: "New Madani", logo: "/images/partner/eventpartner/logo-newmadani.png", href: "#" },
@@ -55,6 +54,11 @@ const LARGE_PARTNER_LOGOS = new Set<string>([
   "Kementerian Pariwisata",
   "Halal Focus",
   "MIHAS"
+]);
+
+// Certain partner logos need to be displayed smaller for better visual balance
+const SMALL_PARTNER_LOGOS = new Set<string>([
+  "Scarf Media"
 ]);
 
 export default function SectionPartners() {
@@ -166,9 +170,9 @@ export default function SectionPartners() {
                 <Image
                   src={p.logo}
                   alt={p.name}
-                  width={LARGE_PARTNER_LOGOS.has(p.name) ? 260 : 200}
-                  height={LARGE_PARTNER_LOGOS.has(p.name) ? 110 : 90}
-                  className={`object-contain w-auto ${LARGE_PARTNER_LOGOS.has(p.name) ? 'max-h-24' : 'max-h-16'} drop-shadow`}
+                  width={LARGE_PARTNER_LOGOS.has(p.name) ? 320 : SMALL_PARTNER_LOGOS.has(p.name) ? 160 : 200}
+                  height={LARGE_PARTNER_LOGOS.has(p.name) ? 140 : SMALL_PARTNER_LOGOS.has(p.name) ? 70 : 90}
+                  className={`object-contain w-auto ${LARGE_PARTNER_LOGOS.has(p.name) ? 'max-h-28' : SMALL_PARTNER_LOGOS.has(p.name) ? 'max-h-12' : 'max-h-16'} drop-shadow`}
                 />
               </motion.a>
             ))}
