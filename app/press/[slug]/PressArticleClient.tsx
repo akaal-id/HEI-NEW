@@ -138,12 +138,24 @@ async function getRandomPressArticles(currentSlug: string): Promise<PressArticle
     
     const allArticles = await response.json();
     
-    // Filter out current article and randomize
-    const otherArticles = allArticles.filter((article: PressArticle) => article.slug !== currentSlug);
+    // Filter out current article and sort by date (newest first)
+    const otherArticles = allArticles
+      .filter((article: PressArticle) => article.slug !== currentSlug)
+      .sort((a: PressArticle, b: PressArticle) => {
+        const dateA = new Date(a.timestamp);
+        const dateB = new Date(b.timestamp);
+        
+        // If dates are invalid, put them at the end
+        if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+        if (isNaN(dateA.getTime())) return 1;
+        if (isNaN(dateB.getTime())) return -1;
+        
+        // Sort in descending order (newest first)
+        return dateB.getTime() - dateA.getTime();
+      });
     
-    // Shuffle and take first 3
-    const shuffled = otherArticles.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
+    // Take first 3 (newest articles)
+    return otherArticles.slice(0, 3);
   } catch (error) {
     console.error('Error fetching random press articles:', error);
     return [];

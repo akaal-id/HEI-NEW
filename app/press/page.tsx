@@ -169,19 +169,33 @@ export default function PressPage() {
     fetchData();
   }, []);
 
-  // Filter press data based on search term
+  // Filter and sort press data based on search term
   const filteredPressData = useMemo(() => {
-    if (!searchTerm.trim()) {
-      return pressData;
+    let filtered = pressData;
+    
+    if (searchTerm.trim()) {
+      filtered = pressData.filter(article =>
+        article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.text.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.timestamp.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (article.category && article.category.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
     }
     
-    return pressData.filter(article =>
-      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.text.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.timestamp.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (article.category && article.category.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+    // Sort by timestamp (newest first)
+    return filtered.sort((a, b) => {
+      const dateA = new Date(a.timestamp);
+      const dateB = new Date(b.timestamp);
+      
+      // If dates are invalid, put them at the end
+      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+      if (isNaN(dateA.getTime())) return 1;
+      if (isNaN(dateB.getTime())) return -1;
+      
+      // Sort in descending order (newest first)
+      return dateB.getTime() - dateA.getTime();
+    });
   }, [pressData, searchTerm]);
 
   // Calculate pagination data

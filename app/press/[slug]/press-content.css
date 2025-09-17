@@ -6,8 +6,29 @@
 
 .press-content p {
   margin-bottom: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   text-align: justify;
+}
+
+/* Ensure proper spacing between elements */
+.press-content h3 + p,
+.press-content h4 + p {
+  margin-top: 0.5rem;
+}
+
+.press-content p + h3,
+.press-content p + h4 {
+  margin-top: 2rem;
+}
+
+.press-content ul + p,
+.press-content ol + p {
+  margin-top: 1rem;
+}
+
+.press-content p + ul,
+.press-content p + ol {
+  margin-top: 0.5rem;
 }
 
 .press-content h1,
@@ -154,8 +175,44 @@
 /* Style for bullet points */
 .press-content ul li {
   list-style-type: disc;
+  margin-bottom: 0.75rem;
 }
 
 .press-content ol li {
   list-style-type: decimal;
+  margin-bottom: 0.75rem;
+}
+
+/* Style for h4 elements (numbered sections with emojis) */
+.press-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #1f2937;
+}
+
+/* Style for paragraphs with emojis */
+.press-content p:has(🚨),
+.press-content p:has(✅),
+.press-content p:has(📌) {
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+/* Style for italic text (Examples of products) */
+.press-content p em {
+  font-style: italic;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* Style for strong paragraphs (Remember, Here you can, etc.) */
+.press-content p strong {
+  font-weight: 600;
+}
+
+/* Ensure proper spacing for br elements */
+.press-content br {
+  line-height: 1.5;
 }

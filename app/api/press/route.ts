@@ -338,25 +338,245 @@ const BULLETPROOF_MOCK_DATA: PressArticle[] = [
   }
 ];
 
-// Simple, bulletproof text processing
+// Enhanced text processing with proper formatting
 function safeTextProcessing(text: string): string {
   try {
     if (!text || typeof text !== 'string') return '';
     
-    // Basic HTML formatting for common patterns
-    let processed = text
-      .replace(/\*\*\*(.*?)\*\*\*/g, '<h3>$1</h3>') // Bold headers
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
-      .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
-      .replace(/\n\n/g, '</p><p>') // Paragraph breaks
-      .replace(/\n/g, '<br>'); // Line breaks
+    console.log('Processing text:', text.substring(0, 200));
     
-    // Wrap in paragraph if not already wrapped
-    if (!processed.includes('<p>')) {
-      processed = `<p>${processed}</p>`;
+    // Split text into lines for better processing
+    const lines = text.split('\n');
+    const processedLines: string[] = [];
+    let inList = false;
+    let listType = '';
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      
+      // Skip empty lines but add spacing
+      if (!line) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        processedLines.push('<br>');
+        continue;
+      }
+      
+      // Handle headers (***text***)
+      if (line.startsWith('***') && line.endsWith('***')) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        const headerText = line.replace(/^\*\*\*/, '').replace(/\*\*\*$/, '').trim();
+        processedLines.push(`<h3><strong>${headerText}</strong></h3>`);
+        continue;
+      }
+      
+      // Handle bold text with emojis (🚨 **text**)
+      if (line.includes('**') && line.includes('🚨')) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        const processedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        processedLines.push(`<p>${processedLine}</p>`);
+        continue;
+      }
+      
+      // Handle numbered sections with emojis (1️⃣ **text**)
+      if (line.match(/^\d+️⃣\s+\*\*.*\*\*$/)) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        const processedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        processedLines.push(`<h4>${processedLine}</h4>`);
+        continue;
+      }
+      
+      // Handle checkmark items (✅ **text**)
+      if (line.startsWith('✅') && line.includes('**')) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        const processedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        processedLines.push(`<p>${processedLine}</p>`);
+        continue;
+      }
+      
+      // Handle "Examples of products:" text
+      if (line.startsWith('Examples of products:')) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        processedLines.push(`<p><em>${line}</em></p>`);
+        continue;
+      }
+      
+      // Handle "Remember," text
+      if (line.startsWith('Remember,')) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        processedLines.push(`<p><strong>${line}</strong></p>`);
+        continue;
+      }
+      
+      // Handle "To help industry players..." text
+      if (line.startsWith('To help industry players')) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        processedLines.push(`<p>${line}</p>`);
+        continue;
+      }
+      
+      // Handle "Here, you can:" text
+      if (line.startsWith('Here, you can:')) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        processedLines.push(`<p><strong>${line}</strong></p>`);
+        continue;
+      }
+      
+      // Handle "Don't let hidden haram ingredients..." text
+      if (line.startsWith('📌')) {
+        if (inList) {
+          if (listType === 'ul') {
+            processedLines.push('</ul>');
+          } else if (listType === 'ol') {
+            processedLines.push('</ol>');
+          }
+          inList = false;
+          listType = '';
+        }
+        processedLines.push(`<p><strong>${line}</strong></p>`);
+        continue;
+      }
+      
+      // Handle bullet points (- text)
+      if (line.startsWith('- ')) {
+        if (!inList || listType !== 'ul') {
+          if (inList) {
+            if (listType === 'ul') {
+              processedLines.push('</ul>');
+            } else if (listType === 'ol') {
+              processedLines.push('</ol>');
+            }
+          }
+          processedLines.push('<ul>');
+          inList = true;
+          listType = 'ul';
+        }
+        const itemText = line.substring(2).trim();
+        const processedItem = itemText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        processedLines.push(`<li>${processedItem}</li>`);
+        continue;
+      }
+      
+      // Handle numbered lists (1. text or 1.text)
+      if (line.match(/^\d+\./)) {
+        if (!inList || listType !== 'ol') {
+          if (inList) {
+            if (listType === 'ul') {
+              processedLines.push('</ul>');
+            } else if (listType === 'ol') {
+              processedLines.push('</ol>');
+            }
+          }
+          processedLines.push('<ol>');
+          inList = true;
+          listType = 'ol';
+        }
+        const itemText = line.replace(/^\d+\.\s?/, '').trim();
+        const processedItem = itemText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        processedLines.push(`<li>${processedItem}</li>`);
+        continue;
+      }
+      
+      // Handle regular paragraphs
+      if (inList) {
+        if (listType === 'ul') {
+          processedLines.push('</ul>');
+        } else if (listType === 'ol') {
+          processedLines.push('</ol>');
+        }
+        inList = false;
+        listType = '';
+      }
+      
+      // Process bold text in regular paragraphs
+      const processedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      processedLines.push(`<p>${processedLine}</p>`);
     }
     
-    return processed;
+    // Close any remaining list
+    if (inList) {
+      if (listType === 'ul') {
+        processedLines.push('</ul>');
+      } else if (listType === 'ol') {
+        processedLines.push('</ol>');
+      }
+    }
+    
+    const result = processedLines.join('\n');
+    console.log('Processed result:', result.substring(0, 500));
+    return result;
+    
   } catch (error) {
     console.error('Error in text processing:', error);
     return text || '';
@@ -542,7 +762,22 @@ export async function GET() {
       throw new Error('No valid articles found in spreadsheet');
     }
     
-    console.log(`Successfully processed ${articles.length} articles from Google Sheets`);
+    // Sort articles by timestamp (newest first)
+    articles.sort((a, b) => {
+      // Convert timestamps to Date objects for comparison
+      const dateA = new Date(a.timestamp);
+      const dateB = new Date(b.timestamp);
+      
+      // If dates are invalid, put them at the end
+      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+      if (isNaN(dateA.getTime())) return 1;
+      if (isNaN(dateB.getTime())) return -1;
+      
+      // Sort in descending order (newest first)
+      return dateB.getTime() - dateA.getTime();
+    });
+    
+    console.log(`Successfully processed ${articles.length} articles from Google Sheets, sorted by date (newest first)`);
     return NextResponse.json(articles);
     
   } catch (error) {
@@ -560,8 +795,22 @@ export async function GET() {
     
     console.error('Detailed error info:', errorInfo);
     
+    // Sort mock data by timestamp (newest first)
+    const sortedMockData = [...BULLETPROOF_MOCK_DATA].sort((a, b) => {
+      const dateA = new Date(a.timestamp);
+      const dateB = new Date(b.timestamp);
+      
+      // If dates are invalid, put them at the end
+      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+      if (isNaN(dateA.getTime())) return 1;
+      if (isNaN(dateB.getTime())) return -1;
+      
+      // Sort in descending order (newest first)
+      return dateB.getTime() - dateA.getTime();
+    });
+    
     // Return mock data as fallback with error info in headers
-    const response = NextResponse.json(BULLETPROOF_MOCK_DATA);
+    const response = NextResponse.json(sortedMockData);
     response.headers.set('X-Error-Info', JSON.stringify(errorInfo));
     response.headers.set('X-Data-Source', 'fallback-mock');
     

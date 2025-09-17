@@ -28,11 +28,26 @@ export default function SectionPress() {
         
         if (response.ok) {
           const data = await response.json();
-          setPressData(data.slice(0, 3)); // Take only first 3 articles
+          
+          // Sort by timestamp (newest first) and take only first 3 articles
+          const sortedData = data.sort((a: PressArticle, b: PressArticle) => {
+            const dateA = new Date(a.timestamp);
+            const dateB = new Date(b.timestamp);
+            
+            // If dates are invalid, put them at the end
+            if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+            if (isNaN(dateA.getTime())) return 1;
+            if (isNaN(dateB.getTime())) return -1;
+            
+            // Sort in descending order (newest first)
+            return dateB.getTime() - dateA.getTime();
+          });
+          
+          setPressData(sortedData.slice(0, 3)); // Take only first 3 articles
         }
       } catch (error) {
         console.error('Error fetching press data:', error);
-        // Fallback data if API fails
+        // Fallback data if API fails - already sorted by date (newest first)
         setPressData([
           {
             id: "1",
