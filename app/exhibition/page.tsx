@@ -185,6 +185,15 @@ export default function ExhibitionPage() {
         <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed tracking-wide">
           Discover our comprehensive program designed to connect businesses, share knowledge, and drive growth in the global halal industry.
         </p>
+        <a
+          href="https://halalexpoindonesia.com/registration/exhibitor"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-gradient-to-r from-[#d93732] to-[#492f32] text-white px-8 py-3 rounded-xl font-semibold text-lg shadow-lg hover:bg-[#b72c25] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 mt-8 border-0"
+          style={{ border: 'none' }}
+        >
+          Book Your Space Now!
+        </a>
       </div>
 
       {/* Carousel Section */}
