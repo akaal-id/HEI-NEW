@@ -1,3 +1,4 @@
+import { ArrowUpRight, LucideIcon } from 'lucide-react';
 import styles from './Button.module.css';
 
 interface ButtonProps {
@@ -7,6 +8,7 @@ interface ButtonProps {
   className?: string;
   type?: 'button' | 'submit' | 'reset';
   ariaLabel?: string;
+  icon?: LucideIcon;
 }
 
 export default function Button({ 
@@ -15,9 +17,19 @@ export default function Button({
   href, 
   className,
   type = 'button',
-  ariaLabel
+  ariaLabel,
+  icon: Icon = ArrowUpRight
 }: ButtonProps) {
   const buttonClass = `${styles.button} ${className || ''}`.trim();
+
+  const buttonContent = (
+    <>
+      <span className={styles.text}>{children}</span>
+      <div className={styles.iconContainer}>
+        <Icon className={styles.icon} />
+      </div>
+    </>
+  );
 
   if (href) {
     return (
@@ -26,7 +38,7 @@ export default function Button({
         className={buttonClass}
         aria-label={ariaLabel}
       >
-        {children}
+        {buttonContent}
       </a>
     );
   }
@@ -38,7 +50,7 @@ export default function Button({
       type={type}
       aria-label={ariaLabel}
     >
-      {children}
+      {buttonContent}
     </button>
   );
 }

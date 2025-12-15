@@ -1,21 +1,27 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #F0FEFF;
   --foreground: #171717;
   --hei26-dongkerblue: #004966;
   --hei26-skyblue: #26A7DF;
   --hei26-linearblue: linear-gradient(90deg, #004966 0%, #26A7DF 100%);
+  --hei26-yellow: #F3AB23;
 }
 
+/* stylelint-disable-next-line unknownAtRules */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-jakarta);
+  --font-sans: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-jakarta), sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }

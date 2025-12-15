@@ -1,23 +1,225 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Button from '../Button/Button';
 import styles from './Hero.module.css';
 
+// Helper function to split text into characters
+function splitTextIntoChars(text: string, isGradient: boolean = false): string {
+  // Collapse whitespace sequences to single space to match HTML rendering behavior
+  const normalizedText = text.replace(/\s+/g, ' ');
+  const displayStyle = isGradient ? 'inline' : 'inline-block';
+
+  // For gradient text, we use inline display which wraps naturally
+  if (isGradient) {
+    return normalizedText
+      .split('')
+      .map((char) => {
+        if (char === ' ') return `<span class="${styles.char}" style="display: ${displayStyle};">&nbsp;</span>`;
+        return `<span class="${styles.char}" style="display: ${displayStyle};">${char}</span>`;
+      })
+      .join('');
+  }
+
+  // For non-gradient text (inline-block), we group characters by word
+  // to prevent line breaks occurring in the middle of words
+  return normalizedText
+    .split(' ')
+    .map((word) => {
+      const chars = word
+        .split('')
+        .map((char) => `<span class="${styles.char}" style="display: ${displayStyle};">${char}</span>`)
+        .join('');
+      // Wrap word in a span that prevents breaking inside
+      return `<span style="display: inline-block; white-space: nowrap;">${chars}</span>`;
+    })
+    // Join words with an animated space
+    .join(`<span class="${styles.char}" style="display: ${displayStyle};">&nbsp;</span>`);
+}
+
 export default function Hero() {
+  const dateRef = useRef<HTMLTimeElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Dynamically import animejs
+    import('animejs').then((animeModule) => {
+      // @ts-ignore - animejs animate function signature
+      const animate = animeModule.animate as any;
+      const stagger = animeModule.stagger;
+
+      // Split text into characters
+      if (dateRef.current) {
+        const originalText = dateRef.current.textContent || '';
+        dateRef.current.innerHTML = splitTextIntoChars(originalText);
+      }
+
+      if (titleRef.current) {
+        // Recursive function to traverse and transform text nodes
+        const processNode = (node: Node, isInsideGradient: boolean = false): string => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent || '';
+            // Skip empty text nodes (often just whitespace from formatting)
+            if (!text.trim() && text.includes('\n')) return '';
+            return splitTextIntoChars(text, isInsideGradient);
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const element = node as HTMLElement;
+            if (element.tagName === 'BR') {
+              return '<br />';
+            }
+            
+            // Check if this element is the gradient span
+            const style = element.getAttribute('style') || '';
+            const hasGradient = style.includes('linear-gradient') || isInsideGradient;
+            
+            // Process children
+            const childrenHTML = Array.from(node.childNodes)
+              .map(child => processNode(child, hasGradient))
+              .join('');
+            
+            // Reconstruct element
+            const tagName = element.tagName.toLowerCase();
+            const attributes = Array.from(element.attributes)
+              .map(attr => `${attr.name}="${attr.value}"`)
+              .join(' ');
+            const attrString = attributes ? ` ${attributes}` : '';
+            
+            return `<${tagName}${attrString}>${childrenHTML}</${tagName}>`;
+          }
+          return '';
+        };
+
+        // We use a temp div to avoid issues with reading/writing to the same ref immediately
+        // or just read childNodes from the ref directly before modifying.
+        const originalNodes = Array.from(titleRef.current.childNodes);
+        const newHTML = originalNodes.map(node => processNode(node)).join('');
+        
+        titleRef.current.innerHTML = newHTML;
+      }
+
+      if (subtitleRef.current) {
+        const originalText = subtitleRef.current.textContent || '';
+        subtitleRef.current.innerHTML = splitTextIntoChars(originalText);
+      }
+
+      // Animate date characters
+      if (dateRef.current) {
+        animate(
+          dateRef.current.querySelectorAll(`.${styles.char}`),
+          {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            delay: stagger(50, { start: 400 }),
+            duration: 600,
+            easing: 'easeOutQuad',
+          }
+        );
+      }
+
+      // Animate title characters
+      if (titleRef.current) {
+        // Get all character spans
+        const allChars = titleRef.current.querySelectorAll(`.${styles.char}`);
+        
+        // Find the gradient span to identify which chars are inside it
+        const gradientSpan = titleRef.current.querySelector('span[style*="linear-gradient"]');
+        const gradientChars = gradientSpan ? Array.from(gradientSpan.querySelectorAll(`.${styles.char}`)) : [];
+        
+        // Non-gradient chars (can use translateY)
+        const nonGradientChars = Array.from(allChars).filter(char => !gradientChars.includes(char));
+        
+        // Animate non-gradient characters with translation
+        if (nonGradientChars.length > 0) {
+          animate(
+            nonGradientChars,
+            {
+              opacity: [0, 1],
+              translateY: [30, 0],
+              delay: stagger(30, { start: 600 }),
+              duration: 600,
+              easing: 'easeOutQuad',
+            }
+          );
+        }
+        
+        // Animate gradient characters with opacity only but smoother timing
+        if (gradientChars.length > 0) {
+          animate(
+            gradientChars,
+            {
+              opacity: [0, 1],
+              translateY: [30, 0],
+              delay: stagger(30, { start: 750 }), // Slightly faster stagger, starts a bit later
+              duration: 900, // Longer duration for smoother fade
+              easing: 'easeOutCubic', // Smoother easing
+            }
+          );
+        }
+      }
+
+      // Animate subtitle characters
+      if (subtitleRef.current) {
+        animate(
+          subtitleRef.current.querySelectorAll(`.${styles.char}`),
+          {
+            opacity: [0, 1],
+            translateY: [30, 0],
+            delay: stagger(30, { start: 750 }),
+            duration: 1200,
+            easing: 'easeOutCubic',
+          }
+        );
+      }
+
+      // Fade in image
+      if (imageRef.current) {
+        animate(
+          imageRef.current,
+          {
+            opacity: [0, 1],
+            duration: 1200,
+            delay: 200,
+            easing: 'easeOutQuad',
+          }
+        );
+      }
+    });
+  }, []);
+
   return (
-    <section className={styles.hero} id="hero">
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <span className={styles.badge} aria-label="Event badge">HEI2026</span>
-          <time className={styles.date} dateTime="2026-04">COMING IN APRIL 2026</time>
-          <h1 className={styles.title}>
-            The 6th<br/>Halal Expo<br/>Indonesia
-          </h1>
-          <p className={styles.subtitle}>
-            Strengthening D-8 Halal Economy Through International Collaboration
-          </p>
-          <Button className={styles.button} href="#discover">Discover more</Button>
+    <div className={styles.placeholder}>
+      <section className={styles.hero} id="hero">
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <time ref={dateRef} className={styles.date} dateTime="2026-04">
+              COMING IN APRIL 2026
+            </time>
+            <h1 ref={titleRef} className={styles.title}>
+              The 6th
+              <br />
+              <span
+                style={{
+                  background: 'linear-gradient(90deg,#1D74B7 0%, #26A7DF 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  display: 'inline',
+                }}
+              >
+                Halal Expo<br />Indonesia
+              </span>
+            </h1>
+            <p ref={subtitleRef} className={styles.subtitle}>
+              Strengthening D-8 Halal Economy Through International Collaboration
+            </p>
+            <Button className={styles.button} href="#discover">Discover more</Button>
+          </div>
         </div>
-        <div className={styles.imageContainer}>
+        <div ref={imageRef} className={styles.imageWrapper}>
           <Image
             src="/kv/kv_raw.png"
             alt="Halal Expo Indonesia 2026"
@@ -28,8 +230,8 @@ export default function Hero() {
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
