@@ -1,5 +1,9 @@
+import dynamic from 'next/dynamic';
 import Hero from './components/Hero/Hero';
-import D8Section from './components/D8Section/D8Section';
+
+const D8Section = dynamic(() => import('./components/D8Section/D8Section'), {
+  loading: () => <div style={{ height: '100vh', background: 'var(--background)' }}></div>,
+});
 
 export default function Home() {
   return (

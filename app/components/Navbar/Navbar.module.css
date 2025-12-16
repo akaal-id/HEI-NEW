@@ -9,7 +9,7 @@
   padding: 24px;
   z-index: 50;
   pointer-events: none; /* Allow clicking through navbar area */
-  transition: background-color 0.3s ease, padding 0.3s ease;
+  transition: background-color 0.3s ease, padding 0.3s ease, transform 0.3s ease;
 }
 
 .logoLink {
@@ -46,3 +46,17 @@
   }
 }
 
+@media (max-width: 480px) {
+  .navbar {
+    padding: clamp(32px, 2vw, 32px);
+  }
+  .logo {
+    height: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar.hidden {
+    transform: translateY(-100%);
+  }
+}

@@ -2,19 +2,70 @@
 
 import Image from 'next/image';
 import { Send, CheckCircle } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import styles from './D8Section.module.css';
 import { useGoogleForm } from '../../hooks/useGoogleForm';
 
 export default function D8Section() {
   const { email, setEmail, status, handleSubmit, resetForm } = useGoogleForm();
+  
+  const sectionRef = useRef<HTMLElement>(null);
+  const eyebrowRef = useRef<HTMLSpanElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            import('animejs').then((animeModule) => {
+              // @ts-ignore - animejs animate function signature
+              const animate = animeModule.animate as any;
+              const stagger = animeModule.stagger;
+
+              const elements = [
+                eyebrowRef.current,
+                titleRef.current,
+                imageRef.current,
+                formRef.current
+              ].filter(Boolean);
+
+              if (elements.length > 0) {
+                animate(
+                  elements,
+                  {
+                    opacity: [0, 1],
+                    translateY: [20, 0],
+                    delay: stagger(600),
+                    duration: 1200,
+                    easing: 'easeOutQuad'
+                  }
+                );
+              }
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className={styles.section} id="discover">
-      <span className={styles.eyebrow}>COMING IN APRIL 2026</span>
-      <h2 className={styles.title}>Ready to be part of</h2>
+    <section ref={sectionRef} className={styles.section} id="discover">
+      <span ref={eyebrowRef} className={styles.eyebrow}>COMING IN APRIL 2026</span>
+      <h2 ref={titleRef} className={styles.title}>Ready to be part of</h2>
 
-      <div className={styles.d8ImageWrapper}>
+      <div ref={imageRef} className={styles.d8ImageWrapper}>
         <Image
           src="/kv/D8 only.png"
           alt="D8 Halal Economy"
@@ -33,7 +84,7 @@ export default function D8Section() {
           </Button>
         </div>
       ) : (
-        <form className={styles.formContainer} onSubmit={handleSubmit}>
+        <form ref={formRef} className={styles.formContainer} onSubmit={handleSubmit}>
           <div className={styles.inputWrapper}>
             <input 
               type="email" 
