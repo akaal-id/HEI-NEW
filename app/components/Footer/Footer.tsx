@@ -25,11 +25,16 @@ export default function Footer() {
               />
             </div>
             <h4 className={styles.heading}>Headoffice</h4>
-            <p className={styles.text}>
-              Jl. Gotong Royong I No.50 Rt.004/DI, RT.3/RW.1,<br />
+            <a
+              href="https://maps.app.goo.gl/aAbeEmPSP51X9QcU6"
+              className={styles.text}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Jl. Gotong Royong I No.50 RT.03/RW.01,<br />
               Ragunan, Ps. Minggu, Kota Jakarta Selatan,<br />
               Daerah Khusus Ibukota Jakarta 12550
-            </p>
+            </a>
           </div>
 
           <div className={styles.columnMiddle}>

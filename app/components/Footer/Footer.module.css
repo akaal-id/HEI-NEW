@@ -45,6 +45,11 @@
   font-size: 14px;
   line-height: 1.6;
   color: #E5E7EB; /* Light gray */
+  cursor: pointer;
+}
+
+.text:hover {
+  color: white;
 }
 
 .columnMiddle {

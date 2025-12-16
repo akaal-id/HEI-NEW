@@ -15,7 +15,8 @@ export default function D8Section() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-
+  const bodyRef = useRef<HTMLParagraphElement>(null);
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -30,7 +31,8 @@ export default function D8Section() {
                 eyebrowRef.current,
                 titleRef.current,
                 imageRef.current,
-                formRef.current
+                bodyRef.current,
+                formRef.current,
               ].filter(Boolean);
 
               if (elements.length > 0) {
@@ -62,8 +64,22 @@ export default function D8Section() {
 
   return (
     <section ref={sectionRef} className={styles.section} id="discover">
-      <span ref={eyebrowRef} className={styles.eyebrow}>COMING IN APRIL 2026</span>
-      <h2 ref={titleRef} className={styles.title}>Ready to be part of</h2>
+      <span ref={eyebrowRef} className={styles.eyebrow}>Mark Your Horizon</span>
+      <h2 ref={titleRef} className={styles.title}>
+        Connect with the&nbsp;
+        <span
+          style={{
+            background: 'var(--hei26-linearblue)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+            WebkitTextFillColor: 'transparent',
+            fontWeight: 700,
+          }}
+        >
+          Leaders of Tomorrow
+        </span>
+      </h2>
 
       <div ref={imageRef} className={styles.d8ImageWrapper}>
         <Image
@@ -75,6 +91,8 @@ export default function D8Section() {
           priority={false}
         />
       </div>
+
+      <p ref={bodyRef} className={styles.body}>Summit</p>
 
       {status === 'success' ? (
         <div className={styles.successContainer}>
