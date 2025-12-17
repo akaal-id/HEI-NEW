@@ -133,6 +133,21 @@ export default function D8Section() {
           style={{ width: '100%', height: 'auto' }}
         />
       </div>
+
+      <Image
+        src="/asset/Asset 6.png"
+        alt="Decorative Asset"
+        width={200}
+        height={200}
+        className={styles.floatingAsset1}
+      />
+      <Image
+        src="/asset/Asset 7.png"
+        alt="Decorative Asset"
+        width={200}
+        height={200}
+        className={styles.floatingAsset2}
+      />
     </section>
   );
 }

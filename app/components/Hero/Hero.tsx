@@ -43,6 +43,8 @@ export default function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const floatingAsset1Ref = useRef<HTMLImageElement>(null);
+  const floatingAsset2Ref = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     // Dynamically import animejs
@@ -122,39 +124,17 @@ export default function Hero() {
       // Animate title characters
       if (titleRef.current) {
         // Get all character spans
-        const allChars = titleRef.current.querySelectorAll(`.${styles.char}`);
+        const allChars = Array.from(titleRef.current.querySelectorAll(`.${styles.char}`));
         
-        // Find the gradient span to identify which chars are inside it
-        const gradientSpan = titleRef.current.querySelector('span[style*="linear-gradient"]');
-        const gradientChars = gradientSpan ? Array.from(gradientSpan.querySelectorAll(`.${styles.char}`)) : [];
-        
-        // Non-gradient chars (can use translateY)
-        const nonGradientChars = Array.from(allChars).filter(char => !gradientChars.includes(char));
-        
-        // Animate non-gradient characters with translation
-        if (nonGradientChars.length > 0) {
+        if (allChars.length > 0) {
           animate(
-            nonGradientChars,
+            allChars,
             {
               opacity: [0, 1],
               translateY: [30, 0],
               delay: stagger(30, { start: 600 }),
               duration: 600,
               easing: 'easeOutQuad',
-            }
-          );
-        }
-        
-        // Animate gradient characters with opacity only but smoother timing
-        if (gradientChars.length > 0) {
-          animate(
-            gradientChars,
-            {
-              opacity: [0, 1],
-              translateY: [30, 0],
-              delay: stagger(30, { start: 750 }), // Slightly faster stagger, starts a bit later
-              duration: 900, // Longer duration for smoother fade
-              easing: 'easeOutCubic', // Smoother easing
             }
           );
         }
@@ -186,6 +166,20 @@ export default function Hero() {
           }
         );
       }
+
+      // Fade in floating assets
+      if (floatingAsset1Ref.current && floatingAsset2Ref.current) {
+        animate(
+          [floatingAsset1Ref.current, floatingAsset2Ref.current],
+          {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 1200,
+            delay: stagger(200, { start: 800 }),
+            easing: 'easeOutQuad',
+          }
+        );
+      }
     });
   }, []);
 
@@ -200,17 +194,8 @@ export default function Hero() {
             <h1 ref={titleRef} className={styles.title}>
               The 6th
               <br />
-              <span
-                style={{
-                  background: 'linear-gradient(90deg,#1D74B7 0%, #26A7DF 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  display: 'inline',
-                }}
-              >
-                Halal Expo<br />Indonesia
+              <span className={styles.gradientText}>
+                Halal Expo Indonesia
               </span>
             </h1>
             <p ref={subtitleRef} className={styles.subtitle}>
@@ -230,8 +215,24 @@ export default function Hero() {
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </div>
+
+        <Image
+          ref={floatingAsset1Ref}
+          src="/asset/Asset 6.png"
+          alt="Decorative Asset"
+          width={200}
+          height={200}
+          className={styles.floatingAsset1}
+        />
+        <Image
+          ref={floatingAsset2Ref}
+          src="/asset/Asset 7.png"
+          alt="Decorative Asset"
+          width={200}
+          height={200}
+          className={styles.floatingAsset2}
+        />
       </section>
     </div>
   );
 }
-
