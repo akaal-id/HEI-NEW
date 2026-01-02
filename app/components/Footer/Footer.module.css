@@ -106,7 +106,7 @@
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--hei26-yellow);
+  border-bottom: 1px solid var(--hei26-turquoise);
   padding: 12px 0;
   color: white;
   font-family: var(--font-inter), sans-serif;
@@ -121,7 +121,7 @@
 }
 
 .input:focus {
-  border-bottom-color: var(--hei26-yellow);
+  border-bottom-color: var(--hei26-turquoise);
 }
 
 /* Override button width to fit design if needed, or rely on component */

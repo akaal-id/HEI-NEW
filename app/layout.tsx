@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Halal Expo Indonesia",
     images: [
       {
-        url: "/kv/kv_raw.png",
+        url: "/D8-assets/KV_D8.png",
         width: 800,
         height: 600,
         alt: "HEI 2026 Key Visual",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "HEI 2026 - The 6th Halal Expo Indonesia",
     description: "Strengthening D-8 Halal Economy Through International Collaboration. Coming in April 2026.",
-    images: ["/kv/kv_raw.png"],
+    images: ["/D8-assets/KV_D8.png"],
   },
 };
 

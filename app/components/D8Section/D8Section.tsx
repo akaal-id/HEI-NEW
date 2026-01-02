@@ -83,16 +83,22 @@ export default function D8Section() {
 
       <div ref={imageRef} className={styles.d8ImageWrapper}>
         <Image
-          src="/kv/D8 only.png"
+          src="/D8-assets/D8-summit.svg"
           alt="D8 Halal Economy"
           width={800}
           height={600}
-          className={styles.d8Image}
+          className={`${styles.d8Image} ${styles.desktopImage}`}
+          priority={false}
+        />
+        <Image
+          src="/D8-assets/D8-summit-ver.svg"
+          alt="D8 Halal Economy"
+          width={600}
+          height={800}
+          className={`${styles.d8Image} ${styles.mobileImage}`}
           priority={false}
         />
       </div>
-
-      <p ref={bodyRef} className={styles.body}>Summit</p>
 
       {status === 'success' ? (
         <div className={styles.successContainer}>
@@ -126,28 +132,13 @@ export default function D8Section() {
 
       <div className={styles.rotatingGraphic}>
         <Image
-          src="/asset/Asset 5.png"
+          src="/D8-assets/circle_D8.svg"
           alt="Decorative Circle"
           width={1000}
           height={1000}
           style={{ width: '100%', height: 'auto' }}
         />
       </div>
-
-      <Image
-        src="/asset/Asset 6.png"
-        alt="Decorative Asset"
-        width={200}
-        height={200}
-        className={styles.floatingAsset1}
-      />
-      <Image
-        src="/asset/Asset 7.png"
-        alt="Decorative Asset"
-        width={200}
-        height={200}
-        className={styles.floatingAsset2}
-      />
     </section>
   );
 }

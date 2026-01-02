@@ -17,7 +17,7 @@ export default function Footer() {
           <div className={styles.columnLeft}>
             <div className={styles.logo}>
               <Image
-                src="/icon/HEI 2026_Logo only_w.svg"
+                src="/D8-assets/logo_D8_hor_white.svg"
                 alt="HEI 2026"
                 width={120}
                 height={60}
@@ -49,7 +49,7 @@ export default function Footer() {
 
           <div className={styles.columnRight}>
             <h4 className={styles.mainHeading} style={{ color: '#F5F5F5' }}>
-              Get our latest updates, <span style={{ color: '#FBBF24' }}>here!</span>
+              Get our latest updates, <span style={{ color: '#00b4aa' }}>here!</span>
             </h4>
             
             {status === 'success' ? (

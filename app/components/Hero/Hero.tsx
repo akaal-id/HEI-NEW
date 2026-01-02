@@ -206,7 +206,7 @@ export default function Hero() {
         </div>
         <div ref={imageRef} className={styles.imageWrapper}>
           <Image
-            src="/kv/kv_raw.png"
+            src="/D8-assets/KV_D8.png"
             alt="Halal Expo Indonesia 2026"
             width={800}
             height={1000}
@@ -218,7 +218,7 @@ export default function Hero() {
 
         <Image
           ref={floatingAsset1Ref}
-          src="/asset/Asset 6.png"
+          src="/D8-assets/asset_1_D8.svg"
           alt="Decorative Asset"
           width={200}
           height={200}
@@ -226,7 +226,7 @@ export default function Hero() {
         />
         <Image
           ref={floatingAsset2Ref}
-          src="/asset/Asset 7.png"
+          src="/D8-assets/asset_2_D8.svg"
           alt="Decorative Asset"
           width={200}
           height={200}

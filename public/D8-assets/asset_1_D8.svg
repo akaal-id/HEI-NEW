@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 246.67 246.67">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #25becb;
+      }
+
+      .cls-2 {
+        fill: #00b4aa;
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-4 {
+        fill: url(#New_Gradient_Swatch_copy_8);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="176.52" y1="168.46" x2="236.89" y2="36.39" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d74b7" stop-opacity="0"/>
+      <stop offset="1" stop-color="#26a7df"/>
+    </linearGradient>
+    <linearGradient id="New_Gradient_Swatch_copy_8" data-name="New Gradient Swatch copy 8" x1="44.64" y1="165.53" x2="154.31" y2="165.53" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d74b7"/>
+      <stop offset="1" stop-color="#26a7df"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-1" d="M183.37,183.36c-36.14,36.14-81.9,56.81-129.05,62-18.05,1.99-36.32,1.71-54.32-.84,10.96-6.02,21.26-13.67,30.53-22.95,5.22-5.22,9.92-10.75,14.11-16.57,40-3.2,79.08-20.11,109.67-50.7l29.06,29.05Z"/>
+      <path class="cls-3" d="M245.36,54.32c-5.19,47.15-25.86,92.91-61.99,129.04l-29.06-29.05c30.59-30.59,47.5-69.68,50.7-109.67,5.81-4.19,11.34-8.89,16.57-14.11,9.28-9.28,16.93-19.57,22.95-30.53,2.55,18,2.83,36.27.84,54.32Z"/>
+      <path class="cls-1" d="M205.01,44.64c-3.2,39.99-20.11,79.08-50.7,109.67l-28.26-28.26c17.4-17.39,29.07-38.36,34.98-60.53,15.52-4.14,30.46-11.11,43.98-20.87Z"/>
+      <path class="cls-4" d="M154.31,154.31c-30.59,30.59-69.67,47.5-109.67,50.7,9.76-13.52,16.73-28.46,20.87-43.98,22.17-5.91,43.15-17.58,60.53-34.98l28.26,28.26Z"/>
+      <path class="cls-2" d="M161.03,65.51c-5.91,22.17-17.58,43.15-34.98,60.53-17.39,17.4-38.36,29.07-60.53,34.98,12.03-45.06.37-95.14-34.98-130.5,35.35,35.35,85.43,47.01,130.5,34.98Z"/>
+    </g>
+  </g>
+</svg>

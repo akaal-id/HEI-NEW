@@ -40,7 +40,7 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
       <Link href="/" className={styles.logoLink}>
         <Image
-          src="/icon/HEI 2026_Logo only.svg"
+          src="/D8-assets/logo_D8_hor.svg"
           alt="HEI 2026 Logo"
           width={64}
           height={64}
