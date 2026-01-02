@@ -192,11 +192,7 @@ export default function Hero() {
               COMING IN APRIL 2026
             </time>
             <h1 ref={titleRef} className={styles.title}>
-              The 6th
-              <br />
-              <span className={styles.gradientText}>
-                Halal Expo Indonesia
-              </span>
+              D8 Halal Expo Indonesia
             </h1>
             <p ref={subtitleRef} className={styles.subtitle}>
               Strengthening D-8 Halal Economy Through International Collaboration
