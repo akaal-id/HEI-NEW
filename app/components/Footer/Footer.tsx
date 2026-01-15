@@ -40,10 +40,11 @@ export default function Footer() {
           <div className={styles.columnMiddle}>
             <h4 className={styles.heading}>Contact us</h4>
             <ul className={styles.linkList}>
-              <li><Link href="#" className={styles.link}>Sales Mail</Link></li>
-              <li><Link href="#" className={styles.link}>Sales Whatsapp</Link></li>
-              <li><Link href="#" className={styles.link}>Marketing Mail</Link></li>
-              <li><Link href="#" className={styles.link}>Marketing Whatsapp</Link></li>
+              <li><a href="mailto:sales@halalexpoindonesia.com" className={styles.link}>Sales Mail</a></li>
+              <li><a href="https://wa.me/62895403824515" className={styles.link} target="_blank" rel="noopener noreferrer">Sales Whatsapp</a></li>
+              <li><a href="mailto:marketing@halalexpoindonesia.com" className={styles.link}>Marketing Mail</a></li>
+              <li><a href="mailto:inquiries@halalexpoindonesia.com" className={styles.link}>Inquiries Mail</a></li>
+              <li><a href="https://wa.me/62895428247935" className={styles.link} target="_blank" rel="noopener noreferrer">Inquiries Whatsapp</a></li>
             </ul>
           </div>
 
