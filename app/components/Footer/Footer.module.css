@@ -16,17 +16,16 @@
 }
 
 .topSection {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 48px;
   margin-bottom: 60px;
 }
 
 .columnLeft {
-  flex: 1;
-  min-width: 300px;
-  max-width: 400px;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .logo {
@@ -52,10 +51,6 @@
   color: white;
 }
 
-.columnMiddle {
-  flex: 0;
-  min-width: 200px;
-}
 
 .linkList {
   list-style: none;
@@ -71,16 +66,38 @@
   text-decoration: none;
   font-family: var(--font-plus-jakarta-sans), sans-serif;
   font-size: 14px;
-  transition: color 0.2s;
+  transition: color 0.2s, text-decoration 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .link:hover {
   color: white;
+  text-decoration: underline;
+}
+
+.contactGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  grid-row: 2;
+}
+
+.contactGroupAligned {
+  margin-top: 43px;
+}
+
+.contactLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 4px 0;
 }
 
 .columnRight {
-  flex: 1;
-  min-width: 300px;
+  grid-column: 2 / 4;
+  grid-row: 1;
 }
 
 .mainHeading {
@@ -189,13 +206,29 @@
   .footer {
     padding: 2.4rem;
   }
+
   .topSection {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
-  
+
+  .columnLeft {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
   .columnRight {
-    order: -1; /* Move form to top if needed, or keep order. Reference layout is horizontal */
-    margin-bottom: 2.4rem;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .contactGroup {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .contactGroupAligned {
+    margin-top: 0;
   }
   
   .bottomSection {
@@ -207,5 +240,4 @@
     flex-direction: column;
     gap: 1.2rem;
   }
-
 }

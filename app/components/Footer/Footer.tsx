@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, CheckCircle } from 'lucide-react';
+import { Mail, CheckCircle, Phone } from 'lucide-react';
 import Button from '../Button/Button';
 import styles from './Footer.module.css';
 import { useGoogleForm } from '../../hooks/useGoogleForm';
@@ -14,6 +14,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.topSection}>
+          {/* Top Left: Logo and Address */}
           <div className={styles.columnLeft}>
             <div className={styles.logo}>
               <Image
@@ -37,17 +38,7 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className={styles.columnMiddle}>
-            <h4 className={styles.heading}>Contact us</h4>
-            <ul className={styles.linkList}>
-              <li><a href="mailto:sales@halalexpoindonesia.com" className={styles.link}>Sales Mail</a></li>
-              <li><a href="https://wa.me/62895403824515" className={styles.link} target="_blank" rel="noopener noreferrer">Sales Whatsapp</a></li>
-              <li><a href="mailto:marketing@halalexpoindonesia.com" className={styles.link}>Marketing Mail</a></li>
-              <li><a href="mailto:inquiries@halalexpoindonesia.com" className={styles.link}>Inquiries Mail</a></li>
-              <li><a href="https://wa.me/62895428247935" className={styles.link} target="_blank" rel="noopener noreferrer">Inquiries Whatsapp</a></li>
-            </ul>
-          </div>
-
+          {/* Top Right: Newsletter */}
           <div className={styles.columnRight}>
             <h4 className={styles.mainHeading} style={{ color: '#F5F5F5' }}>
               Get our latest updates, <span style={{ color: '#00b4aa' }}>here!</span>
@@ -80,6 +71,38 @@ export default function Footer() {
                 </Button>
               </form>
             )}
+          </div>
+
+          {/* Bottom Row: Contact Groups */}
+          <div className={styles.contactGroup}>
+            <h4 className={styles.heading}>Contact us</h4>
+            <h5 className={styles.contactLabel}>Sales</h5>
+            <a href="https://wa.me/62895403824515" className={styles.link} target="_blank" rel="noopener noreferrer">
+              <Phone size={14} /> +62 895-4038-24515
+            </a>
+            <a href="mailto:Sales@halalexpoindonesia.com" className={styles.link}>
+              <Mail size={14} /> Sales@halalexpoindonesia.com
+            </a>
+          </div>
+
+          <div className={`${styles.contactGroup} ${styles.contactGroupAligned}`}>
+            <h5 className={styles.contactLabel}>Marketing</h5>
+            <a href="https://wa.me/62895428247935" className={styles.link} target="_blank" rel="noopener noreferrer">
+              <Phone size={14} /> +62 895-4282-47935
+            </a>
+            <a href="mailto:marketing@halalexpoindonesia.com" className={styles.link}>
+              <Mail size={14} /> marketing@halalexpoindonesia.com
+            </a>
+          </div>
+
+          <div className={`${styles.contactGroup} ${styles.contactGroupAligned}`}>
+            <h5 className={styles.contactLabel}>Inquiries</h5>
+            <a href="https://wa.me/62895428247935" className={styles.link} target="_blank" rel="noopener noreferrer">
+              <Phone size={14} /> +62 895-4282-47935
+            </a>
+            <a href="mailto:Inquiries@halalexpoindonesia.com" className={styles.link}>
+              <Mail size={14} /> Inquiries@halalexpoindonesia.com
+            </a>
           </div>
         </div>
 
