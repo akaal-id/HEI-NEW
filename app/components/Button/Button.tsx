@@ -1,14 +1,19 @@
 import { ArrowUpRight, LucideIcon } from 'lucide-react';
 import styles from './Button.module.css';
 
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string;
   className?: string;
+  textClassName?: string;
+  iconClassName?: string;
   type?: 'button' | 'submit' | 'reset';
   ariaLabel?: string;
   icon?: LucideIcon;
+  variant?: ButtonVariant;
 }
 
 export default function Button({ 
@@ -16,18 +21,30 @@ export default function Button({
   onClick, 
   href, 
   className,
+  textClassName,
+  iconClassName,
   type = 'button',
   ariaLabel,
-  icon: Icon = ArrowUpRight
+  icon,
+  variant = 'primary'
 }: ButtonProps) {
-  const buttonClass = `${styles.button} ${className || ''}`.trim();
+  const variantClass = styles[variant];
+  const buttonClass = `${styles.button} ${variantClass} ${className || ''}`.trim();
+  const textClass = `${styles.text} ${textClassName || ''}`.trim();
+  const iconContainerClass = `${styles.iconContainer} ${iconClassName || ''}`.trim();
 
+  // Show icon if: not tertiary variant AND icon is provided (or use default ArrowUpRight for primary/secondary)
+  const showIcon = variant !== 'tertiary' && (icon !== undefined || variant === 'primary' || variant === 'secondary');
+  const IconComponent = icon !== undefined ? icon : (variant !== 'tertiary' ? ArrowUpRight : undefined);
+  
   const buttonContent = (
     <>
-      <span className={styles.text}>{children}</span>
-      <div className={styles.iconContainer}>
-        <Icon className={styles.icon} />
-      </div>
+      <span className={textClass}>{children}</span>
+      {showIcon && IconComponent && (
+        <div className={iconContainerClass}>
+          <IconComponent className={styles.icon} />
+        </div>
+      )}
     </>
   );
 

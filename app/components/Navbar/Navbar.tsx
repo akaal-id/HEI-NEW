@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ChevronDown } from 'lucide-react';
+import Button from '../Button/Button';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -38,16 +40,82 @@ export default function Navbar() {
 
   return (
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
-      <Link href="/" className={styles.logoLink}>
-        <Image
-          src="/D8-assets/logo_D8_hor.svg"
-          alt="HEI 2026 Logo"
-          width={64}
-          height={64}
-          className={styles.logo}
-          priority
-        />
-      </Link>
+      <div className={styles.navbarContent}>
+        <Link href="/" className={styles.logoLink}>
+          <Image
+            src="/icon/D8 HEI Logo Long.svg"
+            alt="D-8 Halal Expo Indonesia 2026"
+            width={200}
+            height={60}
+            className={styles.logo}
+            priority
+          />
+        </Link>
+
+        <div className={styles.menuContainer}>
+          <Button 
+            href="#home" 
+            variant="tertiary" 
+            className={styles.menuItem}
+            textClassName={styles.menuItemText}
+            icon={undefined}
+          >
+            Home
+          </Button>
+          
+          <Button 
+            href="#about" 
+            variant="secondary" 
+            className={styles.menuItem}
+            textClassName={styles.menuItemText}
+            iconClassName={styles.menuItemIcon}
+            icon={ChevronDown}
+          >
+            About Us
+          </Button>
+          
+          <Button 
+            href="#programs" 
+            variant="secondary" 
+            className={styles.menuItem}
+            textClassName={styles.menuItemText}
+            iconClassName={styles.menuItemIcon}
+            icon={ChevronDown}
+          >
+            Our Programs
+          </Button>
+          
+          <Button 
+            href="#partner" 
+            variant="tertiary" 
+            className={styles.menuItem}
+            textClassName={styles.menuItemText}
+            icon={undefined}
+          >
+            Our Partner
+          </Button>
+          
+          <Button 
+            href="#article" 
+            variant="tertiary" 
+            className={styles.menuItem}
+            textClassName={styles.menuItemText}
+            icon={undefined}
+          >
+            Article & Media
+          </Button>
+          
+          <Button 
+            href="#register" 
+            variant="primary" 
+            className={`${styles.menuItem} ${styles.registerButton}`}
+            textClassName={`${styles.menuItemText} ${styles.registerButtonText}`}
+            iconClassName={styles.registerButtonIcon}
+          >
+            Register Now
+          </Button>
+        </div>
+      </div>
     </nav>
   );
 }

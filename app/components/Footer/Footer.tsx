@@ -47,7 +47,13 @@ export default function Footer() {
             {status === 'success' ? (
               <div className={styles.successContainer}>
                 <p className={styles.successMessage}>Thank you! You've been subscribed.</p>
-                <Button onClick={resetForm} className={styles.subscribeButton} icon={CheckCircle}>
+                <Button 
+                  onClick={resetForm} 
+                  className={styles.subscribeButton} 
+                  textClassName={styles.subscribeButtonText}
+                  iconClassName={styles.subscribeButtonIcon}
+                  icon={CheckCircle}
+                >
                   Add another email
                 </Button>
               </div>
@@ -64,7 +70,9 @@ export default function Footer() {
                 />
                 <Button 
                   icon={Mail} 
-                  className={styles.subscribeButton} 
+                  className={styles.subscribeButton}
+                  textClassName={styles.subscribeButtonText}
+                  iconClassName={styles.subscribeButtonIcon}
                   type="submit"
                 >
                   {status === 'submitting' ? 'Sending...' : 'Subscribe'}

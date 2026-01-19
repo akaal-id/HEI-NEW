@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Button from '../Button/Button';
+import Countdown from './Countdown';
 import styles from './Hero.module.css';
 
 // Helper function to split text into characters
@@ -102,10 +103,7 @@ export default function Hero() {
         titleRef.current.innerHTML = newHTML;
       }
 
-      if (subtitleRef.current) {
-        const originalText = subtitleRef.current.textContent || '';
-        subtitleRef.current.innerHTML = splitTextIntoChars(originalText);
-      }
+      // Subtitle is now structured with location and date, no need to split into chars
 
       // Animate date characters
       if (dateRef.current) {
@@ -140,18 +138,35 @@ export default function Hero() {
         }
       }
 
-      // Animate subtitle characters
+      // Animate subtitle items
       if (subtitleRef.current) {
-        animate(
-          subtitleRef.current.querySelectorAll(`.${styles.char}`),
-          {
-            opacity: [0, 1],
-            translateY: [30, 0],
-            delay: stagger(30, { start: 750 }),
-            duration: 1200,
-            easing: 'easeOutCubic',
-          }
-        );
+        const subtitleItems = subtitleRef.current.querySelectorAll(`.${styles.subtitleItem}`);
+        if (subtitleItems.length > 0) {
+          animate(
+            subtitleItems,
+            {
+              opacity: [0, 1],
+              translateY: [20, 0],
+              delay: stagger(100, { start: 750 }),
+              duration: 800,
+              easing: 'easeOutCubic',
+            }
+          );
+        }
+        // Animate divider
+        const divider = subtitleRef.current.querySelector(`.${styles.subtitleDivider}`);
+        if (divider) {
+          animate(
+            divider,
+            {
+              opacity: [0, 1],
+              scaleY: [0, 1],
+              delay: 850,
+              duration: 400,
+              easing: 'easeOutCubic',
+            }
+          );
+        }
       }
 
       // Fade in image
@@ -189,14 +204,16 @@ export default function Hero() {
         <div className={styles.container}>
           <div className={styles.content}>
             <time ref={dateRef} className={styles.date} dateTime="2026-04">
-              COMING IN APRIL 2026
+              Welcome to The 6th HEI
             </time>
             <h1 ref={titleRef} className={styles.title}>
               D8 Halal Expo Indonesia
             </h1>
-            <p ref={subtitleRef} className={styles.subtitle}>
-              Strengthening D-8 Halal Economy Through International Collaboration
-            </p>
+            <div ref={subtitleRef} className={styles.subtitle}>
+              <span className={styles.subtitleItem}>Indoor Tennis Court</span>
+              <div className={styles.subtitleDivider}></div>
+              <span className={styles.subtitleItem}>April 14th-19th, 2026</span>
+            </div>
             <Button className={styles.button} href="#discover">Discover more</Button>
           </div>
         </div>
@@ -228,6 +245,7 @@ export default function Hero() {
           height={200}
           className={styles.floatingAsset2}
         />
+        <Countdown />
       </section>
     </div>
   );

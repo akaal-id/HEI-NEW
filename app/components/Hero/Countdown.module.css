@@ -1,0 +1,152 @@
+.countdownContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 8rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  gap: 2rem;
+}
+
+.ctaText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ctaLine {
+  font-size: clamp(14px, 2vw, 20px);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ctaTextDark {
+  color: var(--hei26-dongkerblue);
+  font-weight: 600;
+}
+
+.ctaTextBright {
+  color: var(--hei26-turquoise);
+  font-weight: 700;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.timeUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  width: 100px;
+}
+
+.timeValue {
+  font-size: clamp(32px, 2.5vw, 42px);
+  font-weight: 600;
+  color: var(--hei26-dongkerblue);
+  line-height: 1;
+  text-align: center;
+  width: 100%;
+}
+
+.timeLabel {
+  font-size: clamp(12px, 1.2vw, 16px);
+  font-weight: 400;
+  color: var(--hei26-dongkerblue);
+  margin-top: 8px;
+  text-align: center;
+}
+
+.divider {
+  width: 1px;
+  height: 4rem;
+  background-color: var(--hei26-turquoise);
+  flex-shrink: 0;
+}
+
+.buttonWrapper {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .countdownContainer {
+    padding: 1.5rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .timeUnit {
+    min-width: 80px;
+    width: 80px;
+  }
+
+  .timeValue {
+    font-size: clamp(24px, 3vw, 48px);
+  }
+}
+
+@media (max-width: 768px) {
+  .countdownContainer {
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .ctaText {
+    text-align: center;
+  }
+
+  .countdown {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .timeUnit {
+    min-width: 60px;
+    width: 60px;
+  }
+
+  .timeValue {
+    font-size: clamp(20px, 4vw, 32px);
+  }
+
+  .buttonWrapper {
+    width: 100%;
+  }
+
+  .buttonWrapper button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdownContainer {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .timeUnit {
+    min-width: 40px;
+    width: 40px;
+  }
+
+  .timeValue {
+    font-size: clamp(16px, 4vw, 24px);
+  }
+
+  .timeLabel {
+    font-size: 10px;
+  }
+}

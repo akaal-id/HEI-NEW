@@ -16,15 +16,12 @@
 .text {
   display: flex;
   align-items: center;
-  padding: 12px 24px 12px 24px;
-  font-size: clamp(14px, 1vw, 16px);
+  padding: 12px 24px;
+  font-size: clamp(12px, 1vw, 14px);
   font-weight: 500;
-  color: #ffffff;
-  background: var(--hei26-linearblue);
   white-space: nowrap;
   border-radius: 999px;
   height: 48px;
-  width: 100%;
   box-sizing: border-box;
 }
 
@@ -34,50 +31,101 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  border: 2px solid var(--hei26-skyblue);
   border-radius: 999px;
-  background: transparent;
   margin-left: -1px;
   flex-shrink: 0;
   box-sizing: border-box;
-}
-
-.iconContainer {
   transition: background 0.3s ease, transform 1s ease;
 }
 
-.button:hover .iconContainer {
-  background: var(--hei26-skyblue);
-  transform: translateX(4px);
-}
-
-.button:hover .iconContainer .icon {
-  color: var(--background);
-  transition: all 0.3s ease;
-}
 .icon {
   width: 20px;
   height: 20px;
+  stroke-width: 1.5;
+}
+
+/* Primary Button Styles */
+.primary .text {
+  color: white;
+  background: var(--hei26-linearblue);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.primary .iconContainer {
+  border: 1.5px solid var(--hei26-skyblue);
+  background: transparent;
+}
+
+.primary .icon {
   color: var(--hei26-skyblue);
-  stroke-width: 2;
 }
 
-.button:hover {
-  transform: translateY(-2px);
-  transition: all 0.6s ease;
-}
-
-.button:hover .text {
+.primary:hover .text {
   background: linear-gradient(90deg, #18639d 0%, #26A7DF 100%);
   transition: all 0.6s ease;
 }
 
+.primary:hover .iconContainer {
+  background: var(--hei26-skyblue);
+  transform: translateX(4px);
+}
+
+.primary:hover .iconContainer .icon {
+  color: var(--background);
+  transition: all 0.3s ease;
+}
+
+/* Secondary Button Styles */
+.secondary .text {
+  color: var(--hei26-dongkerblue);
+  background: transparent;
+}
+
+.secondary .iconContainer {
+  border: 1.5px solid var(--hei26-skyblue);
+  background: transparent;
+}
+
+.secondary .icon {
+  color: var(--hei26-skyblue);
+}
+
+.secondary:hover .text {
+  color: var(--hei26-turquoise);
+  transition: all 0.6s ease;
+}
+
+.secondary:hover .iconContainer {
+  background: var(--hei26-skyblue);
+  transform: translateX(4px);
+}
+
+.secondary:hover .iconContainer .icon {
+  color: var(--background);
+  transition: all 0.3s ease;
+}
+
+/* Tertiary Button Styles */
+.tertiary .text {
+  color: var(--hei26-dongkerblue);
+  background: transparent;
+  padding: 12px 0;
+}
+
+
+.tertiary:hover .text {
+  color: var(--hei26-turquoise);
+  transition: all 0.3s ease;
+}
+
+/* Common States */
 .button:active {
   transform: translateY(0);
 }
 
 .button:focus-visible {
-  outline: 2px solid var(--hei26-skyblue);
+  outline: 1.5px solid var(--hei26-skyblue);
   outline-offset: 2px;
 }
 

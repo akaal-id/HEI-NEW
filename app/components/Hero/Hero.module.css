@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--background);
+  background: linear-gradient(to bottom, #fff 0%, var(--background) 100%);
   padding: 0;
   font-family: var(--font-plus-jakarta-sans), sans-serif;
   scroll-behavior: smooth;
@@ -72,8 +72,8 @@
 }
 
 .title {
-  font-size: clamp(28px, 8vw, 64px);
-  font-weight: 600;
+  font-size: clamp(36px, 8vw, 72px);
+  font-weight: 700;
   line-height: 100%;
   color: var(--hei26-dongkerblue);
   margin: 0;
@@ -90,13 +90,27 @@
 }
 
 .subtitle {
-  font-size: clamp(12px, 3vw, 24px);
-  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 600;
   line-height: 1.7;
   color: var(--hei26-dongkerblue);
   margin: 0;
-  width: 360px;
+  width: auto;
   margin-bottom: 8px;
+}
+
+.subtitleItem {
+  white-space: nowrap;
+}
+
+.subtitleDivider {
+  width: 0.1rem;
+  height: 3rem;
+  background-color: var(--hei26-turquoise);
+  flex-shrink: 0;
 }
 
 .button {
@@ -142,10 +156,6 @@
     padding: 0;
   }
 
-  .title {
-    font-size: clamp(32px, 6vw, 42px);
-  }
-
   .imageWrapper {
     top: 50%;
     left: 50%;
@@ -176,7 +186,8 @@
 
   .subtitle {
     font-size: clamp(14px, 2.5vw, 16px);
-    width: 100%;
+    width: auto;
+    gap: 12px;
   }
 
   .date {
@@ -245,27 +256,7 @@
   text-transform: uppercase;
   margin-top: 4px;
   margin-bottom: 4px;
-}
-
-.title {
-  font-size: clamp(48px, 8vw, 96px);
-  font-weight: 700;
-  line-height: 120%;
-  color: var(--hei26-dongkerblue);
-  margin: 0;
-  letter-spacing: -2px;
-  background-clip: unset;
-  -webkit-background-clip: unset;
-}
-
-.subtitle {
-  font-size: clamp(14px, 3vw, 16px);
-  font-weight: 400;
-  line-height: 1.7;
-  color: var(--hei26-dongkerblue);
-  margin: 0;
-  width: 80%;
-}
+} 
 
 .button {
   margin-top: 16px;
@@ -379,34 +370,12 @@
   .char {
     opacity: 0;
   }
-  
-  .title {
-    font-size: clamp(32px, 8vw, 72px);
-    font-weight: 700;
-    line-height: 100%;
-    color: var(--hei26-dongkerblue);
-    margin: 0;
-    letter-spacing: -2px;
-    margin-bottom: 16px;
-    background-clip: unset;
-    -webkit-background-clip: unset;
-  }
 
   .gradientText {
     font-size: clamp(32px, 8vw, 72px);
     font-weight: 700;
     line-height: 100%;
     color: var(--hei26-dongkerblue);
-  }
-  
-  .subtitle {
-    font-size: clamp(16px, 3vw, 32px);
-    font-weight: 400;
-    line-height: 1.7;
-    color: var(--hei26-dongkerblue);
-    margin: 0;
-    width: 472px;
-    margin-bottom: 8px;
   }
   
   .button {

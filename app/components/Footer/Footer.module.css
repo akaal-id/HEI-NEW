@@ -144,7 +144,20 @@
 /* Override button width to fit design if needed, or rely on component */
 .subscribeButton {
   width: 100%;
+  display: flex;
   justify-content: space-between;
+}
+
+.subscribeButtonText {
+  flex: 1 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  border-radius: 9999px !important;
+}
+
+.subscribeButtonIcon {
+  border-radius: 9999px !important;
+  flex-shrink: 0 !important;
 }
 
 .subscribeButton:hover {
