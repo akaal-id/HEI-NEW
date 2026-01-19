@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
@@ -10,10 +10,28 @@ import styles from './Navbar.module.css';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    // Initialize scroll position
+    lastScrollY.current = window.scrollY;
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      setIsScrolled(currentScrollY > 50);
+      
+      // Menu shows by default when scrolled, only hides when actively scrolling down
+      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+        // Actively scrolling down past 50px - hide menu
+        setIsScrollingDown(true);
+      } else {
+        // Scrolling up, at top, or no movement - show menu
+        setIsScrollingDown(false);
+      }
+      
+      lastScrollY.current = currentScrollY;
     };
 
     const observer = new IntersectionObserver(
@@ -52,7 +70,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className={styles.menuContainer}>
+        <div className={`${styles.menuContainer} ${isScrollingDown ? styles.menuHidden : ''}`}>
           <Button 
             href="#home" 
             variant="tertiary" 

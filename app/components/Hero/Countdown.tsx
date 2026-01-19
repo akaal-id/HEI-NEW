@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import styles from './Countdown.module.css';
 
@@ -12,6 +12,7 @@ interface TimeLeft {
 }
 
 export default function Countdown() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -42,11 +43,34 @@ export default function Countdown() {
     calculateTimeLeft();
     const interval = setInterval(calculateTimeLeft, 1000);
 
+    // Intro animation
+    import('animejs').then((animeModule) => {
+      const animate = animeModule.animate as any;
+      
+      if (containerRef.current) {
+        // Start with container hidden
+        containerRef.current.style.opacity = '0';
+        containerRef.current.style.transform = 'translateY(50px)';
+        
+        // Animate in
+        animate(
+          containerRef.current,
+          {
+            opacity: [0, 1],
+            translateY: [50, 0],
+            duration: 1000,
+            delay: 500,
+            easing: 'easeOutCubic',
+          }
+        );
+      }
+    });
+
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className={styles.countdownContainer}>
+    <div ref={containerRef} className={styles.countdownContainer}>
       <div className={styles.ctaText}>
         <p className={styles.ctaLine}>
           <span className={styles.ctaTextDark}>Get ready to join </span>
@@ -60,7 +84,7 @@ export default function Countdown() {
 
       <div className={styles.countdown}>
         <div className={styles.timeUnit}>
-          <div className={styles.timeValue}>{timeLeft.days.toString().padStart(3, '0')}</div>
+          <div className={styles.timeValue}>{timeLeft.days.toString().padStart(2, '0')}</div>
           <div className={styles.timeLabel}>Days</div>
         </div>
         <div className={styles.divider}></div>
