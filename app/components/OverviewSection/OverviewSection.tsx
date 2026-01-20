@@ -62,7 +62,7 @@ export default function OverviewSection() {
       <div className={styles.imageSection}>
         <div ref={imageRef} className={styles.imageContainer}>
           <Image
-            src="/D8-assets/KV_D8.png"
+            src="/images/overview.jpg"
             alt="HEI 2026 Exhibition"
             width={1600}
             height={400}
@@ -111,34 +111,72 @@ export default function OverviewSection() {
       {/* Introduction Subsection */}
       <div ref={introRef} className={styles.subsection}>
         <div className={styles.subsectionContent}>
-          <span className={styles.eyebrow}>INTRODUCTION</span>
-          <h2 className={styles.title}>Connecting Global Halal Economy</h2>
-          <p className={styles.description}>
-            HEI 2026 is the strategic halal trade and investment platform aligned with the D-8 Summit, uniting governments, global buyers, investors, and halal industry leaders in one integrated ecosystem.
-          </p>
-          <div className={styles.buttonGroup}>
-            <Button href="#brochure" variant="yellow" className={styles.button}>
-              Download Our Brochure
-            </Button>
-            <Button href="#opportunities" variant="yellow" className={styles.button}>
-              Explore Opportunities
-            </Button>
+          <div className={styles.subsectionText}>
+            <span className={styles.eyebrow}>INTRODUCTION</span>
+            <h2 className={styles.title}>Connecting Global Halal Economy</h2>
+            <p className={styles.description}>
+              HEI 2026 is the strategic halal trade and investment platform aligned with the D-8 Summit, uniting governments, global buyers, investors, and halal industry leaders in one integrated ecosystem.
+            </p>
+            <div className={styles.buttonGroup}>
+              <Button href="#brochure" variant="yellow" className={styles.button}>
+                Download Our Brochure
+              </Button>
+              <Button 
+                href="#opportunities" 
+                variant="secondary" 
+                className={styles.button}
+                textClassName={styles.yellowSecondaryText}
+                iconClassName={styles.yellowSecondaryIcon}
+              >
+                Explore Opportunities
+              </Button>
+            </div>
+          </div>
+          <div className={styles.subsectionImage}>
+            <Image
+              src="/images/overview.jpg"
+              alt="HEI 2026 Exhibition"
+              width={800}
+              height={450}
+              className={styles.introImage}
+              priority={false}
+            />
           </div>
         </div>
       </div>
 
       {/* Value Proposition Subsection */}
       <div ref={valuePropRef} className={styles.subsection}>
-        <div className={styles.subsectionContent}>
-          <span className={styles.eyebrow}>VALUE PROPOSITION</span>
-          <h2 className={styles.title}>One Event. Two Strategic Engines.</h2>
-          <p className={styles.description}>
+        <div className={styles.valueContainer}>
+          <div className={styles.valueHeader}>
+            <span className={styles.eyebrow}>VALUE PROPOSITION</span>
+            <h2 className={styles.title}>One Event. Two Strategic Engines.</h2>
+          </div>
+          <p className={styles.ValueDescription}>
             HEI 2026 bridges high-level diplomacy and real-sector business through a dual-venue ecosystem, combining ministerial dialogue with concrete B2B transactions.
           </p>
           <div className={styles.buttonGroup}>
             <Button href="#how-it-works" variant="yellow" className={styles.button}>
               See How It Works
             </Button>
+          </div>
+          <div className={styles.imageGrid}>
+            <Image
+              src="/images/overview.jpg"
+              alt="HEI 2026 Venue 1"
+              width={800}
+              height={480}
+              className={styles.tennisImage}
+              priority={false}
+            />
+            <Image
+              src="/images/overview.jpg"
+              alt="HEI 2026 Venue 2"
+              width={800}
+              height={480}
+              className={styles.tennisImage}
+              priority={false}
+            />
           </div>
         </div>
       </div>

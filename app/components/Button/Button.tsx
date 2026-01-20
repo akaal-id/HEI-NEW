@@ -33,8 +33,8 @@ export default function Button({
   const textClass = `${styles.text} ${textClassName || ''}`.trim();
   const iconContainerClass = `${styles.iconContainer} ${iconClassName || ''}`.trim();
 
-  // Show icon if: not tertiary variant AND icon is provided (or use default ArrowUpRight for primary/secondary)
-  const showIcon = variant !== 'tertiary' && (icon !== undefined || variant === 'primary' || variant === 'secondary');
+  // Show icon if: not tertiary variant AND icon is provided (or use default ArrowUpRight for primary/secondary/yellow)
+  const showIcon = variant !== 'tertiary' && (icon !== undefined || variant === 'primary' || variant === 'secondary' || variant === 'yellow');
   const IconComponent = icon !== undefined ? icon : (variant !== 'tertiary' ? ArrowUpRight : undefined);
   
   const buttonContent = (

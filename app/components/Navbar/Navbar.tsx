@@ -59,16 +59,16 @@ export default function Navbar() {
   return (
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
       <div className={styles.navbarContent}>
-        <Link href="/" className={styles.logoLink}>
-          <Image
+      <Link href="/" className={styles.logoLink}>
+        <Image
             src="/icon/D8 HEI Logo Long.svg"
             alt="D-8 Halal Expo Indonesia 2026"
             width={200}
             height={60}
-            className={styles.logo}
-            priority
-          />
-        </Link>
+          className={styles.logo}
+          priority
+        />
+      </Link>
 
         <div className={`${styles.menuContainer} ${isScrollingDown ? styles.menuHidden : ''}`}>
           <Button 

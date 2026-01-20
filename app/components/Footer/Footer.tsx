@@ -70,7 +70,7 @@ export default function Footer() {
                 />
                 <Button 
                   icon={Mail} 
-                  className={styles.subscribeButton}
+                  className={styles.subscribeButton} 
                   textClassName={styles.subscribeButtonText}
                   iconClassName={styles.subscribeButtonIcon}
                   type="submit"
