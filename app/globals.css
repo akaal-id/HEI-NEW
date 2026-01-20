@@ -10,6 +10,7 @@ html {
   --hei26-dongkerblue: #004966;
   --hei26-skyblue: #26A7DF;
   --hei26-linearblue: linear-gradient(90deg, #1D74B7 0%, #26A7DF 100%);
+  --hei26-linearyellow: linear-gradient(90deg, #F3AB23 0%, #D98933 100%);
   --hei26-turquoise: #00b4aa;
 }
 

@@ -1,7 +1,7 @@
 import { ArrowUpRight, LucideIcon } from 'lucide-react';
 import styles from './Button.module.css';
 
-type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'yellow';
 
 interface ButtonProps {
   children: React.ReactNode;

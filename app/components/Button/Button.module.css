@@ -113,9 +113,40 @@
   padding: 12px 0;
 }
 
-
 .tertiary:hover .text {
   color: var(--hei26-turquoise);
+  transition: all 0.3s ease;
+}
+
+/* Yellow Button Styles */
+.yellow .text {
+  color: white;
+  background: var(--hei26-linearyellow);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.yellow .iconContainer {
+  border: 1.5px solid #F3AB23;
+  background: transparent;
+}
+
+.yellow .icon {
+  color: #F3AB23;
+}
+
+.yellow:hover .text {
+  background: linear-gradient(90deg, #D98933 0%, #F3AB23 100%);
+  transition: all 0.6s ease;
+}
+
+.yellow:hover .iconContainer {
+  background: #F3AB23;
+  transform: translateX(4px);
+}
+
+.yellow:hover .iconContainer .icon {
+  color: white;
   transition: all 0.3s ease;
 }
 

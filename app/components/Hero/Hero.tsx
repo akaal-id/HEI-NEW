@@ -42,7 +42,8 @@ function splitTextIntoChars(text: string, isGradient: boolean = false): string {
 export default function Hero() {
   const dateRef = useRef<HTMLTimeElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const subtitleLocationRef = useRef<HTMLDivElement>(null);
+  const subtitleDateRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const floatingAsset1Ref = useRef<HTMLImageElement>(null);
   const floatingAsset2Ref = useRef<HTMLImageElement>(null);
@@ -139,34 +140,30 @@ export default function Hero() {
       }
 
       // Animate subtitle items
-      if (subtitleRef.current) {
-        const subtitleItems = subtitleRef.current.querySelectorAll(`.${styles.subtitleItem}`);
-        if (subtitleItems.length > 0) {
-          animate(
-            subtitleItems,
-            {
-              opacity: [0, 1],
-              translateY: [20, 0],
-              delay: stagger(100, { start: 750 }),
-              duration: 800,
-              easing: 'easeOutCubic',
-            }
-          );
-        }
-        // Animate divider
-        const divider = subtitleRef.current.querySelector(`.${styles.subtitleDivider}`);
-        if (divider) {
-          animate(
-            divider,
-            {
-              opacity: [0, 1],
-              scaleY: [0, 1],
-              delay: 850,
-              duration: 400,
-              easing: 'easeOutCubic',
-            }
-          );
-        }
+      if (subtitleLocationRef.current) {
+        animate(
+          subtitleLocationRef.current,
+          {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            delay: 750,
+            duration: 800,
+            easing: 'easeOutCubic',
+          }
+        );
+      }
+
+      if (subtitleDateRef.current) {
+        animate(
+          subtitleDateRef.current,
+          {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            delay: 850,
+            duration: 800,
+            easing: 'easeOutCubic',
+          }
+        );
       }
 
       // Fade in image
@@ -209,12 +206,15 @@ export default function Hero() {
             <h1 ref={titleRef} className={styles.title}>
               D8 Halal Expo Indonesia
             </h1>
-            <div ref={subtitleRef} className={styles.subtitle}>
-              <span className={styles.subtitleItem}>Indoor Tennis Court</span>
-              <div className={styles.subtitleDivider}></div>
-              <span className={styles.subtitleItem}>April 14th-19th, 2026</span>
+            <div className={styles.subtitleContainer}>
+            <div ref={subtitleDateRef} className={styles.subtitleDate}>
+                April 14th-18th, 2026
+              </div>
+              <div ref={subtitleLocationRef} className={styles.subtitleLocation}>
+                Senayan Indoor Tennis Court, Jakarta
+              </div>
             </div>
-            <Button className={styles.button} href="#discover">Discover more</Button>
+            <Button className={styles.button} href="#overview">Discover more</Button>
           </div>
         </div>
         <div ref={imageRef} className={styles.imageWrapper}>

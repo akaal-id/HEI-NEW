@@ -1,15 +1,15 @@
 import dynamic from 'next/dynamic';
 import Hero from './components/Hero/Hero';
 
-const D8Section = dynamic(() => import('./components/D8Section/D8Section'), {
-  loading: () => <div style={{ height: '100vh', background: 'var(--background)' }}></div>,
+const OverviewSection = dynamic(() => import('./components/OverviewSection/OverviewSection'), {
+  loading: () => <div style={{ height: '100vh', background: 'var(--hei26-linearblue)' }}></div>,
 });
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <D8Section />
+      <OverviewSection />
     </main>
   );
 }
