@@ -145,8 +145,8 @@ export default function Navbar() {
               textClassName={styles.menuItemText}
               iconClassName={styles.menuItemIcon}
               icon={ChevronDown}
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={(e?: React.MouseEvent) => {
+                e?.preventDefault();
                 toggleDropdown('about');
               }}
             >
@@ -175,8 +175,8 @@ export default function Navbar() {
               textClassName={styles.menuItemText}
               iconClassName={styles.menuItemIcon}
               icon={ChevronDown}
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={(e?: React.MouseEvent) => {
+                e?.preventDefault();
                 toggleDropdown('programs');
               }}
             >
@@ -293,8 +293,8 @@ export default function Navbar() {
               textClassName={styles.mobileMenuItemText}
               iconClassName={styles.mobileMenuItemIcon}
               icon={ChevronDown}
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={(e?: React.MouseEvent) => {
+                e?.preventDefault();
                 toggleMobileDropdown('about');
               }}
             >
@@ -321,8 +321,8 @@ export default function Navbar() {
               textClassName={styles.mobileMenuItemText}
               iconClassName={styles.mobileMenuItemIcon}
               icon={ChevronDown}
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={(e?: React.MouseEvent) => {
+                e?.preventDefault();
                 toggleMobileDropdown('programs');
               }}
             >
