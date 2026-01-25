@@ -99,18 +99,30 @@
 @media (max-width: 768px) {
   .countdownContainer {
     flex-direction: column;
-    padding: 1.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2rem;
     gap: 1.5rem;
-    align-items: center;
+    padding-bottom: 4rem;
   }
 
   .ctaText {
-    text-align: center;
+    text-align: left;
+  }
+
+  .ctaTextDark {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+  }
+
+  .ctaTextBright {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
   }
 
   .countdown {
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .timeUnit {
@@ -119,7 +131,8 @@
   }
 
   .timeValue {
-    font-size: clamp(20px, 4vw, 32px);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 300;
   }
 
   .buttonWrapper {
@@ -129,24 +142,13 @@
   .buttonWrapper button {
     width: 100%;
   }
-}
-
-@media (max-width: 480px) {
-  .countdownContainer {
-    padding: 1rem;
-    gap: 1rem;
-  }
 
   .timeUnit {
     min-width: 40px;
     width: 40px;
   }
 
-  .timeValue {
-    font-size: clamp(16px, 4vw, 24px);
-  }
-
   .timeLabel {
-    font-size: 10px;
+    font-size: clamp(0.875rem, 2vw, 1rem);
   }
 }

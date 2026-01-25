@@ -149,7 +149,7 @@ export default function Navbar() {
 
       {/* Mobile Navbar */}
       <div className={styles.mobileNavbar}>
-        <div className={styles.mobileNavbarContainer}>
+        <div className={`${styles.mobileNavbarContainer} ${isScrollingDown ? styles.mobileNavbarHidden : ''}`}>
           <Link href="/" className={styles.mobileLogoLink} onClick={closeMobileMenu}>
             <Image
               src="/icon/D8 HEI Logo Long.svg"
