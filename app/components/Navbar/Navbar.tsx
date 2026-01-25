@@ -3,17 +3,21 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Button from '../Button/Button';
 import ContactModal from '../ContactModal/ContactModal';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<'about' | 'programs' | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<'about' | 'programs' | null>(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -59,6 +63,24 @@ export default function Navbar() {
     };
   }, []);
 
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(`.${styles.menuItemWithDropdown}`) && !target.closest(`.${styles.mobileMenuItemWithDropdown}`)) {
+        setOpenDropdown(null);
+        setOpenMobileDropdown(null);
+      }
+    };
+
+    if (openDropdown || openMobileDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [openDropdown, openMobileDropdown]);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -72,6 +94,19 @@ export default function Navbar() {
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
+  };
+
+  const toggleDropdown = (menu: 'about' | 'programs') => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
+
+  const toggleMobileDropdown = (menu: 'about' | 'programs') => {
+    setOpenMobileDropdown(openMobileDropdown === menu ? null : menu);
+  };
+
+  const closeDropdowns = () => {
+    setOpenDropdown(null);
+    setOpenMobileDropdown(null);
   };
 
   return (
@@ -95,39 +130,86 @@ export default function Navbar() {
           <Button 
             href="/" 
             variant="tertiary" 
-            className={styles.menuItem}
+            className={`${styles.menuItem} ${pathname === '/' ? styles.menuItemActive : ''}`}
             textClassName={styles.menuItemText}
             icon={undefined}
           >
             Home
           </Button>
           
-          <Button 
-            href="/about" 
-            variant="secondary" 
-            className={styles.menuItem}
-            textClassName={styles.menuItemText}
-            iconClassName={styles.menuItemIcon}
-            icon={ChevronDown}
-          >
-            About Us
-          </Button>
+          <div className={styles.menuItemWithDropdown}>
+            <Button 
+              href="/about" 
+              variant="secondary" 
+              className={`${styles.menuItem} ${pathname === '/about' ? styles.menuItemActive : ''} ${openDropdown === 'about' ? styles.menuItemDropdownOpen : ''}`}
+              textClassName={styles.menuItemText}
+              iconClassName={styles.menuItemIcon}
+              icon={ChevronDown}
+              onClick={(e) => {
+                e.preventDefault();
+                toggleDropdown('about');
+              }}
+            >
+              About Us
+            </Button>
+            {openDropdown === 'about' && (
+              <div className={styles.dropdown}>
+                <Link href="/about" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  About D-8 Summit
+                </Link>
+                <Link href="/about" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  About D8 HEI 2026
+                </Link>
+                <Link href="/about" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  About Organizer
+                </Link>
+              </div>
+            )}
+          </div>
           
-          <Button 
-            href="/programs" 
-            variant="secondary" 
-            className={styles.menuItem}
-            textClassName={styles.menuItemText}
-            iconClassName={styles.menuItemIcon}
-            icon={ChevronDown}
-          >
-            Our Programs
-          </Button>
+          <div className={styles.menuItemWithDropdown}>
+            <Button 
+              href="/programs" 
+              variant="secondary" 
+              className={`${styles.menuItem} ${pathname === '/programs' ? styles.menuItemActive : ''} ${openDropdown === 'programs' ? styles.menuItemDropdownOpen : ''}`}
+              textClassName={styles.menuItemText}
+              iconClassName={styles.menuItemIcon}
+              icon={ChevronDown}
+              onClick={(e) => {
+                e.preventDefault();
+                toggleDropdown('programs');
+              }}
+            >
+              Our Programs
+            </Button>
+            {openDropdown === 'programs' && (
+              <div className={styles.dropdown}>
+                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  Exhibition
+                </Link>
+                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  Business Matching
+                </Link>
+                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  Investment Match Making
+                </Link>
+                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  Youth Event
+                </Link>
+                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  D-8 HEI Talk
+                </Link>
+                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                  D-8 Culture Festival
+                </Link>
+              </div>
+            )}
+          </div>
           
           <Button 
             href="/partners" 
             variant="tertiary" 
-            className={styles.menuItem}
+            className={`${styles.menuItem} ${pathname === '/partners' ? styles.menuItemActive : ''}`}
             textClassName={styles.menuItemText}
             icon={undefined}
           >
@@ -137,7 +219,7 @@ export default function Navbar() {
           <Button 
             href="/articles" 
             variant="tertiary" 
-            className={styles.menuItem}
+            className={`${styles.menuItem} ${pathname === '/articles' || pathname?.startsWith('/articles/') ? styles.menuItemActive : ''}`}
             textClassName={styles.menuItemText}
             icon={undefined}
           >
@@ -195,42 +277,83 @@ export default function Navbar() {
           <Button 
             href="/" 
             variant="tertiary" 
-            className={styles.mobileMenuItem}
+            className={`${styles.mobileMenuItem} ${pathname === '/' ? styles.mobileMenuItemActive : ''}`}
             textClassName={styles.mobileMenuItemText}
             icon={undefined}
             onClick={closeMobileMenu}
           >
-            D8 HEI Overview
+            Home
           </Button>
           
-          <Button 
-            href="/about" 
-            variant="secondary" 
-            className={styles.mobileMenuItem}
-            textClassName={styles.mobileMenuItemText}
-            iconClassName={styles.mobileMenuItemIcon}
-            icon={ChevronDown}
-            onClick={closeMobileMenu}
-          >
-            About Us
-          </Button>
+          <div className={styles.mobileMenuItemWithDropdown}>
+            <Button 
+              href="/about" 
+              variant="secondary" 
+              className={`${styles.mobileMenuItem} ${pathname === '/about' ? styles.mobileMenuItemActive : ''} ${openMobileDropdown === 'about' ? styles.mobileMenuItemDropdownOpen : ''}`}
+              textClassName={styles.mobileMenuItemText}
+              iconClassName={styles.mobileMenuItemIcon}
+              icon={ChevronDown}
+              onClick={(e) => {
+                e.preventDefault();
+                toggleMobileDropdown('about');
+              }}
+            >
+              About Us
+            </Button>
+            <div className={`${styles.mobileSubmenu} ${openMobileDropdown === 'about' ? styles.mobileSubmenuOpen : ''}`}>
+              <Link href="/about" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                About D-8 Summit
+              </Link>
+              <Link href="/about" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                About D8 HEI 2026
+              </Link>
+              <Link href="/about" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                About Organizer
+              </Link>
+            </div>
+          </div>
           
-          <Button 
-            href="/programs" 
-            variant="secondary" 
-            className={styles.mobileMenuItem}
-            textClassName={styles.mobileMenuItemText}
-            iconClassName={styles.mobileMenuItemIcon}
-            icon={ChevronDown}
-            onClick={closeMobileMenu}
-          >
-            D8 HEI Programs
-          </Button>
+          <div className={styles.mobileMenuItemWithDropdown}>
+            <Button 
+              href="/programs" 
+              variant="secondary" 
+              className={`${styles.mobileMenuItem} ${pathname === '/programs' ? styles.mobileMenuItemActive : ''} ${openMobileDropdown === 'programs' ? styles.mobileMenuItemDropdownOpen : ''}`}
+              textClassName={styles.mobileMenuItemText}
+              iconClassName={styles.mobileMenuItemIcon}
+              icon={ChevronDown}
+              onClick={(e) => {
+                e.preventDefault();
+                toggleMobileDropdown('programs');
+              }}
+            >
+              D8 HEI Programs
+            </Button>
+            <div className={`${styles.mobileSubmenu} ${openMobileDropdown === 'programs' ? styles.mobileSubmenuOpen : ''}`}>
+              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                Exhibition
+              </Link>
+              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                Business Matching
+              </Link>
+              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                Investment Match Making
+              </Link>
+              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                Youth Event
+              </Link>
+              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                D-8 HEI Talk
+              </Link>
+              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+                D-8 Culture Festival
+              </Link>
+            </div>
+          </div>
           
           <Button 
             href="/partners" 
             variant="tertiary" 
-            className={styles.mobileMenuItem}
+            className={`${styles.mobileMenuItem} ${pathname === '/partners' ? styles.mobileMenuItemActive : ''}`}
             textClassName={styles.mobileMenuItemText}
             icon={undefined}
             onClick={closeMobileMenu}
@@ -241,7 +364,7 @@ export default function Navbar() {
           <Button 
             href="/articles" 
             variant="tertiary" 
-            className={styles.mobileMenuItem}
+            className={`${styles.mobileMenuItem} ${pathname === '/articles' || pathname?.startsWith('/articles/') ? styles.mobileMenuItemActive : ''}`}
             textClassName={styles.mobileMenuItemText}
             icon={undefined}
             onClick={closeMobileMenu}

@@ -5,7 +5,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'yellow';
 
 interface ButtonProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void;
   href?: string;
   className?: string;
   textClassName?: string;

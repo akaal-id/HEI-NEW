@@ -63,6 +63,35 @@
   pointer-events: auto;
   white-space: nowrap;
   margin: 0;
+  position: relative;
+}
+
+.menuItemActive {
+  position: relative;
+}
+
+.menuItemActive::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, #1D74B7 0%, #26A7DF 100%);
+  border-radius: 2px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60%;
+    opacity: 1;
+  }
 }
 
 .menuItemText {
@@ -73,6 +102,56 @@
 .menuItemIcon {
   width: 24px !important;
   height: 24px !important;
+  transition: transform 0.3s ease;
+}
+
+.menuItemWithDropdown {
+  position: relative;
+}
+
+.menuItemDropdownOpen .menuItemIcon {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  background: white;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 6px 1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  min-width: 200px;
+  z-index: 100;
+  animation: dropdownSlideDown 0.3s ease-out;
+}
+
+@keyframes dropdownSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownItem {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--hei26-dongkerblue);
+  text-decoration: none;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdownItem:hover {
+  background-color: rgba(29, 116, 183, 0.1);
+  color: var(--hei26-skyblue);
 }
 
 /* Register Now Button Specific Styles */
@@ -269,6 +348,34 @@
     width: 100%;
     justify-content: flex-start;
     margin: 0;
+    position: relative;
+  }
+
+  .mobileMenuItemActive {
+    position: relative;
+  }
+
+  .mobileMenuItemActive::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #1D74B7 0%, #26A7DF 100%);
+    border-radius: 0 4px 4px 0;
+    animation: slideInVertical 0.3s ease-out;
+  }
+
+  @keyframes slideInVertical {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: 100%;
+      opacity: 1;
+    }
   }
 
   .mobileMenuItemText {
@@ -281,6 +388,61 @@
   .mobileMenuItemIcon {
     width: 24px !important;
     height: 24px !important;
+    transition: transform 0.3s ease;
+  }
+
+  .mobileMenuItemWithDropdown {
+    width: 100%;
+  }
+
+  .mobileMenuItemDropdownOpen .mobileMenuItemIcon {
+    transform: rotate(180deg);
+  }
+
+  .mobileSubmenu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    width: 100%;
+  }
+
+  .mobileSubmenuOpen {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateX(0);
+    padding: 0.75rem 0 0 0;
+    margin: 0.5rem 0 0 0;
+    pointer-events: auto;
+  }
+
+  .mobileSubmenuItem {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: var(--hei26-dongkerblue);
+    text-decoration: none;
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-weight: 500;
+    background: rgba(29, 116, 183, 0.1);
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .mobileSubmenuItem:hover {
+    background-color: rgba(29, 116, 183, 0.2);
+    color: var(--hei26-skyblue);
   }
 
   .mobileRegisterButton {

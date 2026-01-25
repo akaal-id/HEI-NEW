@@ -133,7 +133,7 @@ export default function OverviewSection() {
           </div>
           <div className={styles.subsectionImage}>
             <Image
-              src="/images/overview.jpg"
+              src="/images/exhibition-1.png"
               alt="HEI 2026 Exhibition"
               width={800}
               height={450}
@@ -162,7 +162,7 @@ export default function OverviewSection() {
           <div className={styles.imageGrid}>
             <div className={styles.tennisImageContainer}>
               <Image
-                src="/images/overview.jpg"
+                src="/images/fairmont-1.jpg"
                 alt="HEI 2026 Venue 1"
                 width={800}
                 height={480}
@@ -172,7 +172,7 @@ export default function OverviewSection() {
             </div>
             <div className={styles.tennisImageContainer}>
               <Image
-                src="/images/overview.jpg"
+                src="/images/tennis-indoor.png"
                 alt="HEI 2026 Venue 2"
                 width={800}
                 height={480}

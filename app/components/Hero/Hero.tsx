@@ -204,7 +204,7 @@ export default function Hero() {
               Welcome to The 6th HEI
             </time>
             <h1 ref={titleRef} className={styles.title}>
-              D8 Halal Expo Indonesia
+              D-8 Halal Expo Indonesia
             </h1>
             <div className={styles.subtitleContainer}>
             <div ref={subtitleDateRef} className={styles.subtitleDate}>

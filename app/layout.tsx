@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import ContactButton from "./components/ContactButton/ContactButton";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import "./globals.css";
 
 const inter = Inter({
@@ -63,6 +64,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${plusJakartaSans.variable} antialiased`}
       >
+        <LoadingScreen />
         <Navbar />
         {children}
         <Footer />

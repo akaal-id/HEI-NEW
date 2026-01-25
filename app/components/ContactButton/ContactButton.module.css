@@ -15,9 +15,9 @@
   cursor: pointer;
   z-index: 50;
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-weight: 500;
-  font-size: 14px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   white-space: nowrap;
   box-shadow: 0 4px 6px 1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   margin: 0;
