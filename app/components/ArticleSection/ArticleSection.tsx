@@ -7,6 +7,7 @@ import styles from './ArticleSection.module.css';
 
 interface Article {
   id: string;
+  slug?: string;
   category: string;
   image: string;
   author: string;
@@ -15,9 +16,12 @@ interface Article {
   description: string;
 }
 
+// TODO: Replace this with database fetch (Google Sheets or Supabase)
+// This is a temporary mock data structure
 const articles: Article[] = [
   {
     id: '1',
+    slug: 'lorem-ipsum-dolor-sit-amet-consectur',
     category: 'Live Report',
     image: '/images/overview.jpg',
     author: 'John Doe',
@@ -27,6 +31,7 @@ const articles: Article[] = [
   },
   {
     id: '2',
+    slug: 'sed-do-eiusmod-tempor-incididunt',
     category: 'Business Education',
     image: '/images/overview.jpg',
     author: 'Jane Smith',
@@ -36,6 +41,7 @@ const articles: Article[] = [
   },
   {
     id: '3',
+    slug: 'ut-enim-ad-minim-veniam',
     category: 'News & Article',
     image: '/images/overview.jpg',
     author: 'Alice Johnson',
@@ -90,7 +96,7 @@ export default function ArticleSection() {
                 <p className={styles.articleDescription}>{article.description}</p>
                 <div className={styles.divider}></div>
                 <Button 
-                  href={`/articles/${article.id}`}
+                  href={`/articles/${article.slug || article.id}`}
                   variant="secondary"
                   className={styles.readMoreButton}
                 >

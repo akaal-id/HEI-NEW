@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import Button from '../Button/Button';
 import styles from './Navbar.module.css';
 
@@ -11,6 +11,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -56,25 +57,34 @@ export default function Navbar() {
     };
   }, []);
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
+      {/* Desktop Navbar */}
       <div className={styles.navbarContent}>
-      <div className={`${styles.logoContainer} ${isScrolled ? styles.logoContainerScrolled : ''}`}>
-        <Link href="/" className={styles.logoLink}>
-          <Image
-              src="/icon/D8 HEI Logo Long.svg"
-              alt="D-8 Halal Expo Indonesia 2026"
-              width={200}
-              height={60}
-            className={styles.logo}
-            priority
-          />
-        </Link>
-      </div>
+        <div className={`${styles.logoContainer} ${isScrolled ? styles.logoContainerScrolled : ''}`}>
+      <Link href="/" className={styles.logoLink}>
+        <Image
+                src="/icon/D8 HEI Logo Long.svg"
+                alt="D-8 Halal Expo Indonesia 2026"
+                width={200}
+                height={60}
+          className={styles.logo}
+          priority
+        />
+      </Link>
+        </div>
 
         <div className={`${styles.menuContainer} ${isScrollingDown ? styles.menuHidden : ''}`}>
           <Button 
-            href="#home" 
+            href="/" 
             variant="tertiary" 
             className={styles.menuItem}
             textClassName={styles.menuItemText}
@@ -84,7 +94,7 @@ export default function Navbar() {
           </Button>
           
           <Button 
-            href="#about" 
+            href="/about" 
             variant="secondary" 
             className={styles.menuItem}
             textClassName={styles.menuItemText}
@@ -95,7 +105,7 @@ export default function Navbar() {
           </Button>
           
           <Button 
-            href="#programs" 
+            href="/programs" 
             variant="secondary" 
             className={styles.menuItem}
             textClassName={styles.menuItemText}
@@ -106,7 +116,7 @@ export default function Navbar() {
           </Button>
           
           <Button 
-            href="#partner" 
+            href="/partners" 
             variant="tertiary" 
             className={styles.menuItem}
             textClassName={styles.menuItemText}
@@ -116,7 +126,7 @@ export default function Navbar() {
           </Button>
           
           <Button 
-            href="#article" 
+            href="/articles" 
             variant="tertiary" 
             className={styles.menuItem}
             textClassName={styles.menuItemText}
@@ -131,6 +141,103 @@ export default function Navbar() {
             className={`${styles.menuItem} ${styles.registerButton}`}
             textClassName={`${styles.menuItemText} ${styles.registerButtonText}`}
             iconClassName={styles.registerButtonIcon}
+          >
+            Register Now
+          </Button>
+        </div>
+      </div>
+
+      {/* Mobile Navbar */}
+      <div className={styles.mobileNavbar}>
+        <div className={styles.mobileNavbarContainer}>
+          <Link href="/" className={styles.mobileLogoLink} onClick={closeMobileMenu}>
+            <Image
+              src="/icon/D8 HEI Logo Long.svg"
+              alt="D-8 Halal Expo Indonesia 2026"
+              width={150}
+              height={45}
+              className={styles.mobileLogo}
+              priority
+            />
+          </Link>
+          <button 
+            className={styles.mobileMenuButton}
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className={styles.mobileMenuIcon} />
+            ) : (
+              <Menu className={styles.mobileMenuIcon} />
+            )}
+          </button>
+        </div>
+
+        <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+          <Button 
+            href="/" 
+            variant="tertiary" 
+            className={styles.mobileMenuItem}
+            textClassName={styles.mobileMenuItemText}
+            icon={undefined}
+            onClick={closeMobileMenu}
+          >
+            D8 HEI Overview
+          </Button>
+          
+          <Button 
+            href="/about" 
+            variant="secondary" 
+            className={styles.mobileMenuItem}
+            textClassName={styles.mobileMenuItemText}
+            iconClassName={styles.mobileMenuItemIcon}
+            icon={ChevronDown}
+            onClick={closeMobileMenu}
+          >
+            About Us
+          </Button>
+          
+          <Button 
+            href="/programs" 
+            variant="secondary" 
+            className={styles.mobileMenuItem}
+            textClassName={styles.mobileMenuItemText}
+            iconClassName={styles.mobileMenuItemIcon}
+            icon={ChevronDown}
+            onClick={closeMobileMenu}
+          >
+            D8 HEI Programs
+          </Button>
+          
+          <Button 
+            href="/partners" 
+            variant="tertiary" 
+            className={styles.mobileMenuItem}
+            textClassName={styles.mobileMenuItemText}
+            icon={undefined}
+            onClick={closeMobileMenu}
+          >
+            Our Partner
+          </Button>
+          
+          <Button 
+            href="/articles" 
+            variant="tertiary" 
+            className={styles.mobileMenuItem}
+            textClassName={styles.mobileMenuItemText}
+            icon={undefined}
+            onClick={closeMobileMenu}
+          >
+            Article & Media
+          </Button>
+          
+          <Button 
+            href="#register" 
+            variant="primary" 
+            className={`${styles.mobileMenuItem} ${styles.mobileRegisterButton}`}
+            textClassName={`${styles.mobileMenuItemText} ${styles.mobileRegisterButtonText}`}
+            iconClassName={styles.mobileRegisterButtonIcon}
+            onClick={closeMobileMenu}
           >
             Register Now
           </Button>

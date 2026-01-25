@@ -12,6 +12,12 @@
   transition: background-color 0.3s ease, padding 0.3s ease, transform 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+}
+
 .navbarContent {
   width: 100%;
   display: flex;
@@ -120,63 +126,175 @@
   }
 }
 
-@media (max-width: 1024px) {
+/* Desktop Menu - Hide on mobile */
+@media (max-width: 768px) {
   .navbarContent {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .menuContainer {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    height: 50px;
+    display: none;
   }
 }
 
+/* Mobile Navbar */
+.mobileNavbar {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .navbar {
-    padding: 16px;
+  .mobileNavbar {
+    display: block;
+    width: 100%;
+    pointer-events: auto;
+    position: relative;
   }
 
-  .navbar.hidden {
-    transform: translateY(-100%);
+  .mobileNavbarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 6px 1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    pointer-events: auto;
+    position: relative;
+    z-index: 55;
   }
 
-  .menuContainer {
-    gap: 4px;
-    padding: 6px;
+  .mobileLogoLink {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
   }
 
-  .menuItem {
-    font-size: 12px;
-  }
-
-  .logo {
+  .mobileLogo {
+    width: auto;
     height: 40px;
+    pointer-events: auto;
+  }
+
+  .mobileMenuButton {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #1D74B7 0%, #26A7DF 100%);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    flex-shrink: 0;
+    pointer-events: auto;
+    z-index: 56;
+    position: relative;
+  }
+
+  .mobileMenuButton:hover {
+    background: var(--hei26-dongkerblue);
+  }
+
+  .mobileMenuIcon {
+    width: 24px;
+    height: 24px;
+    color: white;
+    transition: transform 0.3s ease;
+  }
+
+  .mobileMenu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    box-shadow: 0 4px 6px 1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease, padding 0.3s ease;
+    z-index: 60;
+    pointer-events: none;
+  }
+
+  .mobileMenuOpen {
+    max-height: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobileMenuItem {
+    width: 100%;
+    justify-content: flex-start;
+    margin: 0;
+  }
+
+  .mobileMenuItemText {
+    padding: 12px 16px !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+    font-size: clamp(14px, 1.6vw, 16px) !important;
+  }
+
+  .mobileMenuItemIcon {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .mobileRegisterButton {
+    margin-top: 0.5rem;
+  }
+
+  .mobileRegisterButtonText {
+    padding: 12px 24px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .mobileRegisterButtonIcon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .navbar.hidden .mobileNavbarContainer {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .navbar.hidden .mobileMenu {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+
+  .mobileNavbarContainer {
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
   }
 }
 
 @media (max-width: 480px) {
-  .navbar {
-    padding: 12px;
+  .mobileNavbarContainer {
+    padding: 10px 12px;
   }
 
-  .logo {
+  .mobileLogo {
     height: 32px;
   }
 
-  .menuContainer {
-    flex-direction: column;
-    width: 100%;
-    border-radius: 16px;
+  .mobileMenuButton {
+    width: 44px;
+    height: 44px;
   }
 
-  .menuItem {
-    width: 100%;
-    justify-content: center;
+  .mobileMenuIcon {
+    width: 20px;
+    height: 20px;
   }
 }

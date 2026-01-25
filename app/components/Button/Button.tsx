@@ -36,14 +36,14 @@ export default function Button({
   // Show icon if: not tertiary variant AND icon is provided (or use default ArrowUpRight for primary/secondary/yellow)
   const showIcon = variant !== 'tertiary' && (icon !== undefined || variant === 'primary' || variant === 'secondary' || variant === 'yellow');
   const IconComponent = icon !== undefined ? icon : (variant !== 'tertiary' ? ArrowUpRight : undefined);
-  
+
   const buttonContent = (
     <>
       <span className={textClass}>{children}</span>
       {showIcon && IconComponent && (
         <div className={iconContainerClass}>
           <IconComponent className={styles.icon} />
-        </div>
+      </div>
       )}
     </>
   );
@@ -54,6 +54,7 @@ export default function Button({
         href={href} 
         className={buttonClass}
         aria-label={ariaLabel}
+        onClick={onClick}
       >
         {buttonContent}
       </a>
