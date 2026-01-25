@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import styles from './PartnerSection.module.css';
 
@@ -75,10 +76,57 @@ const partnerCategories: PartnerCategory[] = [
 ];
 
 export default function PartnerSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            import('animejs').then((animeModule) => {
+              const animate = animeModule.animate as any;
+              const stagger = animeModule.stagger;
+
+              const elements = [
+                headerRef.current,
+                categoriesRef.current,
+                ctaRef.current,
+              ].filter(Boolean);
+
+              if (elements.length > 0) {
+                animate(
+                  elements,
+                  {
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    delay: stagger(200),
+                    duration: 800,
+                    easing: 'easeOutQuad',
+                  }
+                );
+              }
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.section} id="partners">
+    <section ref={sectionRef} className={styles.section} id="partners">
       <div className={styles.container}>
-        <div className={styles.header}>
+        <div ref={headerRef} className={styles.header}>
           <span className={styles.eyebrow}>OUR PARTNERS</span>
           <h2 className={styles.title}>Supported by Global Institutions</h2>
           <p className={styles.description}>
@@ -86,7 +134,7 @@ export default function PartnerSection() {
           </p>
         </div>
 
-        <div className={styles.partnerCategories}>
+        <div ref={categoriesRef} className={styles.partnerCategories}>
           {partnerCategories.map((category) => (
             <div key={category.id} className={`${styles.category} ${category.id === 'organized-by' ? styles.organizedBy : ''}`}>
               <div className={styles.categoryLabel}>{category.label}</div>
@@ -109,7 +157,7 @@ export default function PartnerSection() {
           ))}
         </div>
 
-        <div className={styles.ctaSection}>
+        <div ref={ctaRef} className={styles.ctaSection}>
           <h3 className={styles.ctaTitle}>
             We invite you to become a sponsor for the D8 Halal Expo Indonesia!
           </h3>

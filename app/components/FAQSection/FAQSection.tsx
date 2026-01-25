@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import styles from './FAQSection.module.css';
 import { ChevronDown, ChevronUp, ArrowUpRight } from 'lucide-react';
@@ -71,15 +71,59 @@ const faqItems: FAQItem[] = [
 
 export default function FAQSection() {
   const [expandedId, setExpandedId] = useState<string>('what-is-hei');
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const faqListRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            import('animejs').then((animeModule) => {
+              const animate = animeModule.animate as any;
+              const stagger = animeModule.stagger;
+
+              const elements = [
+                headerRef.current,
+                faqListRef.current,
+              ].filter(Boolean);
+
+              if (elements.length > 0) {
+                animate(
+                  elements,
+                  {
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    delay: stagger(200),
+                    duration: 800,
+                    easing: 'easeOutQuad',
+                  }
+                );
+              }
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const toggleFAQ = (id: string) => {
     setExpandedId(expandedId === id ? '' : id);
   };
 
   return (
-    <section className={styles.section} id="faq">
+    <section ref={sectionRef} className={styles.section} id="faq">
       <div className={styles.container}>
-        <div className={styles.header}>
+        <div ref={headerRef} className={styles.header}>
           <span className={styles.eyebrow}>MORE FOR YOU</span>
           <h2 className={styles.title}>Frequently Ask Question</h2>
           <p className={styles.description}>for more question, feel free to ask!</p>
@@ -100,7 +144,7 @@ export default function FAQSection() {
           </div>
         </div>
 
-        <div className={styles.faqList}>
+        <div ref={faqListRef} className={styles.faqList}>
           {faqItems.map((item) => {
             const isExpanded = expandedId === item.id;
             return (

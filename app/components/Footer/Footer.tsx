@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 import { Mail, CheckCircle, Phone } from 'lucide-react';
 import Button from '../Button/Button';
 import styles from './Footer.module.css';
@@ -9,11 +10,55 @@ import { useGoogleForm } from '../../hooks/useGoogleForm';
 
 export default function Footer() {
   const { email, setEmail, status, handleSubmit, resetForm } = useGoogleForm();
+  const footerRef = useRef<HTMLElement>(null);
+  const topSectionRef = useRef<HTMLDivElement>(null);
+  const bottomSectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            import('animejs').then((animeModule) => {
+              const animate = animeModule.animate as any;
+              const stagger = animeModule.stagger;
+
+              const elements = [
+                topSectionRef.current,
+                bottomSectionRef.current,
+              ].filter(Boolean);
+
+              if (elements.length > 0) {
+                animate(
+                  elements,
+                  {
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    delay: stagger(200),
+                    duration: 800,
+                    easing: 'easeOutQuad',
+                  }
+                );
+              }
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <footer className={styles.footer}>
+    <footer ref={footerRef} className={styles.footer}>
       <div className={styles.container}>
-        <div className={styles.topSection}>
+        <div ref={topSectionRef} className={styles.topSection}>
           {/* Top Left: Logo and Address */}
           <div className={styles.columnLeft}>
             <div className={styles.logo}>
@@ -116,7 +161,7 @@ export default function Footer() {
 
         <div className={styles.divider} />
 
-        <div className={styles.bottomSection}>
+        <div ref={bottomSectionRef} className={styles.bottomSection}>
           <p className={styles.copyright}>
             © 2025 Halal Export Indonesia. All rights reserved.
           </p>

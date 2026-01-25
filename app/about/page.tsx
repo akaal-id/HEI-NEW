@@ -1,6 +1,16 @@
-import AboutD8Summit from '../components/AboutSection/AboutD8Summit';
-import AboutD8HEI from '../components/AboutSection/AboutD8HEI';
-import AboutOrganizer from '../components/AboutSection/AboutOrganizer';
+import dynamic from 'next/dynamic';
+
+const AboutD8Summit = dynamic(() => import('../components/AboutSection/AboutD8Summit'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
+
+const AboutD8HEI = dynamic(() => import('../components/AboutSection/AboutD8HEI'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
+
+const AboutOrganizer = dynamic(() => import('../components/AboutSection/AboutOrganizer'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
 
 export default function AboutPage() {
   return (

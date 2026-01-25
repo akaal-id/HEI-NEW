@@ -171,6 +171,44 @@
     pointer-events: auto;
   }
 
+  .mobileActionButtons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .mobileContactButton {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #1D74B7 0%, #26A7DF 100%);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    flex-shrink: 0;
+    pointer-events: auto;
+    z-index: 56;
+    position: relative;
+  }
+
+  .mobileContactButton:hover {
+    background: var(--hei26-dongkerblue);
+  }
+
+  .mobileContactIcon {
+    width: 20px;
+    height: 20px;
+    color: white;
+    transition: transform 0.3s ease;
+  }
+
+  .mobileContactButton:hover .mobileContactIcon {
+    transform: scale(1.1);
+  }
+
   .mobileMenuButton {
     width: 48px;
     height: 48px;
@@ -292,6 +330,16 @@
 
   .mobileLogo {
     height: 32px;
+  }
+
+  .mobileContactButton {
+    width: 44px;
+    height: 44px;
+  }
+
+  .mobileContactIcon {
+    width: 18px;
+    height: 18px;
   }
 
   .mobileMenuButton {

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import { User, Calendar } from 'lucide-react';
 import styles from './ArticleSection.module.css';
@@ -52,10 +53,55 @@ const articles: Article[] = [
 ];
 
 export default function ArticleSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            import('animejs').then((animeModule) => {
+              const animate = animeModule.animate as any;
+              const stagger = animeModule.stagger;
+
+              const elements = [
+                headerRef.current,
+                gridRef.current,
+              ].filter(Boolean);
+
+              if (elements.length > 0) {
+                animate(
+                  elements,
+                  {
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    delay: stagger(200),
+                    duration: 800,
+                    easing: 'easeOutQuad',
+                  }
+                );
+              }
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.section} id="articles">
+    <section ref={sectionRef} className={styles.section} id="articles">
       <div className={styles.container}>
-        <div className={styles.header}>
+        <div ref={headerRef} className={styles.header}>
           <h2 className={styles.title}>Read more from us</h2>
           <Button 
             href="#more-articles" 
@@ -66,7 +112,7 @@ export default function ArticleSection() {
           </Button>
         </div>
 
-        <div className={styles.articlesGrid}>
+        <div ref={gridRef} className={styles.articlesGrid}>
           {articles.map((article) => (
             <article key={article.id} className={styles.articleCard}>
               <div className={styles.articleCardImageContainer}>

@@ -1,9 +1,28 @@
-import Exhibition from '../components/ProgramDetailSection/Exhibition';
-import BusinessMatching from '../components/ProgramDetailSection/BusinessMatching';
-import InvestmentMatchMaking from '../components/ProgramDetailSection/InvestmentMatchMaking';
-import YouthEvent from '../components/ProgramDetailSection/YouthEvent';
-import D8HEITalk from '../components/ProgramDetailSection/D8HEITalk';
-import D8CultureFestival from '../components/ProgramDetailSection/D8CultureFestival';
+import dynamic from 'next/dynamic';
+
+const Exhibition = dynamic(() => import('../components/ProgramDetailSection/Exhibition'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
+
+const BusinessMatching = dynamic(() => import('../components/ProgramDetailSection/BusinessMatching'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
+
+const InvestmentMatchMaking = dynamic(() => import('../components/ProgramDetailSection/InvestmentMatchMaking'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
+
+const YouthEvent = dynamic(() => import('../components/ProgramDetailSection/YouthEvent'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
+
+const D8HEITalk = dynamic(() => import('../components/ProgramDetailSection/D8HEITalk'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
+
+const D8CultureFestival = dynamic(() => import('../components/ProgramDetailSection/D8CultureFestival'), {
+  loading: () => <div style={{ minHeight: '400px' }}></div>,
+});
 
 export default function ProgramsPage() {
   return (

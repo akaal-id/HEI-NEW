@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import styles from './ProgramSection.module.css';
 import { ArrowUpRight } from 'lucide-react';
@@ -26,9 +26,53 @@ export default function ProgramSection() {
   // Initially: exhibition is expanded, all others are default
   const [expandedCard, setExpandedCard] = useState<string>('exhibition');
   const [mounted, setMounted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            import('animejs').then((animeModule) => {
+              const animate = animeModule.animate as any;
+              const stagger = animeModule.stagger;
+
+              const elements = [
+                headerRef.current,
+                cardsRef.current,
+              ].filter(Boolean);
+
+              if (elements.length > 0) {
+                animate(
+                  elements,
+                  {
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    delay: stagger(200),
+                    duration: 800,
+                    easing: 'easeOutQuad',
+                  }
+                );
+              }
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const handleCardHover = (programId: string) => {
@@ -56,8 +100,8 @@ export default function ProgramSection() {
   };
 
   return (
-    <section className={styles.section} id="programs">
-      <div className={styles.header}>
+    <section ref={sectionRef} className={styles.section} id="programs">
+      <div ref={headerRef} className={styles.header}>
         <div className={styles.headerLeft}>
           <span className={styles.eyebrow}>KEY PROGRAMS</span>
           <h2 className={styles.title}>What's On D8 HEI 2026?</h2>
@@ -72,7 +116,7 @@ export default function ProgramSection() {
         </div>
       </div>
 
-      <div className={styles.cardsContainer}>
+      <div ref={cardsRef} className={styles.cardsContainer}>
         {programs.map((program) => {
           const isExpanded = getIsExpanded(program.id);
           return (

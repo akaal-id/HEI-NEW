@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Button from '../Button/Button';
+import ContactModal from '../ContactModal/ContactModal';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [isHidden, setIsHidden] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -63,6 +65,13 @@ export default function Navbar() {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+  };
+
+  const toggleContactModal = () => {
+    setIsContactModalOpen(!isContactModalOpen);
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
   };
 
   return (
@@ -160,17 +169,26 @@ export default function Navbar() {
               priority
             />
           </Link>
-          <button 
-            className={styles.mobileMenuButton}
-            onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className={styles.mobileMenuIcon} />
-            ) : (
-              <Menu className={styles.mobileMenuIcon} />
-            )}
-          </button>
+          <div className={styles.mobileActionButtons}>
+            <button 
+              className={styles.mobileContactButton}
+              onClick={toggleContactModal}
+              aria-label="Contact us"
+            >
+              <Phone className={styles.mobileContactIcon} />
+            </button>
+            <button 
+              className={styles.mobileMenuButton}
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className={styles.mobileMenuIcon} />
+              ) : (
+                <Menu className={styles.mobileMenuIcon} />
+              )}
+            </button>
+          </div>
         </div>
 
         <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
@@ -243,6 +261,8 @@ export default function Navbar() {
           </Button>
         </div>
       </div>
+
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </nav>
   );
 }

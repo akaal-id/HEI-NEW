@@ -1,0 +1,77 @@
+.scrollToTopButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px 1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  z-index: 100;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 0;
+}
+
+.scrollToTopButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px 2px rgba(0, 0, 0, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+}
+
+.scrollToTopButton:active {
+  transform: translateY(-2px);
+}
+
+.progressRing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.progressRingBackground {
+  stroke: rgba(0, 73, 102, 0.1);
+}
+
+.progressRingProgress {
+  stroke: var(--hei26-skyblue);
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--hei26-dongkerblue);
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.scrollToTopButton:hover .arrowIcon {
+  color: var(--hei26-skyblue);
+}
+
+@media (max-width: 768px) {
+  .scrollToTopButton {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+  }
+
+  .arrowIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .progressRing {
+    width: 44px;
+    height: 44px;
+  }
+}

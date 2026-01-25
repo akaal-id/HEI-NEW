@@ -1,14 +1,60 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import styles from './AboutSection.module.css';
 
 export default function AboutD8Summit() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            import('animejs').then((animeModule) => {
+              const animate = animeModule.animate as any;
+              const stagger = animeModule.stagger;
+
+              const elements = [
+                textRef.current,
+                imageRef.current,
+              ].filter(Boolean);
+
+              if (elements.length > 0) {
+                animate(
+                  elements,
+                  {
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    delay: stagger(200),
+                    duration: 800,
+                    easing: 'easeOutQuad',
+                  }
+                );
+              }
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.section}>
+    <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.textContent}>
+          <div ref={textRef} className={styles.textContent}>
             <span className={styles.eyebrow}>ABOUT D8 SUMMIT</span>
             <h2 className={styles.title}>D-8 Organization for Economic Cooperation</h2>
             <p className={styles.description}>
@@ -18,7 +64,7 @@ export default function AboutD8Summit() {
               The D-8 Summit serves as a platform for high-level dialogue and cooperation among member states, focusing on economic development, trade facilitation, and strategic partnerships that benefit all member countries and contribute to global economic stability.
             </p>
           </div>
-          <div className={styles.imageContent}>
+          <div ref={imageRef} className={styles.imageContent}>
             <Image
               src="/D8-assets/D8-summit.svg"
               alt="D-8 Summit"

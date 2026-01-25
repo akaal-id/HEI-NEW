@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import ContactButton from "./components/ContactButton/ContactButton";
 import "./globals.css";
 
 const inter = Inter({
@@ -64,6 +66,8 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <ScrollToTop />
+        <ContactButton />
       </body>
     </html>
   );
