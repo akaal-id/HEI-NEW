@@ -81,13 +81,32 @@
   height: 36px !important;
 }
 
-.scrolled {
-  background: linear-gradient(to bottom, var(--background) 0%, rgba(240, 254, 255, 0) 100%);
-  padding-bottom: 40px;
-}
-
 .scrolled .logo {
   transform: scale(0.9);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.logoContainerScrolled {
+  position: relative;
+}
+
+.logoContainerScrolled::before {
+  content: '';
+  position: absolute;
+  top: -2rem; /* Reach the top of navbar (navbar padding) */
+  left: -0.8rem; /* Align with navbar padding */
+  right: -0.8rem; /* Align with navbar padding */
+  bottom: -1.4rem; /* Extend below logo */
+  background: white;
+  border-radius: 0 0 0.4rem 0.4rem;
+  z-index: -1;
+  transition: background 0.3s ease;
+  pointer-events: none;
 }
 
 @keyframes fadeIn {

@@ -119,14 +119,13 @@ export default function OverviewSection() {
             </p>
             <div className={styles.buttonGroup}>
               <Button href="#brochure" variant="yellow" className={styles.button}>
-                Download Our Brochure
+                Download Brochure
               </Button>
               <Button 
                 href="#opportunities" 
-                variant="secondary" 
-                className={styles.button}
-                textClassName={styles.yellowSecondaryText}
-                iconClassName={styles.yellowSecondaryIcon}
+                variant="tertiary" 
+                className={styles.tertiaryButton}
+                textClassName={styles.tertiaryButtonText}
               >
                 Explore Opportunities
               </Button>
@@ -161,22 +160,26 @@ export default function OverviewSection() {
             </Button>
           </div>
           <div className={styles.imageGrid}>
-            <Image
-              src="/images/overview.jpg"
-              alt="HEI 2026 Venue 1"
-              width={800}
-              height={480}
-              className={styles.tennisImage}
-              priority={false}
-            />
-            <Image
-              src="/images/overview.jpg"
-              alt="HEI 2026 Venue 2"
-              width={800}
-              height={480}
-              className={styles.tennisImage}
-              priority={false}
-            />
+            <div className={styles.tennisImageContainer}>
+              <Image
+                src="/images/overview.jpg"
+                alt="HEI 2026 Venue 1"
+                width={800}
+                height={480}
+                className={styles.tennisImage}
+                priority={false}
+              />
+            </div>
+            <div className={styles.tennisImageContainer}>
+              <Image
+                src="/images/overview.jpg"
+                alt="HEI 2026 Venue 2"
+                width={800}
+                height={480}
+                className={styles.tennisImage}
+                priority={false}
+              />
+            </div>
           </div>
         </div>
       </div>
