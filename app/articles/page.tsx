@@ -1,9 +1,9 @@
-import ArticleSection from '../components/ArticleSection/ArticleSection';
+import ArticlesMediaPage from '../components/ArticlesMediaPage/ArticlesMediaPage';
 
 export default function ArticlesPage() {
   return (
     <main>
-      <ArticleSection />
+      <ArticlesMediaPage />
     </main>
   );
 }

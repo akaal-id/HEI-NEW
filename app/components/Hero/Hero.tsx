@@ -208,10 +208,10 @@ export default function Hero() {
             </h1>
             <div className={styles.subtitleContainer}>
             <div ref={subtitleDateRef} className={styles.subtitleDate}>
-                April 14th-18th, 2026
+                14-18 April 2026
               </div>
               <div ref={subtitleLocationRef} className={styles.subtitleLocation}>
-                Senayan Indoor Tennis Court, Jakarta
+                Senayan Indoor Tennis Complex, Jakarta
               </div>
             </div>
             <Button className={styles.button} href="#overview">Discover more</Button>
