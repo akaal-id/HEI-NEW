@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import type { Metadata } from 'next';
 
 const Exhibition = dynamic(() => import('../components/ProgramDetailSection/Exhibition'), {
   loading: () => <div style={{ minHeight: '400px' }}></div>,
@@ -23,6 +24,31 @@ const D8HEITalk = dynamic(() => import('../components/ProgramDetailSection/D8HEI
 const D8CultureFestival = dynamic(() => import('../components/ProgramDetailSection/D8CultureFestival'), {
   loading: () => <div style={{ minHeight: '400px' }}></div>,
 });
+
+export const metadata: Metadata = {
+  title: "Programs & Events | HEI 2026 - Halal Expo Indonesia",
+  description: "Explore comprehensive programs at HEI 2026 including exhibitions, business matching, investment matchmaking, youth events, D-8 HEI Talk, and cultural festivals. Join us in Jakarta, April 2026.",
+  keywords: [
+    "HEI 2026 Programs",
+    "Halal Expo Events",
+    "Business Matching Indonesia",
+    "Investment Matchmaking Jakarta",
+    "D-8 HEI Talk",
+    "Halal Exhibition Programs",
+    "Halal Business Conference",
+    "Youth Events Jakarta",
+    "Halal Culture Festival",
+    "Halal Industry Summit"
+  ],
+  openGraph: {
+    title: "Programs & Events | HEI 2026 - Halal Expo Indonesia",
+    description: "Explore comprehensive programs at HEI 2026 including exhibitions, business matching, investment matchmaking, and cultural festivals.",
+    url: "https://halalexpoindonesia.com/programs",
+  },
+  alternates: {
+    canonical: "https://halalexpoindonesia.com/programs",
+  },
+};
 
 export default function ProgramsPage() {
   return (

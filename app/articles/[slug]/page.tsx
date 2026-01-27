@@ -1,10 +1,99 @@
 import { notFound } from 'next/navigation';
-import ArticleDetail from '../../components/ArticleDetail/ArticleDetail';
+import type { Metadata } from 'next';
+import dynamicImport from 'next/dynamic';
 import { getArticleBySlug, getAllArticles } from '../../lib/articles';
+
+const ArticleDetail = dynamicImport(() => import('../../components/ArticleDetail/ArticleDetail'), {
+  loading: () => <div style={{ minHeight: '100vh', padding: '8rem 0.5rem' }}>Loading article...</div>,
+});
 
 // Make this page fully dynamic - no static generation
 export const dynamic = 'force-dynamic';
 export const revalidate = 0; // Always fetch fresh data
+
+// Generate dynamic metadata for each article
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }> | { slug: string };
+}): Promise<Metadata> {
+  const resolvedParams = await (params instanceof Promise ? params : Promise.resolve(params));
+  
+  if (!resolvedParams?.slug || resolvedParams.slug === 'undefined') {
+    return {
+      title: 'Article Not Found | HEI 2026',
+      description: 'The requested article could not be found.',
+    };
+  }
+
+  let slug: string;
+  try {
+    slug = decodeURIComponent(resolvedParams.slug);
+  } catch (e) {
+    slug = resolvedParams.slug;
+  }
+
+  try {
+    const article = await getArticleBySlug(slug);
+    
+    if (!article) {
+      return {
+        title: 'Article Not Found | HEI 2026',
+        description: 'The requested article could not be found.',
+      };
+    }
+
+    const keywords = [
+      article.title,
+      article.category,
+      "Halal Expo Indonesia",
+      "HEI 2026",
+      "D-8 Halal Economy",
+      "Halal Industry",
+      "Halal Business",
+      "Halal Export",
+      "Islamic Economy",
+      "Halal Products"
+    ].filter(Boolean);
+
+    return {
+      title: `${article.title} | HEI 2026 - Halal Expo Indonesia`,
+      description: article.description || `Read about ${article.title} at the 6th Halal Expo Indonesia 2026. Discover insights about halal economy, business opportunities, and industry trends.`,
+      keywords: keywords,
+      authors: [{ name: article.author || 'Halal Export Indonesia' }],
+      openGraph: {
+        title: article.title,
+        description: article.description || `Read about ${article.title} at HEI 2026.`,
+        type: 'article',
+        publishedTime: article.createdAt || article.date,
+        authors: [article.author || 'Halal Export Indonesia'],
+        images: [
+          {
+            url: article.image,
+            width: 1200,
+            height: 630,
+            alt: article.title,
+          },
+        ],
+        url: `https://halalexpoindonesia.com/articles/${article.slug}`,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: article.title,
+        description: article.description || `Read about ${article.title} at HEI 2026.`,
+        images: [article.image],
+      },
+      alternates: {
+        canonical: `https://halalexpoindonesia.com/articles/${article.slug}`,
+      },
+    };
+  } catch (error) {
+    return {
+      title: 'Article | HEI 2026 - Halal Expo Indonesia',
+      description: 'Read the latest articles and news about Halal Expo Indonesia 2026.',
+    };
+  }
+}
 
 export default async function ArticlePage({
   params,

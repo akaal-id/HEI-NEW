@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, User } from 'lucide-react';
+import ArticleCard from '../ArticleCard/ArticleCard';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './RelatedArticles.module.css';
 
 interface Article {
@@ -30,6 +32,8 @@ export default function RelatedArticles({
 }: RelatedArticlesProps) {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sectionRef, isSectionVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [gridRef, isGridVisible] = useIntersectionObserver({ threshold: 0.1 });
 
   useEffect(() => {
     async function fetchRelatedArticles() {
@@ -42,10 +46,18 @@ export default function RelatedArticles({
         }
         const allArticles: Article[] = await response.json();
         
-        // Filter out current article and get related articles
-        let relatedArticles = allArticles.filter(
-          article => article.id !== currentArticleId && article.slug
-        );
+        // Filter out current article - check both ID and slug
+        let relatedArticles = allArticles.filter(article => {
+          // Exclude if ID matches OR slug matches
+          const isCurrentArticle = 
+            (article.id && article.id === currentArticleId) ||
+            (article.slug && article.slug === currentArticleId) ||
+            (article.id === currentArticleId) ||
+            (article.slug === currentArticleId);
+          
+          // Also exclude if slug is invalid
+          return !isCurrentArticle && article.slug && article.slug !== 'undefined';
+        });
 
         // If category is provided, prioritize same category
         if (currentCategory) {
@@ -70,6 +82,14 @@ export default function RelatedArticles({
           })
           .slice(0, limit);
 
+        console.log('[RelatedArticles] Found related articles:', sortedArticles.length, {
+          currentArticleId,
+          currentCategory,
+          totalArticles: allArticles.length,
+          filteredArticles: relatedArticles.length,
+          finalArticles: sortedArticles.length
+        });
+
         setArticles(sortedArticles);
       } catch (error) {
         console.error('Error fetching related articles:', error);
@@ -81,10 +101,11 @@ export default function RelatedArticles({
     fetchRelatedArticles();
   }, [currentArticleId, currentCategory, limit]);
 
-  if (isLoading) {
-    return (
-      <section className={styles.section}>
-        <h2 className={styles.title}>Related Articles</h2>
+  // Always show the section, even if no articles found (for better UX)
+  return (
+    <section ref={sectionRef as React.RefObject<HTMLElement>} className={styles.section}>
+      <h2 className={styles.title}>Related Articles</h2>
+      {isLoading ? (
         <div className={styles.grid}>
           {Array.from({ length: limit }).map((_, index) => (
             <div key={index} className={styles.skeleton}>
@@ -93,51 +114,22 @@ export default function RelatedArticles({
             </div>
           ))}
         </div>
-      </section>
-    );
-  }
-
-  if (articles.length === 0) {
-    return null;
-  }
-
-  return (
-    <section className={styles.section}>
-      <h2 className={styles.title}>Related Articles</h2>
-      <div className={styles.grid}>
-        {articles.map((article, index) => (
-          <Link 
-            key={`${article.id}-${article.slug}-${index}`}
-            href={`/articles/${article.slug}`}
-            className={styles.card}
-          >
-            <div className={styles.imageContainer}>
-              <Image
-                src={article.image}
-                alt={article.title}
-                fill
-                className={styles.image}
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
-              <span className={styles.categoryBadge}>{article.category}</span>
-            </div>
-            <div className={styles.content}>
-              <div className={styles.metadata}>
-                <div className={styles.metaItem}>
-                  <User className={styles.metaIcon} />
-                  <span>{article.author}</span>
-                </div>
-                <div className={styles.metaItem}>
-                  <Calendar className={styles.metaIcon} />
-                  <span>{article.date}</span>
-                </div>
-              </div>
-              <h3 className={styles.articleTitle}>{article.title}</h3>
-              <p className={styles.description}>{article.description}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+      ) : articles.length > 0 ? (
+        <div ref={gridRef as React.RefObject<HTMLDivElement>} className={`${styles.grid} ${isGridVisible ? styles.fadeIn : ''}`}>
+          {articles.map((article, index) => (
+            <ArticleCard
+              key={`${article.id}-${article.slug}-${index}`}
+              article={article}
+              index={index}
+              variant="related"
+            />
+          ))}
+        </div>
+      ) : (
+        <div className={styles.emptyState}>
+          <p>No related articles found at the moment.</p>
+        </div>
+      )}
     </section>
   );
 }

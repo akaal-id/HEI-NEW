@@ -1,9 +1,10 @@
 'use client';
 
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
-import { User, Calendar } from 'lucide-react';
+import ArticleCard from '../ArticleCard/ArticleCard';
+import { User } from 'lucide-react';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './ArticleSection.module.css';
 
 interface Article {
@@ -19,9 +20,9 @@ interface Article {
 }
 
 export default function ArticleSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const [sectionRef, isSectionVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [headerRef, isHeaderVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [gridRef, isGridVisible] = useIntersectionObserver({ threshold: 0.1 });
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -70,51 +71,11 @@ export default function ArticleSection() {
     fetchArticles();
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            import('animejs').then((animeModule) => {
-              const animate = animeModule.animate as any;
-              const stagger = animeModule.stagger;
-
-              const elements = [
-                headerRef.current,
-                gridRef.current,
-              ].filter(Boolean);
-
-              if (elements.length > 0) {
-                animate(
-                  elements,
-                  {
-                    opacity: [0, 1],
-                    translateY: [30, 0],
-                    delay: stagger(200),
-                    duration: 800,
-                    easing: 'easeOutQuad',
-                  }
-                );
-              }
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section} id="articles">
+    <section ref={sectionRef as React.RefObject<HTMLElement>} className={`${styles.section} ${isSectionVisible ? styles.visible : ''}`} id="articles">
       <div className={styles.container}>
-        <div ref={headerRef} className={styles.header}>
+        <div ref={headerRef as React.RefObject<HTMLDivElement>} className={`${styles.header} ${isHeaderVisible ? styles.fadeInUp : ''}`}>
           <h2 className={styles.title}>Read more from us</h2>
           <Button 
             href="/articles" 
@@ -125,7 +86,7 @@ export default function ArticleSection() {
           </Button>
         </div>
 
-        <div ref={gridRef} className={styles.articlesGrid}>
+        <div ref={gridRef as React.RefObject<HTMLDivElement>} className={`${styles.articlesGrid} ${isGridVisible ? styles.fadeInUp : ''}`}>
           {isLoading ? (
             // Loading state - show skeleton or placeholder
             Array.from({ length: 3 }).map((_, index) => (
@@ -152,42 +113,12 @@ export default function ArticleSection() {
             ))
           ) : articles.length > 0 ? (
             articles.map((article, index) => (
-              <article key={`${article.id}-${article.slug}-${index}`} className={styles.articleCard}>
-                <div className={styles.articleCardImageContainer}>
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    className={styles.articleCardImage}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <span className={styles.categoryBadge}>{article.category}</span>
-                </div>
-                
-                <div className={styles.cardContent}>
-                  <div className={styles.metadata}>
-                    <div className={styles.metaItem}>
-                      <User className={styles.metaIcon} />
-                      <span>{article.author}</span>
-                    </div>
-                    <div className={styles.metaItem}>
-                      <Calendar className={styles.metaIcon} />
-                      <span>{article.date}</span>
-                    </div>
-                  </div>
-                  
-                  <h3 className={styles.articleTitle}>{article.title}</h3>
-                  <p className={styles.articleDescription}>{article.description}</p>
-                  <div className={styles.divider}></div>
-                  <Button 
-                    href={`/articles/${article.slug && article.slug !== 'undefined' ? article.slug : article.id || 'not-found'}`}
-                    variant="secondary"
-                    className={styles.readMoreButton}
-                  >
-                    Read More
-                  </Button>
-                </div>
-              </article>
+              <ArticleCard
+                key={`${article.id}-${article.slug}-${index}`}
+                article={article}
+                index={index}
+                variant="home"
+              />
             ))
           ) : (
             <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem' }}>

@@ -3,7 +3,9 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Button from '../Button/Button';
+import ArticleCard from '../ArticleCard/ArticleCard';
 import { User, Calendar, Search, Filter, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './ArticlesMediaPage.module.css';
 import { getAllArticles } from '../../lib/articles';
 
@@ -47,6 +49,11 @@ export default function ArticlesMediaPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<SortOption>('newest');
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sectionRef, isSectionVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [gridRef, isGridVisible] = useIntersectionObserver({ threshold: 0.1 });
+  
+  const ARTICLES_PER_PAGE = 8;
 
   // Fetch articles on mount
   useEffect(() => {
@@ -87,6 +94,22 @@ export default function ArticlesMediaPage() {
     return filtered;
   }, [articles, searchQuery, selectedCategory, sortBy]);
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
+  const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
+  const endIndex = startIndex + ARTICLES_PER_PAGE;
+  const paginatedArticles = filteredArticles.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory, sortBy]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleMediaNext = useCallback(() => {
     setSelectedMediaIndex((prev) => (prev + 1) % mediaItems.length);
   }, []);
@@ -112,7 +135,7 @@ export default function ArticlesMediaPage() {
   }, [activeTab, handleMediaPrev, handleMediaNext]);
 
   return (
-    <section className={styles.section}>
+    <section ref={sectionRef as React.RefObject<HTMLElement>} className={`${styles.section} ${isSectionVisible ? styles.fadeIn : ''}`}>
       <div className={styles.container}>
         {/* Tabs */}
         <div className={styles.tabs}>
@@ -175,45 +198,15 @@ export default function ArticlesMediaPage() {
             </div>
 
             {/* Articles Grid */}
-            <div className={styles.articlesGrid}>
-              {filteredArticles.length > 0 ? (
-                filteredArticles.map((article, index) => (
-                  <article key={`${article.id}-${article.slug}-${index}`} className={styles.articleCard}>
-                    <div className={styles.articleCardImageContainer}>
-                      <Image
-                        src={article.image}
-                        alt={article.title}
-                        fill
-                        className={styles.articleCardImage}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                      <span className={styles.categoryBadge}>{article.category}</span>
-                    </div>
-                    
-                    <div className={styles.cardContent}>
-                      <div className={styles.metadata}>
-                        <div className={styles.metaItem}>
-                          <User className={styles.metaIcon} />
-                          <span>{article.author}</span>
-                        </div>
-                        <div className={styles.metaItem}>
-                          <Calendar className={styles.metaIcon} />
-                          <span>{article.date}</span>
-                        </div>
-                      </div>
-                      
-                      <h3 className={styles.articleTitle}>{article.title}</h3>
-                      <p className={styles.articleDescription}>{article.description}</p>
-                      <div className={styles.divider}></div>
-                      <Button 
-                        href={`/articles/${article.slug && article.slug !== 'undefined' ? article.slug : article.id || 'not-found'}`}
-                        variant="secondary"
-                        className={styles.readMoreButton}
-                      >
-                        Read More
-                      </Button>
-                    </div>
-                  </article>
+            <div ref={gridRef as React.RefObject<HTMLDivElement>} className={`${styles.articlesGrid} ${isGridVisible ? styles.fadeIn : ''}`}>
+              {paginatedArticles.length > 0 ? (
+                paginatedArticles.map((article, index) => (
+                  <ArticleCard
+                    key={`${article.id}-${article.slug}-${index}`}
+                    article={article as any}
+                    index={index}
+                    variant="listing"
+                  />
                 ))
               ) : (
                 <div className={styles.noResults}>
@@ -221,6 +214,61 @@ export default function ArticlesMediaPage() {
                 </div>
               )}
             </div>
+
+            {/* Pagination */}
+            {filteredArticles.length > ARTICLES_PER_PAGE && (
+              <div className={styles.pagination}>
+                <button
+                  className={styles.paginationButton}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft className={styles.paginationIcon} />
+                  <span>Previous</span>
+                </button>
+                
+                <div className={styles.paginationNumbers}>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                    // Show first page, last page, current page, and pages around current
+                    if (
+                      page === 1 ||
+                      page === totalPages ||
+                      (page >= currentPage - 1 && page <= currentPage + 1)
+                    ) {
+                      return (
+                        <button
+                          key={page}
+                          className={`${styles.paginationNumber} ${currentPage === page ? styles.paginationNumberActive : ''}`}
+                          onClick={() => handlePageChange(page)}
+                          aria-label={`Go to page ${page}`}
+                          aria-current={currentPage === page ? 'page' : undefined}
+                        >
+                          {page}
+                        </button>
+                      );
+                    } else if (page === currentPage - 2 || page === currentPage + 2) {
+                      return (
+                        <span key={page} className={styles.paginationEllipsis}>
+                          ...
+                        </span>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+                
+                <button
+                  className={styles.paginationButton}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  aria-label="Next page"
+                >
+                  <span>Next</span>
+                  <ChevronRight className={styles.paginationIcon} />
+                </button>
+              </div>
+            )}
           </div>
         )}
 

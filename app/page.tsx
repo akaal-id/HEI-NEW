@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import type { Metadata } from 'next';
 import Hero from './components/Hero/Hero';
 
 const OverviewSection = dynamic(() => import('./components/OverviewSection/OverviewSection'), {
@@ -21,6 +22,31 @@ const ArticleSection = dynamic(() => import('./components/ArticleSection/Article
   loading: () => <div style={{ minHeight: '400px' }}></div>,
 });
 
+export const metadata: Metadata = {
+  title: "HEI 2026 - The 6th Halal Expo Indonesia | Home",
+  description: "Join the 6th Halal Expo Indonesia 2026 in Jakarta. Strengthening D-8 Halal Economy Through International Collaboration. Discover halal products, services, business opportunities, and networking events. April 2026.",
+  keywords: [
+    "Halal Expo Indonesia 2026",
+    "HEI 2026 Jakarta",
+    "D-8 Halal Economy Summit",
+    "Halal Exhibition Indonesia",
+    "Halal Products Trade Fair",
+    "Halal Business Conference",
+    "Islamic Economy Indonesia",
+    "Halal Certification Event",
+    "Halal Export Indonesia",
+    "Halal Industry Jakarta"
+  ],
+  openGraph: {
+    title: "HEI 2026 - The 6th Halal Expo Indonesia | Home",
+    description: "Join the 6th Halal Expo Indonesia 2026 in Jakarta. Strengthening D-8 Halal Economy Through International Collaboration.",
+    url: "https://halalexpoindonesia.com",
+  },
+  alternates: {
+    canonical: "https://halalexpoindonesia.com",
+  },
+};
+
 export default function Home() {
   return (
     <main>
@@ -33,4 +59,3 @@ export default function Home() {
     </main>
   );
 }
-

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Button from '../Button/Button';
 import ShareButtons from '../ShareButtons/ShareButtons';
 import RelatedArticles from '../RelatedArticles/RelatedArticles';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './ArticleDetail.module.css';
 
 interface Article {
@@ -30,15 +31,20 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
     ? window.location.href 
     : `https://halalexpoindonesia.com/articles/${article.slug}`;
 
+  const [articleRef, isArticleVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [headerRef, isHeaderVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [imageRef, isImageVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [contentRef, isContentVisible] = useIntersectionObserver({ threshold: 0.1 });
+
   return (
-    <article className={styles.article}>
+    <article ref={articleRef as React.RefObject<HTMLElement>} className={`${styles.article} ${isArticleVisible ? styles.fadeIn : ''}`}>
       <div className={styles.container}>
         <Link href="/articles" className={styles.backLink}>
           <ArrowLeft className={styles.backIcon} />
           <span>Back to Articles</span>
         </Link>
 
-        <div className={styles.header}>
+        <div ref={headerRef as React.RefObject<HTMLDivElement>} className={`${styles.header} ${isHeaderVisible ? styles.fadeInUp : ''}`}>
           <span className={styles.categoryBadge}>{article.category}</span>
           <h1 className={styles.title}>{article.title}</h1>
           <div className={styles.metadata}>
@@ -53,7 +59,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
           </div>
         </div>
 
-        <div className={styles.imageContainer}>
+        <div ref={imageRef as React.RefObject<HTMLDivElement>} className={`${styles.imageContainer} ${isImageVisible ? styles.fadeInUp : ''}`}>
           <Image
             src={article.image}
             alt={article.title}
@@ -64,7 +70,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
           />
         </div>
 
-        <div className={styles.content}>
+        <div ref={contentRef as React.RefObject<HTMLDivElement>} className={`${styles.content} ${isContentVisible ? styles.fadeInUp : ''}`}>
           <div 
             className={styles.articleContent}
             dangerouslySetInnerHTML={{ __html: article.content }}
@@ -88,7 +94,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
         </div>
 
         <RelatedArticles 
-          currentArticleId={article.id || article.slug}
+          currentArticleId={article.id || article.slug || ''}
           currentCategory={article.category}
           limit={3}
         />
