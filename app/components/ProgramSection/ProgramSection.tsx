@@ -110,7 +110,7 @@ export default function ProgramSection() {
           <p className={styles.description}>
           D-8 Halal Expo Indonesia 2026 bridges high-level D-8 economic diplomacy and real-sector halal business by connecting policy dialogue with concrete B2B collaboration, investment, and trade.
           </p>
-          <Button href="#all-programs" variant="primary" className={styles.viewAllButton}>
+          <Button href="/programs" variant="primary" className={styles.viewAllButton}>
             View All Programs
           </Button>
         </div>

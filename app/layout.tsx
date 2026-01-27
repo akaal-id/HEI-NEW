@@ -6,6 +6,7 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import ContactButton from "./components/ContactButton/ContactButton";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import MetaPixel from "./components/MetaPixel/MetaPixel";
+import StructuredData from "./components/StructuredData/StructuredData";
 import "./globals.css";
 
 const inter = Inter({
@@ -99,6 +100,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${plusJakartaSans.variable} antialiased`}
       >
+        <StructuredData />
         <MetaPixel />
         <LoadingScreen />
         <Navbar />

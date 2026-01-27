@@ -154,13 +154,13 @@ export default function Navbar() {
             </Button>
             {openDropdown === 'about' && (
               <div className={styles.dropdown}>
-                <Link href="/about" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/about/d8-organization" className={styles.dropdownItem} onClick={closeDropdowns}>
                   About D-8 Summit
                 </Link>
-                <Link href="/about" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/about/d8-expo" className={styles.dropdownItem} onClick={closeDropdowns}>
                   About D8 HEI 2026
                 </Link>
-                <Link href="/about" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/about/organizer" className={styles.dropdownItem} onClick={closeDropdowns}>
                   About Organizer
                 </Link>
               </div>
@@ -171,7 +171,7 @@ export default function Navbar() {
             <Button 
               href="/programs" 
               variant="secondary" 
-              className={`${styles.menuItem} ${pathname === '/programs' ? styles.menuItemActive : ''} ${openDropdown === 'programs' ? styles.menuItemDropdownOpen : ''}`}
+              className={`${styles.menuItem} ${pathname === '/programs' || pathname?.startsWith('/programs/') ? styles.menuItemActive : ''} ${openDropdown === 'programs' ? styles.menuItemDropdownOpen : ''}`}
               textClassName={styles.menuItemText}
               iconClassName={styles.menuItemIcon}
               icon={ChevronDown}
@@ -184,22 +184,22 @@ export default function Navbar() {
             </Button>
             {openDropdown === 'programs' && (
               <div className={styles.dropdown}>
-                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/programs/exhibition" className={styles.dropdownItem} onClick={closeDropdowns}>
                   Exhibition
                 </Link>
-                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/programs/business-matching" className={styles.dropdownItem} onClick={closeDropdowns}>
                   Business Matching
                 </Link>
-                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/programs/investment" className={styles.dropdownItem} onClick={closeDropdowns}>
                   Investment Match Making
                 </Link>
-                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/programs/youth-event" className={styles.dropdownItem} onClick={closeDropdowns}>
                   Youth Event
                 </Link>
-                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/programs/hei-talk" className={styles.dropdownItem} onClick={closeDropdowns}>
                   D-8 HEI Talk
                 </Link>
-                <Link href="/programs" className={styles.dropdownItem} onClick={closeDropdowns}>
+                <Link href="/programs/culture-festival" className={styles.dropdownItem} onClick={closeDropdowns}>
                   D-8 Culture Festival
                 </Link>
               </div>
@@ -301,13 +301,13 @@ export default function Navbar() {
               About Us
             </Button>
             <div className={`${styles.mobileSubmenu} ${openMobileDropdown === 'about' ? styles.mobileSubmenuOpen : ''}`}>
-              <Link href="/about" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/about/d8-organization" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 About D-8 Summit
               </Link>
-              <Link href="/about" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/about/d8-expo" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 About D8 HEI 2026
               </Link>
-              <Link href="/about" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/about/organizer" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 About Organizer
               </Link>
             </div>
@@ -317,7 +317,7 @@ export default function Navbar() {
             <Button 
               href="/programs" 
               variant="secondary" 
-              className={`${styles.mobileMenuItem} ${pathname === '/programs' ? styles.mobileMenuItemActive : ''} ${openMobileDropdown === 'programs' ? styles.mobileMenuItemDropdownOpen : ''}`}
+              className={`${styles.mobileMenuItem} ${pathname === '/programs' || pathname?.startsWith('/programs/') ? styles.mobileMenuItemActive : ''} ${openMobileDropdown === 'programs' ? styles.mobileMenuItemDropdownOpen : ''}`}
               textClassName={styles.mobileMenuItemText}
               iconClassName={styles.mobileMenuItemIcon}
               icon={ChevronDown}
@@ -329,22 +329,22 @@ export default function Navbar() {
               D8 HEI Programs
             </Button>
             <div className={`${styles.mobileSubmenu} ${openMobileDropdown === 'programs' ? styles.mobileSubmenuOpen : ''}`}>
-              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/programs/exhibition" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 Exhibition
               </Link>
-              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/programs/business-matching" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 Business Matching
               </Link>
-              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/programs/investment" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 Investment Match Making
               </Link>
-              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/programs/youth-event" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 Youth Event
               </Link>
-              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/programs/hei-talk" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 D-8 HEI Talk
               </Link>
-              <Link href="/programs" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
+              <Link href="/programs/culture-festival" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 D-8 Culture Festival
               </Link>
             </div>

@@ -11,6 +11,11 @@
   transition: all 0.3s ease;
   outline: none;
   background: transparent;
+  /* Ensure <a> tags look exactly like buttons */
+  color: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .text {

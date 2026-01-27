@@ -1,51 +1,133 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import styles from './LoadingScreen.module.css';
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
-  const startTimeRef = useRef<number>(Date.now());
-  const minDisplayTime = 1000; // 3 seconds minimum
+  const pathname = usePathname();
+  const previousPathnameRef = useRef<string | null>(null);
+  const timeoutRefs = useRef<NodeJS.Timeout[]>([]);
+  const minDisplayTime = 800; // 800ms minimum
 
+  // Function to clear all timeouts
+  const clearAllTimeouts = () => {
+    timeoutRefs.current.forEach(timeout => clearTimeout(timeout));
+    timeoutRefs.current = [];
+  };
+
+  // Function to hide loading screen
+  const hideLoading = () => {
+    setIsLoading(false);
+    const fadeTimeout = setTimeout(() => {
+      setIsVisible(false);
+    }, 300);
+    timeoutRefs.current.push(fadeTimeout);
+  };
+
+  // Handle initial page load and page reload
   useEffect(() => {
     const startTime = Date.now();
-    startTimeRef.current = startTime;
 
     // Hide loading screen once page is fully loaded
     const handleLoad = () => {
       const elapsed = Date.now() - startTime;
       const remainingTime = Math.max(0, minDisplayTime - elapsed);
       
-      setTimeout(() => {
-        setIsLoading(false);
-        // Add a small delay before hiding to ensure smooth transition
-        setTimeout(() => {
-          setIsVisible(false);
-        }, 300);
+      const hideTimeout = setTimeout(() => {
+        hideLoading();
       }, remainingTime);
+      timeoutRefs.current.push(hideTimeout);
     };
 
     // Check if page is already loaded
     if (document.readyState === 'complete') {
-      // Ensure minimum display time
-      const elapsed = Date.now() - startTime;
-      const remainingTime = Math.max(0, minDisplayTime - elapsed);
-      const showTimeout = setTimeout(handleLoad, remainingTime);
-      return () => clearTimeout(showTimeout);
+      handleLoad();
     } else {
       window.addEventListener('load', handleLoad);
-      // Fallback: ensure minimum 3 seconds
-      const timeout = setTimeout(handleLoad, minDisplayTime);
-      
-      return () => {
-        window.removeEventListener('load', handleLoad);
-        clearTimeout(timeout);
-      };
+      // Fallback: ensure minimum display time
+      const fallbackTimeout = setTimeout(handleLoad, minDisplayTime);
+      timeoutRefs.current.push(fallbackTimeout);
     }
+
+    // Also listen for beforeunload to show loading on reload
+    const handleBeforeUnload = () => {
+      setIsVisible(true);
+      setIsLoading(true);
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      clearAllTimeouts();
+      window.removeEventListener('load', handleLoad);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
+
+  // Handle route changes (client-side navigation)
+  useEffect(() => {
+    // Skip on initial mount
+    if (previousPathnameRef.current === null) {
+      previousPathnameRef.current = pathname;
+      return;
+    }
+
+    // Only show loading if pathname actually changed
+    if (previousPathnameRef.current !== pathname) {
+      // Clear any existing timeouts
+      clearAllTimeouts();
+
+      // Show loading screen immediately
+      setIsVisible(true);
+      setIsLoading(true);
+      previousPathnameRef.current = pathname;
+
+      const startTime = Date.now();
+
+      // Function to check if page is ready and hide loading
+      const checkAndHide = () => {
+        const elapsed = Date.now() - startTime;
+        const remainingTime = Math.max(0, minDisplayTime - elapsed);
+        
+        const hideTimeout = setTimeout(() => {
+          hideLoading();
+        }, remainingTime);
+        timeoutRefs.current.push(hideTimeout);
+      };
+
+      // Check if document is already ready
+      if (document.readyState === 'complete') {
+        // Small delay to ensure Next.js has started rendering
+        const delayTimeout = setTimeout(() => {
+          checkAndHide();
+        }, 150);
+        timeoutRefs.current.push(delayTimeout);
+      } else {
+        // Wait for page to be ready
+        const readyCheck = setInterval(() => {
+          if (document.readyState === 'complete') {
+            clearInterval(readyCheck);
+            checkAndHide();
+          }
+        }, 50);
+        timeoutRefs.current.push(setTimeout(() => clearInterval(readyCheck), 5000));
+
+        // Fallback: hide after maximum time
+        const fallbackTimeout = setTimeout(() => {
+          clearInterval(readyCheck);
+          checkAndHide();
+        }, minDisplayTime + 500);
+        timeoutRefs.current.push(fallbackTimeout);
+      }
+    }
+
+    return () => {
+      clearAllTimeouts();
+    };
+  }, [pathname]);
 
   if (!isVisible) return null;
 

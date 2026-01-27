@@ -14,6 +14,8 @@ interface ButtonProps {
   ariaLabel?: string;
   icon?: LucideIcon;
   variant?: ButtonVariant;
+  target?: '_blank' | '_self' | '_parent' | '_top';
+  rel?: string;
 }
 
 export default function Button({ 
@@ -26,7 +28,9 @@ export default function Button({
   type = 'button',
   ariaLabel,
   icon,
-  variant = 'primary'
+  variant = 'primary',
+  target,
+  rel
 }: ButtonProps) {
   const variantClass = styles[variant];
   const buttonClass = `${styles.button} ${variantClass} ${className || ''}`.trim();
@@ -48,25 +52,37 @@ export default function Button({
     </>
   );
 
+  // If href is provided, render as <a> tag for SEO
   if (href) {
+    // Determine if link is external
+    const isExternal = href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//');
+    const isHashLink = href.startsWith('#');
+    
+    // Set default target and rel for external links
+    const linkTarget = target || (isExternal ? '_blank' : undefined);
+    const linkRel = rel || (isExternal && !isHashLink ? 'noopener noreferrer' : undefined);
+
     return (
       <a 
         href={href} 
         className={buttonClass}
-        aria-label={ariaLabel}
+        aria-label={ariaLabel || (typeof children === 'string' ? children : undefined)}
         onClick={onClick}
+        target={linkTarget}
+        rel={linkRel}
       >
         {buttonContent}
       </a>
     );
   }
 
+  // If no href, render as <button> tag
   return (
     <button 
       onClick={onClick} 
       className={buttonClass}
       type={type}
-      aria-label={ariaLabel}
+      aria-label={ariaLabel || (typeof children === 'string' ? children : undefined)}
     >
       {buttonContent}
     </button>
