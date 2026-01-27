@@ -29,17 +29,33 @@ export default function ArticleSection() {
   useEffect(() => {
     async function fetchArticles() {
       try {
-        const response = await fetch('/api/articles');
+        // Fetch fresh data with cache-busting
+        const response = await fetch('/api/articles', {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch articles');
         }
         const allArticles: Article[] = await response.json();
+        
+        // Filter out articles without proper data
+        const validArticles = allArticles.filter(
+          article => article.id && article.title && article.slug
+        );
+        
         // Get the latest 3 articles (most recent first)
-        const latestArticles = allArticles
+        const latestArticles = validArticles
           .sort((a, b) => {
             // Sort by date, newest first
             const dateA = new Date(a.date || a.createdAt || '').getTime();
             const dateB = new Date(b.date || b.createdAt || '').getTime();
+            // Handle invalid dates
+            if (isNaN(dateA) && isNaN(dateB)) return 0;
+            if (isNaN(dateA)) return 1;
+            if (isNaN(dateB)) return -1;
             return dateB - dateA;
           })
           .slice(0, 3);

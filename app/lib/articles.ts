@@ -260,8 +260,9 @@ export async function getArticleSlugs(): Promise<string[]> {
 // GOOGLE SHEETS INTEGRATION
 // ============================================================================
 
-const SPREADSHEET_ID = '1OxE-sFGQ4hqfpxsQGo3GdanjahIEPE-XxHOy-mDUmvw';
-const GID = '0';
+// Get configuration from environment variables with fallback to defaults
+const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID || '1OxE-sFGQ4hqfpxsQGo3GdanjahIEPE-XxHOy-mDUmvw';
+const GID = process.env.GOOGLE_SHEETS_GID || '0';
 
 /**
  * Fetches articles from Google Sheets
@@ -270,9 +271,12 @@ const GID = '0';
 async function fetchFromGoogleSheets(): Promise<GoogleSheetRow[]> {
   try {
     // Use CSV export which is more reliable
+    // Add timestamp to prevent caching for dynamic updates
+    const timestamp = Date.now();
     const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${GID}`;
     const response = await fetch(url, { 
-      next: { revalidate: 3600 } // Revalidate every hour
+      cache: 'no-store', // Always fetch fresh data
+      next: { revalidate: 0 } // No caching
     });
     
     if (!response.ok) {
@@ -280,26 +284,28 @@ async function fetchFromGoogleSheets(): Promise<GoogleSheetRow[]> {
     }
 
     const csvText = await response.text();
-    const lines = csvText.split('\n').filter(line => line.trim());
     
-    if (lines.length < 2) {
+    // Parse CSV properly handling quoted fields with newlines
+    const csvRows = parseCSV(csvText);
+    
+    if (csvRows.length < 2) {
       return [];
     }
 
     // Parse CSV header
-    const headers = parseCSVLine(lines[0]);
+    const headers = csvRows[0];
     const headerMap: { [key: string]: number } = {};
     headers.forEach((header, index) => {
       headerMap[header.trim()] = index;
     });
 
     // Parse data rows
-    const rows: GoogleSheetRow[] = [];
+    const resultRows: GoogleSheetRow[] = [];
     const seenIds = new Set<string>(); // Track seen IDs to prevent duplicates
     let rowIndex = 1; // Start from 1 (after header)
     
-    for (let i = 1; i < lines.length; i++) {
-      const values = parseCSVLine(lines[i]);
+    for (let i = 1; i < csvRows.length; i++) {
+      const values = csvRows[i];
       
       // Skip if no values
       if (values.length === 0) {
@@ -353,21 +359,55 @@ async function fetchFromGoogleSheets(): Promise<GoogleSheetRow[]> {
         }
       });
       
+      // Also handle case-insensitive column matching for common variations
+      const textIndex = headerMap['Text'] ?? headerMap['text'] ?? headerMap['TEXT'] ?? -1;
+      const imageUrlIndex = headerMap['Image_URL'] ?? headerMap['Image URL'] ?? headerMap['image_url'] ?? -1;
+      const categoryIndex = headerMap['Category'] ?? headerMap['category'] ?? -1;
+      const authorIndex = headerMap['Author'] ?? headerMap['author'] ?? -1;
+      const timestampIndex = headerMap['Timestamp'] ?? headerMap['timestamp'] ?? -1;
+      
+      // Ensure all required fields are set with case-insensitive matching
+      // Text field is critical - preserve it even if it contains newlines
+      if (textIndex >= 0 && textIndex < values.length) {
+        // Don't trim Text field as it may contain intentional whitespace/newlines
+        row['Text'] = values[textIndex] || '';
+      } else {
+        row['Text'] = '';
+      }
+      
+      if (imageUrlIndex >= 0 && imageUrlIndex < values.length) {
+        row['Image_URL'] = (values[imageUrlIndex] || '').trim();
+      }
+      if (categoryIndex >= 0 && categoryIndex < values.length) {
+        row['Category'] = (values[categoryIndex] || '').trim();
+      }
+      if (authorIndex >= 0 && authorIndex < values.length) {
+        row['Author'] = (values[authorIndex] || '').trim();
+      }
+      if (timestampIndex >= 0 && timestampIndex < values.length) {
+        row['Timestamp'] = (values[timestampIndex] || '').trim();
+      }
+      
       // Ensure ID is set correctly
       row['Id'] = idValue;
       
       // Validate Image_URL - if it doesn't look like a URL, set to empty
-      const imageUrlValue = row['Image_URL'] || row['Image URL'] || row['image_url'] || '';
+      const imageUrlValue = row['Image_URL'] || '';
       if (imageUrlValue && !imageUrlValue.match(/^(https?:\/\/|\/)/i)) {
         // If it doesn't start with http://, https://, or /, it's probably not a URL
         row['Image_URL'] = '';
       }
       
-      rows.push(row as GoogleSheetRow);
+      // Ensure Text field is not empty (critical for content)
+      if (!row['Text'] || row['Text'].trim().length === 0) {
+        console.warn(`Article ${idValue} (${titleValue}) has no Text content`);
+      }
+      
+      resultRows.push(row as GoogleSheetRow);
       rowIndex++;
     }
 
-    return rows;
+    return resultRows;
   } catch (error) {
     console.error('Error fetching from Google Sheets:', error);
     return [];
@@ -375,7 +415,63 @@ async function fetchFromGoogleSheets(): Promise<GoogleSheetRow[]> {
 }
 
 /**
- * Parse a CSV line handling quoted fields
+ * Parse CSV text handling quoted fields with newlines
+ */
+function parseCSV(csvText: string): string[][] {
+  const rows: string[][] = [];
+  let currentRow: string[] = [];
+  let currentField = '';
+  let inQuotes = false;
+  
+  for (let i = 0; i < csvText.length; i++) {
+    const char = csvText[i];
+    const nextChar = csvText[i + 1];
+    
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        // Escaped quote
+        currentField += '"';
+        i++; // Skip next quote
+      } else {
+        // Toggle quote state
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      // End of field
+      currentRow.push(currentField);
+      currentField = '';
+    } else if ((char === '\n' || char === '\r') && !inQuotes) {
+      // End of row (but only if not in quotes)
+      if (char === '\n' || (char === '\r' && nextChar !== '\n')) {
+        currentRow.push(currentField);
+        if (currentRow.some(field => field.trim().length > 0)) {
+          rows.push(currentRow);
+        }
+        currentRow = [];
+        currentField = '';
+        // Skip \r\n combination
+        if (char === '\r' && nextChar === '\n') {
+          i++;
+        }
+      }
+    } else {
+      currentField += char;
+    }
+  }
+  
+  // Add last field and row
+  if (currentField || currentRow.length > 0) {
+    currentRow.push(currentField);
+    if (currentRow.some(field => field.trim().length > 0)) {
+      rows.push(currentRow);
+    }
+  }
+  
+  return rows;
+}
+
+/**
+ * Parse a CSV line handling quoted fields (legacy function for single-line parsing)
  */
 function parseCSVLine(line: string): string[] {
   const result: string[] = [];
@@ -397,7 +493,7 @@ function parseCSVLine(line: string): string[] {
       }
     } else if (char === ',' && !inQuotes) {
       // End of field
-      result.push(current.trim());
+      result.push(current);
       current = '';
     } else {
       current += char;
@@ -405,7 +501,7 @@ function parseCSVLine(line: string): string[] {
   }
   
   // Add last field
-  result.push(current.trim());
+  result.push(current);
   return result;
 }
 
@@ -414,10 +510,16 @@ function parseCSVLine(line: string): string[] {
  */
 function mapToArticle(row: GoogleSheetRow): Article {
   const slug = generateSlug(row.Title, row.Id);
-  const description = truncateText(row.Text);
+  const textContent = row.Text || '';
+  const description = truncateText(textContent);
   const formattedDate = formatDate(row.Timestamp);
-  const contentHtml = convertMarkdownToHtml(row.Text);
+  const contentHtml = convertMarkdownToHtml(textContent);
   const imageUrl = validateImageUrl(row.Image_URL || '');
+
+  // Ensure content is not empty
+  if (!contentHtml || contentHtml.trim().length === 0) {
+    console.warn(`Article ${row.Id} (${row.Title}) has empty content. Using description as fallback.`);
+  }
 
   return {
     id: row.Id,
@@ -428,7 +530,7 @@ function mapToArticle(row: GoogleSheetRow): Article {
     date: formattedDate || row.Timestamp,
     title: row.Title,
     description,
-    content: contentHtml,
+    content: contentHtml || description || '<p>Content not available.</p>',
     createdAt: row.Timestamp,
     updatedAt: row.Timestamp,
   };
@@ -453,11 +555,92 @@ export async function getAllArticles(): Promise<Article[]> {
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  const articles = await getAllArticles();
-  return articles.find(article => article.slug === slug) || null;
+  try {
+    const articles = await getAllArticles();
+    
+    if (articles.length === 0) {
+      console.warn('No articles found in database');
+      return null;
+    }
+    
+    // Normalize the search slug - remove leading/trailing slashes and decode
+    let normalizedSearchSlug = decodeURIComponent(slug).toLowerCase().trim();
+    normalizedSearchSlug = normalizedSearchSlug.replace(/^\/+|\/+$/g, ''); // Remove leading/trailing slashes
+    
+    console.log(`Searching for slug: "${normalizedSearchSlug}" (from "${slug}")`);
+    console.log(`Total articles available: ${articles.length}`);
+    
+    // Try exact match first (case-insensitive)
+    let foundArticle: Article | undefined = articles.find(articleItem => {
+      const articleSlug = articleItem.slug.toLowerCase().trim();
+      return articleSlug === normalizedSearchSlug;
+    });
+    
+    if (foundArticle) {
+      console.log(`Found article with exact match: ${foundArticle.title}`);
+      return foundArticle;
+    }
+    
+    // If not found, try matching the beginning (for truncated slugs)
+    if (!foundArticle) {
+      foundArticle = articles.find(articleItem => {
+        const articleSlug = articleItem.slug.toLowerCase().trim();
+        // Check if search slug starts with article slug or vice versa (at least 20 chars)
+        const minLength = Math.min(20, normalizedSearchSlug.length, articleSlug.length);
+        if (minLength < 10) return false;
+        return articleSlug.substring(0, minLength) === normalizedSearchSlug.substring(0, minLength) ||
+               normalizedSearchSlug.substring(0, minLength) === articleSlug.substring(0, minLength);
+      });
+    }
+    
+    if (foundArticle) {
+      console.log(`Found article with prefix match: ${foundArticle.title} (slug: ${foundArticle.slug})`);
+      return foundArticle;
+    }
+    
+    // If still not found, try fuzzy match by word similarity
+    if (!foundArticle) {
+      const searchWords = normalizedSearchSlug.split('-').filter(w => w.length > 2);
+      let bestMatch: Article | null = null;
+      let bestScore = 0;
+      
+      for (const articleItem of articles) {
+        const articleWords = articleItem.slug.toLowerCase().split('-').filter(w => w.length > 2);
+        // Count matching words
+        const matchingWords = searchWords.filter(word => 
+          articleWords.some(aw => aw === word || aw.includes(word) || word.includes(aw))
+        );
+        const score = matchingWords.length / Math.max(searchWords.length, articleWords.length);
+        
+        if (score > bestScore && score >= 0.5) {
+          bestScore = score;
+          bestMatch = articleItem;
+        }
+      }
+      
+      if (bestMatch) {
+        console.log(`Found article with fuzzy match: ${bestMatch.title} (slug: ${bestMatch.slug})`);
+        return bestMatch;
+      }
+    }
+    
+    // Log available slugs for debugging
+    console.warn(`Article not found for slug: "${normalizedSearchSlug}"`);
+    console.log('Available slugs (first 10):', articles.slice(0, 10).map(a => a.slug));
+    
+    return null;
+  } catch (error) {
+    console.error('Error fetching article by slug:', error);
+    return null;
+  }
 }
 
 export async function getArticleSlugs(): Promise<string[]> {
-  const articles = await getAllArticles();
-  return articles.map(article => article.slug);
+  try {
+    const articles = await getAllArticles();
+    return articles.map(article => article.slug).filter(Boolean);
+  } catch (error) {
+    console.error('Error fetching article slugs:', error);
+    return [];
+  }
 }

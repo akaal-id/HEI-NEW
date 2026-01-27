@@ -4,9 +4,12 @@ import Image from 'next/image';
 import { User, Calendar, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Button from '../Button/Button';
+import ShareButtons from '../ShareButtons/ShareButtons';
+import RelatedArticles from '../RelatedArticles/RelatedArticles';
 import styles from './ArticleDetail.module.css';
 
 interface Article {
+  id?: string;
   slug: string;
   category: string;
   image: string;
@@ -14,6 +17,7 @@ interface Article {
   date: string;
   title: string;
   content: string;
+  description?: string;
 }
 
 interface ArticleDetailProps {
@@ -21,6 +25,11 @@ interface ArticleDetailProps {
 }
 
 export default function ArticleDetail({ article }: ArticleDetailProps) {
+  // Get current URL for sharing
+  const currentUrl = typeof window !== 'undefined' 
+    ? window.location.href 
+    : `https://halalexpoindonesia.com/articles/${article.slug}`;
+
   return (
     <article className={styles.article}>
       <div className={styles.container}>
@@ -62,6 +71,12 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
           />
         </div>
 
+        <ShareButtons 
+          url={currentUrl}
+          title={article.title}
+          description={article.description || ''}
+        />
+
         <div className={styles.footer}>
           <Button 
             href="/articles" 
@@ -71,6 +86,12 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
             View All Articles
           </Button>
         </div>
+
+        <RelatedArticles 
+          currentArticleId={article.id || article.slug}
+          currentCategory={article.category}
+          limit={3}
+        />
       </div>
     </article>
   );
