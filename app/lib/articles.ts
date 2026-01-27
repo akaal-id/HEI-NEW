@@ -36,7 +36,17 @@ interface GoogleSheetRow {
 // Limits length to prevent filesystem errors
 function generateSlug(title: string, id: string): string {
   const maxLength = 100; // Limit slug length to prevent filesystem errors
-  let slug = title
+  
+  // Ensure title and id are valid strings
+  const safeTitle = (title || '').trim();
+  const safeId = (id || '').trim() || 'article';
+  
+  if (!safeTitle || safeTitle.length === 0) {
+    // If no title, use ID-based slug
+    return `article-${safeId}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  }
+  
+  let slug = safeTitle
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
@@ -48,7 +58,12 @@ function generateSlug(title: string, id: string): string {
   
   // If slug is empty or too short, use ID
   if (!slug || slug.length < 3) {
-    slug = `article-${id}`;
+    slug = `article-${safeId}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  }
+  
+  // Final validation - ensure slug is never empty or undefined
+  if (!slug || slug.trim().length === 0) {
+    slug = `article-${safeId}-${Date.now()}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
   }
   
   return slug;
@@ -521,14 +536,19 @@ function mapToArticle(row: GoogleSheetRow): Article {
     console.warn(`Article ${row.Id} (${row.Title}) has empty content. Using description as fallback.`);
   }
 
+  // Ensure slug is always valid
+  const validSlug = slug && slug !== 'undefined' && slug.trim().length > 0 
+    ? slug 
+    : `article-${row.Id || 'unknown'}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
   return {
-    id: row.Id,
-    slug,
+    id: row.Id || `article-${Date.now()}`,
+    slug: validSlug,
     category: row.Category || 'Uncategorized',
     image: imageUrl,
     author: row.Author || 'AKAAL',
     date: formattedDate || row.Timestamp,
-    title: row.Title,
+    title: row.Title || 'Untitled Article',
     description,
     content: contentHtml || description || '<p>Content not available.</p>',
     createdAt: row.Timestamp,
@@ -563,21 +583,40 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       return null;
     }
     
-    // Normalize the search slug - remove leading/trailing slashes and decode
-    let normalizedSearchSlug = decodeURIComponent(slug).toLowerCase().trim();
+    // Normalize the search slug - handle URL encoding/decoding
+    let normalizedSearchSlug: string;
+    try {
+      normalizedSearchSlug = decodeURIComponent(slug);
+    } catch (e) {
+      // If decoding fails, use the slug as-is
+      normalizedSearchSlug = slug;
+    }
+    
+    normalizedSearchSlug = normalizedSearchSlug.toLowerCase().trim();
     normalizedSearchSlug = normalizedSearchSlug.replace(/^\/+|\/+$/g, ''); // Remove leading/trailing slashes
     
-    console.log(`Searching for slug: "${normalizedSearchSlug}" (from "${slug}")`);
-    console.log(`Total articles available: ${articles.length}`);
+    console.log(`[getArticleBySlug] Searching for slug: "${normalizedSearchSlug}" (from "${slug}")`);
+    console.log(`[getArticleBySlug] Total articles available: ${articles.length}`);
+    
+    // Log first few article slugs for debugging
+    if (articles.length > 0) {
+      console.log(`[getArticleBySlug] Sample article slugs:`, articles.slice(0, 3).map(a => a.slug));
+    }
     
     // Try exact match first (case-insensitive)
     let foundArticle: Article | undefined = articles.find(articleItem => {
       const articleSlug = articleItem.slug.toLowerCase().trim();
-      return articleSlug === normalizedSearchSlug;
+      // Also try URL-encoded version
+      const articleSlugEncoded = encodeURIComponent(articleItem.slug).toLowerCase();
+      const searchSlugEncoded = encodeURIComponent(slug).toLowerCase();
+      
+      return articleSlug === normalizedSearchSlug || 
+             articleSlugEncoded === searchSlugEncoded ||
+             articleItem.slug.toLowerCase() === slug.toLowerCase();
     });
     
     if (foundArticle) {
-      console.log(`Found article with exact match: ${foundArticle.title}`);
+      console.log(`[getArticleBySlug] Found article with exact match: ${foundArticle.title} (slug: ${foundArticle.slug})`);
       return foundArticle;
     }
     
@@ -625,8 +664,24 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     }
     
     // Log available slugs for debugging
-    console.warn(`Article not found for slug: "${normalizedSearchSlug}"`);
-    console.log('Available slugs (first 10):', articles.slice(0, 10).map(a => a.slug));
+    console.warn(`[getArticleBySlug] Article not found for slug: "${normalizedSearchSlug}"`);
+    console.log(`[getArticleBySlug] Available slugs (first 10):`, articles.slice(0, 10).map(a => ({ 
+      slug: a.slug, 
+      title: a.title.substring(0, 50),
+      slugLength: a.slug.length 
+    })));
+    
+    // Try one more time with the original slug (no normalization)
+    const directMatch = articles.find(a => 
+      a.slug === slug || 
+      a.slug.toLowerCase() === slug.toLowerCase() ||
+      encodeURIComponent(a.slug) === encodeURIComponent(slug)
+    );
+    
+    if (directMatch) {
+      console.log(`[getArticleBySlug] Found article with direct match: ${directMatch.title}`);
+      return directMatch;
+    }
     
     return null;
   } catch (error) {

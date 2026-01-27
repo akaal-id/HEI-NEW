@@ -206,7 +206,7 @@ export default function ArticlesMediaPage() {
                       <p className={styles.articleDescription}>{article.description}</p>
                       <div className={styles.divider}></div>
                       <Button 
-                        href={`/articles/${article.slug || article.id}`}
+                        href={`/articles/${article.slug && article.slug !== 'undefined' ? article.slug : article.id || 'not-found'}`}
                         variant="secondary"
                         className={styles.readMoreButton}
                       >
