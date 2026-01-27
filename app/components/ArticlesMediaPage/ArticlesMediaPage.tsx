@@ -4,7 +4,9 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Button from '../Button/Button';
 import ArticleCard from '../ArticleCard/ArticleCard';
-import { User, Calendar, Search, Filter, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import ArticleHeroSlider from '../ArticleHeroSlider/ArticleHeroSlider';
+import MediaCarousel from '../MediaCarousel/MediaCarousel';
+import { User, Calendar, Search, Filter, ArrowUpDown, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './ArticlesMediaPage.module.css';
 import { getAllArticles } from '../../lib/articles';
@@ -25,19 +27,101 @@ interface MediaItem {
   image: string;
   title: string;
   category?: string;
+  year?: string;
 }
 
-// Mock media data - replace with actual data source
-const mediaItems: MediaItem[] = [
-  { id: '1', image: '/images/overview.jpg', title: 'Event Photo 1', category: 'Event' },
-  { id: '2', image: '/images/fairmont-1.jpg', title: 'Event Photo 2', category: 'Event' },
-  { id: '3', image: '/images/tennis-indoor.png', title: 'Event Photo 3', category: 'Venue' },
-  { id: '4', image: '/images/exhibition-1.png', title: 'Event Photo 4', category: 'Exhibition' },
-  { id: '5', image: '/images/overview.jpg', title: 'Event Photo 5', category: 'Event' },
-  { id: '6', image: '/images/fairmont-1.jpg', title: 'Event Photo 6', category: 'Venue' },
-  { id: '7', image: '/images/tennis-indoor.png', title: 'Event Photo 7', category: 'Exhibition' },
-  { id: '8', image: '/images/exhibition-1.png', title: 'Event Photo 8', category: 'Event' },
+interface YearGallery {
+  year: string;
+  highlightImage: string;
+  photos: string[];
+  displayName?: string; // Custom display name for specific years
+}
+
+// Year-based photo galleries - using existing images from the project
+const yearGalleries: YearGallery[] = [
+  {
+    year: '2025',
+    highlightImage: '/images/overview.jpg',
+    displayName: 'The 2nd Halal Export Indonesia',
+    photos: [
+      '/images/overview.jpg',
+      '/images/fairmont-1.jpg',
+      '/images/exhibition-1.png',
+      '/images/tennis-indoor.png',
+      '/images/fairmont.jpg',
+      '/images/fairmont 2.jpg',
+    ],
+  },
+  {
+    year: '2024',
+    highlightImage: '/images/fairmont-1.jpg',
+    displayName: 'Halal Export Indonesia',
+    photos: [
+      '/images/fairmont-1.jpg',
+      '/images/overview.jpg',
+      '/images/exhibition-1.png',
+      '/images/tennis-indoor.png',
+      '/images/fairmont.jpg',
+      '/images/fairmont 3.png',
+    ],
+  },
+  {
+    year: '2023',
+    highlightImage: '/images/exhibition-1.png',
+    photos: [
+      '/images/exhibition-1.png',
+      '/images/overview.jpg',
+      '/images/fairmont-1.jpg',
+      '/images/tennis-indoor.png',
+      '/images/fairmont.jpg',
+      '/images/fairmont 2.jpg',
+    ],
+  },
+  {
+    year: '2020',
+    highlightImage: '/images/tennis-indoor.png',
+    photos: [
+      '/images/tennis-indoor.png',
+      '/images/overview.jpg',
+      '/images/fairmont-1.jpg',
+      '/images/exhibition-1.png',
+      '/images/fairmont.jpg',
+      '/images/fairmont 3.png',
+    ],
+  },
+  {
+    year: '2019',
+    highlightImage: '/images/fairmont.jpg',
+    photos: [
+      '/images/fairmont.jpg',
+      '/images/overview.jpg',
+      '/images/fairmont-1.jpg',
+      '/images/exhibition-1.png',
+      '/images/tennis-indoor.png',
+      '/images/fairmont 2.jpg',
+    ],
+  },
+  {
+    year: '2018',
+    highlightImage: '/images/fairmont 2.jpg',
+    photos: [
+      '/images/fairmont 2.jpg',
+      '/images/overview.jpg',
+      '/images/fairmont-1.jpg',
+      '/images/exhibition-1.png',
+      '/images/tennis-indoor.png',
+      '/images/fairmont 3.png',
+    ],
+  },
 ];
+
+// Media carousel items (all highlight images from all years)
+const mediaCarouselItems = yearGalleries.map((gallery, index) => ({
+  id: `carousel-${gallery.year}`,
+  image: gallery.highlightImage,
+  title: `${gallery.displayName || `Halal Expo Indonesia ${gallery.year}`} Highlights`,
+  year: gallery.year,
+}));
 
 type TabType = 'article' | 'media';
 type SortOption = 'newest' | 'oldest';
@@ -50,6 +134,7 @@ export default function ArticlesMediaPage() {
   const [sortBy, setSortBy] = useState<SortOption>('newest');
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [sectionRef, isSectionVisible] = useIntersectionObserver({ threshold: 0.1 });
   const [gridRef, isGridVisible] = useIntersectionObserver({ threshold: 0.1 });
   
@@ -110,33 +195,56 @@ export default function ArticlesMediaPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleMediaNext = useCallback(() => {
-    setSelectedMediaIndex((prev) => (prev + 1) % mediaItems.length);
+  const handleYearClick = useCallback((year: string) => {
+    setSelectedYear(year);
   }, []);
 
-  const handleMediaPrev = useCallback(() => {
-    setSelectedMediaIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
+  const handleCloseGallery = useCallback(() => {
+    setSelectedYear(null);
   }, []);
 
-  // Keyboard navigation for carousel
+  // Manage body overflow and Escape key listener
   useEffect(() => {
-    if (activeTab === 'media') {
+    if (selectedYear) {
+      // Prevent background scrolling
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      // Close gallery on Escape key
       const handleKeyPress = (e: KeyboardEvent) => {
-        if (e.key === 'ArrowLeft') {
-          handleMediaPrev();
-        } else if (e.key === 'ArrowRight') {
-          handleMediaNext();
+        if (e.key === 'Escape') {
+          setSelectedYear(null);
         }
       };
-
       window.addEventListener('keydown', handleKeyPress);
-      return () => window.removeEventListener('keydown', handleKeyPress);
+
+      // Cleanup
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        window.removeEventListener('keydown', handleKeyPress);
+      };
     }
-  }, [activeTab, handleMediaPrev, handleMediaNext]);
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedYear]);
+
+  const selectedGallery = selectedYear ? yearGalleries.find(g => g.year === selectedYear) : null;
 
   return (
     <section ref={sectionRef as React.RefObject<HTMLElement>} className={`${styles.section} ${isSectionVisible ? styles.fadeIn : ''}`}>
       <div className={styles.container}>
+        {/* Hero Slider - Only show in article tab */}
+        {activeTab === 'article' && articles.length > 0 && (
+          <ArticleHeroSlider articles={articles} />
+        )}
+
+        {/* Media Carousel - Only show in media tab, above tabs */}
+        {activeTab === 'media' && (
+          <MediaCarousel mediaItems={mediaCarouselItems} />
+        )}
+
         {/* Tabs */}
         <div className={styles.tabs}>
           <button
@@ -275,61 +383,64 @@ export default function ArticlesMediaPage() {
         {/* Media Tab Content */}
         {activeTab === 'media' && (
           <div className={styles.mediaTab}>
-            {/* Gallery Carousel */}
-            <div className={styles.galleryCarousel}>
-              <button
-                className={styles.carouselButton}
-                onClick={handleMediaPrev}
-                aria-label="Previous image"
-              >
-                <ChevronLeft className={styles.carouselButtonIcon} />
-              </button>
-              <div className={styles.carouselImageContainer}>
-                <Image
-                  src={mediaItems[selectedMediaIndex].image}
-                  alt={mediaItems[selectedMediaIndex].title}
-                  fill
-                  className={styles.carouselImage}
-                  sizes="100vw"
-                />
-                <div className={styles.carouselInfo}>
-                  <h3>{mediaItems[selectedMediaIndex].title}</h3>
-                  {mediaItems[selectedMediaIndex].category && (
-                    <span className={styles.carouselCategory}>
-                      {mediaItems[selectedMediaIndex].category}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <button
-                className={styles.carouselButton}
-                onClick={handleMediaNext}
-                aria-label="Next image"
-              >
-                <ChevronRight className={styles.carouselButtonIcon} />
-              </button>
-            </div>
-
-            {/* Gallery Catalogue */}
-            <div className={styles.galleryCatalogue}>
-              <h3 className={styles.catalogueTitle}>Gallery Catalogue</h3>
-              <div className={styles.catalogueGrid}>
-                {mediaItems.map((item, index) => (
+            {/* Year-based Photo Groups */}
+            <div className={styles.yearGroupsContainer}>
+              <h2 className={styles.yearGroupsTitle}>Previous Halal Expo Indonesia Galleries</h2>
+              <div className={styles.yearGroupsGrid}>
+                {yearGalleries.map((gallery) => (
                   <div
-                    key={item.id}
-                    className={`${styles.catalogueItem} ${index === selectedMediaIndex ? styles.catalogueItemActive : ''}`}
-                    onClick={() => setSelectedMediaIndex(index)}
+                    key={gallery.year}
+                    className={styles.yearGroupCard}
+                    onClick={() => handleYearClick(gallery.year)}
                   >
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className={styles.catalogueImage}
-                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    />
-                    <div className={styles.catalogueOverlay}>
-                      <span className={styles.catalogueTitleText}>{item.title}</span>
+                    <div className={styles.yearGroupImageContainer}>
+                      <Image
+                        src={gallery.highlightImage}
+                        alt={`${gallery.displayName || `Halal Expo Indonesia ${gallery.year}`} Gallery`}
+                        fill
+                        className={styles.yearGroupImage}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      <div className={styles.yearGroupOverlay}>
+                        <div className={styles.yearGroupContent}>
+                          <span className={styles.yearBadge}>{gallery.displayName || `Halal Expo Indonesia ${gallery.year}`}</span>
+                          <p className={styles.yearGroupCount}>{gallery.photos.length} Photos</p>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Year Gallery Modal */}
+        {selectedYear && selectedGallery && (
+          <div className={styles.galleryModal} onClick={handleCloseGallery}>
+            <div className={styles.galleryModalContent} onClick={(e) => e.stopPropagation()}>
+              <div className={styles.galleryModalHeader}>
+                <h2 className={styles.galleryModalTitle}>
+                  {selectedGallery?.displayName || `Halal Expo Indonesia ${selectedYear}`} Gallery
+                </h2>
+                <button
+                  className={styles.galleryModalClose}
+                  onClick={handleCloseGallery}
+                  aria-label="Close gallery"
+                >
+                  <X className={styles.closeIcon} />
+                </button>
+              </div>
+              <div className={styles.galleryModalGrid}>
+                {selectedGallery.photos.map((photo, index) => (
+                  <div key={index} className={styles.galleryModalItem}>
+                    <Image
+                      src={photo}
+                      alt={`${selectedGallery?.displayName || `Halal Expo Indonesia ${selectedYear}`} Photo ${index + 1}`}
+                      fill
+                      className={styles.galleryModalImage}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
                   </div>
                 ))}
               </div>

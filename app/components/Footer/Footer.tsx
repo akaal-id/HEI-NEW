@@ -163,7 +163,7 @@ export default function Footer() {
 
         <div ref={bottomSectionRef} className={styles.bottomSection}>
           <p className={styles.copyright}>
-            © 2025 Halal Export Indonesia. All rights reserved.
+            © D-8 Halal Expo Indonesia 2026. All rights reserved.
           </p>
           <div className={styles.legalLinks}>
             <Link href="#" className={styles.legalLink}>Privacy Policy</Link>

@@ -10,6 +10,7 @@ interface Partner {
   name: string;
   logo: string;
   alt: string;
+  website?: string;
 }
 
 interface PartnerCategory {
@@ -27,13 +28,15 @@ const partnerCategories: PartnerCategory[] = [
         id: 'd8',
         name: 'D-8 Organization for Economic Cooperation',
         logo: '/Partner Logo/D8 Icon.svg',
-        alt: 'D-8 Organization for Economic Cooperation'
+        alt: 'D-8 Organization for Economic Cooperation',
+        website: 'https://developing8.org/',
       },
       {
         id: 'islamic-economy',
         name: 'Islamic Economy',
         logo: '/Partner Logo/Islamic Economy logo.svg',
-        alt: 'Islamic Economy'
+        alt: 'Islamic Economy',
+        website: 'https://islamic-economy.org/',
       }
     ]
   },
@@ -45,19 +48,22 @@ const partnerCategories: PartnerCategory[] = [
         id: 'kemlu',
         name: 'Ministry of Foreign Affairs Republic of Indonesia',
         logo: '/Partner Logo/Kemlu RI logo.svg',
-        alt: 'Ministry of Foreign Affairs Republic of Indonesia'
+        alt: 'Ministry of Foreign Affairs Republic of Indonesia',
+        website: 'https://kemlu.go.id/',
       },
       {
         id: 'kneks',
         name: 'National Committee of Islamic Economy and Finance',
         logo: '/Partner Logo/KNEKS Icon.svg',
-        alt: 'KNEKS - National Committee of Islamic Economy and Finance'
+        alt: 'KNEKS - National Committee of Islamic Economy and Finance',
+        website: 'https://www.kneks.go.id/',
       },
       {
         id: 'kadin',
         name: 'Indonesian Chamber of Commerce and Industry',
         logo: '/Partner Logo/Frame 12.svg',
-        alt: 'KADIN Indonesia - Indonesian Chamber of Commerce and Industry'
+        alt: 'KADIN Indonesia - Indonesian Chamber of Commerce and Industry',
+        website: 'https://kadin.id/',
       }
     ]
   },
@@ -69,7 +75,8 @@ const partnerCategories: PartnerCategory[] = [
         id: 'skyconnect',
         name: 'skyconnection',
         logo: '/Partner Logo/skyconnect logo.svg',
-        alt: 'skyconnection'
+        alt: 'skyconnection',
+        website: 'https://skyconnection.co.id/',
       }
     ]
   }
@@ -141,15 +148,35 @@ export default function PartnerSection() {
               <div className={styles.partnerGrid}>
                 {category.partners.map((partner) => (
                   <div key={partner.id} className={styles.partnerCard}>
-                    <div className={styles.partnerLogo}>
-                      <Image
-                        src={partner.logo}
-                        alt={partner.alt}
-                        width={200}
-                        height={120}
-                        className={styles.logoImage}
-                      />
-                    </div>
+                    {partner.website ? (
+                      <a
+                        href={partner.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.partnerLink}
+                        aria-label={`Visit ${partner.name} website`}
+                      >
+                        <div className={styles.partnerLogo}>
+                          <Image
+                            src={partner.logo}
+                            alt={partner.alt}
+                            width={200}
+                            height={120}
+                            className={styles.logoImage}
+                          />
+                        </div>
+                      </a>
+                    ) : (
+                      <div className={styles.partnerLogo}>
+                        <Image
+                          src={partner.logo}
+                          alt={partner.alt}
+                          width={200}
+                          height={120}
+                          className={styles.logoImage}
+                        />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -159,17 +186,17 @@ export default function PartnerSection() {
 
         <div ref={ctaRef} className={styles.ctaSection}>
           <h3 className={styles.ctaTitle}>
-            We invite you to become a sponsor for the D8 Halal Expo Indonesia!
+          We invite you to explore a strategic partnership with D-8 Halal Expo Indonesia 2026!
           </h3>
           <p className={styles.ctaDescription}>
-            This event is a fantastic opportunity to showcase your brand to a diverse audience and connect with key players in the halal industry. Join us in promoting halal products and services while gaining valuable exposure. Let&apos;s work together to make this event a success!
+          This event offers an opportunity to enhance brand visibility, engage with key halal industry stakeholders, and support international business collaboration across D-8 Member States.
           </p>
           <Button 
             href="#sponsor" 
             variant="primary"
             className={styles.sponsorButton}
           >
-            Become Our Sponsors
+            Explore Partnership Opportunities
           </Button>
         </div>
       </div>

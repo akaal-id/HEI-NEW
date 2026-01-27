@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import styles from './OverviewSection.module.css';
-import { Globe, Briefcase, Mic, Building2 } from 'lucide-react';
+import buttonStyles from '../Button/Button.module.css';
+import { Globe, Briefcase, Mic, Building2, ArrowUpRight } from 'lucide-react';
 
 export default function OverviewSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -76,8 +77,8 @@ export default function OverviewSection() {
           <div className={styles.metric}>
             <Globe className={styles.metricIcon} />
             <div className={styles.metricContent}>
-              <div className={styles.metricValue}>9 Countries</div>
-              <div className={styles.metricLabel}>Countries Participant</div>
+              <div className={styles.metricValue}>9+ Countries</div>
+              <div className={styles.metricLabel}>Participanting Countries</div>
             </div>
           </div>
           <div className={styles.divider}></div>
@@ -115,12 +116,20 @@ export default function OverviewSection() {
             <span className={styles.eyebrow}>INTRODUCTION</span>
             <h2 className={styles.title}>Connecting Global Halal Economy</h2>
             <p className={styles.description}>
-              HEI 2026 is the strategic halal trade and investment platform aligned with the D-8 Summit, uniting governments, global buyers, investors, and halal industry leaders in one integrated ecosystem.
+              D-8 Halal Expo Indonesia 2026 is the strategic halal trade and investment platform aligned with the D-8 Summit, uniting governments, global buyers, investors, and halal industry leaders in one integrated ecosystem.
             </p>
             <div className={styles.buttonGroup}>
-              <Button href="#brochure" variant="yellow" className={styles.button}>
-                Download Brochure
-              </Button>
+              <a 
+                href="https://drive.google.com/drive/folders/1Hhl1Bp-z1jwlsGrVGhwGylOibyhOzi9c" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.button}`}
+              >
+                <span className={buttonStyles.text}>Download Brochure</span>
+                <div className={buttonStyles.iconContainer}>
+                  <ArrowUpRight className={buttonStyles.icon} />
+                </div>
+              </a>
               <Button 
                 href="#opportunities" 
                 variant="tertiary" 
@@ -152,7 +161,7 @@ export default function OverviewSection() {
             <h2 className={styles.title}>One Event. Two Strategic Engines.</h2>
           </div>
           <p className={styles.ValueDescription}>
-            HEI 2026 bridges high-level diplomacy and real-sector business through a dual-venue ecosystem, combining ministerial dialogue with concrete B2B transactions.
+          D-8 Halal Expo Indonesia 2026 bridges high-level D-8 economic diplomacy and real-sector halal business by connecting policy dialogue with concrete B2B collaboration, investment, and trade.
           </p>
           <div className={styles.buttonGroup}>
             <Button href="#how-it-works" variant="yellow" className={styles.button}>
@@ -162,8 +171,8 @@ export default function OverviewSection() {
           <div className={styles.imageGrid}>
             <div className={styles.tennisImageContainer}>
               <Image
-                src="/images/fairmont-1.jpg"
-                alt="HEI 2026 Venue 1"
+                src="/images/tennis-indoor.png"
+                alt="D-8 Halal Expo Indonesia 2026 Venue 1"
                 width={800}
                 height={480}
                 className={styles.tennisImage}
@@ -171,14 +180,19 @@ export default function OverviewSection() {
               />
             </div>
             <div className={styles.tennisImageContainer}>
-              <Image
-                src="/images/tennis-indoor.png"
-                alt="HEI 2026 Venue 2"
-                width={800}
-                height={480}
-                className={styles.tennisImage}
-                priority={false}
-              />
+              <div className={styles.tennisImageTitle}>
+                <p className={styles.tennisImageTitleText}>Venue Layout</p>
+              </div>
+              <div className={styles.tennisImageContainerImage}>
+                <Image
+                  src="/images/layout-3D.jpeg"
+                  alt="D-8 Halal Expo Indonesia 2026 Venue Layout"
+                  width={800}
+                  height={480}
+                  className={styles.tennisImage}
+                  priority={false}
+                />
+              </div>
             </div>
           </div>
         </div>

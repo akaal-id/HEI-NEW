@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Button from '../Button/Button';
 import styles from './FAQSection.module.css';
 import { ChevronDown, ChevronUp, ArrowUpRight } from 'lucide-react';
+import buttonStyles from '../Button/Button.module.css';
 
 interface FAQItem {
   id: string;
@@ -14,27 +14,27 @@ interface FAQItem {
 const faqItems: FAQItem[] = [
   {
     id: 'what-is-hei',
-    question: 'What is HEI 2026?',
-    answer: 'Halal Expo Indonesia (HEI) 2026 is a global halal trade, investment, and innovation platform officially aligned as a side event of the D-8 Summit, connecting governments, businesses, investors, and youth leaders.'
+    question: 'What is D-8 Halal Expo Indonesia 2026?',
+    answer: 'D-8 Halal Expo Indonesia 2026 is an international B2B platform and an official side event of the 2026 D-8 Summit, designed to connect businesses, investors, regulators, and key stakeholders in order to strengthen trade among D-8 Member States, enhance resilient halal value chains, and advance economic cooperation, investment, and sustainable development among D-8 Member States.'
   },
   {
     id: 'd8-summit',
-    question: 'How is HEI 2026 related to the D-8 Summit?',
-    answer: 'HEI 2026 is officially aligned as a side event of the D-8 Summit, creating a strategic platform that bridges high-level diplomacy with real-sector business opportunities.'
+    question: 'How is D-8 Halal Expo Indonesia 2026 related to the 2026 D-8 Summit?',
+    answer: 'D-8 Halal Expo Indonesia 2026 is officially aligned as a side event of the 2026 D-8 Summit, creating a strategic platform that bridges high-level diplomacy with real-sector business opportunities.'
   },
   {
     id: 'who-should-attend',
-    question: 'Who should attend HEI 2026?',
-    answer: 'HEI 2026 is designed for governments, businesses, investors, and youth leaders interested in the halal economy, trade, and investment opportunities.'
+    question: 'Who should attend D-8 Halal Expo Indonesia 2026?',
+    answer: 'D-8 Halal Expo Indonesia 2026 is designed for governments, businesses, investors, and youth leaders interested in the halal economy, trade, and investment opportunities.'
   },
   {
     id: 'exhibitor',
     question: 'Who can become an exhibitor?',
-    answer: 'Companies and organizations involved in halal products, services, and solutions can become exhibitors at HEI 2026.'
+    answer: 'Companies and organizations involved in halal products, services, and solutions can become exhibitors at D-8 Halal Expo Indonesia 2026.'
   },
   {
     id: 'exhibitor-benefits',
-    question: 'What are the benefits of exhibiting at HEI 2026?',
+    question: 'What are the benefits of exhibiting at D-8 Halal Expo Indonesia 2026?',
     answer: 'Exhibitors gain access to global buyers, investors, and government officials, participate in business matching sessions, and showcase their products to a targeted halal market audience.'
   },
   {
@@ -59,8 +59,8 @@ const faqItems: FAQItem[] = [
   },
   {
     id: 'register',
-    question: 'How do I register for HEI 2026?',
-    answer: 'You can register for HEI 2026 through our official website. Different registration options are available for exhibitors, buyers, and general attendees.'
+    question: 'How do I register for D-8 Halal Expo Indonesia 2026?',
+    answer: 'You can register for D-8 Halal Expo Indonesia 2026 through our official website. Different registration options are available for exhibitors, buyers, and general attendees.'
   },
   {
     id: 'media',
@@ -128,14 +128,23 @@ export default function FAQSection() {
           <h2 className={styles.title}>Frequently Ask Question</h2>
           <p className={styles.description}>for more question, feel free to ask!</p>
           <div className={styles.buttonGroup}>
-            <Button 
-              href="#contact-marketing" 
-              variant="primary" 
-              className={styles.contactButton}
+            <a 
+              href="https://wa.me/62895428247935" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${buttonStyles.button} ${buttonStyles.primary} ${styles.contactButton}`}
             >
-              Contact Marketing
-            </Button>
-            <a href="#contact-sales" className={styles.contactSalesLink}>
+              <span className={buttonStyles.text}>Contact Marketing</span>
+              <div className={buttonStyles.iconContainer}>
+                <ArrowUpRight className={buttonStyles.icon} />
+              </div>
+            </a>
+            <a 
+              href="https://wa.me/62895403824515" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.contactSalesLink}
+            >
               <span>Contact Sales</span>
               <div className={styles.contactSalesIcon}>
                 <ArrowUpRight className={styles.contactSalesArrow} />

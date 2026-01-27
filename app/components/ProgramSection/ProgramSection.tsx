@@ -108,7 +108,7 @@ export default function ProgramSection() {
         </div>
         <div className={styles.headerRight}>
           <p className={styles.description}>
-            HEI 2026 bridges high-level diplomacy and real-sector business through a dual-venue ecosystem, combining ministerial dialogue with concrete B2B transactions.
+          D-8 Halal Expo Indonesia 2026 bridges high-level D-8 economic diplomacy and real-sector halal business by connecting policy dialogue with concrete B2B collaboration, investment, and trade.
           </p>
           <Button href="#all-programs" variant="primary" className={styles.viewAllButton}>
             View All Programs

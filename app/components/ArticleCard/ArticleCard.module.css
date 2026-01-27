@@ -68,6 +68,7 @@
   color: white;
   padding: 6px 16px;
   border-radius: 50px;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: clamp(12px, 1.4vw, 14px);
   font-weight: 500;
   z-index: 1;
@@ -93,18 +94,21 @@
   align-items: center;
   gap: 0.5rem;
   font-size: clamp(12px, 1.4vw, 14px);
+  font-family: var(--font-plus-jakarta-sans);
   color: #666;
 }
 
 .metaIcon {
   width: 16px;
   height: 16px;
+  font-family: var(--font-plus-jakarta-sans);
   color: #666;
 }
 
 .articleTitle {
   font-size: clamp(16px, 1.8vw, 18px);
   font-weight: 600;
+  font-family: var(--font-plus-jakarta-sans);
   color: var(--hei26-dongkerblue);
   line-height: 1.4;
   margin: 0;
@@ -115,6 +119,7 @@
 .articleDescription {
   font-size: clamp(0.625rem, 1.6vw, 0.875rem);
   font-weight: 400;
+  font-family: var(--font-plus-jakarta-sans);
   color: var(--hei26-gray);
   line-height: 1.6;
   margin: 0;
@@ -129,6 +134,7 @@
   width: 100%;
   height: 1px;
   background: rgba(0, 0, 0, 0.1);
+  font-family: var(--font-plus-jakarta-sans);
   margin: 1rem 0;
 }
 
@@ -136,6 +142,7 @@
   align-self: flex-start;
   margin-top: auto;
   margin-left: -1.5rem;
+  font-family: var(--font-plus-jakarta-sans);
 }
 
 @media (max-width: 768px) {

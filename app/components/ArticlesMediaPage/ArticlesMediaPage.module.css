@@ -138,7 +138,7 @@
   padding: 0.75rem 1rem;
   border: 1px solid rgba(0, 73, 102, 0.2);
   border-radius: 8px;
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: 0.875rem;
   color: var(--hei26-dongkerblue);
   background: white;
@@ -272,7 +272,7 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 4rem 2rem;
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: 1.125rem;
   color: var(--hei26-dongkerblue);
   opacity: 0.6;
@@ -297,7 +297,7 @@
   background: white;
   border: 1px solid rgba(0, 73, 102, 0.2);
   border-radius: 8px;
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--hei26-dongkerblue);
@@ -337,7 +337,7 @@
   background: white;
   border: 1px solid rgba(0, 73, 102, 0.2);
   border-radius: 8px;
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--hei26-dongkerblue);
@@ -372,6 +372,199 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  width: 100%;
+}
+
+/* Year-based Photo Groups */
+.yearGroupsContainer {
+  width: 100%;
+}
+
+.yearGroupsTitle {
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 700;
+  color: var(--hei26-dongkerblue);
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.yearGroupsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.yearGroupCard {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.yearGroupCard:hover {
+  box-shadow: 0 8px 24px rgba(0, 73, 102, 0.2);
+}
+
+.yearGroupImageContainer {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.yearGroupImage {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.yearGroupCard:hover .yearGroupImage {
+  transform: scale(1.05);
+}
+
+.yearGroupOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  z-index: 1;
+}
+
+.yearGroupContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.yearBadge {
+  display: inline-block;
+  color: white;
+  font-size: clamp(20px, 1.6vw, 24px);
+  font-weight: 600;
+  width: fit-content;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+}
+
+.yearGroupCount {
+  color: white;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: clamp(12px, 1.6vw, 14px);
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.5;
+}
+
+.yearGroupTitle {
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: clamp(20px, 2.5vw, 24px);
+  font-weight: 700;
+  color: var(--hei26-dongkerblue);
+  margin: 1rem 1.5rem;
+  text-align: center;
+}
+
+/* Gallery Modal */
+.galleryModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.galleryModalContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: transparent;
+  border-radius: 16px;
+  padding: 2rem 0;
+  margin-top: 6rem;
+}
+
+.galleryModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.galleryModalTitle {
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.galleryModalClose {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.galleryModalClose:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.galleryModalGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.galleryModalItem {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.galleryModalItem:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+}
+
+.galleryModalImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 /* Gallery Carousel */
@@ -444,7 +637,7 @@
 }
 
 .carouselInfo h3 {
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
@@ -455,7 +648,7 @@
   padding: 0.5rem 1rem;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -470,7 +663,7 @@
 }
 
 .catalogueTitle {
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--hei26-dongkerblue);
@@ -527,7 +720,7 @@
 }
 
 .catalogueTitleText {
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
   font-size: 0.875rem;
   font-weight: 600;
   color: white;
@@ -659,5 +852,57 @@
   .catalogueGrid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 0.75rem;
+  }
+
+  .yearGroupsTitle {
+    font-size: clamp(24px, 5vw, 28px);
+    margin-bottom: 2rem;
+  }
+
+  .yearGroupsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .yearGroupImageContainer {
+    height: 250px;
+  }
+
+  .yearGroupTitle {
+    font-size: clamp(18px, 4vw, 20px);
+    margin: 1rem;
+  }
+
+  .galleryModal {
+    padding: 1rem;
+  }
+
+  .galleryModalContent {
+    padding: 1rem 0;
+  }
+
+  .galleryModalHeader {
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .galleryModalTitle {
+    font-size: clamp(20px, 5vw, 24px);
+  }
+
+  .galleryModalClose {
+    width: 40px;
+    height: 40px;
+  }
+
+  .closeIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .galleryModalGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    padding: 0 0.5rem;
   }
 }
