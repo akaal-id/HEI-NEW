@@ -177,8 +177,8 @@ export default function ArticlesMediaPage() {
             {/* Articles Grid */}
             <div className={styles.articlesGrid}>
               {filteredArticles.length > 0 ? (
-                filteredArticles.map((article) => (
-                  <article key={article.id} className={styles.articleCard}>
+                filteredArticles.map((article, index) => (
+                  <article key={`${article.id}-${article.slug}-${index}`} className={styles.articleCard}>
                     <div className={styles.articleCardImageContainer}>
                       <Image
                         src={article.image}
