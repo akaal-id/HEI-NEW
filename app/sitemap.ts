@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next';
 import { getAllArticles } from './lib/articles';
 
-// Revalidate sitemap every hour (3600 seconds)
-export const revalidate = 3600;
+// Mark sitemap as dynamic since it fetches from Google Sheets
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
 
 const baseUrl = 'https://halalexpoindonesia.com';
 
