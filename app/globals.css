@@ -19,10 +19,21 @@ html {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
+  --font-serif: var(--font-lora);
+  --font-editorial-sans: var(--font-mulish);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
+}
+
+/* Editorial / Jardin Secret typography */
+.font-editorial-sans {
+  font-family: var(--font-mulish), sans-serif;
+}
+
+.font-editorial-serif {
+  font-family: var(--font-lora), serif;
 }

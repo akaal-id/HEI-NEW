@@ -1,0 +1,98 @@
+export const SALUTATIONS = [
+  { value: 'Mr', label: 'Mr' },
+  { value: 'Ms', label: 'Ms' },
+  { value: 'Mrs', label: 'Mrs' },
+  { value: 'Dr', label: 'Dr' },
+];
+
+export const COUNTRY_CODES = [
+  { value: '+62', label: 'Indonesia (+62)' },
+  { value: '+60', label: 'Malaysia (+60)' },
+  { value: '+65', label: 'Singapore (+65)' },
+  { value: '+66', label: 'Thailand (+66)' },
+  { value: '+84', label: 'Vietnam (+84)' },
+  { value: '+63', label: 'Philippines (+63)' },
+  { value: '+44', label: 'United Kingdom (+44)' },
+  { value: '+1', label: 'USA/Canada (+1)' },
+  { value: '+61', label: 'Australia (+61)' },
+  { value: '+81', label: 'Japan (+81)' },
+  { value: '+82', label: 'South Korea (+82)' },
+  { value: '+86', label: 'China (+86)' },
+  { value: '+91', label: 'India (+91)' },
+  { value: '+90', label: 'Türkiye (+90)' },
+  { value: '+98', label: 'Iran (+98)' },
+  { value: '+20', label: 'Egypt (+20)' },
+  { value: '+880', label: 'Bangladesh (+880)' },
+  { value: '+92', label: 'Pakistan (+92)' },
+  { value: '+234', label: 'Nigeria (+234)' },
+  { value: '+994', label: 'Azerbaijan (+994)' },
+  { value: '+971', label: 'UAE (+971)' },
+  { value: '+966', label: 'Saudi Arabia (+966)' },
+  { value: '+49', label: 'Germany (+49)' },
+  { value: '+33', label: 'France (+33)' },
+  { value: '+31', label: 'Netherlands (+31)' },
+  { value: '+39', label: 'Italy (+39)' },
+  { value: '+34', label: 'Spain (+34)' },
+  { value: '+48', label: 'Poland (+48)' },
+  { value: '+7', label: 'Russia (+7)' },
+  { value: '+27', label: 'South Africa (+27)' },
+  { value: '+55', label: 'Brazil (+55)' },
+  { value: '+52', label: 'Mexico (+52)' },
+  { value: '+64', label: 'New Zealand (+64)' },
+  { value: '+other', label: 'Other' },
+];
+
+export const COUNTRIES = [
+  'Indonesia', 'Malaysia', 'Singapore', 'Thailand', 'Vietnam', 'Philippines', 'Japan', 'South Korea', 'China', 'India',
+  'Bangladesh', 'Pakistan', 'Iran', 'Türkiye', 'Egypt', 'Nigeria', 'Azerbaijan', 'Saudi Arabia', 'UAE', 'Qatar', 'Kuwait', 'Bahrain', 'Oman', 'Jordan', 'Lebanon',
+  'United Kingdom', 'Germany', 'France', 'Netherlands', 'Italy', 'Spain', 'Poland', 'Russia', 'Switzerland', 'Austria', 'Belgium', 'Sweden', 'Norway', 'Denmark', 'Finland',
+  'United States', 'Canada', 'Australia', 'New Zealand', 'South Africa', 'Brazil', 'Mexico', 'Argentina', 'Chile', 'Colombia',
+  'Other',
+].map((c) => ({ value: c, label: c }));
+
+export const JOB_TITLES = [
+  { value: 'CEO', label: 'CEO' },
+  { value: 'Director', label: 'Director' },
+  { value: 'Manager', label: 'Manager' },
+  { value: 'Head of Business', label: 'Head of Business' },
+  { value: 'Purchasing Manager', label: 'Purchasing Manager' },
+  { value: 'Export Manager', label: 'Export Manager' },
+  { value: 'Marketing Manager', label: 'Marketing Manager' },
+  { value: 'Business Development', label: 'Business Development' },
+  { value: 'Owner', label: 'Owner' },
+  { value: 'Founder', label: 'Founder' },
+  { value: 'Other', label: 'Other' },
+];
+
+export const BUSINESS_CATEGORIES = [
+  { value: 'food-beverage', label: 'Food & Beverage' },
+  { value: 'cosmetics', label: 'Cosmetics' },
+  { value: 'finance', label: 'Finance' },
+  { value: 'fashion', label: 'Fashion' },
+  { value: 'pharmaceutical', label: 'Pharmaceutical' },
+  { value: 'tourism', label: 'Tourism & Hospitality' },
+  { value: 'logistics', label: 'Logistics & Supply Chain' },
+  { value: 'technology', label: 'Technology' },
+  { value: 'agriculture', label: 'Agriculture & Agribusiness' },
+  { value: 'retail', label: 'Retail' },
+  { value: 'other', label: 'Other' },
+];
+
+export const MARKET_SECTORS = [
+  { value: 'B2B', label: 'B2B' },
+  { value: 'B2C', label: 'B2C' },
+  { value: 'Government', label: 'Government' },
+  { value: 'B2B2C', label: 'B2B2C' },
+  { value: 'other', label: 'Other' },
+];
+
+export const SOURCE_OF_INFO = [
+  { value: 'social-media', label: 'Social Media' },
+  { value: 'email', label: 'Email' },
+  { value: 'website', label: 'Website' },
+  { value: 'brochure', label: 'Brochure' },
+  { value: 'government', label: 'Government Institution' },
+  { value: 'other', label: 'Other' },
+];
+
+export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

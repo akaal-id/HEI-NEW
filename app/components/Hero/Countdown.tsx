@@ -105,7 +105,7 @@ export default function Countdown() {
       </div>
 
       <div className={styles.buttonWrapper}>
-        <Button href="#register" variant="primary">
+        <Button href="/register/exhibitor" variant="primary">
           Register as Exhibitor
         </Button>
       </div>
