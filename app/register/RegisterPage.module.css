@@ -102,6 +102,25 @@
   margin-top: 1.5rem;
 }
 
+.formMessage {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 14px;
+  min-height: 1.5em;
+}
+
+.formMessageIncomplete {
+  color: var(--hei26-dongkerblue, #004966);
+}
+
+.formMessageError {
+  color: #c00;
+}
+
+.formMessageSuccess {
+  color: #0a6b2c;
+}
+
 @media (max-width: 768px) {
   .page {
     padding-top: 6rem;

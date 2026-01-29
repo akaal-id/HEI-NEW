@@ -34,6 +34,8 @@ export default function RegisterExhibitorPage() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [formMessage, setFormMessage] = useState<{ type: 'incomplete' | 'success' | 'error'; text: string } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     setTouched({
@@ -59,10 +61,63 @@ export default function RegisterExhibitorPage() {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
-    alert('Registration form submitted (demo).');
+    setFormMessage(null);
+
+    if (!validate()) {
+      setFormMessage({
+        type: 'incomplete',
+        text: 'Please complete all required fields (*) before submitting.',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const jobTitleValue = jobTitle === 'Other' ? `Other: ${jobTitleOther.trim()}` : jobTitle;
+      const res = await fetch('/api/submit-exhibitor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          salutation: salutation.trim(),
+          fullName: name.trim(),
+          countryCode,
+          mobileNumber: mobile.trim(),
+          email: email.trim(),
+          country,
+          companyName: companyName.trim(),
+          jobTitle: jobTitleValue,
+          companyAddress: companyAddress.trim(),
+          businessCategory,
+          marketSector,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFormMessage({ type: 'success', text: 'Thank you! Your registration has been submitted successfully.' });
+        setSalutation('');
+        setName('');
+        setCountryCode('+62');
+        setMobile('');
+        setEmail('');
+        setCountry('');
+        setCompanyName('');
+        setJobTitle('');
+        setJobTitleOther('');
+        setCompanyAddress('');
+        setBusinessCategory('');
+        setMarketSector('');
+        setErrors({});
+        setTouched({});
+      } else {
+        setFormMessage({ type: 'error', text: data.error ?? 'Something went wrong. Please try again.' });
+      }
+    } catch {
+      setFormMessage({ type: 'error', text: 'Failed to submit. Please check your connection and try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -214,9 +269,23 @@ export default function RegisterExhibitorPage() {
               variant="primary"
               className={styles.submitButton}
               textClassName={styles.submitButtonText}
+              disabled={isSubmitting}
             >
-              Submit Registration
+              {isSubmitting ? 'Submitting...' : 'Submit Registration'}
             </Button>
+            {formMessage && (
+              <p
+                className={`${styles.formMessage} ${
+                  formMessage.type === 'incomplete'
+                    ? styles.formMessageIncomplete
+                    : formMessage.type === 'error'
+                      ? styles.formMessageError
+                      : styles.formMessageSuccess
+                }`}
+              >
+                {formMessage.text}
+              </p>
+            )}
           </form>
         </div>
       </section>

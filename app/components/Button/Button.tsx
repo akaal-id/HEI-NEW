@@ -16,6 +16,7 @@ interface ButtonProps {
   variant?: ButtonVariant;
   target?: '_blank' | '_self' | '_parent' | '_top';
   rel?: string;
+  disabled?: boolean;
 }
 
 export default function Button({ 
@@ -30,7 +31,8 @@ export default function Button({
   icon,
   variant = 'primary',
   target,
-  rel
+  rel,
+  disabled,
 }: ButtonProps) {
   const variantClass = styles[variant];
   const buttonClass = `${styles.button} ${variantClass} ${className || ''}`.trim();
@@ -83,6 +85,7 @@ export default function Button({
       className={buttonClass}
       type={type}
       aria-label={ariaLabel || (typeof children === 'string' ? children : undefined)}
+      disabled={disabled}
     >
       {buttonContent}
     </button>
