@@ -97,11 +97,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon/D8-icon.svg', type: 'image/svg+xml' },
       { url: '/icon/icon-d8hei.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon/D8-icon.svg', type: 'image/svg+xml' },
     ],
-    apple: '/icon/D8-icon.svg',
-    shortcut: '/icon/D8-icon.svg',
+    apple: '/icon/icon-d8hei.png',
+    shortcut: '/icon/icon-d8hei.png',
   },
 };
 
