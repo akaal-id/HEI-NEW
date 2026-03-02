@@ -78,7 +78,7 @@
   transform: translateX(-50%);
   width: 60%;
   height: 2px;
-  background: linear-gradient(90deg, #1D74B7 0%, #26A7DF 100%);
+  background: linear-gradient(90deg, #157A7A 0%, #1F8F8F 100%);
   border-radius: 2px;
   animation: slideIn 0.3s ease-out;
 }
@@ -301,7 +301,7 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: linear-gradient(90deg, #1D74B7 0%, #26A7DF 100%);
+    background: linear-gradient(90deg, #157A7A 0%, #1F8F8F 100%);
     border: none;
     display: flex;
     align-items: center;
@@ -333,7 +333,7 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: linear-gradient(90deg, #1D74B7 0%, #26A7DF 100%);
+    background: linear-gradient(90deg, #157A7A 0%, #1F8F8F 100%);
     border: none;
     display: flex;
     align-items: center;
@@ -403,7 +403,7 @@
     top: 0;
     bottom: 0;
     width: 4px;
-    background: linear-gradient(180deg, #1D74B7 0%, #26A7DF 100%);
+    background: linear-gradient(180deg, #157A7A 0%, #1F8F8F 100%);
     border-radius: 0 4px 4px 0;
     animation: slideInVertical 0.3s ease-out;
   }

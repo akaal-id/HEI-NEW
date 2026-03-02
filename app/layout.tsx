@@ -36,7 +36,7 @@ const mulish = Mulish({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F0FEFF",
+  themeColor: "#F4F7F6",
 };
 
 export const metadata: Metadata = {

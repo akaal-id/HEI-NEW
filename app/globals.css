@@ -5,13 +5,13 @@ html {
 }
 
 :root {
-  --background: #F0FEFF;
-  --foreground: #171717;
-  --hei26-dongkerblue: #004966;
-  --hei26-skyblue: #26A7DF;
-  --hei26-linearblue: linear-gradient(90deg, #1D74B7 0%, #26A7DF 100%);
-  --hei26-linearyellow: linear-gradient(90deg, #D98933 0%, #F3AB23 100%);
-  --hei26-turquoise: #00b4aa;
+  --background: #F4F7F6;
+  --foreground: #1C2B2B;
+  --hei26-dongkerblue: #0F5C5C;
+  --hei26-skyblue: #157A7A;
+  --hei26-linearblue: linear-gradient(90deg, #0F5C5C 0%, #1F8F8F 100%);
+  --hei26-linearyellow: linear-gradient(90deg, #E6B800 0%, #F2A900 100%);
+  --hei26-turquoise: #7CC6C6;
 }
 
 /* stylelint-disable-next-line unknownAtRules */

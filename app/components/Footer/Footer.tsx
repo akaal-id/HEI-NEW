@@ -86,7 +86,7 @@ export default function Footer() {
           {/* Top Right: Newsletter */}
           <div className={styles.columnRight}>
             <h4 className={styles.mainHeading} style={{ color: '#F5F5F5' }}>
-              Get our latest updates, <span style={{ color: '#00b4aa' }}>here!</span>
+              Get our latest updates, <span style={{ color: '#7CC6C6' }}>here!</span>
             </h4>
             
             {status === 'success' ? (

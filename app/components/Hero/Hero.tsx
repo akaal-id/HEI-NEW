@@ -219,7 +219,7 @@ export default function Hero() {
         </div>
         <div ref={imageRef} className={styles.imageWrapper}>
           <Image
-            src="/D8-assets/KV_D8.png"
+            src="/D8-assets/KV_D8.png?v=2"
             alt="Halal Expo Indonesia 2026"
             width={800}
             height={1000}

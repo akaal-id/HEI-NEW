@@ -46,7 +46,7 @@
 }
 
 .sectionAlt {
-  background: #f0feff;
+  background: #F4F7F6;
 }
 
 .container {
@@ -110,7 +110,7 @@
 }
 
 .formMessageIncomplete {
-  color: var(--hei26-dongkerblue, #004966);
+  color: var(--hei26-dongkerblue, #0F5C5C);
 }
 
 .formMessageError {

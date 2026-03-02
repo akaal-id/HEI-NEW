@@ -104,12 +104,12 @@
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 40px;
-  color: #FBBF24; /* Yellowish orange from logo */
+  color: #F2A900; /* HEI 2026 gold */
 }
 
 /* Fallback if logo color isn't exact match to variable, picking a nice orange/yellow */
 .mainHeading span {
-  color: #F59E0B;
+  color: #E6B800;
 }
 
 .form {

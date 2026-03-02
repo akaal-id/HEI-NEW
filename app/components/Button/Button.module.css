@@ -67,7 +67,7 @@
 }
 
 .primary:hover .text {
-  background: linear-gradient(90deg, #18639d 0%, #26A7DF 100%);
+  background: linear-gradient(90deg, #0F5C5C 0%, #1F8F8F 100%);
   transition: all 0.6s ease;
 }
 
@@ -132,12 +132,12 @@
 }
 
 .yellow .iconContainer {
-  border: 1.5px solid #F3AB23;
+  border: 1.5px solid #F2A900;
   background: transparent;
 }
 
 .yellow .icon {
-  color: #F3AB23;
+  color: #F2A900;
 }
 
 .yellow:hover .text {
@@ -153,7 +153,7 @@
 }
 
 .yellow:hover .iconContainer {
-  background: #F3AB23;
+  background: #F2A900;
   transform: translateX(4px);
 }
 

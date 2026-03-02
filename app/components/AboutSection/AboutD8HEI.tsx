@@ -56,7 +56,7 @@ export default function AboutD8HEI() {
         <div className={`${styles.content} ${styles.contentReverse}`}>
           <div ref={imageRef} className={styles.imageContent}>
             <Image
-              src="/D8-assets/KV_D8.png"
+              src="/D8-assets/KV_D8.png?v=2"
               alt="D-8 HEI 2026"
               width={600}
               height={400}
