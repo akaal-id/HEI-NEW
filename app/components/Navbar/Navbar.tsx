@@ -23,12 +23,12 @@ export default function Navbar() {
   useEffect(() => {
     // Initialize scroll position
     lastScrollY.current = window.scrollY;
-    
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       setIsScrolled(currentScrollY > 50);
-      
+
       // Menu shows by default when scrolled, only hides when actively scrolling down
       if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
         // Actively scrolling down past 50px - hide menu
@@ -37,7 +37,7 @@ export default function Navbar() {
         // Scrolling up, at top, or no movement - show menu
         setIsScrollingDown(false);
       }
-      
+
       lastScrollY.current = currentScrollY;
     };
 
@@ -54,7 +54,7 @@ export default function Navbar() {
     }
 
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (footer) {
@@ -118,33 +118,33 @@ export default function Navbar() {
       {/* Desktop Navbar */}
       <div className={styles.navbarContent}>
         <div className={`${styles.logoContainer} ${isScrolled ? styles.logoContainerScrolled : ''}`}>
-      <Link href="/" className={styles.logoLink}>
-        <Image
-                src="/icon/D8 HEI Logo Long.svg"
-                alt="D-8 Halal Expo Indonesia 2026"
-                width={200}
-                height={60}
-          className={styles.logo}
-          priority
-        />
-      </Link>
+          <Link href="/" className={styles.logoLink}>
+            <Image
+              src="/icon/D8 HEI Logo Long.svg"
+              alt="D-8 Halal Expo Indonesia 2026"
+              width={200}
+              height={60}
+              className={styles.logo}
+              priority
+            />
+          </Link>
         </div>
 
         <div className={`${styles.menuContainer} ${isScrollingDown ? styles.menuHidden : ''}`}>
-          <Button 
-            href="/" 
-            variant="tertiary" 
+          <Button
+            href="/"
+            variant="tertiary"
             className={`${styles.menuItem} ${pathname === '/' ? styles.menuItemActive : ''}`}
             textClassName={styles.menuItemText}
             icon={undefined}
           >
             Home
           </Button>
-          
+
           <div className={styles.menuItemWithDropdown}>
-            <Button 
-              href="/about" 
-              variant="secondary" 
+            <Button
+              href="/about"
+              variant="secondary"
               className={`${styles.menuItem} ${pathname === '/about' ? styles.menuItemActive : ''} ${openDropdown === 'about' ? styles.menuItemDropdownOpen : ''}`}
               textClassName={styles.menuItemText}
               iconClassName={styles.menuItemIcon}
@@ -162,7 +162,7 @@ export default function Navbar() {
                   About D-8 Summit
                 </Link>
                 <Link href="/about/d8-expo" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  About D8 HEI 2026
+                  About D-8 HEI 2026
                 </Link>
                 <Link href="/about/organizer" className={styles.dropdownItem} onClick={closeDropdowns}>
                   About Organizer
@@ -170,11 +170,11 @@ export default function Navbar() {
               </div>
             )}
           </div>
-          
+
           <div className={styles.menuItemWithDropdown}>
-            <Button 
-              href="/programs" 
-              variant="secondary" 
+            <Button
+              href="/programs"
+              variant="secondary"
               className={`${styles.menuItem} ${pathname === '/programs' || pathname?.startsWith('/programs/') ? styles.menuItemActive : ''} ${openDropdown === 'programs' ? styles.menuItemDropdownOpen : ''}`}
               textClassName={styles.menuItemText}
               iconClassName={styles.menuItemIcon}
@@ -209,27 +209,27 @@ export default function Navbar() {
               </div>
             )}
           </div>
-          
-          <Button 
-            href="/partners" 
-            variant="tertiary" 
+
+          <Button
+            href="/partners"
+            variant="tertiary"
             className={`${styles.menuItem} ${pathname === '/partners' ? styles.menuItemActive : ''}`}
             textClassName={styles.menuItemText}
             icon={undefined}
           >
             Our Partner
           </Button>
-          
-          <Button 
-            href="/articles" 
-            variant="tertiary" 
+
+          <Button
+            href="/articles"
+            variant="tertiary"
             className={`${styles.menuItem} ${pathname === '/articles' || pathname?.startsWith('/articles/') ? styles.menuItemActive : ''}`}
             textClassName={styles.menuItemText}
             icon={undefined}
           >
             Article & Media
           </Button>
-          
+
           <div className={styles.registerDropdownWrapper}>
             <Button
               variant="primary"
@@ -275,14 +275,14 @@ export default function Navbar() {
             />
           </Link>
           <div className={styles.mobileActionButtons}>
-            <button 
+            <button
               className={styles.mobileContactButton}
               onClick={toggleContactModal}
               aria-label="Contact us"
             >
               <Phone className={styles.mobileContactIcon} />
             </button>
-            <button 
+            <button
               className={styles.mobileMenuButton}
               onClick={toggleMobileMenu}
               aria-label="Toggle menu"
@@ -297,9 +297,9 @@ export default function Navbar() {
         </div>
 
         <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
-          <Button 
-            href="/" 
-            variant="tertiary" 
+          <Button
+            href="/"
+            variant="tertiary"
             className={`${styles.mobileMenuItem} ${pathname === '/' ? styles.mobileMenuItemActive : ''}`}
             textClassName={styles.mobileMenuItemText}
             icon={undefined}
@@ -307,11 +307,11 @@ export default function Navbar() {
           >
             Home
           </Button>
-          
+
           <div className={styles.mobileMenuItemWithDropdown}>
-            <Button 
-              href="/about" 
-              variant="secondary" 
+            <Button
+              href="/about"
+              variant="secondary"
               className={`${styles.mobileMenuItem} ${pathname === '/about' ? styles.mobileMenuItemActive : ''} ${openMobileDropdown === 'about' ? styles.mobileMenuItemDropdownOpen : ''}`}
               textClassName={styles.mobileMenuItemText}
               iconClassName={styles.mobileMenuItemIcon}
@@ -335,11 +335,11 @@ export default function Navbar() {
               </Link>
             </div>
           </div>
-          
+
           <div className={styles.mobileMenuItemWithDropdown}>
-            <Button 
-              href="/programs" 
-              variant="secondary" 
+            <Button
+              href="/programs"
+              variant="secondary"
               className={`${styles.mobileMenuItem} ${pathname === '/programs' || pathname?.startsWith('/programs/') ? styles.mobileMenuItemActive : ''} ${openMobileDropdown === 'programs' ? styles.mobileMenuItemDropdownOpen : ''}`}
               textClassName={styles.mobileMenuItemText}
               iconClassName={styles.mobileMenuItemIcon}
@@ -372,10 +372,10 @@ export default function Navbar() {
               </Link>
             </div>
           </div>
-          
-          <Button 
-            href="/partners" 
-            variant="tertiary" 
+
+          <Button
+            href="/partners"
+            variant="tertiary"
             className={`${styles.mobileMenuItem} ${pathname === '/partners' ? styles.mobileMenuItemActive : ''}`}
             textClassName={styles.mobileMenuItemText}
             icon={undefined}
@@ -383,10 +383,10 @@ export default function Navbar() {
           >
             Our Partner
           </Button>
-          
-          <Button 
-            href="/articles" 
-            variant="tertiary" 
+
+          <Button
+            href="/articles"
+            variant="tertiary"
             className={`${styles.mobileMenuItem} ${pathname === '/articles' || pathname?.startsWith('/articles/') ? styles.mobileMenuItemActive : ''}`}
             textClassName={styles.mobileMenuItemText}
             icon={undefined}
@@ -394,7 +394,7 @@ export default function Navbar() {
           >
             Article & Media
           </Button>
-          
+
           <div className={styles.mobileMenuItemWithDropdown}>
             <Button
               variant="primary"

@@ -1,7 +1,7 @@
 'use client';
 
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
-import { Info } from 'lucide-react';
+import Button from '../Button/Button';
 import styles from './ProgramPage.module.css';
 
 export default function ProgramBusinessMatching() {
@@ -9,15 +9,11 @@ export default function ProgramBusinessMatching() {
   const [contentRef, isContentVisible] = useIntersectionObserver({ threshold: 0.1 });
   const [textRef, isTextVisible] = useIntersectionObserver({ threshold: 0.1 });
 
-  const handleMoreDetails = () => {
-    alert('More details on the matching process will be available soon.');
-  };
-
   return (
     <>
       {/* Hero Section */}
-      <section 
-        ref={heroRef as React.RefObject<HTMLElement>} 
+      <section
+        ref={heroRef as React.RefObject<HTMLElement>}
         className={`${styles.heroSection} ${isHeroVisible ? styles.fadeIn : ''}`}
         style={{
           backgroundImage: 'url(https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2084&q=80)',
@@ -25,6 +21,7 @@ export default function ProgramBusinessMatching() {
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContainer}>
+          <p className={styles.heroEyebrow}>Our Programs</p>
           <h1 className={styles.heroTitle}>Business Matching</h1>
         </div>
       </section>
@@ -40,13 +37,13 @@ export default function ProgramBusinessMatching() {
               <p className={styles.description}>
                 With approximately 100 business matching sessions expected, participants can maximize their networking opportunities and accelerate their business growth in the halal market. Our platform ensures that each meeting is strategically aligned with participants' business objectives and market interests.
               </p>
-              <button 
-                onClick={handleMoreDetails}
-                className={styles.detailsButton}
+              <Button
+                href="/register/buyer"
+                variant="primary"
+                className={styles.actionButton}
               >
-                <Info size={20} />
-                <span>More Details on Matching Process</span>
-              </button>
+                Register as Buyer
+              </Button>
             </div>
           </div>
         </div>
