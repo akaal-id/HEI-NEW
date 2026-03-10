@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "D-8 HEI Talk",
     "Halal Exhibition Programs",
     "Halal Business Conference",
-    "Youth Events Jakarta",
+    "D-8 HEI Youth Jakarta",
     "Halal Culture Festival",
     "Halal Industry Summit"
   ],

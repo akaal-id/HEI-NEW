@@ -140,7 +140,7 @@ export default function StructuredData() {
           },
           {
             '@type': 'SiteNavigationElement',
-            name: 'Youth Event',
+            name: 'D-8 HEI Youth',
             url: `${baseUrl}/programs/youth-event`,
             position: 4,
           },
@@ -152,7 +152,7 @@ export default function StructuredData() {
           },
           {
             '@type': 'SiteNavigationElement',
-            name: 'D-8 Culture Festival',
+            name: 'D-8 HEI Culture Festival',
             url: `${baseUrl}/programs/culture-festival`,
             position: 6,
           },

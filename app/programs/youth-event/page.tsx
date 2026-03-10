@@ -2,23 +2,23 @@ import type { Metadata } from 'next';
 import ProgramYouthEvent from '../../components/ProgramPages/ProgramYouthEvent';
 
 export const metadata: Metadata = {
-  title: "Youth Event | D-8 Halal Expo Indonesia 2026 - Programs",
-  description: "Join the Youth Event at D-8 Halal Expo Indonesia 2026. Further details will be available soon.",
+  title: "D-8 HEI Youth | D-8 Halal Expo Indonesia 2026 - Programs",
+  description: "D-8 HEI Youth at D-8 Halal Expo Indonesia 2026: Young Entrepreneur Meetup and Young Entrepreneur Panel Discussion for halal and creative economy startups.",
   keywords: [
-    "Youth Event",
-    "Young Professionals",
+    "D-8 HEI Youth",
+    "Young Entrepreneur Meetup",
+    "Young Entrepreneur Panel",
     "Halal Economy Youth",
     "Youth Leadership",
-    "Next Generation",
+    "Sharia-based Startups",
     "Youth Engagement",
-    "Student Programs",
-    "Youth Development",
     "Halal Industry Youth",
+    "Creative Economy",
     "Future Leaders"
   ],
   openGraph: {
-    title: "Youth Event | D-8 Halal Expo Indonesia 2026",
-    description: "Join the Youth Event at D-8 Halal Expo Indonesia 2026.",
+    title: "D-8 HEI Youth | D-8 Halal Expo Indonesia 2026",
+    description: "D-8 HEI Youth: Young Entrepreneur Meetup and Panel Discussion for halal and creative economy startups.",
     url: "https://halalexpoindonesia.com/programs/youth-event",
   },
   alternates: {

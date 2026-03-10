@@ -20,7 +20,7 @@ export default function ProgramCultureFestival() {
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContainer}>
-          <h1 className={styles.heroTitle}>D-8 Culture Festival</h1>
+          <h1 className={styles.heroTitle}>D-8 HEI Culture Festival</h1>
         </div>
       </section>
 
@@ -30,7 +30,7 @@ export default function ProgramCultureFestival() {
           <div className={styles.content}>
             <div ref={textRef as React.RefObject<HTMLDivElement>} className={`${styles.textContent} ${isTextVisible ? styles.fadeInUp : ''}`}>
               <p className={styles.description}>
-                The D-8 Culture Festival celebrates the cultural heritage and diversity of D-8 Member States. This vibrant event showcases traditional arts, music, dance, cuisine, and crafts from Bangladesh, Egypt, Indonesia, Iran, Malaysia, Nigeria, Pakistan, and Türkiye, with Azerbaijan joining in 2025.
+                The D-8 HEI Culture Festival celebrates the cultural heritage and diversity of D-8 Member States. This vibrant event showcases traditional arts, music, dance, cuisine, and crafts from Bangladesh, Egypt, Indonesia, Iran, Malaysia, Nigeria, Pakistan, Türkiye, and Azerbaijan.
               </p>
               <p className={styles.description}>
                 Through cultural performances, exhibitions, and interactive experiences, the festival fosters mutual understanding, strengthens cultural bonds, and highlights the rich traditions that unite the D-8 community. It provides a unique opportunity for visitors to experience the diverse cultural tapestry of the D-8 nations while celebrating shared values and heritage.

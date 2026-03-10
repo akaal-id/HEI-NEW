@@ -198,13 +198,13 @@ export default function Navbar() {
                   Investment Match Making
                 </Link>
                 <Link href="/programs/youth-event" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  Youth Event
+                  D-8 HEI Youth
                 </Link>
                 <Link href="/programs/hei-talk" className={styles.dropdownItem} onClick={closeDropdowns}>
                   D-8 HEI Talk
                 </Link>
                 <Link href="/programs/culture-festival" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  D-8 Culture Festival
+                  D-8 HEI Culture Festival
                 </Link>
               </div>
             )}
@@ -362,13 +362,13 @@ export default function Navbar() {
                 Investment Match Making
               </Link>
               <Link href="/programs/youth-event" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                Youth Event
+                D-8 HEI Youth
               </Link>
               <Link href="/programs/hei-talk" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 D-8 HEI Talk
               </Link>
               <Link href="/programs/culture-festival" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                D-8 Culture Festival
+                D-8 HEI Culture Festival
               </Link>
             </div>
           </div>

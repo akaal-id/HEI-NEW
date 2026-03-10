@@ -13,12 +13,12 @@ interface Program {
 }
 
 const programs: Program[] = [
-  { id: 'exhibition', title: 'Exhibition', image: '/images/overview.jpg' },
-  { id: 'business-matching', title: 'Business Matching', image: '/images/overview.jpg' },
-  { id: 'investment', title: 'Investment Match Making', image: '/images/overview.jpg' },
-  { id: 'youth', title: 'Youth Event', image: '/images/overview.jpg' },
-  { id: 'd8-talk', title: 'D-8 HEI Talk', image: '/images/overview.jpg' },
-  { id: 'd8-culture', title: 'D8 Culture Festival', image: '/images/overview.jpg' },
+  { id: 'exhibition', title: 'Exhibition', image: '/images/Programs/1-Exhibition.png' },
+  { id: 'business-matching', title: 'Business Matching', image: '/images/Programs/2-Business Matching.png' },
+  { id: 'investment', title: 'Investment Matchmaking', image: '/images/Programs/3-Investment Matchmaking.png' },
+  { id: 'youth-event', title: 'D-8 HEI Youth', image: '/images/Programs/4-youth event.png' },
+  { id: 'hei-talk', title: 'D-8 HEI Talkshow', image: '/images/Programs/5-D-8 HEI Talkshow.png' },
+  { id: 'culture-festival', title: 'D-8 HEI Culture Festival', image: '/images/Programs/6-Culture Festival.png' },
 ];
 
 export default function ProgramSection() {
