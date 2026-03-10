@@ -25,7 +25,7 @@ export default function ProgramYouthEvent() {
       </section>
 
       {/* Young Entrepreneur Meetup */}
-      <section ref={content1Ref as React.RefObject<HTMLElement>} className={`${styles.section} ${styles.sectionAlt} ${styles.sectionNoPaddingTop}`}>
+      <section ref={content1Ref as React.RefObject<HTMLElement>} className={styles.section}>
         <div className={styles.container}>
           <div className={`${styles.textContent} ${isContent1Visible ? styles.fadeInUp : ''}`}>
             <h2 className={styles.sectionTitle}>Young Entrepreneur Meetup</h2>
@@ -37,7 +37,7 @@ export default function ProgramYouthEvent() {
       </section>
 
       {/* Young Entrepreneur Panel Discussion */}
-      <section ref={content2Ref as React.RefObject<HTMLElement>} className={`${styles.section} ${styles.sectionAlt} ${styles.sectionNoPaddingTop}`}>
+      <section ref={content2Ref as React.RefObject<HTMLElement>} className={`${styles.section} ${styles.sectionAlt}`}>
         <div className={styles.container}>
           <div className={`${styles.textContent} ${isContent2Visible ? styles.fadeInUp : ''}`}>
             <h2 className={styles.sectionTitle}>Young Entrepreneur Panel Discussion</h2>

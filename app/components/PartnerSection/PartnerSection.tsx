@@ -68,6 +68,31 @@ const partnerCategories: PartnerCategory[] = [
     ]
   },
   {
+    id: 'media-partner',
+    label: 'Media Partner',
+    partners: [
+      { id: 'beranda-news', name: 'Beranda News', logo: '/Media Partner/Logo Beranda News/Beranda News.jpg.jpeg', alt: 'Beranda News' },
+      { id: 'berita-info-jitu', name: 'Berita Info Jitu', logo: '/Media Partner/Logo Berita Info Jitu/IMG-20260207-WA0001(1).jpg.jpeg', alt: 'Berita Info Jitu' },
+      { id: 'berita-unggulan', name: 'Berita Unggulan', logo: '/Media Partner/LOGO BERITA UNGGULAN/WhatsApp Image 2026-02-26 at 17.31.38.jpeg', alt: 'Berita Unggulan' },
+      { id: 'bisnis-com', name: 'Bisnis.com', logo: '/Media Partner/Logo Bisnis.com/Bisniscom Hitam.png', alt: 'Bisnis.com' },
+      { id: 'cantika', name: 'Cantika', logo: '/Media Partner/Logo Cantika/000 Logo Cantika 2025-07.png', alt: 'Cantika' },
+      { id: 'dunia-mice', name: 'Dunia MICE', logo: '/Media Partner/Logo Dunia MICE/LOGO DUNIA MICE (COLOR).png', alt: 'Dunia MICE' },
+      { id: 'getpost', name: 'Getpost', logo: '/Media Partner/Logo Getpost/451718.jpg', alt: 'Getpost' },
+      { id: 'hai-sawit-indonesia', name: 'Hai Sawit Indonesia', logo: '/Media Partner/Logo Hai Sawit Indonesia/LOGO HSI HD.PNG', alt: 'Hai Sawit Indonesia' },
+      { id: 'halal-i-see-you', name: 'Halal I See You', logo: '/Media Partner/Logo Halal I See You/halalicu-partnership(1).png', alt: 'Halal I See You' },
+      { id: 'humaniora', name: 'Humaniora', logo: '/Media Partner/Logo Humaniora/WhatsApp Image 2026-02-06 at 16.17.54_Nero_AI_Image_Upscaler_Photo_Face.jpeg', alt: 'Humaniora' },
+      { id: 'klik-warta', name: 'Klik Warta', logo: '/Media Partner/Logo Klik Warta/Logo Klikwarta.com.png', alt: 'Klik Warta' },
+      { id: 'metro-tv', name: 'Metro TV', logo: '/Media Partner/Logo Metro TV/Metro TV/SAVE_20260206_162410.jpg.jpeg', alt: 'Metro TV' },
+      { id: 'muslim-terkini', name: 'Muslim Terkini', logo: '/Media Partner/Logo Muslim Terkini/Logo MuslimTerkini ID.jpg.jpeg', alt: 'Muslim Terkini' },
+      { id: 'scarf-media', name: 'Scarf Media', logo: '/Media Partner/Logo Scarf Media/LOGO SCARF MEDIA black new hires.png', alt: 'Scarf Media' },
+      { id: 'tempo', name: 'TEMPO', logo: '/Media Partner/Logo TEMPO/Tempo White RED.png', alt: 'TEMPO' },
+      { id: 'the-phrase', name: 'The Phrase', logo: '/Media Partner/Logo The Phrase/the phrase logo - landscape.png', alt: 'The Phrase' },
+      { id: 'valid-news', name: 'Valid News', logo: '/Media Partner/Logo Valid News/VALIDNEWS LOGO (WHITE).png', alt: 'Valid News' },
+      { id: 'venue-magazine', name: 'Venue Magazine', logo: '/Media Partner/Logo Venue Magazine/logo venue baru kotak.jpg', alt: 'Venue Magazine' },
+      { id: 'warta-usaha', name: 'Warta Usaha', logo: '/Media Partner/Logo Warta Usaha/Logo Wartausaha_PNG.png', alt: 'Warta Usaha' },
+    ]
+  },
+  {
     id: 'organized-by',
     label: 'Organized by',
     partners: [
@@ -143,11 +168,11 @@ export default function PartnerSection() {
 
         <div ref={categoriesRef} className={styles.partnerCategories}>
           {partnerCategories.map((category) => (
-            <div key={category.id} className={`${styles.category} ${category.id === 'organized-by' ? styles.organizedBy : ''}`}>
+            <div key={category.id} className={`${styles.category} ${category.id === 'organized-by' ? styles.organizedBy : ''} ${category.id === 'media-partner' ? styles.mediaPartnerCategory : ''}`}>
               <div className={styles.categoryLabel}>{category.label}</div>
-              <div className={styles.partnerGrid}>
+              <div className={category.id === 'media-partner' ? styles.mediaPartnerGrid : styles.partnerGrid}>
                 {category.partners.map((partner) => (
-                  <div key={partner.id} className={styles.partnerCard}>
+                  <div key={partner.id} className={category.id === 'media-partner' ? styles.mediaPartnerCard : styles.partnerCard}>
                     {partner.website ? (
                       <a
                         href={partner.website}
@@ -156,23 +181,23 @@ export default function PartnerSection() {
                         className={styles.partnerLink}
                         aria-label={`Visit ${partner.name} website`}
                       >
-                        <div className={styles.partnerLogo}>
+                        <div className={category.id === 'media-partner' ? styles.mediaPartnerLogo : styles.partnerLogo}>
                           <Image
                             src={partner.logo}
                             alt={partner.alt}
-                            width={200}
-                            height={120}
+                            width={category.id === 'media-partner' ? 140 : 200}
+                            height={category.id === 'media-partner' ? 72 : 120}
                             className={styles.logoImage}
                           />
                         </div>
                       </a>
                     ) : (
-                      <div className={styles.partnerLogo}>
+                      <div className={category.id === 'media-partner' ? styles.mediaPartnerLogo : styles.partnerLogo}>
                         <Image
                           src={partner.logo}
                           alt={partner.alt}
-                          width={200}
-                          height={120}
+                          width={category.id === 'media-partner' ? 140 : 200}
+                          height={category.id === 'media-partner' ? 72 : 120}
                           className={styles.logoImage}
                         />
                       </div>
