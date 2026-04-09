@@ -207,9 +207,9 @@ export default function Hero() {
               D-8 Halal Expo Indonesia
             </h1>
             <div className={styles.subtitleContainer}>
-            <div ref={subtitleDateRef} className={styles.subtitleDate}>
+            {/* <div ref={subtitleDateRef} className={styles.subtitleDate}>
                 14-18 April 2026
-              </div>
+              </div> */}
               <div ref={subtitleLocationRef} className={styles.subtitleLocation}>
                 Senayan Indoor Tennis Complex, Jakarta
               </div>
@@ -245,7 +245,7 @@ export default function Hero() {
           height={200}
           className={styles.floatingAsset2}
         />
-        <Countdown />
+        {/* <Countdown /> */}
       </section>
     </div>
   );
