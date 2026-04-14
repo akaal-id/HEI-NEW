@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
-import Hero from './components/Hero/Hero';
+import SituationSection from './components/SituationSection/SituationSection';
 
 const OverviewSection = dynamic(() => import('./components/OverviewSection/OverviewSection'), {
   loading: () => <div style={{ height: '100vh', background: 'var(--hei26-linearblue)' }}></div>,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <Hero />
+      <SituationSection />
       <OverviewSection />
       <ProgramSection />
       <FAQSection />
