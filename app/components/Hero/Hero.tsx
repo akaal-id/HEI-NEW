@@ -45,8 +45,10 @@ export default function Hero() {
   const defaultSlideDuration = 6000;
   const contentFadeDuration = 350;
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [activeContentIndex, setActiveContentIndex] = useState(0);
   const [isContentExiting, setIsContentExiting] = useState(false);
   const activeSlide = heroMedia[activeSlideIndex] ?? heroMedia[0];
+  const activeContentSlide = heroMedia[activeContentIndex] ?? activeSlide;
   const dateRef = useRef<HTMLTimeElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleLocationRef = useRef<HTMLDivElement>(null);
@@ -74,12 +76,23 @@ export default function Hero() {
   const requestSlideChange = (nextIndex: number) => {
     if (heroMedia.length <= 1 || nextIndex === activeSlideIndex || isContentExiting) return;
 
+    const nextSlide = heroMedia[nextIndex];
+    const currentContentKey = activeContentSlide?.contentKey;
+    const nextContentKey = nextSlide?.contentKey;
+
+    if (nextSlide && nextContentKey === currentContentKey) {
+      clearSlideTimers();
+      setActiveSlideIndex(nextIndex);
+      return;
+    }
+
     clearSlideTimers();
     clearContentFadeTimer();
     setIsContentExiting(true);
 
     contentFadeTimeoutRef.current = window.setTimeout(() => {
       setActiveSlideIndex(nextIndex);
+      setActiveContentIndex(nextIndex);
       setIsContentExiting(false);
       contentFadeTimeoutRef.current = null;
     }, contentFadeDuration);
@@ -108,7 +121,7 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!activeSlide) return;
+    if (!activeContentSlide) return;
 
     // Dynamically import animejs
     import('animejs').then((animeModule) => {
@@ -118,13 +131,13 @@ export default function Hero() {
 
       // Split text into characters
       if (dateRef.current) {
-        dateRef.current.textContent = activeSlide.eyebrow;
-        dateRef.current.innerHTML = splitTextIntoChars(activeSlide.eyebrow);
+        dateRef.current.textContent = activeContentSlide.eyebrow;
+        dateRef.current.innerHTML = splitTextIntoChars(activeContentSlide.eyebrow);
       }
 
       if (titleRef.current) {
-        titleRef.current.textContent = activeSlide.title;
-        titleRef.current.innerHTML = splitTextIntoChars(activeSlide.title);
+        titleRef.current.textContent = activeContentSlide.title;
+        titleRef.current.innerHTML = splitTextIntoChars(activeContentSlide.title);
       }
 
       // Subtitle is now structured with location and date, no need to split into chars
@@ -203,7 +216,7 @@ export default function Hero() {
         );
       }
     });
-  }, [activeSlide]);
+  }, [activeContentSlide]);
 
   const goToPreviousSlide = () => {
     if (heroMedia.length <= 1) return;
@@ -215,7 +228,7 @@ export default function Hero() {
     requestSlideChange((activeSlideIndex + 1) % heroMedia.length);
   };
 
-  if (!activeSlide) {
+  if (!activeSlide || !activeContentSlide) {
     return null;
   }
 
@@ -292,21 +305,21 @@ export default function Hero() {
 
         <div className={styles.container}>
           <div className={`${styles.content} ${isContentExiting ? styles.contentExiting : ''}`}>
-            <time ref={dateRef} className={styles.date} dateTime={activeSlide.eyebrowDateTime}>
-              {activeSlide.eyebrow}
+            <time ref={dateRef} className={styles.date} dateTime={activeContentSlide.eyebrowDateTime}>
+              {activeContentSlide.eyebrow}
             </time>
             <h1 ref={titleRef} className={styles.title}>
-              {activeSlide.title}
+              {activeContentSlide.title}
             </h1>
             <div className={styles.subtitleContainer}>
             {/* <div ref={subtitleDateRef} className={styles.subtitleDate}>
                 14-18 April 2026
               </div> */}
               <div ref={subtitleLocationRef} className={styles.subtitleLocation}>
-                {activeSlide.location}
+                {activeContentSlide.location}
               </div>
             </div>
-            <Button className={styles.button} href={activeSlide.buttonHref}>{activeSlide.buttonLabel}</Button>
+            <Button className={styles.button} href={activeContentSlide.buttonHref}>{activeContentSlide.buttonLabel}</Button>
           </div>
         </div>
         {/* <div ref={imageRef} className={styles.imageWrapper}>

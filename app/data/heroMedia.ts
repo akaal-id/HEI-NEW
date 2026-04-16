@@ -1,4 +1,5 @@
 type HeroContent = {
+  contentKey: string;
   eyebrow: string;
   eyebrowDateTime: string;
   title: string;
@@ -28,6 +29,7 @@ export const heroMedia: HeroMediaItem[] = [
     src: '/video/Final A-final.mp4',
     alt: 'Halal Expo Indonesia video',
     duration: 12000,
+    contentKey: 'hei-main',
     eyebrow: 'Welcome to The 6th HEI',
     eyebrowDateTime: '2026-04',
     title: 'D-8 Halal Expo Indonesia',
@@ -40,6 +42,7 @@ export const heroMedia: HeroMediaItem[] = [
     src: '/video/export-video-1.mp4',
     alt: 'Halal Expo Indonesia video-2',
     duration: 5000,
+    contentKey: 'dhcf',
     eyebrow: 'Join & Feel The Diversity at',
     eyebrowDateTime: '2026-04',
     title: 'D-8 HEI Cultural Festival',
