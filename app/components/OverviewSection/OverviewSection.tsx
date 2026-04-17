@@ -5,7 +5,37 @@ import { useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import styles from './OverviewSection.module.css';
 import buttonStyles from '../Button/Button.module.css';
-import { Globe, Briefcase, Mic, Building2, ArrowUpRight } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { Globe, Briefcase, Mic, Building2, ArrowUpRight, Flag, SquareStack} from 'lucide-react';
+
+type IntroMetricCard = {
+  icon: LucideIcon;
+  eyebrow: string;
+  title: string;
+  description: string;
+};
+
+/** Add, remove, or reorder entries to change the intro metric cards. */
+const INTRO_METRIC_CARDS: IntroMetricCard[] = [
+  {
+    icon: Globe,
+    eyebrow: 'Massive Global Footprint',
+    title: '41,000+ Global Visitors',
+    description: 'Connecting buyers, innovators, and industry leaders representing up to 140 countries across the globe',
+  },
+  {
+    icon: SquareStack,
+    eyebrow: 'High-Impact Trade Action',
+    title: '100+ Premium Exhibition Booths',
+    description: 'Facilitating targeted Business Matching and direct Investment pitching to drive real-sector growth',
+  },
+  {
+    icon: Flag,
+    eyebrow: 'Unparalleled D-8 Networking',
+    title: '9 Powerful Member Nations',
+    description: 'Bridging international delegates, top-tier exhibitors, and key decision-makers from the D-8 economic ecosystem',
+  }
+];
 
 export default function OverviewSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -72,7 +102,45 @@ export default function OverviewSection() {
           />
         </div>
         
-        <div ref={metricsRef} className={styles.metricsContainerWrapper}>
+        <div className={styles.introWrapper}>
+          <div className={styles.introContent}>
+            <span className={styles.introEyebrow}>Let's Start with A Question</span>
+            <h2 className={styles.introTitle}>What is D-8 Halal Expo Indonesia 2026?</h2>
+            <p className={styles.introDescription}>
+            While high-level trade policies are negotiated behind closed doors, the real economic future is built on the expo floor. As the official side event of the D-8 Summit, the D-8 Halal Expo Indonesia (HEI) 2026 is where global diplomacy meets concrete market action. It is a unified, international framework designed to translate government treaties into tangible, cross-border business opportunities. Here, the ambitious visions of D-8 nations are transformed into real-sector growth, connecting policymakers directly with industry innovators, investors, and traders.
+            </p>
+            <div className={styles.introMetricsTitle}>The World is Watching. Will You Be There? </div>
+            <div className={styles.introMetricsWrapper}>
+              <div className={styles.introMetricsContainer}>
+                {INTRO_METRIC_CARDS.map(({ icon: Icon, eyebrow, title, description }) => (
+                  <div key={`${title}-${description}`} className={styles.introMetricsCard}>
+                    <div className={styles.introMetricsCardTitle}>
+                      <div className={styles.introMetricsCardEyebrowWrapper}>
+                        <Icon className={styles.introMetricsCardIcon} />
+                        <span className={styles.introMetricsCardEyebrowText}>{eyebrow}</span>
+                      </div>
+                      <span className={styles.introMetricsCardTitleText}>{title}</span>
+                    </div>
+                    <div className={styles.introMetricsCardDescription}>
+                      <span className={styles.introMetricsCardDescriptionText}>{description}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={styles.introDescription}>This is not just another exhibition; it is the epicenter of the global halal value chain. By securing your access to HEI, you are stepping into an elite network with a proven track record of immense scale</div>
+            <div className={styles.introButton}>
+              <a href="/about/d8-organization" className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.button}`}>
+                <span className={buttonStyles.text}>Get to Know D-8 More</span>
+                <div className={buttonStyles.iconContainer}>
+                  <ArrowUpRight className={buttonStyles.icon} />
+                </div> 
+              </a>
+            </div>
+          </div>
+        </div>
+        </div>
+        {/* <div ref={metricsRef} className={styles.metricsContainerWrapper}>
           <div className={styles.metricsContainer}>
           <div className={styles.metric}>
             <Globe className={styles.metricIcon} />
@@ -106,8 +174,7 @@ export default function OverviewSection() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
 
       {/* Introduction Subsection */}
       <div ref={introRef} className={styles.subsection}>

@@ -17,7 +17,7 @@
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 4;
+  aspect-ratio: 16 / 6;
   border-radius: 16px;
   /*padding: 0.05rem;*/
   overflow: hidden;
@@ -39,6 +39,194 @@
   transform: scale(1.01);
   filter: brightness(1.1);
 }
+
+.introWrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3.2rem 0;
+}
+
+.introContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.introEyebrow {
+  font-size: clamp(0.875rem, 1.8vw, 1rem);
+  font-weight: 400;
+  color: var(--hei26-white);
+  opacity: 0.8;
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.introTitle {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 600;
+  color: var(--hei26-white);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -2px;
+  margin-bottom: 2rem;
+}
+
+.introDescription {
+  font-size: clamp(0.875rem, 1.8vw, 1rem);
+  font-weight: 400;
+  color: var(--hei26-white);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 60%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.introMetricsTitle {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: var(--hei26-white);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+.introMetricsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+.introMetricsContainer {
+  display: grid;
+  /* Wraps to fewer columns when the row is too narrow; min(100%, …) avoids overflow */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.introMetricsCard {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 12rem;
+  height: auto;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.4px solid rgba(255, 255, 255, 0.2);
+  overflow-wrap: break-word;
+  transition: all 0.6s ease;
+}
+
+.introMetricsCard:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.2rem);
+}
+
+.introMetricsCardEyebrowWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  width: fit-content;
+  margin-bottom: 0.5rem;
+}
+
+.introMetricsCardIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--hei26-white);
+  flex-shrink: 0;
+}
+
+.introMetricsCardEyebrowText {
+  font-size: clamp(0.625rem, 1vw, 0.875rem);
+  font-weight: 500;
+  color: var(--hei26-white);
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.introMetricsCardTitle {
+  font-size: clamp(2.5rem, 2vw, 2.5rem);
+  font-weight: 600;
+  color: var(--hei26-white);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -2px;
+}
+.introMetricsCardDescription {
+  font-size: clamp(0.875rem, 1.8vw, 1rem);
+  font-weight: 400;
+  color: var(--hei26-white);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 100%;
+}
+.introMetricsCardValue {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: var(--hei26-white);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.introCTAText {
+  font-size: clamp(0.875rem, 1.8vw, 1rem);
+  font-weight: 400;
+  color: var(--hei26-white);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 100%;
+}
+.introCTATextBold {
+  font-weight: 600;
+}
+
+.introButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 24px;
+  width: fit-content;
+}
+
 .metricsContainerWrapper {
   position: absolute;
   bottom: 0.5rem;
@@ -424,6 +612,37 @@
     
   }
 
+  .introWrapper {
+    padding: 2rem 0;
+  }
+
+  .introContent {
+    padding: 0 2rem;
+    align-items: flex-start;
+  }
+
+  .introEyebrow {
+    font-size: clamp(0.875rem, 1.8vw, 1rem);
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+
+  .introTitle {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  .introDescription {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    max-width: 100%;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+
+  .introButton {
+    width: 100%;
+  }
 
   .subsectionContent {
     flex-direction: column;
@@ -508,5 +727,32 @@
     object-fit: cover;
   }
 
+  .introMetricsTitle {
+    font-size: clamp(1.5625rem, 2vw, 1.5rem);
+    text-align: left;
+    margin-top: 1rem;
+    max-width: 16rem;
+    line-height: 1.4;
+    letter-spacing: -1px;
+  }
+
+  .introMetricsWrapper {
+    flex-direction: column;
+    padding: 2rem 0;
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  .introMetricsContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  .introMetricsCard {
+    padding: 1rem;
+    min-height: auto;
+  }
 }
 

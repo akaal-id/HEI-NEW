@@ -7,8 +7,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.4rem 8rem;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  background: #094949b2;
+  backdrop-filter: blur(1rem);
   z-index: 10;
   gap: 2rem;
 }
@@ -27,7 +27,7 @@
 }
 
 .ctaTextDark {
-  color: var(--hei26-dongkerblue);
+  color: #f9f9f9;
   font-weight: 600;
 }
 

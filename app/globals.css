@@ -7,6 +7,7 @@ html {
 :root {
   --background: #F4F7F6;
   --foreground: #1C2B2B;
+  --hei26-white: #F9F9F9;
   --hei26-dongkerblue: #0F5C5C;
   --hei26-skyblue: #157A7A;
   --hei26-linearblue: linear-gradient(90deg, #0F5C5C 0%, #1F8F8F 100%);
