@@ -176,7 +176,7 @@ export default function OverviewSection() {
           </div>
         </div> */}
 
-      {/* Introduction Subsection */}
+      {/* Introduction Subsection
       <div ref={introRef} className={styles.subsection}>
         <div className={styles.subsectionContent}>
           <div className={styles.subsectionText}>
@@ -218,9 +218,9 @@ export default function OverviewSection() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* Value Proposition Subsection */}
+      {/* Value Proposition Subsection
       <div ref={valuePropRef} className={styles.subsection}>
         <div className={styles.valueContainer}>
           <div className={styles.valueHeader}>
@@ -263,7 +263,7 @@ export default function OverviewSection() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

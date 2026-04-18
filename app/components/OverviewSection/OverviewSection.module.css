@@ -10,8 +10,7 @@
 .imageSection {
   position: relative;
   width: 100%;
-  margin: 0 auto 120px;
-  padding-bottom: 80px;
+  margin: auto 0 2rem 0;
 }
 
 .imageContainer {
@@ -565,7 +564,7 @@
 
   .imageSection {
     margin-bottom: 0;
-    padding-bottom: 0;
+    padding-bottom: 2rem;
     width: 100%;
   }
 

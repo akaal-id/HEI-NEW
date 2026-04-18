@@ -151,8 +151,11 @@ export default function ProgramSection() {
                     </Button>
                   </>
                 ) : (
-                  <div className={styles.cardIconButton}>
-                    <ArrowUpRight className={styles.cardIcon} />
+                  <div className={styles.cardDefaultWrap}>
+                    <span className={styles.cardDefaultTitle}>{program.title}</span>
+                    <div className={styles.cardIconButton}>
+                      <ArrowUpRight className={styles.cardIcon} />
+                    </div>
                   </div>
                 )}
               </div>
