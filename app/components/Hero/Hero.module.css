@@ -189,11 +189,20 @@
 
 .subtitleContainer {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
   margin: 0;
   width: auto;
   margin-bottom: 8px;
+}
+
+.subtitledivider {
+  width: 1px;
+  height: 24px;
+  background-color: #f9f9f9;
+  opacity: 0.5;
 }
 
 .subtitleLocation {
@@ -329,16 +338,27 @@
     object-fit: cover;
     object-position: center center;
   }
+
+  .subtitleContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .subtitledivider {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
 
   .sliderNavButton {
-    bottom: 14.2rem;
+    bottom: 19.5rem;
   }
 
   .sliderDots {
-    bottom: 15rem;
+    bottom: 20.5rem;
   }
   
   .hero {

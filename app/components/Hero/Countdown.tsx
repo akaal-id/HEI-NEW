@@ -22,7 +22,7 @@ export default function Countdown() {
 
   useEffect(() => {
     // Target date: April 14th, 2026
-    const targetDate = new Date('2026-04-14T00:00:00').getTime();
+    const targetDate = new Date('2026-07-08T00:00:00').getTime();
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -82,7 +82,7 @@ export default function Countdown() {
         </p>
       </div>
 
-      {/* <div className={styles.countdown}>
+      <div className={styles.countdown}>
         <div className={styles.timeUnit}>
           <div className={styles.timeValue}>{timeLeft.days.toString().padStart(2, '0')}</div>
           <div className={styles.timeLabel}>Days</div>
@@ -102,7 +102,7 @@ export default function Countdown() {
           <div className={styles.timeValue}>{timeLeft.seconds.toString().padStart(2, '0')}</div>
           <div className={styles.timeLabel}>Second</div>
         </div>
-      </div> */}
+      </div>
 
       <div className={styles.buttonWrapper}>
         <Button href="/register/exhibitor" variant="primary">

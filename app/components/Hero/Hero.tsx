@@ -312,9 +312,10 @@ export default function Hero() {
               {activeContentSlide.title}
             </h1>
             <div className={styles.subtitleContainer}>
-            {/* <div ref={subtitleDateRef} className={styles.subtitleDate}>
-                14-18 April 2026
-              </div> */}
+            <div ref={subtitleDateRef} className={styles.subtitleDate}>
+                08 - 12 July 2026
+              </div>
+              <div className={styles.subtitledivider} />
               <div ref={subtitleLocationRef} className={styles.subtitleLocation}>
                 {activeContentSlide.location}
               </div>

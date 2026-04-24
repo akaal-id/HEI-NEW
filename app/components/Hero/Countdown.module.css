@@ -55,7 +55,7 @@
 .timeValue {
   font-size: clamp(32px, 2.5vw, 42px);
   font-weight: 600;
-  color: var(--hei26-dongkerblue);
+  color: var(--hei26-turquoise);
   line-height: 1;
   text-align: center;
   width: 100%;
@@ -64,7 +64,7 @@
 .timeLabel {
   font-size: clamp(12px, 1.2vw, 16px);
   font-weight: 400;
-  color: var(--hei26-dongkerblue);
+  color: var(--hei26-white);
   margin-top: 8px;
   text-align: center;
 }
