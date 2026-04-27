@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
-import AboutD8Organization from '../../components/AboutSection/AboutD8Organization';
+import Header from './header/header';
+import Organization from './organization/organization';
+import Summit from './summit/summit';
+import Cta from './cta/cta';
 
 export const metadata: Metadata = {
   title: "D-8 Organization for Economic Cooperation | About HEI 2026",
@@ -29,7 +32,10 @@ export const metadata: Metadata = {
 export default function D8OrganizationPage() {
   return (
     <main>
-      <AboutD8Organization />
+      <Header />
+      <Organization />
+      <Summit />
+      <Cta />
     </main>
   );
 }
