@@ -1,10 +1,18 @@
 'use client';
 
 import Image from 'next/image';
-import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './header.module.css';
 
-export default function Header() {
+export const headerTitleAccentClass = styles.heroTitleAccent;
+
+type HeaderProps = {
+  eyebrow: string;
+  title: React.ReactNode;
+  subtitle: string;
+};
+
+export default function Header({ eyebrow, title, subtitle }: HeaderProps) {
   const [sectionRef, isVisible] = useIntersectionObserver({ threshold: 0.1 });
 
   return (
@@ -23,15 +31,9 @@ export default function Header() {
       </div>
 
       <div className={styles.heroContainer}>
-        <span className={styles.eyebrow}>About D-8</span>
-        <h1 className={styles.heroTitle}>
-          D-8 Organization for{' '}
-          <span className={styles.heroTitleAccent}>Economic Cooperation</span>
-        </h1>
-        <p className={styles.heroSubtitle}>
-          A nine-nation economic forum advancing global trade, sustainable development,
-          and shared prosperity across Asia, Africa, and Europe.
-        </p>
+        <span className={styles.eyebrow}>{eyebrow}</span>
+        <h1 className={styles.heroTitle}>{title}</h1>
+        <p className={styles.heroSubtitle}>{subtitle}</p>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 .section {
   position: relative;
   width: 100%;
-  padding: clamp(4rem, 8vw, 7rem) 1rem;
+  padding: clamp(4rem, 8vw, 7rem) 2rem;
   background: var(--hei26-linearblue);
   font-family: var(--font-plus-jakarta-sans), sans-serif;
   overflow: hidden;
@@ -50,7 +50,7 @@
 .container {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -246,11 +246,54 @@
 }
 
 @media (max-width: 768px) {
+  .section {
+    padding: clamp(3rem, 8vw, 4.5rem) 1rem;
+  }
+
+  .container {
+    gap: 1.5rem;
+  }
+
+  .title {
+    margin-bottom: 1rem;
+  }
+
+  .subBlock {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+  }
+
   .callout {
     border-radius: 18px;
+    padding: 1.5rem 1rem;
   }
 
   .statCard {
     padding: 1.2rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0.85rem;
+  }
+
+  .statsRow {
+    gap: 0.75rem;
+  }
+
+  .statCard {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .statIconWrap {
+    width: 44px;
+    height: 44px;
+  }
+
+  .statIcon {
+    width: 20px;
+    height: 20px;
   }
 }

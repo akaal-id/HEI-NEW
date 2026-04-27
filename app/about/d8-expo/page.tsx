@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
-import AboutD8Expo from '../../components/AboutSection/AboutD8Expo';
+import Header, { headerTitleAccentClass } from '../header/header';
+import HEI from './hei/hei';
+import D8HEI from './d8hei/d8hei';
+import Cta from '../cta/cta';
 
 export const metadata: Metadata = {
   title: "D-8 Halal Expo Indonesia 2026 | About the Event",
@@ -29,7 +32,19 @@ export const metadata: Metadata = {
 export default function D8ExpoPage() {
   return (
     <main>
-      <AboutD8Expo />
+      <Header
+        eyebrow="About HEI"
+        title={
+          <>
+            Halal Expo Indonesia:{' '}
+            <span className={headerTitleAccentClass}>The Global B2B Halal Stage</span>
+          </>
+        }
+        subtitle="A leading B2B halal ecosystem platform and strategic global stage for the Islamic economy — bridging local industrial potential with the worldwide halal trade and lifestyle marketplace."
+      />
+      <HEI />
+      <D8HEI />
+      <Cta />
     </main>
   );
 }

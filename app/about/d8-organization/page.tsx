@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Header from './header/header';
+import Header, { headerTitleAccentClass } from '../header/header';
 import Organization from './organization/organization';
 import Summit from './summit/summit';
-import Cta from './cta/cta';
+import Cta from '../cta/cta';
 
 export const metadata: Metadata = {
   title: "D-8 Organization for Economic Cooperation | About HEI 2026",
@@ -32,7 +32,16 @@ export const metadata: Metadata = {
 export default function D8OrganizationPage() {
   return (
     <main>
-      <Header />
+      <Header
+        eyebrow="About D-8"
+        title={
+          <>
+            D-8 Organization for{' '}
+            <span className={headerTitleAccentClass}>Economic Cooperation</span>
+          </>
+        }
+        subtitle="A nine-nation economic forum advancing global trade, sustainable development, and shared prosperity across Asia, Africa, and Europe."
+      />
       <Organization />
       <Summit />
       <Cta />

@@ -123,23 +123,27 @@ export default function Summit() {
           className={`${styles.halalCard} ${halalVisible ? styles.visible : ''}`}
         >
           <div className={styles.halalContent}>
-            <span className={styles.subEyebrow}>Halal Economy</span>
-            <h3 className={styles.subTitle}>Championing the Global Halal Economy</h3>
-            <p className={styles.body}>
-              Within the D-8 framework, the halal economy has emerged as a rapidly growing sector
-              with strong potential to enhance trade, investment, and collaboration among member
-              states. D-8 nations collectively represent a significant share of the global halal
-              market — spanning culinary products, fashion, pharmaceuticals, education, and Islamic
-              finance — established to promote sustainable development and strengthen global
-              economic cooperation.
-            </p>
-            <p className={styles.body}>
-              At its highest level, the D-8 Summit serves as a premier forum where world leaders
-              align policies and establish strategic trade partnerships to transform economic
-              visions into actionable strategies for shared global progress. With Indonesia hosting
-              the D-8 Summit in 2026, a new chapter of global economic synergy is unfolding,
-              positioning the nation at the heart of the global halal ecosystem.
-            </p>
+            <div className={styles.halalTop}>
+              <span className={styles.subEyebrow}>Halal Economy</span>
+              <h3 className={styles.subTitle}>Championing the Global Halal Economy</h3>
+            </div>
+            <div className={styles.halalDescGrid}>
+              <p className={styles.body}>
+                Within the D-8 framework, the halal economy has emerged as a rapidly growing sector
+                with strong potential to enhance trade, investment, and collaboration among member
+                states. D-8 nations collectively represent a significant share of the global halal
+                market — spanning culinary products, fashion, pharmaceuticals, education, and Islamic
+                finance — established to promote sustainable development and strengthen global
+                economic cooperation.
+              </p>
+              <p className={styles.body}>
+                At its highest level, the D-8 Summit serves as a premier forum where world leaders
+                align policies and establish strategic trade partnerships to transform economic
+                visions into actionable strategies for shared global progress. With Indonesia hosting
+                the D-8 Summit in 2026, a new chapter of global economic synergy is unfolding,
+                positioning the nation at the heart of the global halal ecosystem.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -176,7 +180,7 @@ export default function Summit() {
           </div>
         </div>
 
-        {/* SUMMIT ACTIVITIES — sticky-aside zigzag editorial */}
+        {/* SUMMIT ACTIVITIES — split sticky aside + objective list */}
         <div className={styles.activitiesSection}>
           <aside className={styles.activitiesAside}>
             <span className={styles.subEyebrow}>What Happens at the Summit</span>
@@ -187,27 +191,26 @@ export default function Summit() {
             </p>
           </aside>
 
-          <div
-            ref={activitiesRef as React.RefObject<HTMLDivElement>}
-            className={`${styles.zigzagList} ${activitiesVisible ? styles.visible : ''}`}
+          <ol
+            ref={activitiesRef as React.RefObject<HTMLOListElement>}
+            className={`${styles.activitiesList} ${activitiesVisible ? styles.visible : ''}`}
           >
             {SUMMIT_ACTIVITIES.map(({ icon: Icon, title, description }, i) => (
-              <article
+              <li
                 key={title}
-                className={`${styles.zigzagRow} ${i % 2 === 1 ? styles.zigzagAlt : ''}`}
+                className={styles.activityItem}
                 style={{ transitionDelay: `${i * 90}ms` }}
               >
-                <div className={styles.zigzagBlock}>
-                  <Icon className={styles.zigzagIcon} />
-                  <span className={styles.zigzagIndex}>{pad(i)}</span>
+                <div className={styles.activityContent}>
+                  <div className={styles.activityTitleRow}>
+                    <h4 className={styles.activityTitle}>{title}</h4>
+                    <Icon className={styles.activityIcon} />
+                  </div>
+                  <p className={styles.activityDescription}>{description}</p>
                 </div>
-                <div className={styles.zigzagContent}>
-                  <h4 className={styles.zigzagTitle}>{title}</h4>
-                  <p className={styles.zigzagDescription}>{description}</p>
-                </div>
-              </article>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
 
         {/* PURPOSE — minimal stat row with dividers */}

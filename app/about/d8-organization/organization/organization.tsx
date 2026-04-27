@@ -59,19 +59,20 @@ const PRIORITY_SECTORS = [
 const HOST_MEMBER = {
   code: 'ID',
   name: 'Indonesia',
+  region: 'Southeast Asia',
   description:
     'The largest economy in Southeast Asia and a global hub for the Halal industry. Hosting the D-8 Summit 2026 and the D-8 Halal Expo Indonesia 2026.',
 };
 
 const OTHER_MEMBERS = [
-  { code: 'BD', name: 'Bangladesh', description: 'Key player in global manufacturing and textile exports.' },
-  { code: 'EG', name: 'Egypt', description: 'Strategic trade hub bridging Africa and Asia.' },
-  { code: 'IR', name: 'Iran', description: 'Excellence in energy, technology, and natural resources.' },
-  { code: 'MY', name: 'Malaysia', description: 'Pioneer in Islamic finance and Halal certification.' },
-  { code: 'NG', name: 'Nigeria', description: 'Largest African economy with vast consumer potential.' },
-  { code: 'PK', name: 'Pakistan', description: 'Strong agricultural sector and a young, dynamic workforce.' },
-  { code: 'TR', name: 'Türkiye', description: 'Modern manufacturing hub bridging Europe and Asia.' },
-  { code: 'AZ', name: 'Azerbaijan', description: 'Newest member (2025), strengthening Caucasus connectivity.' },
+  { code: 'BD', name: 'Bangladesh', region: 'South Asia', description: 'Key player in global manufacturing and textile exports.' },
+  { code: 'EG', name: 'Egypt', region: 'North Africa', description: 'Strategic trade hub bridging Africa and Asia.' },
+  { code: 'IR', name: 'Iran', region: 'West Asia', description: 'Excellence in energy, technology, and natural resources.' },
+  { code: 'MY', name: 'Malaysia', region: 'Southeast Asia', description: 'Pioneer in Islamic finance and Halal certification.' },
+  { code: 'NG', name: 'Nigeria', region: 'West Africa', description: 'Largest African economy with vast consumer potential.' },
+  { code: 'PK', name: 'Pakistan', region: 'South Asia', description: 'Strong agricultural sector and a young, dynamic workforce.' },
+  { code: 'TR', name: 'Türkiye', region: 'Eurasia', description: 'Modern manufacturing hub bridging Europe and Asia.' },
+  { code: 'AZ', name: 'Azerbaijan', region: 'Caucasus', description: 'Newest member (2025), strengthening Caucasus connectivity.' },
 ];
 
 const MILESTONES = [
@@ -105,14 +106,11 @@ const MILESTONES = [
   },
 ];
 
-const pad = (n: number) => String(n + 1).padStart(2, '0');
-
 export default function Organization() {
   const [introRef, introVisible] = useIntersectionObserver({ threshold: 0.15 });
   const [objectivesRef, objectivesVisible] = useIntersectionObserver({ threshold: 0.1 });
   const [sectorsRef, sectorsVisible] = useIntersectionObserver({ threshold: 0.1 });
-  const [featuredRef, featuredVisible] = useIntersectionObserver({ threshold: 0.2 });
-  const [chipsRef, chipsVisible] = useIntersectionObserver({ threshold: 0.05 });
+  const [membersRef, membersVisible] = useIntersectionObserver({ threshold: 0.05 });
   const [milestonesRef, milestonesVisible] = useIntersectionObserver({ threshold: 0.1 });
 
   return (
@@ -215,7 +213,6 @@ export default function Organization() {
                 className={styles.numberedItem}
                 style={{ transitionDelay: `${i * 90}ms` }}
               >
-                <span className={styles.numberLabel}>{pad(i)}</span>
                 <div className={styles.numberedContent}>
                   <div className={styles.numberedTitleRow}>
                     <h4 className={styles.numberedTitle}>{obj.title}</h4>
@@ -263,47 +260,55 @@ export default function Organization() {
           </div>
         </div>
 
-        {/* MEMBER PROFILES — featured host + chip grid */}
+        {/* MEMBER PROFILES — bento grid with featured host */}
         <div className={styles.membersSection}>
-          <header className={styles.subsectionHeader}>
-            <span className={styles.subEyebrow}>Member Profiles</span>
-            <h3 className={styles.subTitle}>9 Pillars of Global Growth</h3>
-            <p className={styles.subDescription}>
-              The D-8 unites geographic diversity from Southeast Asia to West Africa, creating a
-              massive collective market.
+          <header className={styles.compactHeader}>
+            <div>
+              <span className={styles.subEyebrow}>Member Profiles</span>
+              <h3 className={styles.subTitle}>9 Pillars of Global Growth</h3>
+            </div>
+            <p className={styles.compactDescription}>
+              The D-8 unites geographic diversity from Southeast Asia to West Africa — a collective
+              of nine emerging economies shaping the next chapter of global trade.
             </p>
           </header>
 
-          <article
-            ref={featuredRef as React.RefObject<HTMLElement>}
-            className={`${styles.featuredMember} ${featuredVisible ? styles.visible : ''}`}
-          >
-            <div className={styles.featuredAside}>
-              <span className={styles.featuredCode}>{HOST_MEMBER.code}</span>
-              <span className={styles.featuredBadge}>
-                <Star className={styles.featuredBadgeIcon} />
-                Host Country · Summit 2026
-              </span>
-            </div>
-            <div className={styles.featuredBody}>
-              <h4 className={styles.featuredName}>{HOST_MEMBER.name}</h4>
-              <p className={styles.featuredDescription}>{HOST_MEMBER.description}</p>
-            </div>
-          </article>
-
           <div
-            ref={chipsRef as React.RefObject<HTMLDivElement>}
-            className={`${styles.memberChipGrid} ${chipsVisible ? styles.visible : ''}`}
+            ref={membersRef as React.RefObject<HTMLDivElement>}
+            className={`${styles.membersGrid} ${membersVisible ? styles.visible : ''}`}
           >
+            <article
+              className={`${styles.memberCard} ${styles.memberCardFeatured}`}
+              style={{ transitionDelay: '0ms' }}
+            >
+              <div className={styles.memberCardHeader}>
+                <span className={styles.memberHostBadge}>
+                  <Star className={styles.memberHostIcon} />
+                  Host · Summit 2026
+                </span>
+                <span className={styles.memberCode}>{HOST_MEMBER.code}</span>
+              </div>
+              <div className={styles.memberCardBody}>
+                <span className={styles.memberRegion}>{HOST_MEMBER.region}</span>
+                <h4 className={styles.memberName}>{HOST_MEMBER.name}</h4>
+                <p className={styles.memberDescription}>{HOST_MEMBER.description}</p>
+              </div>
+            </article>
+
             {OTHER_MEMBERS.map((m, i) => (
               <article
                 key={m.code}
-                className={styles.memberChip}
-                style={{ transitionDelay: `${i * 60}ms` }}
+                className={styles.memberCard}
+                style={{ transitionDelay: `${(i + 1) * 70}ms` }}
               >
-                <span className={styles.chipCode}>{m.code}</span>
-                <h4 className={styles.chipName}>{m.name}</h4>
-                <p className={styles.chipDescription}>{m.description}</p>
+                <div className={styles.memberCardHeader}>
+                  <span className={styles.memberRegion}>{m.region}</span>
+                  <span className={styles.memberCode}>{m.code}</span>
+                </div>
+                <div className={styles.memberCardBody}>
+                  <h4 className={styles.memberName}>{m.name}</h4>
+                  <p className={styles.memberDescription}>{m.description}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -324,25 +329,30 @@ export default function Organization() {
 
           <div
             ref={milestonesRef as React.RefObject<HTMLDivElement>}
-            className={`${styles.timeline} ${milestonesVisible ? styles.visible : ''}`}
+            className={`${styles.milestonesTimeline} ${milestonesVisible ? styles.visible : ''}`}
           >
-            <div className={styles.timelineRail} aria-hidden="true" />
-            {MILESTONES.map(({ icon: Icon, year, title, description }, i) => (
-              <article
-                key={title}
-                className={styles.timelineItem}
-                style={{ transitionDelay: `${i * 90}ms` }}
-              >
-                <div className={styles.timelineMarker}>
-                  <Icon className={styles.timelineIcon} />
-                </div>
-                <div className={styles.timelineBody}>
-                  <span className={styles.timelineYear}>{year}</span>
-                  <h4 className={styles.timelineTitle}>{title}</h4>
-                  <p className={styles.timelineDescription}>{description}</p>
-                </div>
-              </article>
-            ))}
+            <div className={styles.milestonesRail} aria-hidden="true" />
+            <div className={styles.milestonesTrack}>
+              {MILESTONES.map(({ icon: Icon, year, title, description }, i) => (
+                <article
+                  key={title}
+                  className={styles.milestoneCard}
+                  style={{ transitionDelay: `${i * 110}ms` }}
+                >
+                  <div className={styles.milestoneMarker}>
+                    <span className={styles.milestoneIndex}>{String(i + 1).padStart(2, '0')}</span>
+                    <div className={styles.milestoneIconWrap}>
+                      <Icon className={styles.milestoneIcon} />
+                    </div>
+                  </div>
+                  <div className={styles.milestoneBody}>
+                    <span className={styles.milestoneYear}>{year}</span>
+                    <h4 className={styles.milestoneTitle}>{title}</h4>
+                    <p className={styles.milestoneDescription}>{description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </div>

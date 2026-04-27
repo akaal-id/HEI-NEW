@@ -1,16 +1,46 @@
 .section {
   width: 100%;
-  padding: clamp(4rem, 8vw, 7rem) 1rem;
+  padding: clamp(4rem, 8vw, 7rem) 2rem;
   background: var(--background);
   font-family: var(--font-plus-jakarta-sans), sans-serif;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(3.5rem, 7vw, 6rem);
+  gap: 240px;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: clamp(3.5rem, 6vw, 5.5rem) 1.25rem;
+  }
+
+  .container {
+    gap: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: clamp(3rem, 8vw, 4.5rem) 1rem;
+  }
+
+  .container {
+    gap: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0.85rem;
+  }
+
+  .container {
+    gap: 88px;
+  }
 }
 
 /* ==== Shared text tokens ==== */
@@ -138,11 +168,12 @@
     linear-gradient(135deg, rgba(15, 92, 92, 0.04) 0%, rgba(31, 143, 143, 0.06) 100%),
     #ffffff;
   border: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 14%, transparent);
-  box-shadow: 0 18px 48px -28px color-mix(in srgb, var(--hei26-dongkerblue) 30%, transparent);
+  box-shadow: 0 18px 48px -28px color-mix(in srgb, var(--hei26-dongkerblue) 10%, transparent);
   overflow: hidden;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  min-height: 460px;
 }
 
 .halalCard::before {
@@ -169,7 +200,30 @@
 .halalContent {
   position: relative;
   z-index: 1;
-  max-width: 80ch;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+}
+
+.halalTop {
+  max-width: 56ch;
+}
+
+.halalTop .subTitle {
+  margin-bottom: 0;
+}
+
+.halalDescGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.halalDescGrid .body {
+  margin-bottom: 0;
 }
 
 /* ==== Strategic Goals: manifest columns (centered header) ==== */
@@ -286,10 +340,10 @@
   transition: transform 0.4s ease;
 }
 
-/* ==== Summit Activities: sticky aside + zigzag rows ==== */
+/* ==== Summit Activities: split sticky aside + objective list ==== */
 .activitiesSection {
   display: grid;
-  grid-template-columns: 0.8fr 1.4fr;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
 }
@@ -297,118 +351,94 @@
 .activitiesAside {
   position: sticky;
   top: 1rem;
+}
+
+.activitiesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
 }
 
-.zigzagList {
+.activityItem {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 12%, transparent);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.activityItem:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.activityItem:last-child {
+  padding-bottom: 0;
+}
+
+.activitiesList.visible .activityItem {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.activityContent {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+}
+
+.activityTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem;
 }
 
-.zigzagRow {
-  display: grid;
-  grid-template-columns: 84px 1fr;
-  gap: 1.25rem;
-  align-items: center;
-  padding: 1.25rem 1.5rem;
-  border-radius: 16px;
-  background: #ffffff;
-  border: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 10%, transparent);
-  opacity: 0;
-  transform: translateX(-12px);
-  transition:
-    opacity 0.7s ease-out,
-    transform 0.7s ease-out,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.zigzagAlt {
-  grid-template-columns: 1fr 84px;
-  text-align: right;
-  background:
-    linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, var(--hei26-turquoise) 8%, #ffffff) 100%);
-  transform: translateX(12px);
-}
-
-.zigzagList.visible .zigzagRow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.zigzagRow:hover {
-  border-color: color-mix(in srgb, var(--hei26-skyblue) 35%, transparent);
-  box-shadow: 0 16px 32px -20px color-mix(in srgb, var(--hei26-dongkerblue) 28%, transparent);
-}
-
-.zigzagBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  width: 84px;
-  height: 84px;
-  border-radius: 14px;
-  background: var(--hei26-linearblue);
-  color: #ffffff;
-}
-
-.zigzagAlt .zigzagBlock {
-  order: 2;
-  margin-left: auto;
-}
-
-.zigzagIcon {
-  width: 24px;
-  height: 24px;
-  stroke-width: 1.75;
-  color: #ffffff;
-}
-
-.zigzagIndex {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: rgba(255, 255, 255, 0.85);
-  font-feature-settings: "tnum";
-}
-
-.zigzagContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  min-width: 0;
-}
-
-.zigzagAlt .zigzagContent {
-  order: 1;
-  align-items: flex-end;
-}
-
-.zigzagTitle {
+.activityTitle {
   margin: 0;
   color: var(--hei26-dongkerblue);
-  font-size: clamp(17px, 1.4vw, 19px);
+  font-size: clamp(18px, 1.6vw, 22px);
   font-weight: 600;
   line-height: 1.3;
 }
 
-.zigzagDescription {
-  margin: 0;
-  color: #5a6a6a;
-  font-size: clamp(14px, 1.2vw, 15px);
-  line-height: 1.65;
-  max-width: 60ch;
+.activityIcon {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.75;
+  color: var(--hei26-skyblue);
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.zigzagAlt .zigzagDescription {
-  margin-left: auto;
+.activityItem:hover .activityIcon {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.activityDescription {
+  margin: 0;
+  color: #5a6a6a;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.7;
 }
 
 @media (max-width: 900px) {
+  .halalCard {
+    min-height: 0;
+    height: auto;
+  }
+
+  .halalDescGrid {
+    grid-template-columns: 1fr;
+  }
+
   .activitiesSection {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -418,42 +448,25 @@
     position: static;
   }
 
-  .zigzagAlt {
-    grid-template-columns: 84px 1fr;
-    text-align: left;
-    transform: translateX(-12px);
-  }
-
-  .zigzagAlt .zigzagBlock {
-    order: 0;
-    margin-left: 0;
-  }
-
-  .zigzagAlt .zigzagContent {
-    order: 0;
-    align-items: flex-start;
-  }
-
-  .zigzagAlt .zigzagDescription {
-    margin-left: 0;
+  .activityItem {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1.25rem 0;
   }
 }
 
 @media (max-width: 768px) {
   .halalCard {
     border-radius: 18px;
+    padding: 1.25rem;
   }
 
-  .zigzagRow,
-  .zigzagAlt {
-    grid-template-columns: 64px 1fr;
-    padding: 1rem 1.1rem;
+  .manifestColumn {
+    padding: 1.25rem 1.1rem 1.5rem;
   }
 
-  .zigzagBlock {
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
+  .minimalHeader {
+    text-align: left;
   }
 }
 

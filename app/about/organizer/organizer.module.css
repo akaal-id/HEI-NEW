@@ -1,0 +1,540 @@
+.section {
+  width: 100%;
+  padding: clamp(4rem, 8vw, 7rem) 2rem;
+  background: #ffffff;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 240px;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: clamp(3.5rem, 6vw, 5.5rem) 1.25rem;
+  }
+
+  .container {
+    gap: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: clamp(3rem, 8vw, 4.5rem) 1rem;
+  }
+
+  .container {
+    gap: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0.85rem;
+  }
+
+  .container {
+    gap: 88px;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--hei26-skyblue);
+  margin-bottom: 0.6rem;
+}
+
+.subEyebrow {
+  display: inline-block;
+  font-size: clamp(11px, 1.1vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hei26-skyblue);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  margin: 0 0 1.25rem;
+  color: var(--hei26-dongkerblue);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+}
+
+.subTitle {
+  margin: 0 0 0.75rem;
+  color: var(--hei26-dongkerblue);
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.subDescription {
+  margin: 0;
+  color: #6b7676;
+  font-size: clamp(15px, 1.3vw, 17px);
+  line-height: 1.7;
+  max-width: 60ch;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.overview.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overviewHeader {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(260px, 1fr);
+  gap: clamp(1.25rem, 4vw, 3rem);
+  align-items: end;
+  padding-bottom: clamp(1rem, 2.5vw, 1.75rem);
+  border-bottom: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 14%, transparent);
+}
+
+.overviewHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.overviewTagline {
+  margin: 0;
+  color: #5f6f6f;
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.7;
+  max-width: 58ch;
+}
+
+@media (max-width: 900px) {
+  .overviewHeader {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 0.85rem;
+  }
+}
+
+.keyFacts {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: stretch;
+  gap: clamp(0.75rem, 2.5vw, 2rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-radius: 18px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--background) 80%, #ffffff) 0%, #ffffff 100%);
+  border: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 12%, transparent);
+}
+
+.factItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.factValue {
+  color: var(--hei26-dongkerblue);
+  font-size: clamp(20px, 2.1vw, 26px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.factLabel {
+  color: #6b7676;
+  font-size: clamp(11px, 1vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+
+.factDivider {
+  width: 1px;
+  align-self: stretch;
+  background: color-mix(in srgb, var(--hei26-dongkerblue) 16%, transparent);
+}
+
+@media (max-width: 900px) {
+  .keyFacts {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+  }
+  .factDivider {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .keyFacts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.compactHeader {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(240px, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: end;
+}
+
+.compactDescription {
+  margin: 0;
+  color: #6b7676;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .compactHeader {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+.membersSection {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.membersGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.memberCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.35rem;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 9%, transparent);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.65s ease-out, transform 0.4s ease, border-color 0.3s ease;
+}
+
+.membersGrid.visible .memberCard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.memberCard:hover {
+  border-color: color-mix(in srgb, var(--hei26-skyblue) 35%, transparent);
+  transform: translateY(-3px);
+}
+
+.memberCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.memberCode {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--hei26-skyblue);
+}
+
+.memberIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--hei26-skyblue);
+}
+
+.memberCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.memberName {
+  margin: 0;
+  color: var(--hei26-dongkerblue);
+  font-size: clamp(15px, 1.25vw, 18px);
+  font-weight: 600;
+}
+
+.memberDescription {
+  margin: 0;
+  color: #6b7676;
+  font-size: clamp(12px, 1vw, 13px);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .membersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .membersGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.milestonesSection {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.milestonesTimeline {
+  position: relative;
+  padding-top: 0.5rem;
+}
+
+.milestonesTrack {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.85rem, 1.6vw, 1.5rem);
+}
+
+.milestonesRail {
+  position: absolute;
+  top: calc(0.5rem + 32px);
+  left: calc(100% / 10);
+  right: calc(100% / 10);
+  height: 2px;
+  background: linear-gradient(to right, color-mix(in srgb, var(--hei26-dongkerblue) 22%, transparent) 0%, color-mix(in srgb, var(--hei26-skyblue) 38%, transparent) 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.2s ease-out 0.15s;
+  z-index: 0;
+}
+
+.milestonesTimeline.visible .milestonesRail {
+  transform: scaleX(1);
+}
+
+.milestoneCard {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 0 0.5rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.milestonesTimeline.visible .milestoneCard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.milestoneMarker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.milestoneIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--hei26-linearblue);
+  color: #ffffff;
+  box-shadow: 0 0 0 6px #ffffff, 0 6px 18px color-mix(in srgb, var(--hei26-dongkerblue) 18%, transparent);
+}
+
+.milestoneIcon {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.75;
+}
+
+.milestoneIndex {
+  position: absolute;
+  top: -10px;
+  right: -14px;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 14%, transparent);
+  color: var(--hei26-dongkerblue);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.milestoneBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.milestoneYear {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hei26-turquoise) 20%, transparent);
+  color: var(--hei26-dongkerblue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.milestoneTitle {
+  margin: 0;
+  color: var(--hei26-dongkerblue);
+  font-size: clamp(15px, 1.25vw, 18px);
+  font-weight: 600;
+}
+
+.milestoneDescription {
+  margin: 0;
+  color: #5a6a6a;
+  font-size: clamp(12px, 1vw, 13px);
+  line-height: 1.6;
+}
+
+@media (max-width: 1100px) {
+  .milestonesTrack {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 2.5rem;
+  }
+  .milestonesRail {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .milestonesTrack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .milestonesTrack {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+}
+
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.splitAside {
+  position: sticky;
+  top: 1rem;
+}
+
+.numberedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.numberedItem {
+  padding: 1.5rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 12%, transparent);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.numberedItem:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.numberedItem:last-child {
+  padding-bottom: 0;
+}
+
+.numberedList.visible .numberedItem {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.numberedContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.numberedTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.numberedTitle {
+  margin: 0;
+  color: var(--hei26-dongkerblue);
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 600;
+}
+
+.numberedIcon {
+  width: 22px;
+  height: 22px;
+  color: var(--hei26-skyblue);
+  opacity: 0.7;
+}
+
+.numberedDescription {
+  margin: 0;
+  color: #5a6a6a;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .splitLayout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .splitAside {
+    position: static;
+  }
+  .numberedItem {
+    padding: 1.25rem 0;
+  }
+}

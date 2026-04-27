@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
-import AboutOrganizerPage from '../../components/AboutSection/AboutOrganizerPage';
+import Header, { headerTitleAccentClass } from '../header/header';
+import Cta from '../cta/cta';
+import Organizer from './organizer';
 
 export const metadata: Metadata = {
   title: "Skyconnection - Official Organizer | About HEI 2026",
@@ -29,7 +31,18 @@ export const metadata: Metadata = {
 export default function OrganizerPage() {
   return (
     <main>
-      <AboutOrganizerPage />
+      <Header
+        eyebrow="About Organizer"
+        title={
+          <>
+            Skyconnection:{' '}
+            <span className={headerTitleAccentClass}>A Decade of Event Excellence</span>
+          </>
+        }
+        subtitle="Official organizer of D-8 Halal Expo Indonesia 2026, delivering high-impact national and international events with end-to-end execution capability since 2010."
+      />
+      <Organizer />
+      <Cta />
     </main>
   );
 }

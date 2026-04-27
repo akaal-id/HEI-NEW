@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { ArrowUpRight, Users, TrendingUp } from 'lucide-react';
-import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
-import buttonStyles from '../../../components/Button/Button.module.css';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import buttonStyles from '../../components/Button/Button.module.css';
 import styles from './cta.module.css';
 
 const STATS = [
@@ -94,7 +94,7 @@ export default function Cta() {
             href="/register"
             className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
           >
-            <span className={buttonStyles.text}>Register Now &amp; Secure Your Spot</span>
+            <span className={buttonStyles.text}>Secure Your Spot</span>
             <div className={buttonStyles.iconContainer}>
               <ArrowUpRight className={buttonStyles.icon} />
             </div>
