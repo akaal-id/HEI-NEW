@@ -19,22 +19,36 @@ type IntroMetricCard = {
 const INTRO_METRIC_CARDS: IntroMetricCard[] = [
   {
     icon: Globe,
-    eyebrow: 'Massive Global Footprint',
-    title: '41,000+ Global Visitors',
-    description: 'Connecting buyers, innovators, and industry leaders representing up to 140 countries across the globe',
+    eyebrow: 'Global Market Value',
+    title: '$5.2 Trillion ',
+    description: 'Access the massive and rapidly growing global halal economy.',
   },
   {
     icon: SquareStack,
-    eyebrow: 'High-Impact Trade Action',
-    title: '100+ Premium Exhibition Booths',
-    description: 'Facilitating targeted Business Matching and direct Investment pitching to drive real-sector growth',
+    eyebrow: 'Massive Global Footprint',
+    title: '41K+ Global Visitors ',
+    description: 'Connect with a vast consumer base across D-8 nations.',
   },
   {
     icon: Flag,
-    eyebrow: 'Unparalleled D-8 Networking',
-    title: '9 Powerful Member Nations',
-    description: 'Bridging international delegates, top-tier exhibitors, and key decision-makers from the D-8 economic ecosystem',
-  }
+    eyebrow: 'Historical Reach',
+    title: '140+ Countries',
+    description: 'Benefit from a platform that has consistently attracted global visitors.',
+  },
+  {
+    icon: Flag,
+    eyebrow: 'Trade Network',
+    title: '9 Nations',
+    description: 'Leverage a unified economic bloc spanning 3 continents.',
+  },
+
+];
+
+const ABOUTUS_SNEAKPEAK: { title: string; description: string }[] = [
+  {
+    title: 'A Strategic Diplomatic Bridge',
+    description: 'D-8 Halal Expo Indonesia (HEI) 2026 is where high-level diplomacy meets global commerce. As Part of the D-8 Summit, we provide an unrivaled platform for "Halal Diplomacy," supported by the Ministry of Foreign Affairs of the Republic of Indonesia.<br /><br />From our humble beginnings in 2018 to becoming a global sourcing hub, we have consistently bridged the gap between local innovation and international trade.',
+  },
 ];
 
 export default function OverviewSection() {
@@ -104,12 +118,12 @@ export default function OverviewSection() {
         
         <div className={styles.introWrapper}>
           <div className={styles.introContent}>
-            <span className={styles.introEyebrow}>Let's Start with A Question</span>
-            <h2 className={styles.introTitle}>What is D-8 Halal Expo Indonesia 2026?</h2>
-            <p className={styles.introDescription}>
-            While high-level trade policies are negotiated behind closed doors, the real economic future is built on the expo floor. As the official side event of the D-8 Summit, the D-8 Halal Expo Indonesia (HEI) 2026 is where global diplomacy meets concrete market action. It is a unified, international framework designed to translate government treaties into tangible, cross-border business opportunities. Here, the ambitious visions of D-8 nations are transformed into real-sector growth, connecting policymakers directly with industry innovators, investors, and traders.
-            </p>
-            <div className={styles.introMetricsTitle}>The World is Watching. Will You Be There? </div>
+            <span className={styles.introEyebrow}>D-8 Halal Expo Indonesia 2026 in Numbers</span>
+            <h2 className={styles.introTitle}>The Global Halal Powerhouse</h2>
+            {/* <p className={styles.introDescription}>
+            Scaling your business across the world’s most dynamic economic bloc.
+            </p> */}
+            <div className={styles.introMetricsTitle}>Scaling your business across the world’s most dynamic economic bloc.</div>
             <div className={styles.introMetricsWrapper}>
               <div className={styles.introMetricsContainer}>
                 {INTRO_METRIC_CARDS.map(({ icon: Icon, eyebrow, title, description }) => (
@@ -128,7 +142,16 @@ export default function OverviewSection() {
                 ))}
               </div>
             </div>
-            <div className={styles.introDescription}>This is not just another exhibition; it is the epicenter of the global halal value chain. By securing your access to HEI, you are stepping into an elite network with a proven track record of immense scale</div>
+            <div className={styles.introDescription}>source: <a href="https://developing8.org/about-d-8/brief-history-of-d-8/" target="_blank" rel="noopener noreferrer">https://developing8.org/about-d-8/brief-history-of-d-8/</a></div>
+            
+            <div className={styles.divider}></div>
+            <div className={styles.aboutUsSneakpeakWrapper}>
+            <div className={styles.aboutUsSneakpeak}>
+              <div className={styles.aboutUsSneakpeakItem}>
+                <h3 className={styles.aboutUsSneakpeakTitle}>{ABOUTUS_SNEAKPEAK[0].title}</h3>
+                  <div className={styles.aboutUsSneakpeakDescription} dangerouslySetInnerHTML={{ __html: ABOUTUS_SNEAKPEAK[0].description }} />
+                </div>
+              </div>
             <div className={styles.introButton}>
               <a href="/about/d8-organization" className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.button}`}>
                 <span className={buttonStyles.text}>Get to Know D-8 More</span>
@@ -136,6 +159,7 @@ export default function OverviewSection() {
                   <ArrowUpRight className={buttonStyles.icon} />
                 </div> 
               </a>
+            </div>
             </div>
           </div>
         </div>

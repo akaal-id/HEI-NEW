@@ -3,6 +3,7 @@ type HeroContent = {
   eyebrow: string;
   eyebrowDateTime: string;
   title: string;
+  date: string;
   location: string;
   buttonLabel: string;
   buttonHref: string;
@@ -33,9 +34,10 @@ export const heroMedia: HeroMediaItem[] = [
     eyebrow: 'Welcome to The 6th HEI',
     eyebrowDateTime: '2026-04',
     title: 'D-8 Halal Expo Indonesia',
+    date: '08 - 12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
-    buttonLabel: 'Discover more',
-    buttonHref: '#overview'
+    buttonLabel: 'Book Space Now',
+    buttonHref: '/register/exhibitor'
   },
   {
     type: 'video',
@@ -46,6 +48,7 @@ export const heroMedia: HeroMediaItem[] = [
     eyebrow: 'Join & Feel The Diversity at',
     eyebrowDateTime: '2026-04',
     title: 'D-8 HEI Cultural Festival',
+    date: '12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Your Booth Now',
     buttonHref: '#overview'
