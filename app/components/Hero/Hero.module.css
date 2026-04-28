@@ -89,7 +89,7 @@
 .sliderDots {
   position: absolute;
   left: 50%;
-  bottom: 7rem;
+  bottom: 15%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
@@ -120,7 +120,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 8rem;
+  padding: 0;
   position: relative;
   z-index: 2;
 }
@@ -135,7 +135,7 @@
   align-items: center;
   padding: 0;
   gap: 16px;
-  vertical-align: bottom;
+  vertical-align: top;
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
@@ -170,7 +170,7 @@
 }
 
 .title {
-  font-size: clamp(6rem, 8vw, 6rem);
+  font-size: clamp(4rem, 6vw, 6rem);
   text-align: center;
   font-weight: 700;
   line-height: 100%;

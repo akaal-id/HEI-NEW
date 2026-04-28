@@ -2,18 +2,18 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { X } from 'lucide-react';
+import { X, Mail, CheckCircle } from 'lucide-react';
 import styles from './SituationSection.module.css';
+import { useGoogleForm } from '../../hooks/useGoogleForm';
+import Button from '../Button/Button';
 
-const COPY_ID =
-  'Terkait pelaksanaan D-8 Halal Expo Indonesia, saat ini kami masih melakukan koordinasi intensif dengan Kementerian Luar Negeri guna menyesuaikan dengan rangkaian agenda KTT D-8. Oleh karena itu, penetapan jadwal terbaru akan segera kami sampaikan setelah mendapatkan arahan lebih lanjut.';
-
-const COPY_EN =
-  "The D-8 Halal Expo Indonesia has been rescheduled as we are currently awaiting further guidance and synchronization with the Ministry of Foreign Affairs, given the event's integration with the D-8 Summit agenda. We will announce the finalized schedule as soon as the coordination process is complete.";
+const BODY_COPY =
+  'Subscribe for the latest news on event highlights, exhibitor slots, partnership opportunities, and program announcements<br></br>Stay updated on D-8 Halal Expo Indonesia 2026!';
 
 export default function SituationSection() {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(true);
+  const { email, setEmail, status, handleSubmit, resetForm } = useGoogleForm();
 
   useEffect(() => {
     setMounted(true);
@@ -70,31 +70,63 @@ export default function SituationSection() {
         </button>
 
         <div className={styles.inner}>
-          <div className={styles.grid}>
-            <div className={styles.column}>
-              <h1 id="situation-heading" className={styles.title}>
-                Kami <em>memohon maaf</em> atas ketidaknyamanan yang ditimbulkan.
-              </h1>
-              <p lang="id" className={styles.text}>
-                {COPY_ID}
-              </p>
-            </div>
-            <div className={styles.divider} role="presentation" />
-            <div className={styles.column}>
-              <h2 className={styles.title}>
-                We <em>sincerely apologize</em> for any inconvenience.
-              </h2>
-              <p lang="en" className={styles.text}>
-                {COPY_EN}
-              </p>
-            </div>
-          </div>
-        </div>
+          <h2 id="situation-heading" className={styles.title}>
+            Get the <em>latest offering</em>, straight to your inbox.
+          </h2>
 
-        <div className={styles.footer}>
-          <button type="button" className={styles.continueButton} onClick={dismiss}>
-            Mengerti · Continue
-          </button>
+          <p className={styles.text} dangerouslySetInnerHTML={{ __html: BODY_COPY }} />
+
+          {status === 'success' ? (
+            <div className={styles.success} role="status" aria-live="polite">
+              <CheckCircle className={styles.successIcon} aria-hidden />
+              <p className={styles.successText}>
+                You&apos;re subscribed. We&apos;ll keep you posted.
+              </p>
+              <button
+                type="button"
+                className={styles.linkButton}
+                onClick={resetForm}
+              >
+                Add another email
+              </button>
+            </div>
+          ) : (
+            <form className={styles.form} onSubmit={handleSubmit} noValidate>
+              <label htmlFor="situation-email" className={styles.label}>
+                Email address
+              </label>
+              <div className={styles.inputRow}>
+                <input
+                  id="situation-email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  required
+                  placeholder="name@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={status === 'submitting'}
+                  className={styles.input}
+                />
+                <Button
+                  type="submit"
+                  icon={Mail}
+                  className={styles.submitButton}
+                  textClassName={styles.submitText}
+                  iconClassName={styles.submitIcon}
+                  disabled={status === 'submitting' || !email}
+                >
+                  {status === 'submitting' ? 'Sending…' : 'Subscribe'}
+                </Button>
+           
+              </div>
+              {status === 'error' && (
+                <p className={styles.errorText} role="alert">
+                  Something went wrong. Please try again in a moment.
+                </p>
+              )}
+            </form>
+          )}
         </div>
       </div>
     </div>,
