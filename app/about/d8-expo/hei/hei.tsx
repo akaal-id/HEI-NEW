@@ -12,6 +12,13 @@ import {
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
 import styles from './hei.module.css';
 
+const KEY_FACTS = [
+  { value: 'B2B', label: 'Business-to-Business Format' },
+  { value: 'Halal', label: 'Trade & Lifestyle Industry' },
+  { value: 'Worldwide', label: 'International Marketplace' },
+  { value: 'Skyconnection', label: 'Official Organizer' },
+];
+
 const PURPOSE_PILLARS = [
   {
     icon: Network,
@@ -49,7 +56,7 @@ const MILESTONES: Array<{
     title: 'The Inception',
     venue: 'Jakarta Convention Center',
     description:
-      'HEI launched at JCC under the theme “Global Muslim Lifestyle,” planting the first flag for an integrated halal trade platform in Indonesia.',
+      'HEI launched at JCC under the theme "Global Muslim Lifestyle," planting the first flag for an integrated halal trade platform in Indonesia.',
     stats: [
       { value: '~100', label: 'Exhibitors' },
       { value: '5K', label: 'Visitors' },
@@ -61,7 +68,7 @@ const MILESTONES: Array<{
     title: 'Rapid Expansion',
     venue: 'ICE BSD',
     description:
-      'Scaled significantly under the theme “Halal is Everything,” marking HEI’s first major leap as a national halal industry stage.',
+      'Scaled significantly under the theme "Halal is Everything," marking HEI\u2019s first major leap as a national halal industry stage.',
     stats: [
       { value: '284', label: 'Exhibitors' },
       { value: '28K', label: 'Visitors' },
@@ -85,7 +92,7 @@ const MILESTONES: Array<{
     title: 'Record-Breaking Milestones',
     venue: 'ICE BSD',
     description:
-      'A historic peak — the largest HEI yet, drawing audiences and exhibitors from every major halal market in the world.',
+      'A historic peak \u2014 the largest HEI yet, drawing audiences and exhibitors from every major halal market in the world.',
     stats: [
       { value: '41,488', label: 'Visitors' },
       { value: '140', label: 'Countries' },
@@ -115,93 +122,78 @@ export default function HEI() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        {/* OVERVIEW — what HEI is + organizer */}
+        {/* OVERVIEW — centered magazine-style intro */}
         <div
           ref={introRef as React.RefObject<HTMLDivElement>}
           className={`${styles.overview} ${introVisible ? styles.visible : ''}`}
         >
-          <div className={styles.overviewHeader}>
-            <div className={styles.overviewHeading}>
-              <span className={styles.eyebrow}>What is HEI?</span>
-              <h2 className={styles.title}>
-                A Global Stage for the Halal Trade & Lifestyle Industry
-              </h2>
-            </div>
-            <p className={styles.overviewTagline}>
-              Halal Expo Indonesia (HEI) is a leading Business-to-Business (B2B) halal ecosystem
-              platform and a strategic global stage for the Islamic economy. It serves as a
-              comprehensive hub for the halal trade and lifestyle industry, bridging local
-              industrial potential with a vast international marketplace. As an integrated
-              environment where innovation, regulation, and commerce converge, HEI acts as a
-              primary catalyst for industry capacity-building and the integration of halal value
-              chains on a worldwide scale. This international event is organized by skyconnection.
-            </p>
-          </div>
+          <span className={styles.eyebrow}>What is HEI?</span>
+          <h2 className={styles.heroTitle}>
+            A Global Stage for the{' '}
+            <span className={styles.heroAccent}>Halal Trade & Lifestyle</span>{' '}
+            Industry
+          </h2>
+          <p className={styles.heroLead}>
+            Halal Expo Indonesia (HEI) is a leading Business-to-Business (B2B) halal ecosystem
+            platform and a strategic global stage for the Islamic economy. It serves as a
+            comprehensive hub for the halal trade and lifestyle industry, bridging local
+            industrial potential with a vast international marketplace. As an integrated
+            environment where innovation, regulation, and commerce converge, HEI acts as a
+            primary catalyst for industry capacity-building and the integration of halal value
+            chains on a worldwide scale. This international event is organized by skyconnection.
+          </p>
 
-          <footer className={styles.keyFacts}>
-            <div className={styles.factItem}>
-              <span className={styles.factValue}>B2B</span>
-              <span className={styles.factLabel}>Business-to-Business Format</span>
-            </div>
-            <span className={styles.factDivider} aria-hidden="true" />
-            <div className={styles.factItem}>
-              <span className={styles.factValue}>Halal</span>
-              <span className={styles.factLabel}>Trade &amp; Lifestyle Industry</span>
-            </div>
-            <span className={styles.factDivider} aria-hidden="true" />
-            <div className={styles.factItem}>
-              <span className={styles.factValue}>Worldwide</span>
-              <span className={styles.factLabel}>International Marketplace</span>
-            </div>
-            <span className={styles.factDivider} aria-hidden="true" />
-            <div className={styles.factItem}>
-              <span className={styles.factValue}>Skyconnection</span>
-              <span className={styles.factLabel}>Official Organizer</span>
-            </div>
-          </footer>
+          <div className={styles.factStrip}>
+            {KEY_FACTS.map((fact) => (
+              <div key={fact.value} className={styles.factChip}>
+                <span className={styles.factChipValue}>{fact.value}</span>
+                <span className={styles.factChipLabel}>{fact.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* PURPOSE — split layout: sticky aside + numbered list */}
-        <div className={styles.splitLayout}>
-          <aside className={styles.splitAside}>
+        {/* PURPOSE — vertical pillar cards */}
+        <div className={styles.purposeSection}>
+          <header className={styles.purposeHeader}>
             <span className={styles.subEyebrow}>Purpose</span>
             <h3 className={styles.subTitle}>A Unified Framework for Halal Growth</h3>
-            <p className={styles.subDescription}>
+            <p className={styles.purposeDesc}>
               HEI is built upon three core strategic pillars that drive global halal economic
               integration and unlock value across the entire industry chain.
             </p>
-          </aside>
+          </header>
 
-          <ol
-            ref={purposeRef as React.RefObject<HTMLOListElement>}
-            className={`${styles.numberedList} ${purposeVisible ? styles.visible : ''}`}
+          <div
+            ref={purposeRef as React.RefObject<HTMLDivElement>}
+            className={`${styles.pillarGrid} ${purposeVisible ? styles.visible : ''}`}
           >
             {PURPOSE_PILLARS.map((pillar, i) => (
-              <li
+              <article
                 key={pillar.title}
-                className={styles.numberedItem}
-                style={{ transitionDelay: `${i * 90}ms` }}
+                className={styles.pillarCard}
+                style={{ transitionDelay: `${i * 120}ms` }}
               >
-                <div className={styles.numberedContent}>
-                  <div className={styles.numberedTitleRow}>
-                    <h4 className={styles.numberedTitle}>{pillar.title}</h4>
-                    <pillar.icon className={styles.numberedIcon} />
-                  </div>
-                  <p className={styles.numberedDescription}>{pillar.description}</p>
+                <div className={styles.pillarAccent} aria-hidden="true" />
+                <div className={styles.pillarHead}>
+                  <span className={styles.pillarIndex}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <pillar.icon className={styles.pillarIcon} />
                 </div>
-              </li>
+                <h4 className={styles.pillarTitle}>{pillar.title}</h4>
+                <p className={styles.pillarDescription}>{pillar.description}</p>
+              </article>
             ))}
-          </ol>
+          </div>
         </div>
 
-        {/* HISTORY — milestone timeline */}
-        <div className={styles.milestonesSection}>
-          <header className={styles.compactHeader}>
-            <div>
-              <span className={styles.subEyebrow}>History</span>
-              <h3 className={styles.subTitle}>From Inception to Global Stage</h3>
-            </div>
-            <p className={styles.compactDescription}>
+        {/* HISTORY — vertical alternating timeline */}
+        <div className={styles.historySection}>
+          <header className={styles.purposeHeader}>
+            <span className={styles.subEyebrow}>History</span>
+            <h3 className={styles.subTitle}>From Inception to Global Stage</h3>
+            <p className={styles.purposeDesc}>
               The evolution of Halal Expo Indonesia is a narrative of rapid growth and deepening
               global connectivity — from its first edition in Jakarta to a world-leading B2B halal
               platform.
@@ -210,41 +202,38 @@ export default function HEI() {
 
           <div
             ref={milestonesRef as React.RefObject<HTMLDivElement>}
-            className={`${styles.milestonesTimeline} ${milestonesVisible ? styles.visible : ''}`}
+            className={`${styles.verticalTimeline} ${milestonesVisible ? styles.visible : ''}`}
           >
-            <div className={styles.milestonesRail} aria-hidden="true" />
-            <div className={styles.milestonesTrack}>
-              {MILESTONES.map(({ icon: Icon, year, title, venue, description, stats }, i) => (
-                <article
-                  key={year}
-                  className={styles.milestoneCard}
-                  style={{ transitionDelay: `${i * 110}ms` }}
-                >
-                  <div className={styles.milestoneMarker}>
-                    <span className={styles.milestoneIndex}>{String(i + 1).padStart(2, '0')}</span>
-                    <div className={styles.milestoneIconWrap}>
-                      <Icon className={styles.milestoneIcon} />
-                    </div>
+            <div className={styles.timelineSpine} aria-hidden="true" />
+
+            {MILESTONES.map(({ icon: Icon, year, title, venue, description, stats }, i) => (
+              <div
+                key={year}
+                className={`${styles.timelineNode} ${i % 2 === 1 ? styles.timelineNodeRight : ''}`}
+                style={{ transitionDelay: `${i * 140}ms` }}
+              >
+                <div className={styles.timelineDot} aria-hidden="true">
+                  <Icon className={styles.timelineDotIcon} />
+                </div>
+
+                <article className={styles.timelineCard}>
+                  <div className={styles.timelineCardHead}>
+                    <span className={styles.timelineYear}>{year}</span>
+                    <span className={styles.timelineVenue}>{venue}</span>
                   </div>
-                  <div className={styles.milestoneBody}>
-                    <span className={styles.milestoneYear}>{year}</span>
-                    <h4 className={styles.milestoneTitle}>
-                      {title}
-                      <span className={styles.milestoneVenue}>{venue}</span>
-                    </h4>
-                    <p className={styles.milestoneDescription}>{description}</p>
-                    <dl className={styles.milestoneStats}>
-                      {stats.map((stat) => (
-                        <div key={stat.label} className={styles.milestoneStat}>
-                          <dt className={styles.milestoneStatValue}>{stat.value}</dt>
-                          <dd className={styles.milestoneStatLabel}>{stat.label}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
+                  <h4 className={styles.timelineTitle}>{title}</h4>
+                  <p className={styles.timelineDesc}>{description}</p>
+                  <dl className={styles.timelineStats}>
+                    {stats.map((stat) => (
+                      <div key={stat.label} className={styles.timelineStat}>
+                        <dt className={styles.timelineStatValue}>{stat.value}</dt>
+                        <dd className={styles.timelineStatLabel}>{stat.label}</dd>
+                      </div>
+                    ))}
+                  </dl>
                 </article>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

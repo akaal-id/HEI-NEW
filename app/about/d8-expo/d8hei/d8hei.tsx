@@ -105,53 +105,62 @@ export default function D8HEI() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        {/* TARGET GOALS — split sticky aside + numbered list */}
-        <div className={styles.splitLayout}>
-          <aside className={styles.splitAside}>
-            <span className={styles.subEyebrow}>Target Goals</span>
-            <h3 className={styles.subTitle}>Outcomes the D-8 HEI Drives</h3>
-            <p className={styles.subDescription}>
+        {/* TARGET GOALS — single-column editorial list */}
+        <div className={styles.goalsSection}>
+          <header className={styles.goalsHeader}>
+            <div className={styles.goalsHeaderLeft}>
+              <span className={styles.subEyebrow}>Target Goals</span>
+              <h3 className={styles.subTitle}>Outcomes the D-8 HEI Drives</h3>
+            </div>
+            <p className={styles.goalsHeaderDesc}>
               Aligned with the D-8 Organization for Economic Cooperation, HEI advances four
               measurable outcomes that turn high-level commitments into real industry impact.
             </p>
-          </aside>
+          </header>
 
-          <ol
-            ref={goalsRef as React.RefObject<HTMLOListElement>}
-            className={`${styles.numberedList} ${goalsVisible ? styles.visible : ''}`}
+          <div
+            ref={goalsRef as React.RefObject<HTMLDivElement>}
+            className={`${styles.goalsList} ${goalsVisible ? styles.visible : ''}`}
           >
             {TARGET_GOALS.map((goal, i) => (
-              <li
+              <article
                 key={goal.title}
-                className={styles.numberedItem}
+                className={styles.goalRow}
                 style={{ transitionDelay: `${i * 90}ms` }}
               >
-                <div className={styles.numberedContent}>
-                  <div className={styles.numberedTitleRow}>
-                    <h4 className={styles.numberedTitle}>{goal.title}</h4>
-                    <goal.icon className={styles.numberedIcon} />
-                  </div>
-                  <p className={styles.numberedDescription}>{goal.description}</p>
+                <span className={styles.goalStep} aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className={styles.goalIconWrap}>
+                  <goal.icon className={styles.goalIcon} />
+                </div>
+                <div className={styles.goalBody}>
+                  <h4 className={styles.goalTitle}>{goal.title}</h4>
+                  <p className={styles.goalDescription}>{goal.description}</p>
                   {goal.highlight && (
-                    <span className={styles.numberedHighlight}>
-                      <span className={styles.numberedHighlightValue}>{goal.highlight.value}</span>
-                      <span className={styles.numberedHighlightLabel}>{goal.highlight.label}</span>
-                    </span>
+                    <div className={styles.goalHighlightInline}>
+                      <span className={styles.goalHighlightValue}>{goal.highlight.value}</span>
+                      <span className={styles.goalHighlightLabel}>{goal.highlight.label}</span>
+                    </div>
                   )}
                 </div>
-              </li>
+                {goal.highlight && (
+                  <aside className={styles.goalStat} aria-label="Market reach">
+                    <span className={styles.goalStatValue}>{goal.highlight.value}</span>
+                    <span className={styles.goalStatLabel}>{goal.highlight.label}</span>
+                  </aside>
+                )}
+              </article>
             ))}
-          </ol>
+          </div>
         </div>
 
-        {/* SECTORS — 5-column editorial grid */}
+        {/* SECTORS — full-width horizontal rows */}
         <div className={styles.sectorsSection}>
-          <header className={styles.compactHeader}>
-            <div>
-              <span className={styles.subEyebrow}>Sectors of Operation</span>
-              <h3 className={styles.subTitle}>Ten Pillars of the Halal Economy</h3>
-            </div>
-            <p className={styles.compactDescription}>
+          <header className={styles.sectorsHeader}>
+            <span className={styles.subEyebrow}>Sectors of Operation</span>
+            <h3 className={styles.subTitle}>Ten Pillars of the Halal Economy</h3>
+            <p className={styles.sectorsHeaderDesc}>
               HEI operates across ten comprehensive sectors that together form a complete halal
               economy ecosystem — from food production to finance, education, and sustainability.
             </p>
@@ -159,22 +168,21 @@ export default function D8HEI() {
 
           <div
             ref={sectorsRef as React.RefObject<HTMLDivElement>}
-            className={`${styles.sectorsList} ${sectorsVisible ? styles.visible : ''}`}
+            className={`${styles.sectorRows} ${sectorsVisible ? styles.visible : ''}`}
           >
             {SECTORS.map(({ icon: Icon, title, description }, i) => (
               <article
                 key={title}
                 className={styles.sectorRow}
-                style={{ transitionDelay: `${i * 60}ms` }}
+                style={{ transitionDelay: `${i * 55}ms` }}
               >
                 <span className={styles.sectorIndex}>{String(i + 1).padStart(2, '0')}</span>
                 <div className={styles.sectorIconWrap}>
                   <Icon className={styles.sectorIcon} />
                 </div>
-                <div className={styles.sectorText}>
-                  <h4 className={styles.sectorTitle}>{title}</h4>
-                  <p className={styles.sectorDescription}>{description}</p>
-                </div>
+                <h4 className={styles.sectorTitle}>{title}</h4>
+                <p className={styles.sectorDescription}>{description}</p>
+                <span className={styles.sectorArrow} aria-hidden="true">&rsaquo;</span>
               </article>
             ))}
           </div>
