@@ -3,7 +3,7 @@ import Header, { headerTitleAccentClass } from '../../about/header/header';
 import IntroSection from './sections/intro/intro';
 import CategorySection from './sections/category/category';
 import WhyExhibitSection from './sections/why-exhibit/why-exhibit';
-import BrochureSection from './sections/brochure/brochure';
+import BrochureSection from '../../components/BrochureSection/BrochureSection';
 import CtaSection from './sections/cta/cta';
 
 export const metadata: Metadata = {

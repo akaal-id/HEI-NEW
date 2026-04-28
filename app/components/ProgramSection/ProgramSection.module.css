@@ -1,7 +1,7 @@
 .section {
   position: relative;
   width: 100%;
-  padding: 8rem 0.5rem;
+  padding: 8rem 2rem;
   background-color: var(--hei26-dongkerblue);
   font-family: var(--font-plus-jakarta-sans), sans-serif;
   z-index: 1;
@@ -92,7 +92,7 @@
   grid-template-columns: repeat(15, 1fr);
   width: calc(100% - 1rem);
   margin: 0 0.5rem;
-  padding: 0;
+  padding: 0 2rem 0 0;
   gap: 0.5rem;
 }
 

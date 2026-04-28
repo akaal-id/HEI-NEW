@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfO7l875BGC0CMFDhbQRwtiQL6pgA-8vtK8uSaFkhr6fyK8Vw/formResponse';
 const EMAIL_ENTRY_ID = 'entry.77618089';
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function useGoogleForm() {
   const [email, setEmail] = useState('');
@@ -9,12 +10,13 @@ export function useGoogleForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    const trimmedEmail = email.trim();
+    if (!EMAIL_REGEX.test(trimmedEmail)) return;
 
     setStatus('submitting');
 
     const formData = new FormData();
-    formData.append(EMAIL_ENTRY_ID, email);
+    formData.append(EMAIL_ENTRY_ID, trimmedEmail);
 
     try {
       await fetch(GOOGLE_FORM_ACTION_URL, {
