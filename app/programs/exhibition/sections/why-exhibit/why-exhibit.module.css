@@ -86,6 +86,12 @@
   transform: translateY(0);
 }
 
+@media (min-width: 901px) {
+  .whyCell:first-child {
+    grid-column: span 2;
+  }
+}
+
 .whyCell:hover {
   background: color-mix(in srgb, var(--hei26-turquoise) 8%, transparent);
 }

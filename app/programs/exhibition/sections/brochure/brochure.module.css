@@ -56,7 +56,86 @@
   font-size: clamp(16px, 1.25vw, 18px);
   max-width: 48ch;
   line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.previewCard {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--hei26-skyblue) 22%, transparent);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 14px 30px -18px rgba(8, 24, 40, 0.24);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.previewHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--hei26-skyblue) 18%, transparent);
+}
+
+.previewEyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--hei26-skyblue);
+}
+
+.previewTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--hei26-dongkerblue);
+}
+
+.previewFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 210 / 297;
+  min-height: 260px;
+  max-height: 640px;
+  background: #f2f7ff;
+}
+
+.previewEmbed {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+}
+
+.actionSwitcher {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  min-height: 72px;
   margin-bottom: 3rem;
+}
+
+.switching .actionContent {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.actionContent {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+.actionContent.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .form {
@@ -66,7 +145,32 @@
   width: 100%;
   max-width: 600px;
   gap: 1rem;
-  margin-bottom: 3rem;
+}
+
+.downloadWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.successWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 72px;
+}
+
+.successMessage {
+  margin: 0;
+  padding: 0.8rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--hei26-turquoise) 35%, transparent);
+  background: color-mix(in srgb, var(--hei26-turquoise) 12%, white);
+  color: var(--hei26-dongkerblue);
+  font-size: clamp(14px, 1.1vw, 15px);
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .input {
@@ -109,6 +213,18 @@
 }
 
 @media (max-width: 680px) {
+  .previewFrame {
+    min-height: 220px;
+  }
+
+  .actionSwitcher {
+    min-height: 128px;
+  }
+
+  .successMessage {
+    width: 100%;
+  }
+
   .form {
     flex-direction: column;
   }
