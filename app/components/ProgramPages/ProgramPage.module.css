@@ -1,7 +1,7 @@
 /* Hero Section */
 .heroSection {
   aspect-ratio: 16 / 7;
-  max-width: 1200px;
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   margin-top: 12rem;
@@ -49,7 +49,7 @@
 }
 
 .heroContainer {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   text-align: center;
   position: relative;
@@ -95,7 +95,7 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 1rem;
 }
