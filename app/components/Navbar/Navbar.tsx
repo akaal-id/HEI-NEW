@@ -400,7 +400,7 @@ export default function Navbar() {
               variant="primary"
               className={`${styles.mobileMenuItem} ${styles.mobileRegisterButton} ${openMobileDropdown === 'register' ? styles.mobileMenuItemDropdownOpen : ''}`}
               textClassName={`${styles.mobileMenuItemText} ${styles.mobileRegisterButtonText}`}
-              iconClassName={styles.mobileMenuItemIcon}
+              iconClassName={styles.primaryButtonIcon}
               icon={ChevronDown}
               onClick={(e?: React.MouseEvent) => {
                 e?.preventDefault();

@@ -11,6 +11,10 @@ const ProgramSection = dynamic(() => import('./components/ProgramSection/Program
   loading: () => <div style={{ minHeight: '400px' }}></div>,
 });
 
+const VenueProfileSection = dynamic(() => import('./components/VenueProfileSection/VenueProfileSection'), {
+  loading: () => <div style={{ minHeight: '320px' }}></div>,
+});
+
 const BrochureSection = dynamic(() => import('./components/BrochureSection/BrochureSection'), {
   loading: () => <div style={{ minHeight: '400px' }}></div>,
 });
@@ -59,6 +63,7 @@ export default function Home() {
       <SituationSection />
       <OverviewSection />
       <ProgramSection />
+      <VenueProfileSection />
       <BrochureSection />
       <FAQSection />
       <PartnerSection />

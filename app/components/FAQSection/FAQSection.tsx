@@ -15,12 +15,12 @@ const faqItems: FAQItem[] = [
   {
     id: 'what-is-hei',
     question: 'What is D-8 Halal Expo Indonesia 2026?',
-    answer: 'D-8 Halal Expo Indonesia 2026 is an international B2B platform and an official side event of the 2026 D-8 Summit, designed to connect businesses, investors, regulators, and key stakeholders in order to strengthen trade among D-8 Member States, enhance resilient halal value chains, and advance economic cooperation, investment, and sustainable development among D-8 Member States.'
+    answer: 'D-8 Halal Expo Indonesia 2026 is an international B2B platform and as a part of the 2026 D-8 Summit, designed to connect businesses, investors, regulators, and key stakeholders in order to strengthen trade among D-8 Nations, enhance resilient halal value chains, and advance economic cooperation, investment, and sustainable development among D-8 Nations.'
   },
   {
     id: 'd8-summit',
     question: 'How is D-8 Halal Expo Indonesia 2026 related to the 2026 D-8 Summit?',
-    answer: 'D-8 Halal Expo Indonesia 2026 is officially aligned as a side event of the 2026 D-8 Summit, creating a strategic platform that bridges high-level diplomacy with real-sector business opportunities.'
+    answer: 'D-8 Halal Expo Indonesia 2026 is officially aligned as a part of the 2026 D-8 Summit, creating a strategic platform that bridges high-level diplomacy with real-sector business opportunities. Unique networking opportunities with policy-makers who shape the regulations of the $5.2 Trillion global halal market.'
   },
   {
     id: 'who-should-attend',
@@ -55,7 +55,7 @@ const faqItems: FAQItem[] = [
   {
     id: 'youth-summit',
     question: 'What is the Youth Summit?',
-    answer: 'The Youth Summit is a dedicated platform for young leaders and entrepreneurs to engage with the halal economy, featuring networking, mentorship, and innovation showcases.'
+    answer: 'The Youth Program is a dedicated platform for young leaders and entrepreneurs to engage with the halal economy, featuring networking, mentorship, and innovation showcases.'
   },
   {
     id: 'register',
@@ -66,6 +66,11 @@ const faqItems: FAQItem[] = [
     id: 'media',
     question: 'Is media accreditation available?',
     answer: 'Yes, media accreditation is available for journalists and media professionals. Please contact our media relations team for more information.'
+  },
+  {
+    id: 'cultural-festival',
+    question: 'What is the Cultural Festival?',
+    answer: 'The Cultural Festival is a dedicated platform for showcasing the rich culture and heritage of the D-8 Nations, featuring traditional performances, art exhibitions, and cultural workshops.'
   }
 ];
 
@@ -143,11 +148,11 @@ export default function FAQSection() {
               href="https://wa.me/62895403824515" 
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.contactSalesLink}
+              className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.contactSalesLink}`}
             >
-              <span>Contact Sales</span>
-              <div className={styles.contactSalesIcon}>
-                <ArrowUpRight className={styles.contactSalesArrow} />
+              <span className={buttonStyles.text}>Contact Sales</span>
+              <div className={buttonStyles.iconContainer}>
+                <ArrowUpRight className={buttonStyles.icon} />
               </div>
             </a>
           </div>
@@ -166,7 +171,7 @@ export default function FAQSection() {
                   <h3 className={styles.faqQuestion}>{item.question}</h3>
                   <div className={styles.faqIcon}>
                     {isExpanded ? (
-                      <ChevronUp className={styles.icon} />
+                      <ChevronDown className={styles.icon} />
                     ) : (
                       <ChevronDown className={styles.icon} />
                     )}
