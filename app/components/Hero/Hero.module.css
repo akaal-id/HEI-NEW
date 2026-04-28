@@ -250,7 +250,7 @@
 }
 
 .image {
-  width: clamp(600px, 58.8vw, 1200px);
+  width: clamp(600px, 58.8vw, 1440px);
   height: 1080px;
   display: block;
   overflow: hidden;
@@ -433,7 +433,7 @@
   }
   
   .image {
-    width: clamp(600px, 58.8vw, 1200px);
+    width: clamp(600px, 58.8vw, 1440px);
     height: clamp(600px, 85vw, 900px);
   }
 }
@@ -549,7 +549,7 @@
   }
   
   .image {
-    width: clamp(600px, 58.8vw, 1200px);
+    width: clamp(600px, 58.8vw, 1440px);
     height: 1080px;
     display: block;
     overflow: hidden;

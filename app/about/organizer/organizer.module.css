@@ -44,7 +44,7 @@
 }
 
 .profileInner {
-  max-width: 1320px;
+  max-width: 1440px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -276,7 +276,7 @@
 }
 
 .clientsContainer {
-  max-width: 1320px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -390,7 +390,7 @@
 }
 
 .timelineContainer {
-  max-width: 1320px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -532,7 +532,7 @@
 }
 
 .capContainer {
-  max-width: 1320px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
-import ProgramBusinessMatching from '../../components/ProgramPages/ProgramBusinessMatching';
+import Header, { headerTitleAccentClass } from '../../about/header/header';
+import Cta from '../../about/cta/cta';
+import AboutSection from './sections/about/about';
+import FlowSection from './sections/flow/flow';
 
 export const metadata: Metadata = {
   title: "Business Matching | D-8 Halal Expo Indonesia 2026 - Programs",
@@ -29,7 +32,19 @@ export const metadata: Metadata = {
 export default function BusinessMatchingPage() {
   return (
     <main>
-      <ProgramBusinessMatching />
+      <Header
+        eyebrow="Programs"
+        title={
+          <>
+            Business Matching:{' '}
+            <span className={headerTitleAccentClass}>Precision Partnerships for Global Halal Trade</span>
+          </>
+        }
+        subtitle="A premium, high-impact platform transforming networking into tangible commercial success through curated, face-to-face interactions between international exhibitors and qualified buyers."
+      />
+      <AboutSection />
+      <FlowSection />
+      {/* <Cta /> */}
     </main>
   );
 }
