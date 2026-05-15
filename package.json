@@ -10,11 +10,15 @@
     "favicon": "png-to-ico public/icon/icon-d8hei.png > app/favicon.ico"
   },
   "dependencies": {
+    "@react-email/components": "^1.0.12",
     "animejs": "^4.2.2",
+    "google-spreadsheet": "^5.2.0",
     "lucide-react": "^0.561.0",
     "next": "16.0.10",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "react-email": "^6.1.3",
+    "resend": "^6.12.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

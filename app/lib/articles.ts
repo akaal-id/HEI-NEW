@@ -286,13 +286,14 @@ const GID = process.env.GOOGLE_SHEETS_GID || '0';
 async function fetchFromGoogleSheets(): Promise<GoogleSheetRow[]> {
   try {
     // Use CSV export which is more reliable
-    // Add timestamp to prevent caching for dynamic updates
-    const timestamp = Date.now();
     const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${GID}`;
-    const response = await fetch(url, { 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const response = await fetch(url, {
       cache: 'no-store', // Always fetch fresh data
-      next: { revalidate: 0 } // No caching
-    });
+      next: { revalidate: 0 }, // No caching
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timeout));
     
     if (!response.ok) {
       throw new Error(`Failed to fetch: ${response.statusText}`);
@@ -424,6 +425,10 @@ async function fetchFromGoogleSheets(): Promise<GoogleSheetRow[]> {
 
     return resultRows;
   } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      console.error('Google Sheets request timed out while fetching articles.');
+      return [];
+    }
     console.error('Error fetching from Google Sheets:', error);
     return [];
   }

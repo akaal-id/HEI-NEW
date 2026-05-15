@@ -68,6 +68,33 @@ const partnerCategories: PartnerCategory[] = [
     ]
   },
   {
+    id: 'event-partner',
+    label: 'Event Partner',
+    partners: [
+      {
+        id: 'wasabih',
+        name: 'Wasabih',
+        logo: '/event partner/wasabih-logo.png',
+        alt: 'Wasabih logo',
+        website: 'https://wasabih.com/',
+      },
+      {
+        id: 'akaal',
+        name: 'Akaal',
+        logo: '/event partner/akaal-logo.png',
+        alt: 'Akaal logo',
+        website: 'https://akaal.id/',
+      },
+      {
+        id: 'hegira',
+        name: 'Hegira',
+        logo: '/event partner/hegira-logo.png',
+        alt: 'Hegira logo',
+        website: 'https://hegira.id/',
+      }
+    ]
+  },
+  {
     id: 'media-partner',
     label: 'Media Partner',
     partners: [
@@ -109,56 +136,58 @@ const partnerCategories: PartnerCategory[] = [
 
 export default function PartnerSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const categoriesRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            import('animejs').then((animeModule) => {
-              const animate = animeModule.animate as any;
-              const stagger = animeModule.stagger;
+    let observer: IntersectionObserver | null = null;
+    let isMounted = true;
 
-              const elements = [
-                headerRef.current,
-                categoriesRef.current,
-                ctaRef.current,
-              ].filter(Boolean);
+    const setupAnimations = async () => {
+      const animeModule = await import('animejs');
+      if (!isMounted || !sectionRef.current) return;
 
-              if (elements.length > 0) {
-                animate(
-                  elements,
-                  {
-                    opacity: [0, 1],
-                    translateY: [30, 0],
-                    delay: stagger(200),
-                    duration: 800,
-                    easing: 'easeOutQuad',
-                  }
-                );
-              }
+      const animate = animeModule.animate as any;
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const target = entry.target as HTMLElement;
+            const delay = Number(target.dataset.delay ?? 0);
+
+            animate(target, {
+              opacity: [0, 1],
+              translateY: [24, 0],
+              delay: Number.isFinite(delay) ? delay : 0,
+              duration: 1200,
+              easing: 'easeOutQuad',
             });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+            observer?.unobserve(target);
+          });
+        },
+        {
+          threshold: 0.2,
+          rootMargin: '0px 0px -10% 0px',
+        }
+      );
 
-    return () => observer.disconnect();
+      const animatableItems = sectionRef.current.querySelectorAll('[data-animate="true"]');
+      animatableItems.forEach((item) => observer?.observe(item));
+    };
+
+    setupAnimations();
+
+    return () => {
+      isMounted = false;
+      observer?.disconnect();
+    };
   }, []);
 
   return (
     <section ref={sectionRef} className={styles.section} id="partners">
       <div className={styles.container}>
-        <div ref={headerRef} className={styles.header}>
+        <div className={`${styles.header} ${styles.animateItem}`} data-animate="true" data-delay="0">
           <span className={styles.eyebrow}>OUR PARTNERS</span>
           <h2 className={styles.title}>Supported by Global Institutions</h2>
           <p className={styles.description}>
@@ -166,9 +195,14 @@ export default function PartnerSection() {
           </p>
         </div>
 
-        <div ref={categoriesRef} className={styles.partnerCategories}>
-          {partnerCategories.map((category) => (
-            <div key={category.id} className={`${styles.category} ${category.id === 'organized-by' ? styles.organizedBy : ''} ${category.id === 'media-partner' ? styles.mediaPartnerCategory : ''}`}>
+        <div className={styles.partnerCategories}>
+          {partnerCategories.map((category, index) => (
+            <div
+              key={category.id}
+              className={`${styles.category} ${styles.animateItem} ${category.id === 'organized-by' ? styles.organizedBy : ''} ${category.id === 'media-partner' ? styles.mediaPartnerCategory : ''}`}
+              data-animate="true"
+              data-delay={String(index * 100)}
+            >
               <div className={styles.categoryLabel}>{category.label}</div>
               <div className={category.id === 'media-partner' ? styles.mediaPartnerGrid : styles.partnerGrid}>
                 {category.partners.map((partner) => (
@@ -209,7 +243,7 @@ export default function PartnerSection() {
           ))}
         </div>
 
-        <div ref={ctaRef} className={styles.ctaSection}>
+        <div className={`${styles.ctaSection} ${styles.animateItem}`} data-animate="true" data-delay="0">
           <h3 className={styles.ctaTitle}>
           We invite you to explore a strategic partnership with D-8 Halal Expo Indonesia 2026!
           </h3>
@@ -217,11 +251,12 @@ export default function PartnerSection() {
           This event offers an opportunity to enhance brand visibility, engage with key halal industry stakeholders, and support international business collaboration across D-8 Member States.
           </p>
           <Button 
-            href="#sponsor" 
-            variant="primary"
+            href="https://wa.me/62895428247935" 
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.sponsorButton}
           >
-            Explore Partnership Opportunities
+            Be Our Partner
           </Button>
         </div>
       </div>

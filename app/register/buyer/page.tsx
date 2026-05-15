@@ -6,6 +6,9 @@ import {
   EditorialSelect,
 } from '../../components/ui/editorial-form';
 import Button from '../../components/Button/Button';
+import RegistrationModal, {
+  type RegistrationModalRow,
+} from '../../components/RegistrationModal/RegistrationModal';
 import {
   SALUTATIONS,
   COUNTRY_CODES,
@@ -27,8 +30,37 @@ export default function RegisterBuyerPage() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [formMessage, setFormMessage] = useState<{ type: 'incomplete' | 'success' | 'error'; text: string } | null>(null);
+  const [formMessage, setFormMessage] = useState<{ type: 'incomplete' | 'error'; text: string } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalPhase, setModalPhase] = useState<'confirm' | 'success'>('confirm');
+  const [modalError, setModalError] = useState<string | null>(null);
+  const [submittedEmail, setSubmittedEmail] = useState('');
+
+  const resetForm = () => {
+    setSalutation('');
+    setName('');
+    setCountryCode('+62');
+    setMobile('');
+    setEmail('');
+    setCountry('');
+    setCompanyName('');
+    setSourceOfInfo('');
+    setErrors({});
+    setTouched({});
+    setFormMessage(null);
+  };
+
+  const buildConfirmRows = (): RegistrationModalRow[] => [
+    { label: 'Status', value: 'Buyer', highlight: true },
+    { label: 'Salutation', value: salutation },
+    { label: 'Full Name', value: name.trim() },
+    { label: 'Mobile Number', value: `${countryCode} ${mobile.trim()}` },
+    { label: 'Email Address', value: email.trim() },
+    { label: 'Country', value: country },
+    { label: 'Company Name', value: companyName.trim() },
+    { label: 'Source of Information', value: sourceOfInfo },
+  ];
 
   const validate = () => {
     setTouched({
@@ -49,9 +81,10 @@ export default function RegisterBuyerPage() {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormMessage(null);
+    setModalError(null);
 
     if (!validate()) {
       setFormMessage({
@@ -61,6 +94,12 @@ export default function RegisterBuyerPage() {
       return;
     }
 
+    setModalPhase('confirm');
+    setModalOpen(true);
+  };
+
+  const handleModalConfirm = async () => {
+    setModalError(null);
     setIsSubmitting(true);
     try {
       const res = await fetch('/api/submit-buyer', {
@@ -79,25 +118,33 @@ export default function RegisterBuyerPage() {
       });
       const data = await res.json();
       if (data.success) {
-        setFormMessage({ type: 'success', text: 'Thank you! Your registration has been submitted successfully.' });
-        setSalutation('');
-        setName('');
-        setCountryCode('+62');
-        setMobile('');
-        setEmail('');
-        setCountry('');
-        setCompanyName('');
-        setSourceOfInfo('');
-        setErrors({});
-        setTouched({});
+        setSubmittedEmail(email.trim());
+        setModalPhase('success');
       } else {
-        setFormMessage({ type: 'error', text: data.error ?? 'Something went wrong. Please try again.' });
+        setModalError(data.error ?? 'Something went wrong. Please try again.');
       }
     } catch {
-      setFormMessage({ type: 'error', text: 'Failed to submit. Please check your connection and try again.' });
+      setModalError('Failed to submit. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleModalClose = () => {
+    if (isSubmitting) return;
+    setModalOpen(false);
+    setModalError(null);
+    if (modalPhase === 'success') {
+      resetForm();
+    }
+  };
+
+  const handleSubmitAnother = () => {
+    resetForm();
+    setModalOpen(false);
+    setModalPhase('confirm');
+    setModalError(null);
+    setSubmittedEmail('');
   };
 
   return (
@@ -209,9 +256,7 @@ export default function RegisterBuyerPage() {
                 className={`${styles.formMessage} ${
                   formMessage.type === 'incomplete'
                     ? styles.formMessageIncomplete
-                    : formMessage.type === 'error'
-                      ? styles.formMessageError
-                      : styles.formMessageSuccess
+                    : styles.formMessageError
                 }`}
               >
                 {formMessage.text}
@@ -220,6 +265,20 @@ export default function RegisterBuyerPage() {
           </form>
         </div>
       </section>
+
+      <RegistrationModal
+        isOpen={modalOpen}
+        phase={modalPhase}
+        rows={buildConfirmRows()}
+        email={modalPhase === 'success' ? submittedEmail : email.trim()}
+        successTitle="Registration submitted!"
+        successMessage="Thank you for registering. Please check your inbox for a confirmation email from D-8 Halal Expo Indonesia 2026."
+        isSubmitting={isSubmitting}
+        error={modalError}
+        onClose={handleModalClose}
+        onConfirm={handleModalConfirm}
+        onSubmitAnother={handleSubmitAnother}
+      />
     </main>
   );
 }

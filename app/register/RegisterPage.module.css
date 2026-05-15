@@ -3,7 +3,7 @@
 .page {
   min-height: 100vh;
   background: var(--background);
-  padding-top: 8rem;
+  /* padding-top: 8rem; */
   padding-bottom: 6rem;
   font-family: var(--font-plus-jakarta-sans), sans-serif;
 }
@@ -11,6 +11,7 @@
 .heroSection {
   width: 100%;
   padding: 4rem 1rem 3rem;
+  padding-top: 12rem;
   background: var(--hei26-linearblue);
   margin-bottom: 0;
 }
@@ -123,12 +124,13 @@
 
 @media (max-width: 768px) {
   .page {
-    padding-top: 6rem;
+    /* padding-top: 6rem; */
     padding-bottom: 4rem;
   }
 
   .heroSection {
     padding: 3rem 1rem 2rem;
+    padding-top: 8rem;
   }
 
   .section {
