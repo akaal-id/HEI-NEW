@@ -64,7 +64,7 @@ export default function AboutOrganizerPage() {
             <div ref={imageRef as React.RefObject<HTMLDivElement>} className={`${styles.imageContent} ${isImageVisible ? styles.fadeInUp : ''}`}>
               <div className={styles.placeholderImage}>
                 <Image
-                  src="/Partner Logo/skyconnect logo.svg"
+                  src="/partner-logo/organized-by/skyconnect logo.png"
                   alt="Skyconnection Logo"
                   width={400}
                   height={300}

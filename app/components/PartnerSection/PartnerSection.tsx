@@ -27,14 +27,14 @@ const partnerCategories: PartnerCategory[] = [
       {
         id: 'd8',
         name: 'D-8 Organization for Economic Cooperation',
-        logo: '/Partner Logo/D8 Icon.svg',
+        logo: '/partner-logo/official-host/d-8_logo.png',
         alt: 'D-8 Organization for Economic Cooperation',
         website: 'https://developing8.org/',
       },
       {
         id: 'islamic-economy',
         name: 'Islamic Economy',
-        logo: '/Partner Logo/Islamic Economy logo.svg',
+        logo: '/partner-logo/official-host/ie_logo.png',
         alt: 'Islamic Economy',
         website: 'https://islamic-economy.org/',
       }
@@ -47,23 +47,30 @@ const partnerCategories: PartnerCategory[] = [
       {
         id: 'kemlu',
         name: 'Ministry of Foreign Affairs Republic of Indonesia',
-        logo: '/Partner Logo/Kemlu RI logo.svg',
+        logo: '/partner-logo/strategic-partner/mfa-ri_logo.png',
         alt: 'Ministry of Foreign Affairs Republic of Indonesia',
         website: 'https://kemlu.go.id/',
       },
       {
         id: 'kneks',
         name: 'National Committee of Islamic Economy and Finance',
-        logo: '/Partner Logo/KNEKS Icon.svg',
+        logo: '/partner-logo/strategic-partner/kneks-logo.png',
         alt: 'KNEKS - National Committee of Islamic Economy and Finance',
         website: 'https://www.kneks.go.id/',
       },
       {
         id: 'kadin',
         name: 'Indonesian Chamber of Commerce and Industry',
-        logo: '/Partner Logo/Frame 12.svg',
+        logo: '/partner-logo/strategic-partner/kadin-logo.png',
         alt: 'KADIN Indonesia - Indonesian Chamber of Commerce and Industry',
         website: 'https://kadin.id/',
+      },
+      {
+        id: 'kpmi',
+        name: 'KPMI',
+        logo: '/partner-logo/strategic-partner/kpmi-logo.png',
+        alt: 'KPMI logo',
+        website: 'https://kpmi.or.id/',
       }
     ]
   },
@@ -74,23 +81,63 @@ const partnerCategories: PartnerCategory[] = [
       {
         id: 'wasabih',
         name: 'Wasabih',
-        logo: '/event partner/wasabih-logo.png',
+        logo: '/partner-logo/event-partner/wasabih-logo.png',
         alt: 'Wasabih logo',
         website: 'https://wasabih.com/',
       },
       {
         id: 'akaal',
         name: 'Akaal',
-        logo: '/event partner/akaal-logo.png',
+        logo: '/partner-logo/event-partner/akaal-logo.png',
         alt: 'Akaal logo',
         website: 'https://akaal.id/',
       },
       {
         id: 'hegira',
         name: 'Hegira',
-        logo: '/event partner/hegira-logo.png',
+        logo: '/partner-logo/event-partner/hegira-logo.png',
         alt: 'Hegira logo',
         website: 'https://hegira.id/',
+      },
+      {
+        id: 'halal-korea',
+        name: 'Halal Korea',
+        logo: '/partner-logo/event-partner/halalkorea-logo.png',
+        alt: 'Halal Korea logo',
+        website: 'http://halalkorea.tv/',
+      },
+      {
+        id: 'halal-expo-sarajevo',
+        name: 'Halal Expo Sarajevo',
+        logo: '/partner-logo/event-partner/halalsarajevo-logo.png',
+        alt: 'Halal Expo Sarajevo logo',
+        website: 'https://halalexposarajevo.com/',
+      }
+    ]
+  },
+  {
+    id: 'official-hotel-partner',
+    label: 'Official Hotel Partner',
+    partners: [
+      {
+        id: 'hotel-mulia',
+        name: 'Hotel Mulia',
+        logo: '/partner-logo/official-hotel-partner/hotelmulia-logo.png',
+        alt: 'Hotel Mulia logo',
+        website: 'https://www.themulia.com/jakarta/hotel-mulia',
+      }
+    ]
+  },
+  {
+    id: 'promotion-partner',
+    label: 'Promotion Partner',
+    partners: [
+      {
+        id: 'jip',
+        name: 'JIP',
+        logo: '/partner-logo/promotional-partner/jip-logo.png',
+        alt: 'JIP logo',
+        website: 'https://jiplink.id/',
       }
     ]
   },
@@ -126,7 +173,7 @@ const partnerCategories: PartnerCategory[] = [
       {
         id: 'skyconnect',
         name: 'skyconnection',
-        logo: '/Partner Logo/skyconnect logo.svg',
+        logo: '/partner-logo/organized-by/skyconnect logo.png',
         alt: 'skyconnection',
         website: 'https://skyconnection.co.id/',
       }
@@ -136,6 +183,26 @@ const partnerCategories: PartnerCategory[] = [
 
 export default function PartnerSection() {
   const sectionRef = useRef<HTMLElement>(null);
+
+  const getPartnerCardClass = (categoryId: string) => {
+    if (categoryId === 'strategic-partner') {
+      return `${styles.partnerCard} ${styles.strategicPartnerCard}`;
+    }
+
+    if (categoryId === 'official-hotel-partner') {
+      return `${styles.partnerCard} ${styles.officialHotelPartnerCard}`;
+    }
+
+    if (categoryId === 'event-partner') {
+      return `${styles.partnerCard} ${styles.eventPartnerCard}`;
+    }
+
+    if (categoryId === 'promotion-partner') {
+      return `${styles.partnerCard} ${styles.promotionPartnerCard}`;
+    }
+
+    return styles.partnerCard;
+  };
 
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
@@ -206,7 +273,7 @@ export default function PartnerSection() {
               <div className={styles.categoryLabel}>{category.label}</div>
               <div className={category.id === 'media-partner' ? styles.mediaPartnerGrid : styles.partnerGrid}>
                 {category.partners.map((partner) => (
-                  <div key={partner.id} className={category.id === 'media-partner' ? styles.mediaPartnerCard : styles.partnerCard}>
+                  <div key={partner.id} className={category.id === 'media-partner' ? styles.mediaPartnerCard : getPartnerCardClass(category.id)}>
                     {partner.website ? (
                       <a
                         href={partner.website}

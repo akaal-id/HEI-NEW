@@ -66,7 +66,7 @@ export default function AboutOrganizer() {
           </div>
           <div ref={imageRef} className={styles.imageContent}>
             <Image
-              src="/Partner Logo/skyconnect logo.svg"
+              src="/partner-logo/organized-by/skyconnect logo.png"
               alt="skyconnection"
               width={400}
               height={300}
