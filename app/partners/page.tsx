@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import PartnerSection from '../components/PartnerSection/PartnerSection';
 import type { Metadata } from 'next';
+import styles from './page.module.css';
 
 export const metadata: Metadata = {
   title: "Partners & Sponsors | HEI 2026 - Halal Expo Indonesia",
@@ -28,8 +30,34 @@ export const metadata: Metadata = {
 
 export default function PartnersPage() {
   return (
-    <main>
-      <PartnerSection />
+    <main className={styles.page}>
+      <section className={styles.heroSection} aria-labelledby="partners-hero-title">
+        <div className={styles.decoration} aria-hidden="true">
+          <Image
+            src="/D8-assets/circle_D8.svg"
+            alt=""
+            width={1000}
+            height={1000}
+            className={styles.decorationImage}
+            priority
+          />
+        </div>
+
+        <div className={styles.heroContainer}>
+          <span className={styles.eyebrow}>Partners &amp; Sponsors</span>
+          <h1 id="partners-hero-title" className={styles.heroTitle}>
+            Supported by{' '}
+            <span className={styles.heroTitleAccent}>Global Institutions</span>
+          </h1>
+          <p className={styles.heroSubtitle}>
+            Meet the organizations, companies, and institutions collaborating with D-8 Halal Expo Indonesia 2026 to strengthen the halal economy across member states.
+          </p>
+        </div>
+      </section>
+
+      <div className={styles.content}>
+        <PartnerSection hideHeader />
+      </div>
     </main>
   );
 }

@@ -11,6 +11,7 @@ import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const isArticlesPage = pathname === '/articles' || Boolean(pathname?.startsWith('/articles/'));
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
@@ -113,11 +114,13 @@ export default function Navbar() {
     setOpenMobileDropdown(null);
   };
 
+  const showScrolledLogo = isScrolled || isArticlesPage;
+
   return (
-    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
+    <nav className={`${styles.navbar} ${showScrolledLogo ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
       {/* Desktop Navbar */}
       <div className={styles.navbarContent}>
-        <div className={`${styles.logoContainer} ${isScrolled ? styles.logoContainerScrolled : ''}`}>
+        <div className={`${styles.logoContainer} ${showScrolledLogo ? styles.logoContainerScrolled : ''}`}>
           <Link href="/" className={styles.logoLink}>
             <Image
               src="/icon/D8 HEI Logo Long.svg"

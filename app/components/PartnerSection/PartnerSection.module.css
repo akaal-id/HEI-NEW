@@ -11,6 +11,10 @@
   overflow: hidden;
 }
 
+.sectionNoHeader {
+  padding-top: 4rem;
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
@@ -85,19 +89,35 @@
 }
 
 .partnerGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(33.33333333333333%, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.partnerGrid > * {
+  flex: 0 1 calc((100% - 2 * 1rem) / 3);
+  max-width: calc((100% - 2 * 1rem) / 3);
   width: 100%;
 }
 
 .category.organizedBy .partnerGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   gap: 1rem;
   width: 100%;
-  max-width: 33.33333333333333%;
   margin: 0 auto;
+}
+
+.category.organizedBy .partnerGrid > * {
+  flex: 0 1 calc((100% - 2 * 1rem) / 3);
+  max-width: calc((100% - 2 * 1rem) / 3);
+  width: 100%;
 }
 
 /* Media Partner: 4-column grid, smaller items */
@@ -106,10 +126,17 @@
 }
 
 .mediaPartnerGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+}
+
+.mediaPartnerGrid > * {
+  flex: 0 1 320px;
+  max-width: 320px;
   width: 100%;
 }
 
@@ -129,9 +156,8 @@
 
 .mediaPartnerLogo {
   width: 100%;
-  height: 72px;
-  min-height: 56px;
-  max-width: 10rem;
+  height: 100%;
+  max-height: 96px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,8 +194,6 @@
 
 .officialHotelPartnerCard {
   border: 1px solid rgba(0, 0, 0, 0.1);
-  width: 33.33333333333333%;
-  margin: 0 auto;
 }
 
 .eventPartnerCard {
@@ -178,8 +202,6 @@
 
 .promotionPartnerCard {
   border: 1px solid rgba(0, 0, 0, 0.1);
-  width: 33.33333333333333%;
-  margin: 0 auto;
 }
 
 .partnerLink {
@@ -268,8 +290,13 @@
 }
 
 @media (max-width: 1024px) {
+  .partnerGrid > *,
+  .category.organizedBy .partnerGrid > * {
+    flex: 0 1 calc((100% - 1.5rem) / 2);
+    max-width: calc((100% - 1.5rem) / 2);
+  }
+
   .partnerGrid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.5rem;
   }
 
@@ -304,17 +331,22 @@
     margin-bottom: 3rem;
   }
 
-  .partnerGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .category.organizedBy .partnerGrid {
+  .partnerGrid > *,
+  .category.organizedBy .partnerGrid > * {
+    flex: 0 1 100%;
     max-width: 100%;
   }
 
+  .partnerGrid {
+    gap: 1.5rem;
+  }
+
+  .mediaPartnerGrid > * {
+    flex: 0 1 calc((100% - 1rem) / 2);
+    max-width: calc((100% - 1rem) / 2);
+  }
+
   .mediaPartnerGrid {
-    grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
 

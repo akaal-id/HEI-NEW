@@ -112,7 +112,46 @@ const partnerCategories: PartnerCategory[] = [
         logo: '/partner-logo/event-partner/halalsarajevo-logo.png',
         alt: 'Halal Expo Sarajevo logo',
         website: 'https://halalexposarajevo.com/',
-      }
+      },
+      {
+        id: 'asean-expo',
+        name: 'ASEAN Expo Saudi Arabia',
+        logo: '/partner-logo/event-partner/aseanexpo-logo.png',
+        alt: 'ASEAN Expo Saudi Arabia logo',
+        website: 'https://aseanexpo.org/',
+      },
+      {
+        id: 'jeddah-vision',
+        name: 'Jeddah Vision for Expo & Conferences',
+        logo: '/partner-logo/event-partner/jvfe-logo.png',
+        alt: 'Jeddah Vision for Expo & Conferences logo',
+      },
+      {
+        id: 'kolej-uniti',
+        name: 'Kolej UNITI',
+        logo: '/partner-logo/event-partner/kolejuniti-logo.png',
+        alt: 'Kolej UNITI logo',
+      },
+      {
+        id: 'mihas',
+        name: 'MIHAS',
+        logo: '/partner-logo/event-partner/mihas-logo.png',
+        alt: 'MIHAS - Malaysia International Halal Showcase logo',
+        website: 'https://www.mihas.com.my/',
+      },
+      {
+        id: 'talents-mapping',
+        name: 'Talents Mapping',
+        logo: '/partner-logo/event-partner/tm-logo.png',
+        alt: 'Talents Mapping logo',
+      },
+      {
+        id: 'uhac',
+        name: 'Uniti Halal Centre',
+        logo: '/partner-logo/event-partner/uhac-logo.png',
+        alt: 'Uniti Halal Centre (UHAC) logo',
+        website: 'https://unitihalalcentre.com/',
+      },
     ]
   },
   {
@@ -145,25 +184,39 @@ const partnerCategories: PartnerCategory[] = [
     id: 'media-partner',
     label: 'Media Partner',
     partners: [
-      { id: 'beranda-news', name: 'Beranda News', logo: '/Media Partner/Logo Beranda News/Beranda News.jpg.jpeg', alt: 'Beranda News' },
-      { id: 'berita-info-jitu', name: 'Berita Info Jitu', logo: '/Media Partner/Logo Berita Info Jitu/IMG-20260207-WA0001(1).jpg.jpeg', alt: 'Berita Info Jitu' },
-      { id: 'berita-unggulan', name: 'Berita Unggulan', logo: '/Media Partner/LOGO BERITA UNGGULAN/WhatsApp Image 2026-02-26 at 17.31.38.jpeg', alt: 'Berita Unggulan' },
-      { id: 'bisnis-com', name: 'Bisnis.com', logo: '/Media Partner/Logo Bisnis.com/Bisniscom Hitam.png', alt: 'Bisnis.com' },
-      { id: 'cantika', name: 'Cantika', logo: '/Media Partner/Logo Cantika/000 Logo Cantika 2025-07.png', alt: 'Cantika' },
-      { id: 'dunia-mice', name: 'Dunia MICE', logo: '/Media Partner/Logo Dunia MICE/LOGO DUNIA MICE (COLOR).png', alt: 'Dunia MICE' },
-      { id: 'getpost', name: 'Getpost', logo: '/Media Partner/Logo Getpost/451718.jpg', alt: 'Getpost' },
-      { id: 'hai-sawit-indonesia', name: 'Hai Sawit Indonesia', logo: '/Media Partner/Logo Hai Sawit Indonesia/LOGO HSI HD.PNG', alt: 'Hai Sawit Indonesia' },
-      { id: 'halal-i-see-you', name: 'Halal I See You', logo: '/Media Partner/Logo Halal I See You/halalicu-partnership(1).png', alt: 'Halal I See You' },
-      { id: 'humaniora', name: 'Humaniora', logo: '/Media Partner/Logo Humaniora/WhatsApp Image 2026-02-06 at 16.17.54_Nero_AI_Image_Upscaler_Photo_Face.jpeg', alt: 'Humaniora' },
-      { id: 'klik-warta', name: 'Klik Warta', logo: '/Media Partner/Logo Klik Warta/Logo Klikwarta.com.png', alt: 'Klik Warta' },
-      { id: 'metro-tv', name: 'Metro TV', logo: '/Media Partner/Logo Metro TV/Metro TV/SAVE_20260206_162410.jpg.jpeg', alt: 'Metro TV' },
-      { id: 'muslim-terkini', name: 'Muslim Terkini', logo: '/Media Partner/Logo Muslim Terkini/Logo MuslimTerkini ID.jpg.jpeg', alt: 'Muslim Terkini' },
-      { id: 'scarf-media', name: 'Scarf Media', logo: '/Media Partner/Logo Scarf Media/LOGO SCARF MEDIA black new hires.png', alt: 'Scarf Media' },
-      { id: 'tempo', name: 'TEMPO', logo: '/Media Partner/Logo TEMPO/Tempo White RED.png', alt: 'TEMPO' },
-      { id: 'the-phrase', name: 'The Phrase', logo: '/Media Partner/Logo The Phrase/the phrase logo - landscape.png', alt: 'The Phrase' },
-      { id: 'valid-news', name: 'Valid News', logo: '/Media Partner/Logo Valid News/VALIDNEWS LOGO (WHITE).png', alt: 'Valid News' },
-      { id: 'venue-magazine', name: 'Venue Magazine', logo: '/Media Partner/Logo Venue Magazine/logo venue baru kotak.jpg', alt: 'Venue Magazine' },
-      { id: 'warta-usaha', name: 'Warta Usaha', logo: '/Media Partner/Logo Warta Usaha/Logo Wartausaha_PNG.png', alt: 'Warta Usaha' },
+      { id: 'beranda-news', name: 'Beranda News', logo: '/partner-logo/media-partner/berandanews-logo.png', alt: 'Beranda News' },
+      { id: 'berita-info-jitu', name: 'Berita Info Jitu', logo: '/partner-logo/media-partner/beritainfojitu-logo.png', alt: 'Berita Info Jitu' },
+      { id: 'berita-unggulan', name: 'Berita Unggulan', logo: '/partner-logo/media-partner/beritaunggulan-logo.png', alt: 'Berita Unggulan' },
+      { id: 'bisnis-com', name: 'Bisnis.com', logo: '/partner-logo/media-partner/bisnis-logo.png', alt: 'Bisnis.com' },
+      { id: 'bisnis-indonesia', name: 'Bisnis Indonesia', logo: '/partner-logo/media-partner/bisnisindonesia-logo.png', alt: 'Bisnis Indonesia' },
+      { id: 'cantika', name: 'Cantika', logo: '/partner-logo/media-partner/cantika-logo.png', alt: 'Cantika' },
+      { id: 'cyber-islam', name: 'Cyber Islam', logo: '/partner-logo/media-partner/cyberislam-logo.png', alt: 'Cyber Islam' },
+      { id: 'dunia-mice', name: 'Dunia MICE', logo: '/partner-logo/media-partner/duniamice-logo.png', alt: 'Dunia MICE' },
+      { id: 'getpost', name: 'Getpost', logo: '/partner-logo/media-partner/getpost-logo.png', alt: 'Getpost' },
+      { id: 'hai-sawit-indonesia', name: 'Hai Sawit Indonesia', logo: '/partner-logo/media-partner/haisawitindonesia-logo.png', alt: 'Hai Sawit Indonesia' },
+      { id: 'halal-i-see-you', name: 'Halal I See You', logo: '/partner-logo/media-partner/halaliseeyou-logo.png', alt: 'Halal I See You' },
+      { id: 'humaniora', name: 'Humaniora', logo: '/partner-logo/media-partner/humaniora-logo.png', alt: 'Humaniora' },
+      { id: 'indonesia-window-news', name: 'Indonesia Window News', logo: '/partner-logo/media-partner/indonesiawindownews-logo.png', alt: 'Indonesia Window News' },
+      { id: 'inilah', name: 'Inilah', logo: '/partner-logo/media-partner/inilah-logo.png', alt: 'Inilah' },
+      { id: 'infobrand', name: 'Infobrand', logo: '/partner-logo/media-partner/infobrand-logo.png', alt: 'Infobrand' },
+      { id: 'info-filantropi', name: 'Info Filantropi', logo: '/partner-logo/media-partner/infofilantropi-logo.png', alt: 'Info Filantropi' },
+      { id: 'klik-warta', name: 'Klik Warta', logo: '/partner-logo/media-partner/klikwarta-logo.png', alt: 'Klik Warta' },
+      { id: 'medcom', name: 'Medcom', logo: '/partner-logo/media-partner/medcom-logo.png', alt: 'Medcom' },
+      { id: 'metro-tv', name: 'Metro TV', logo: '/partner-logo/media-partner/metrotv-logo.png', alt: 'Metro TV' },
+      { id: 'metro-tv-news', name: 'Metro TV News', logo: '/partner-logo/media-partner/metrotvnews-logo.png', alt: 'Metro TV News' },
+      { id: 'muslim-terkini', name: 'Muslim Terkini', logo: '/partner-logo/media-partner/muslimterkini-logo.png', alt: 'Muslim Terkini' },
+      { id: 'radar-baru', name: 'Radar Baru', logo: '/partner-logo/media-partner/radarbaru-logo.png', alt: 'Radar Baru' },
+      { id: 'scraf-media', name: 'Scraf Media', logo: '/partner-logo/media-partner/scrafmedia-logo.png', alt: 'Scraf Media' },
+      { id: 'suara-merdeka', name: 'Suara Merdeka', logo: '/partner-logo/media-partner/suaramerdeka-logo.png', alt: 'Suara Merdeka' },
+      { id: 'suara-merdeka-tv', name: 'Suara Merdeka TV', logo: '/partner-logo/media-partner/suaramerdekatv-logo.png', alt: 'Suara Merdeka TV' },
+      { id: 'tempo', name: 'TEMPO', logo: '/partner-logo/media-partner/tempo-logo.png', alt: 'TEMPO' },
+      { id: 'telusur', name: 'Telusur', logo: '/partner-logo/media-partner/telusur-logo.png', alt: 'Telusur' },
+      { id: 'the-phrase', name: 'The Phrase', logo: '/partner-logo/media-partner/thephrase-logo.png', alt: 'The Phrase' },
+      { id: 'tvri-news', name: 'TVRI News', logo: '/partner-logo/media-partner/tvrinews-logo.png', alt: 'TVRI News' },
+      { id: 'ummat-tv', name: 'Ummat TV', logo: '/partner-logo/media-partner/ummattv-logo.png', alt: 'Ummat TV' },
+      { id: 'valid-news', name: 'Valid News', logo: '/partner-logo/media-partner/validnews-logo.png', alt: 'Valid News' },
+      { id: 'venue-magazine', name: 'Venue Magazine', logo: '/partner-logo/media-partner/venuemagazine-logo.png', alt: 'Venue Magazine' },
+      { id: 'warta-usaha', name: 'Warta Usaha', logo: '/partner-logo/media-partner/wartausaha-logo.png', alt: 'Warta Usaha' },
     ]
   },
   {
@@ -181,7 +234,11 @@ const partnerCategories: PartnerCategory[] = [
   }
 ];
 
-export default function PartnerSection() {
+type PartnerSectionProps = {
+  hideHeader?: boolean;
+};
+
+export default function PartnerSection({ hideHeader = false }: PartnerSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   const getPartnerCardClass = (categoryId: string) => {
@@ -252,15 +309,21 @@ export default function PartnerSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section} id="partners">
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${hideHeader ? styles.sectionNoHeader : ''}`}
+      id="partners"
+    >
       <div className={styles.container}>
-        <div className={`${styles.header} ${styles.animateItem}`} data-animate="true" data-delay="0">
-          <span className={styles.eyebrow}>OUR PARTNERS</span>
-          <h2 className={styles.title}>Supported by Global Institutions</h2>
-          <p className={styles.description}>
-            We are proud to collaborate with a diverse range of partners who share our vision and commitment to fostering international cooperation and development.
-          </p>
-        </div>
+        {!hideHeader && (
+          <div className={`${styles.header} ${styles.animateItem}`} data-animate="true" data-delay="0">
+            <span className={styles.eyebrow}>OUR PARTNERS</span>
+            <h2 className={styles.title}>Supported by Global Institutions</h2>
+            <p className={styles.description}>
+              We are proud to collaborate with a diverse range of partners who share our vision and commitment to fostering international cooperation and development.
+            </p>
+          </div>
+        )}
 
         <div className={styles.partnerCategories}>
           {partnerCategories.map((category, index) => (
