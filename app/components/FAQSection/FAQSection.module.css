@@ -215,6 +215,41 @@
   }
 }
 
+.viewAllWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2.5rem;
+}
+
+.viewAllLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+  font-size: clamp(14px, 1.4vw, 16px);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.viewAllLink:hover {
+  background: var(--hei26-linearyellow);
+  border-color: transparent;
+  color: var(--hei26-deepgreen);
+  transform: translateY(-2px);
+}
+
+.viewAllIcon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
 @media (max-width: 1024px) {
   .container {
     grid-template-columns: 1fr;

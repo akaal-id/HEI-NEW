@@ -10,15 +10,53 @@ interface Program {
   id: string;
   title: string;
   image: string;
+  description: string;
+  href: string;
 }
 
 const programs: Program[] = [
-  { id: 'exhibition', title: 'Exhibition', image: '/images/Programs/1-Exhibition.png' },
-  { id: 'business-matching', title: 'Business Matching', image: '/images/Programs/2-Business Matching.png' },
-  { id: 'investment', title: 'Investment Matchmaking', image: '/images/Programs/3-Investment Matchmaking.png' },
-  { id: 'youth-event', title: 'D-8 HEI Youth', image: '/images/Programs/4-youth event.png' },
-  { id: 'hei-talk', title: 'D-8 HEI Talkshow', image: '/images/Programs/5-D-8 HEI Talkshow.png' },
-  { id: 'culture-festival', title: 'D-8 HEI Culture Festival', image: '/images/Programs/6-Culture Festival.png' },
+  {
+    id: 'exhibition',
+    title: 'Exhibition',
+    image: '/images/Programs/1-Exhibition.png',
+    description: 'Showcase your halal products and services to global buyers, investors, and government delegations on the main expo floor.',
+    href: '/programs/exhibition',
+  },
+  {
+    id: 'business-matching',
+    title: 'Business Matching',
+    image: '/images/Programs/2-Business Matching.png',
+    description: 'Pre-scheduled, curated B2B meetings that turn introductions into cross-border deals across the D-8 halal market.',
+    href: '/programs/business-matching',
+  },
+  {
+    id: 'investment',
+    title: 'Investment Matchmaking',
+    image: '/images/Programs/3-Investment Matchmaking.png',
+    description: 'Connect high-potential ventures with the investors and capital funding the next wave of the halal economy.',
+    href: '/programs/investment',
+  },
+  {
+    id: 'youth-event',
+    title: 'D-8 HEI Youth',
+    image: '/images/Programs/4-youth event.png',
+    description: 'A dedicated stage empowering the next generation of halal entrepreneurs through mentorship and innovation.',
+    href: '/programs/youth-event',
+  },
+  {
+    id: 'hei-talk',
+    title: 'D-8 HEI Talkshow',
+    image: '/images/Programs/5-D-8 HEI Talkshow.png',
+    description: 'Insights from policymakers and industry leaders shaping the regulations of the global halal trade.',
+    href: '/programs/hei-talk',
+  },
+  {
+    id: 'culture-festival',
+    title: 'D-8 HEI Cultural Fest',
+    image: '/images/Programs/6-Culture Festival.png',
+    description: 'Celebrate the rich heritage of the D-8 nations through performances, art, and cultural showcases.',
+    href: '/programs/culture-festival',
+  },
 ];
 
 export default function ProgramSection() {
@@ -75,93 +113,93 @@ export default function ProgramSection() {
     return () => observer.disconnect();
   }, []);
 
-  const handleCardHover = (programId: string) => {
-    // When hovering a default card, it becomes expanded
-    // When hovering an expanded card, it stays expanded (no change)
-    if (expandedCard !== programId) {
-      // Hovering a default card - make it expanded
-      setExpandedCard(programId);
-    }
+  const handleSelect = (programId: string) => {
+    setExpandedCard(programId);
   };
 
-  const handleCardLeave = () => {
-    // When mouse leaves, keep the current expanded card (or reset to exhibition)
-    // This prevents flickering when moving between cards
-  };
-
-  // Exhibition is expanded initially, all others are default
-  const getIsExpanded = (programId: string) => {
-    if (!mounted) {
-      // During SSR, match the initial client state: exhibition is expanded, others are default
-      return programId === 'exhibition';
-    }
-    // After mount: check if this card is the expanded one
-    return expandedCard === programId;
-  };
+  // Exhibition is active initially; before mount match SSR state.
+  const activeId = mounted ? expandedCard : 'exhibition';
+  const activeProgram = programs.find((p) => p.id === activeId) ?? programs[0];
 
   return (
     <section ref={sectionRef} className={styles.section} id="programs">
-      <div ref={headerRef} className={styles.header}>
-        <div className={styles.headerLeft}>
+      <div className={`${styles.inner} hei-container`}>
+        {/* 1. Centered main title */}
+        <div ref={headerRef} className={styles.header}>
           <span className={styles.eyebrow}>KEY PROGRAMS</span>
-          <h2 className={styles.title}>What's On D8 HEI 2026?</h2>
+          <h2 className={styles.title}>What&apos;s On D-8 HEI 2026?</h2>
         </div>
-        <div className={styles.headerRight}>
+
+        {/* 2. Program elements — one large image container with the selector nested inside */}
+        <div ref={cardsRef} className={styles.showcase}>
+          <div className={styles.showcaseStage}>
+            {programs.map((program) => (
+              <div
+                key={program.id}
+                className={`${styles.showcaseImage} ${program.id === activeId ? styles.showcaseImageActive : ''}`}
+                aria-hidden={program.id !== activeId}
+              >
+                <Image
+                  src={program.image}
+                  alt={program.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1440px"
+                  className={styles.showcaseImageEl}
+                  priority={program.id === 'exhibition'}
+                />
+              </div>
+            ))}
+            <div className={styles.showcaseOverlay} />
+
+            <div className={styles.showcaseContent}>
+              <h3 className={styles.showcaseTitle}>{activeProgram.title}</h3>
+              <p className={styles.showcaseSubtext}>{activeProgram.description}</p>
+              <Button
+                href={activeProgram.href}
+                variant="secondary"
+                className={styles.showcaseButton}
+                textClassName={styles.cardButtonText}
+                iconClassName={styles.cardButtonIcon}
+              >
+                Discover More
+              </Button>
+            </div>
+          </div>
+
+          {/* Nested program selector */}
+          <div className={styles.selector} role="tablist" aria-label="Programs">
+            {programs.map((program) => {
+              const isActive = program.id === activeId;
+              return (
+                <button
+                  key={program.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`${styles.selectorItem} ${isActive ? styles.selectorItemActive : ''}`}
+                  onMouseEnter={() => handleSelect(program.id)}
+                  onFocus={() => handleSelect(program.id)}
+                  onClick={() => handleSelect(program.id)}
+                >
+                  <span className={styles.selectorItemText}>{program.title}</span>
+                  <span className={styles.selectorItemIcon}>
+                    <ArrowUpRight className={styles.cardIcon} />
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 3. Descriptive sub-text & actionable CTA */}
+        <div className={styles.footer}>
           <p className={styles.description}>
-          D-8 Halal Expo Indonesia 2026 bridges high-level D-8 economic diplomacy and real-sector halal business by connecting policy dialogue with concrete B2B collaboration, investment, and trade.
+            D-8 Halal Expo Indonesia 2026 bridges high-level D-8 economic diplomacy and real-sector halal business by connecting policy dialogue with concrete B2B collaboration, investment, and trade.
           </p>
           <Button href="/programs" variant="primary" className={styles.viewAllButton}>
             View All Programs
           </Button>
         </div>
-      </div>
-
-      <div ref={cardsRef} className={styles.cardsContainer}>
-        {programs.map((program) => {
-          const isExpanded = getIsExpanded(program.id);
-          return (
-            <div
-              key={program.id}
-              className={`${styles.card} ${isExpanded ? styles.cardExpanded : styles.cardDefault}`}
-              onMouseEnter={() => handleCardHover(program.id)}
-              onMouseLeave={handleCardLeave}
-            >
-              <div className={styles.cardImageContainer}>
-                <Image
-                  src={program.image}
-                  alt={program.title}
-                  fill
-                  className={styles.cardImage}
-                  priority={false}
-                />
-                <div className={styles.cardOverlay}></div>
-              </div>
-              <div className={styles.cardContent}>
-                {isExpanded ? (
-                  <>
-                    <h3 className={styles.cardTitle}>{program.title}</h3>
-                    <Button
-                      href={`#${program.id}`}
-                      variant="secondary"
-                      className={styles.cardButton}
-                      textClassName={styles.cardButtonText}
-                      iconClassName={styles.cardButtonIcon}
-                    >
-                      Discover More
-                    </Button>
-                  </>
-                ) : (
-                  <div className={styles.cardDefaultWrap}>
-                    <span className={styles.cardDefaultTitle}>{program.title}</span>
-                    <div className={styles.cardIconButton}>
-                      <ArrowUpRight className={styles.cardIcon} />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
       </div>
     </section>
   );

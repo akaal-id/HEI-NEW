@@ -86,6 +86,20 @@ export const MARKET_SECTORS = [
   { value: 'other', label: 'Other' },
 ];
 
+export const BUYER_SECTOR_INTERESTS = [
+  { value: 'Halal Food, Beverage & Agribusiness', label: 'Halal Food, Beverage & Agribusiness' },
+  { value: 'Halal Lifestyle, Consumer Goods & Creative Economy', label: 'Halal Lifestyle, Consumer Goods & Creative Economy' },
+  { value: 'Halal Manufacturing, Industrial Services & Supply Chain', label: 'Halal Manufacturing, Industrial Services & Supply Chain' },
+  { value: 'Halal Technology, Digital Solutions & Innovation', label: 'Halal Technology, Digital Solutions & Innovation' },
+  { value: 'Islamic Finance, Investment & Halal Fintech', label: 'Islamic Finance, Investment & Halal Fintech' },
+  { value: 'Trade, Export & International Pavilions', label: 'Trade, Export & International Pavilions' },
+  { value: 'Halal Certification, Standards & Regulatory Bodies', label: 'Halal Certification, Standards & Regulatory Bodies' },
+  { value: 'Islamic Education, Research & Innovation Institutions', label: 'Islamic Education, Research & Innovation Institutions' },
+  { value: 'Halal Tourism, Hospitality & Muslim-Friendly Services', label: 'Halal Tourism, Hospitality & Muslim-Friendly Services' },
+  { value: 'Social & Sustainable Halal Economy', label: 'Social & Sustainable Halal Economy' },
+  { value: 'Other', label: 'Other' },
+];
+
 export const SOURCE_OF_INFO = [
   { value: 'social-media', label: 'Social Media' },
   { value: 'email', label: 'Email' },
@@ -96,3 +110,14 @@ export const SOURCE_OF_INFO = [
 ];
 
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export const OTHER_OPTION_VALUES = ['other', 'Other', '+other'] as const;
+
+export function isOtherOption(value: string): boolean {
+  return (OTHER_OPTION_VALUES as readonly string[]).includes(value);
+}
+
+/** When "Other" is selected, submit the custom text to the same field/column. */
+export function resolveOtherFieldValue(selected: string, otherText: string): string {
+  return isOtherOption(selected) ? otherText.trim() : selected;
+}

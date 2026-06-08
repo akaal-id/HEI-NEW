@@ -15,6 +15,8 @@ import {
   COUNTRIES,
   SOURCE_OF_INFO,
   EMAIL_REGEX,
+  isOtherOption,
+  resolveOtherFieldValue,
 } from '../../lib/registration-data';
 import styles from '../RegisterPage.module.css';
 
@@ -26,7 +28,14 @@ export default function RegisterVisitorPage() {
   const [email, setEmail] = useState('');
   const [country, setCountry] = useState('');
   const [companyName, setCompanyName] = useState('');
+  const [countryCodeOther, setCountryCodeOther] = useState('');
+  const [countryOther, setCountryOther] = useState('');
   const [sourceOfInfo, setSourceOfInfo] = useState('');
+  const [sourceOfInfoOther, setSourceOfInfoOther] = useState('');
+
+  const getCountryCodeValue = () => resolveOtherFieldValue(countryCode, countryCodeOther);
+  const getCountryValue = () => resolveOtherFieldValue(country, countryOther);
+  const getSourceOfInfoValue = () => resolveOtherFieldValue(sourceOfInfo, sourceOfInfoOther);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -45,7 +54,10 @@ export default function RegisterVisitorPage() {
     setEmail('');
     setCountry('');
     setCompanyName('');
+    setCountryCodeOther('');
+    setCountryOther('');
     setSourceOfInfo('');
+    setSourceOfInfoOther('');
     setErrors({});
     setTouched({});
     setFormMessage(null);
@@ -55,28 +67,33 @@ export default function RegisterVisitorPage() {
     { label: 'Status', value: 'Visitor', highlight: true },
     { label: 'Salutation', value: salutation },
     { label: 'Full Name', value: name.trim() },
-    { label: 'Mobile Number', value: `${countryCode} ${mobile.trim()}` },
+    { label: 'Mobile Number', value: `${getCountryCodeValue()} ${mobile.trim()}` },
     { label: 'Email Address', value: email.trim() },
-    { label: 'Country', value: country },
+    { label: 'Country', value: getCountryValue() },
     { label: 'Company Name', value: companyName.trim() },
-    { label: 'Source of Information', value: sourceOfInfo },
+    { label: 'Source of Information', value: getSourceOfInfoValue() },
   ];
 
   const validate = () => {
     setTouched({
-      salutation: true, name: true, mobile: true, email: true, country: true,
-      companyName: true, sourceOfInfo: true,
+      salutation: true, name: true, countryCode: true, countryCodeOther: true,
+      mobile: true, email: true, country: true, countryOther: true,
+      companyName: true, sourceOfInfo: true, sourceOfInfoOther: true,
     });
     const next: Record<string, string> = {};
     if (!salutation) next.salutation = 'Required';
     if (!name?.trim()) next.name = 'Required';
+    if (!countryCode) next.countryCode = 'Required';
+    if (isOtherOption(countryCode) && !countryCodeOther?.trim()) next.countryCodeOther = 'Please specify';
     if (!mobile?.trim()) next.mobile = 'Required';
     else if (mobile.replace(/\D/g, '').length < 9) next.mobile = 'Minimum 9 digits';
     if (!email?.trim()) next.email = 'Required';
     else if (!EMAIL_REGEX.test(email)) next.email = 'Invalid email address';
     if (!country) next.country = 'Required';
+    if (isOtherOption(country) && !countryOther?.trim()) next.countryOther = 'Please specify';
     if (!companyName?.trim()) next.companyName = 'Required';
     if (!sourceOfInfo) next.sourceOfInfo = 'Required';
+    if (isOtherOption(sourceOfInfo) && !sourceOfInfoOther?.trim()) next.sourceOfInfoOther = 'Please specify';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -108,12 +125,12 @@ export default function RegisterVisitorPage() {
         body: JSON.stringify({
           salutation: salutation.trim(),
           fullName: name.trim(),
-          countryCode,
+          countryCode: getCountryCodeValue(),
           mobileNumber: mobile.trim(),
           email: email.trim(),
-          country,
+          country: getCountryValue(),
           companyName: companyName.trim(),
-          sourceOfInfo,
+          sourceOfInfo: getSourceOfInfoValue(),
         }),
       });
       const data = await res.json();
@@ -183,13 +200,34 @@ export default function RegisterVisitorPage() {
                 />
               </div>
               <div className={styles.formRowThird}>
-                <EditorialSelect
-                  label="Country Code"
-                  required
-                  options={COUNTRY_CODES}
-                  value={countryCode}
-                  onChange={(e) => setCountryCode(e.target.value)}
-                />
+                <div>
+                  <EditorialSelect
+                    label="Country Code"
+                    required
+                    options={COUNTRY_CODES}
+                    value={countryCode}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setCountryCode(value);
+                      if (!isOtherOption(value)) setCountryCodeOther('');
+                    }}
+                    error={touched.countryCode ? errors.countryCode : undefined}
+                    onBlur={() => setTouched((t) => ({ ...t, countryCode: true }))}
+                  />
+                  {isOtherOption(countryCode) && (
+                    <div className={styles.otherFieldBlock}>
+                      <EditorialInput
+                        label="Specify Country Code"
+                        required
+                        value={countryCodeOther}
+                        onChange={(e) => setCountryCodeOther(e.target.value)}
+                        error={touched.countryCodeOther ? errors.countryCodeOther : undefined}
+                        onBlur={() => setTouched((t) => ({ ...t, countryCodeOther: true }))}
+                        placeholder="e.g. +XX"
+                      />
+                    </div>
+                  )}
+                </div>
                 <EditorialInput
                   label="Mobile Number"
                   required
@@ -211,16 +249,35 @@ export default function RegisterVisitorPage() {
                 onBlur={() => setTouched((t) => ({ ...t, email: true }))}
                 placeholder=""
               />
-              <EditorialSelect
-                label="Country"
-                required
-                options={COUNTRIES}
-                placeholder="Select country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                error={touched.country ? errors.country : undefined}
-                onBlur={() => setTouched((t) => ({ ...t, country: true }))}
-              />
+              <div>
+                <EditorialSelect
+                  label="Country"
+                  required
+                  options={COUNTRIES}
+                  placeholder="Select country"
+                  value={country}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setCountry(value);
+                    if (!isOtherOption(value)) setCountryOther('');
+                  }}
+                  error={touched.country ? errors.country : undefined}
+                  onBlur={() => setTouched((t) => ({ ...t, country: true }))}
+                />
+                {isOtherOption(country) && (
+                  <div className={styles.otherFieldBlock}>
+                    <EditorialInput
+                      label="Specify Country"
+                      required
+                      value={countryOther}
+                      onChange={(e) => setCountryOther(e.target.value)}
+                      error={touched.countryOther ? errors.countryOther : undefined}
+                      onBlur={() => setTouched((t) => ({ ...t, countryOther: true }))}
+                      placeholder=""
+                    />
+                  </div>
+                )}
+              </div>
               <EditorialInput
                 label="Company Name"
                 required
@@ -230,16 +287,35 @@ export default function RegisterVisitorPage() {
                 onBlur={() => setTouched((t) => ({ ...t, companyName: true }))}
                 placeholder=""
               />
-              <EditorialSelect
-                label="Where did you get information about D-8 Halal Expo?"
-                required
-                options={SOURCE_OF_INFO}
-                placeholder="Select"
-                value={sourceOfInfo}
-                onChange={(e) => setSourceOfInfo(e.target.value)}
-                error={touched.sourceOfInfo ? errors.sourceOfInfo : undefined}
-                onBlur={() => setTouched((t) => ({ ...t, sourceOfInfo: true }))}
-              />
+              <div>
+                <EditorialSelect
+                  label="Where did you get information about D-8 Halal Expo?"
+                  required
+                  options={SOURCE_OF_INFO}
+                  placeholder="Select"
+                  value={sourceOfInfo}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setSourceOfInfo(value);
+                    if (!isOtherOption(value)) setSourceOfInfoOther('');
+                  }}
+                  error={touched.sourceOfInfo ? errors.sourceOfInfo : undefined}
+                  onBlur={() => setTouched((t) => ({ ...t, sourceOfInfo: true }))}
+                />
+                {isOtherOption(sourceOfInfo) && (
+                  <div className={styles.otherFieldBlock}>
+                    <EditorialInput
+                      label="Please specify"
+                      required
+                      value={sourceOfInfoOther}
+                      onChange={(e) => setSourceOfInfoOther(e.target.value)}
+                      error={touched.sourceOfInfoOther ? errors.sourceOfInfoOther : undefined}
+                      onBlur={() => setTouched((t) => ({ ...t, sourceOfInfoOther: true }))}
+                      placeholder=""
+                    />
+                  </div>
+                )}
+              </div>
             </div>
 
             <Button

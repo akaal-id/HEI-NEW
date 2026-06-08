@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "Halal Exhibition Programs",
     "Halal Business Conference",
     "D-8 HEI Youth Jakarta",
-    "Halal Culture Festival",
+    "Halal Cultural Fest",
     "Halal Industry Summit"
   ],
   openGraph: {

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './ProgramPage.module.css';
 
@@ -15,7 +16,7 @@ export default function ProgramInvestment() {
         ref={heroRef as React.RefObject<HTMLElement>} 
         className={`${styles.heroSection} ${isHeroVisible ? styles.fadeIn : ''}`}
         style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)',
+          backgroundImage: 'url("/images/Programs/3-Investment Matchmaking.png")',
         }}
       >
         <div className={styles.heroOverlay}></div>
@@ -27,8 +28,19 @@ export default function ProgramInvestment() {
       {/* Main Content Section */}
       <section ref={contentRef as React.RefObject<HTMLElement>} className={`${styles.section} ${styles.sectionAlt}`}>
         <div className={styles.container}>
-          <div className={styles.content}>
-            <div ref={textRef as React.RefObject<HTMLDivElement>} className={`${styles.textContent} ${isTextVisible ? styles.fadeInUp : ''}`}>
+          <div className={styles.mediaSplit}>
+            <div className={styles.mediaImageWrap}>
+              <Image
+                src="/images/overview.jpg"
+                alt="Investors and business leaders connecting at D-8 Halal Expo Indonesia"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className={styles.mediaImage}
+              />
+            </div>
+            <div ref={textRef as React.RefObject<HTMLDivElement>} className={`${styles.mediaText} ${styles.textContent} ${isTextVisible ? styles.fadeInUp : ''}`}>
+              <span className={styles.mediaBadge}>Capital meets opportunity</span>
+              <h2 className={styles.mediaHeading}>Funding the future of the halal economy</h2>
               <p className={styles.description}>
                 Investment Matchmaking at D-8 Halal Expo Indonesia 2026 connects businesses seeking funding with investors looking for opportunities in the halal economy. This program facilitates strategic investment partnerships that drive growth and innovation in the halal sector.
               </p>

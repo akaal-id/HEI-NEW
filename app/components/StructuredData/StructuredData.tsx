@@ -152,7 +152,7 @@ export default function StructuredData() {
           },
           {
             '@type': 'SiteNavigationElement',
-            name: 'D-8 HEI Culture Festival',
+            name: 'D-8 HEI Cultural Fest',
             url: `${baseUrl}/programs/culture-festival`,
             position: 6,
           },

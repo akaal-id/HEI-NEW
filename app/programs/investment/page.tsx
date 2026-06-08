@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
-import ProgramInvestment from '../../components/ProgramPages/ProgramInvestment';
+import Header, { headerTitleAccentClass } from '../../about/header/header';
+import AboutSection from './sections/about/about';
+import FlowSection from './sections/flow/flow';
+import CtaSection from './sections/cta/cta';
 
 export const metadata: Metadata = {
   title: "Investment Matchmaking | D-8 Halal Expo Indonesia 2026 - Programs",
@@ -29,7 +32,19 @@ export const metadata: Metadata = {
 export default function InvestmentPage() {
   return (
     <main>
-      <ProgramInvestment />
+      <Header
+        eyebrow="Programs"
+        title={
+          <>
+            Investment Matchmaking:{' '}
+            <span className={headerTitleAccentClass}>Where Capital Meets Halal Opportunity</span>
+          </>
+        }
+        subtitle="A curated platform connecting businesses seeking funding with investors looking for high-potential, sharia-compliant opportunities across the global halal economy."
+      />
+      <AboutSection />
+      <FlowSection />
+      <CtaSection />
     </main>
   );
 }

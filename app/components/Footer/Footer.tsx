@@ -166,6 +166,7 @@ export default function Footer() {
             © D-8 Halal Expo Indonesia 2026. All rights reserved.
           </p>
           <div className={styles.legalLinks}>
+            <Link href="/faq" className={styles.legalLink}>FAQ</Link>
             <Link href="#" className={styles.legalLink}>Privacy Policy</Link>
             <Link href="#" className={styles.legalLink}>Terms of Service</Link>
           </div>

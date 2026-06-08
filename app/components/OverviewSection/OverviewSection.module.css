@@ -7,6 +7,14 @@
   font-family: var(--font-plus-jakarta-sans);
 }
 
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem 0;
+}
+
 .imageSection {
   position: relative;
   width: 100%;
@@ -112,11 +120,11 @@
 
 .introMetricsContainer {
   display: grid;
-  /* Wraps to fewer columns when the row is too narrow; min(100%, …) avoids overflow */
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
-  gap: 0;
+  /* Symmetrical 2x2 grid for a sharper, organized read */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   width: 100%;
-  max-width: 100%;
+  max-width: 64rem;
   min-width: 0;
   box-sizing: border-box;
 }
@@ -133,7 +141,8 @@
   min-height: 12rem;
   height: auto;
   gap: 2rem;
-  padding: 1.5rem;
+  padding: 1.75rem;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.06);
   border: 0.6px solid rgba(255, 255, 255, 0.2);
   overflow-wrap: break-word;
@@ -166,7 +175,7 @@
 .introMetricsCardIcon {
   width: 0.875rem;
   height: 0.875rem;
-  color: var(--hei26-white);
+  color: var(--hei26-gold-soft);
   flex-shrink: 0;
 }
 

@@ -5,6 +5,7 @@ const GOOGLE_FORM_RESPONSE_URL =
 
 // Entry IDs from the HEI 2026 Register Buyer form (from prefill URL)
 const ENTRY_IDS = {
+  interest: 'entry.269312168',
   salutation: 'entry.1991638139',
   fullName: 'entry.1934559686',
   countryCode: 'entry.285454750',
@@ -20,6 +21,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     const formData = new URLSearchParams();
+    formData.append(ENTRY_IDS.interest, body.interest ?? '');
     formData.append(ENTRY_IDS.salutation, body.salutation ?? '');
     formData.append(ENTRY_IDS.fullName, body.fullName ?? '');
     formData.append(ENTRY_IDS.countryCode, body.countryCode ?? '');

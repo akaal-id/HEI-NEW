@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './ProgramPage.module.css';
 
@@ -15,7 +16,7 @@ export default function ProgramCultureFestival() {
         ref={heroRef as React.RefObject<HTMLElement>} 
         className={`${styles.heroSection} ${isHeroVisible ? styles.fadeIn : ''}`}
         style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80)',
+          backgroundImage: 'url("/images/DHCF.jpg")',
         }}
       >
         <div className={styles.heroOverlay}></div>
@@ -27,8 +28,19 @@ export default function ProgramCultureFestival() {
       {/* Main Content Section */}
       <section ref={contentRef as React.RefObject<HTMLElement>} className={`${styles.section} ${styles.sectionAlt}`}>
         <div className={styles.container}>
-          <div className={styles.content}>
-            <div ref={textRef as React.RefObject<HTMLDivElement>} className={`${styles.textContent} ${isTextVisible ? styles.fadeInUp : ''}`}>
+          <div className={styles.mediaSplit}>
+            <div className={styles.mediaImageWrap}>
+              <Image
+                src="/images/Programs/6-Culture Festival.png"
+                alt="Cultural performances and heritage showcases from the D-8 nations"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className={styles.mediaImage}
+              />
+            </div>
+            <div ref={textRef as React.RefObject<HTMLDivElement>} className={`${styles.mediaText} ${styles.textContent} ${isTextVisible ? styles.fadeInUp : ''}`}>
+              <span className={styles.mediaBadge}>9 nations, one celebration</span>
+              <h2 className={styles.mediaHeading}>A vibrant celebration of D-8 heritage</h2>
               <p className={styles.description}>
                 The D-8 HEI Culture Festival celebrates the cultural heritage and diversity of D-8 Member States. This vibrant event showcases traditional arts, music, dance, cuisine, and crafts from Bangladesh, Egypt, Indonesia, Iran, Malaysia, Nigeria, Pakistan, and Türkiye, with Azerbaijan joining in 2025.
               </p>

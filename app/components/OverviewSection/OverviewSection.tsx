@@ -103,8 +103,34 @@ export default function OverviewSection() {
 
   return (
     <section ref={sectionRef} className={styles.section} id="overview">
-      {/* Image Container with Metrics Overlay */}
-      <div className={styles.imageSection}>
+      <div className={`${styles.inner} hei-container`}>
+        {/* 1. Primary content — title + the numbers */}
+        <div ref={introRef} className={styles.introContent}>
+          <span className={styles.introEyebrow}>D-8 Halal Expo Indonesia 2026 in Numbers</span>
+          <h2 className={styles.introTitle}>The Global Halal Powerhouse</h2>
+          <div className={styles.introMetricsTitle}>Scaling your business across the world’s most dynamic economic bloc.</div>
+          <div ref={metricsRef} className={styles.introMetricsWrapper}>
+            <div className={styles.introMetricsContainer}>
+              {INTRO_METRIC_CARDS.map(({ icon: Icon, eyebrow, title, description }) => (
+                <div key={`${title}-${description}`} className={styles.introMetricsCard}>
+                  <div className={styles.introMetricsCardTitle}>
+                    <div className={styles.introMetricsCardEyebrowWrapper}>
+                      <Icon className={styles.introMetricsCardIcon} />
+                      <span className={styles.introMetricsCardEyebrowText}>{eyebrow}</span>
+                    </div>
+                    <span className={styles.introMetricsCardTitleText}>{title}</span>
+                  </div>
+                  <div className={styles.introMetricsCardDescription}>
+                    <span className={styles.introMetricsCardDescriptionText}>{description}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={styles.introDescription}>source: <a href="https://developing8.org/about-d-8/brief-history-of-d-8/" target="_blank" rel="noopener noreferrer">https://developing8.org/about-d-8/brief-history-of-d-8/</a></div>
+        </div>
+
+        {/* 2. Visual asset */}
         <div ref={imageRef} className={styles.imageContainer}>
           <Image
             src="/images/overview.jpg"
@@ -115,55 +141,25 @@ export default function OverviewSection() {
             priority={false}
           />
         </div>
-        
-        <div className={styles.introWrapper}>
-          <div className={styles.introContent}>
-            <span className={styles.introEyebrow}>D-8 Halal Expo Indonesia 2026 in Numbers</span>
-            <h2 className={styles.introTitle}>The Global Halal Powerhouse</h2>
-            {/* <p className={styles.introDescription}>
-            Scaling your business across the world’s most dynamic economic bloc.
-            </p> */}
-            <div className={styles.introMetricsTitle}>Scaling your business across the world’s most dynamic economic bloc.</div>
-            <div className={styles.introMetricsWrapper}>
-              <div className={styles.introMetricsContainer}>
-                {INTRO_METRIC_CARDS.map(({ icon: Icon, eyebrow, title, description }) => (
-                  <div key={`${title}-${description}`} className={styles.introMetricsCard}>
-                    <div className={styles.introMetricsCardTitle}>
-                      <div className={styles.introMetricsCardEyebrowWrapper}>
-                        <Icon className={styles.introMetricsCardIcon} />
-                        <span className={styles.introMetricsCardEyebrowText}>{eyebrow}</span>
-                      </div>
-                      <span className={styles.introMetricsCardTitleText}>{title}</span>
-                    </div>
-                    <div className={styles.introMetricsCardDescription}>
-                      <span className={styles.introMetricsCardDescriptionText}>{description}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className={styles.introDescription}>source: <a href="https://developing8.org/about-d-8/brief-history-of-d-8/" target="_blank" rel="noopener noreferrer">https://developing8.org/about-d-8/brief-history-of-d-8/</a></div>
-            
-            <div className={styles.divider}></div>
-            <div className={styles.aboutUsSneakpeakWrapper}>
-            <div className={styles.aboutUsSneakpeak}>
-              <div className={styles.aboutUsSneakpeakItem}>
-                <h3 className={styles.aboutUsSneakpeakTitle}>{ABOUTUS_SNEAKPEAK[0].title}</h3>
-                  <div className={styles.aboutUsSneakpeakDescription} dangerouslySetInnerHTML={{ __html: ABOUTUS_SNEAKPEAK[0].description }} />
-                </div>
-              </div>
-            <div className={styles.introButton}>
-              <a href="/about/d8-organization" className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.button}`}>
-                <span className={buttonStyles.text}>Get to Know D-8 More</span>
-                <div className={buttonStyles.iconContainer}>
-                  <ArrowUpRight className={buttonStyles.icon} />
-                </div> 
-              </a>
-            </div>
+
+        {/* 3. Sneak peek CTA */}
+        <div ref={valuePropRef} className={styles.aboutUsSneakpeakWrapper}>
+          <div className={styles.aboutUsSneakpeak}>
+            <div className={styles.aboutUsSneakpeakItem}>
+              <h3 className={styles.aboutUsSneakpeakTitle}>{ABOUTUS_SNEAKPEAK[0].title}</h3>
+              <div className={styles.aboutUsSneakpeakDescription} dangerouslySetInnerHTML={{ __html: ABOUTUS_SNEAKPEAK[0].description }} />
             </div>
           </div>
+          <div className={styles.introButton}>
+            <a href="/about/d8-organization" className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.button}`}>
+              <span className={buttonStyles.text}>Get to Know D-8 More</span>
+              <div className={buttonStyles.iconContainer}>
+                <ArrowUpRight className={buttonStyles.icon} />
+              </div> 
+            </a>
+          </div>
         </div>
-        </div>
+      </div>
         {/* <div ref={metricsRef} className={styles.metricsContainerWrapper}>
           <div className={styles.metricsContainer}>
           <div className={styles.metric}>

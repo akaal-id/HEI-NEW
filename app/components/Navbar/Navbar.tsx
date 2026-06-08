@@ -207,7 +207,7 @@ export default function Navbar() {
                   D-8 HEI Talk
                 </Link>
                 <Link href="/programs/culture-festival" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  D-8 HEI Culture Festival
+                  D-8 HEI Cultural Fest
                 </Link>
               </div>
             )}
@@ -371,7 +371,7 @@ export default function Navbar() {
                 D-8 HEI Talk
               </Link>
               <Link href="/programs/culture-festival" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                D-8 HEI Culture Festival
+                D-8 HEI Cultural Fest
               </Link>
             </div>
           </div>

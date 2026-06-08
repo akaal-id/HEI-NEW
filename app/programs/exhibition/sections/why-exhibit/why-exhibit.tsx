@@ -22,7 +22,7 @@ const REASONS = [
   },
   {
     title: 'Cultural Diplomacy',
-    description: 'in the Culture Fest, fostering international relations through heritage and culinary arts.',
+    description: 'in the Cultural Fest, fostering international relations through heritage and culinary arts.',
   },
 ];
 

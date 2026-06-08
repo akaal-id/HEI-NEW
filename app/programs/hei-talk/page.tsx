@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
-import ProgramHEITalk from '../../components/ProgramPages/ProgramHEITalk';
+import Header, { headerTitleAccentClass } from '../../about/header/header';
+import AboutSection from './sections/about/about';
+import FlowSection from './sections/flow/flow';
+import CtaSection from './sections/cta/cta';
 
 export const metadata: Metadata = {
   title: "D-8 HEI Talk | D-8 Halal Expo Indonesia 2026 - Programs",
@@ -29,7 +32,19 @@ export const metadata: Metadata = {
 export default function HEITalkPage() {
   return (
     <main>
-      <ProgramHEITalk />
+      <Header
+        eyebrow="Programs"
+        title={
+          <>
+            D-8 HEI Talk:{' '}
+            <span className={headerTitleAccentClass}>Where Halal Industry Leaders Convene</span>
+          </>
+        }
+        subtitle="Approximately 15 expert-led sessions of discussions, presentations, and panel forums—turning the dialogue of policymakers, innovators, and industry leaders into actionable insight for the global halal economy."
+      />
+      <AboutSection />
+      <FlowSection />
+      <CtaSection />
     </main>
   );
 }

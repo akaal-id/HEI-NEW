@@ -44,13 +44,13 @@ export default function IntroSection() {
           <span className={styles.introLabel}>The B2C Showcase</span>
           <h2 className={styles.introHeadline}>
             D-8 Halal<br />
-            <em>Culture Fest</em>
+            <em>Cultural Fest</em>
           </h2>
         </div>
 
         <div className={styles.b2cRight}>
           <p className={styles.b2cLead}>
-            To complement the business objectives, the Culture Fest highlights the rich heritage of the D-8 member nations.
+            To complement the business objectives, the Cultural Fest highlights the rich heritage of the D-8 member nations.
           </p>
           <p>
             A key feature of this segment is the live cooking competition featuring expert chefs from across the D-8. Visitors and delegates are invited to experience authentic flavors from three continents, a vibrant showcase designed to promote D-8 culinary tourism and cultural exchange.
