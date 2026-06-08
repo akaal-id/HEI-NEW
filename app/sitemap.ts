@@ -117,7 +117,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let articlePages: MetadataRoute.Sitemap = [];
   
   try {
-    const articles = await getAllArticles();
+    const articles = await getAllArticles({ revalidate: 3600 });
     
     articlePages = articles
       .filter(article => article.slug && article.slug !== 'undefined')

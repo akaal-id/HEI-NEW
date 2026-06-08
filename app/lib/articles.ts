@@ -279,19 +279,30 @@ export async function getArticleSlugs(): Promise<string[]> {
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID || '1OxE-sFGQ4hqfpxsQGo3GdanjahIEPE-XxHOy-mDUmvw';
 const GID = process.env.GOOGLE_SHEETS_GID || '0';
 
+type ArticleFetchOptions = {
+  /** ISR revalidate interval in seconds. Omit for always-fresh (dynamic) fetches. */
+  revalidate?: number;
+};
+
 /**
  * Fetches articles from Google Sheets
  * Uses Google Sheets CSV export (more reliable for public sheets)
  */
-async function fetchFromGoogleSheets(): Promise<GoogleSheetRow[]> {
+async function fetchFromGoogleSheets(
+  options: ArticleFetchOptions = {}
+): Promise<GoogleSheetRow[]> {
   try {
     // Use CSV export which is more reliable
     const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${GID}`;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
+    const fetchOptions: RequestInit =
+      options.revalidate != null && options.revalidate > 0
+        ? { next: { revalidate: options.revalidate } }
+        : { cache: 'no-store' };
+
     const response = await fetch(url, {
-      cache: 'no-store', // Always fetch fresh data
-      next: { revalidate: 0 }, // No caching
+      ...fetchOptions,
       signal: controller.signal,
     }).finally(() => clearTimeout(timeout));
     
@@ -561,9 +572,11 @@ function mapToArticle(row: GoogleSheetRow): Article {
   };
 }
 
-export async function getAllArticles(): Promise<Article[]> {
+export async function getAllArticles(
+  options: ArticleFetchOptions = {}
+): Promise<Article[]> {
   try {
-    const rows = await fetchFromGoogleSheets();
+    const rows = await fetchFromGoogleSheets(options);
     const articles = rows.map(mapToArticle);
     
     // Remove duplicates based on ID, keeping the first occurrence
