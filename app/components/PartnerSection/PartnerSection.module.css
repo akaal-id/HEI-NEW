@@ -75,6 +75,26 @@
   gap: 1.5rem;
 }
 
+.hotelPartnerRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
+.hotelPartnerRow .category {
+  flex: 0 1 calc((100% - 2 * 1rem) / 3);
+  max-width: calc((100% - 2 * 1rem) / 3);
+  width: 100%;
+}
+
+.hotelPartnerRow .partnerGrid > * {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
 .categoryLabel {
   display: inline-block;
   padding: 8px 24px;
@@ -135,8 +155,8 @@
 }
 
 .mediaPartnerGrid > * {
-  flex: 0 1 320px;
-  max-width: 320px;
+  flex: 0 1 240px;
+  max-width: 249px;
   width: 100%;
 }
 
@@ -296,6 +316,11 @@
     max-width: calc((100% - 1.5rem) / 2);
   }
 
+  .hotelPartnerRow .category {
+    flex: 0 1 calc((100% - 1.5rem) / 2);
+    max-width: calc((100% - 1.5rem) / 2);
+  }
+
   .partnerGrid {
     gap: 1.5rem;
   }
@@ -318,6 +343,15 @@
 }
 
 @media (max-width: 768px) {
+  .hotelPartnerRow {
+    gap: 2.5rem;
+  }
+
+  .hotelPartnerRow .category {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+
   .section {
     padding: 4rem 0.5rem;
   }

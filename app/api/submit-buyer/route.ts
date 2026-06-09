@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const GOOGLE_FORM_RESPONSE_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSfg5l09MCg9gVjnCl_hUDEycCuT8WUEvQDIRq5MLB484S-2-w/formResponse';
+  'https://docs.google.com/forms/d/e/1FAIpQLSf7SvdkCx2BMbRN46twBF1NCBCY_joYbwTEvvU9uJ9T8Q2mJQ/formResponse';
 
 // Entry IDs from the HEI 2026 Register Buyer form (from prefill URL)
 const ENTRY_IDS = {

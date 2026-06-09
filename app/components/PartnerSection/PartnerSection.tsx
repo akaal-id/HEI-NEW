@@ -64,13 +64,6 @@ const partnerCategories: PartnerCategory[] = [
         logo: '/partner-logo/strategic-partner/kadin-logo.png',
         alt: 'KADIN Indonesia - Indonesian Chamber of Commerce and Industry',
         website: 'https://kadin.id/',
-      },
-      {
-        id: 'kpmi',
-        name: 'KPMI',
-        logo: '/partner-logo/strategic-partner/kpmi-logo.png',
-        alt: 'KPMI logo',
-        website: 'https://kpmi.or.id/',
       }
     ]
   },
@@ -78,6 +71,13 @@ const partnerCategories: PartnerCategory[] = [
     id: 'event-partner',
     label: 'Event Partner',
     partners: [
+      {
+        id: 'kpmi',
+        name: 'KPMI',
+        logo: '/partner-logo/strategic-partner/kpmi-logo.png',
+        alt: 'KPMI logo',
+        website: 'https://kpmi.or.id/',
+      },
       {
         id: 'wasabih',
         name: 'Wasabih',
@@ -91,13 +91,6 @@ const partnerCategories: PartnerCategory[] = [
         logo: '/partner-logo/event-partner/akaal-logo.png',
         alt: 'Akaal logo',
         website: 'https://akaal.id/',
-      },
-      {
-        id: 'hegira',
-        name: 'Hegira',
-        logo: '/partner-logo/event-partner/hegira-logo.png',
-        alt: 'Hegira logo',
-        website: 'https://hegira.id/',
       },
       {
         id: 'halal-korea',
@@ -164,6 +157,19 @@ const partnerCategories: PartnerCategory[] = [
         logo: '/partner-logo/official-hotel-partner/hotelmulia-logo.png',
         alt: 'Hotel Mulia logo',
         website: 'https://www.themulia.com/jakarta/hotel-mulia',
+      }
+    ]
+  },
+  {
+    id: 'registration-partner',
+    label: 'Official Registration Partner',
+    partners: [
+      {
+        id: 'hegira',
+        name: 'Hegira',
+        logo: '/partner-logo/event-partner/hegira-logo.png',
+        alt: 'Hegira logo',
+        website: 'https://hegira.id/',
       }
     ]
   },
@@ -246,7 +252,7 @@ export default function PartnerSection({ hideHeader = false }: PartnerSectionPro
       return `${styles.partnerCard} ${styles.strategicPartnerCard}`;
     }
 
-    if (categoryId === 'official-hotel-partner') {
+    if (categoryId === 'official-hotel-partner' || categoryId === 'registration-partner') {
       return `${styles.partnerCard} ${styles.officialHotelPartnerCard}`;
     }
 
@@ -308,6 +314,51 @@ export default function PartnerSection({ hideHeader = false }: PartnerSectionPro
     };
   }, []);
 
+  const renderPartnerCard = (partner: Partner, categoryId: string) => (
+    <div key={partner.id} className={categoryId === 'media-partner' ? styles.mediaPartnerCard : getPartnerCardClass(categoryId)}>
+      {partner.website ? (
+        <a
+          href={partner.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.partnerLink}
+          aria-label={`Visit ${partner.name} website`}
+        >
+          <div className={categoryId === 'media-partner' ? styles.mediaPartnerLogo : styles.partnerLogo}>
+            <Image
+              src={partner.logo}
+              alt={partner.alt}
+              width={categoryId === 'media-partner' ? 140 : 200}
+              height={categoryId === 'media-partner' ? 72 : 120}
+              className={styles.logoImage}
+            />
+          </div>
+        </a>
+      ) : (
+        <div className={categoryId === 'media-partner' ? styles.mediaPartnerLogo : styles.partnerLogo}>
+          <Image
+            src={partner.logo}
+            alt={partner.alt}
+            width={categoryId === 'media-partner' ? 140 : 200}
+            height={categoryId === 'media-partner' ? 72 : 120}
+            className={styles.logoImage}
+          />
+        </div>
+      )}
+    </div>
+  );
+
+  const renderCategoryBlock = (category: PartnerCategory) => (
+    <div className={styles.category}>
+      <div className={styles.categoryLabel}>{category.label}</div>
+      <div className={category.id === 'media-partner' ? styles.mediaPartnerGrid : styles.partnerGrid}>
+        {category.partners.map((partner) => renderPartnerCard(partner, category.id))}
+      </div>
+    </div>
+  );
+
+  const hiddenCategoryIds = new Set(['promotion-partner', 'registration-partner']);
+
   return (
     <section
       ref={sectionRef}
@@ -326,51 +377,39 @@ export default function PartnerSection({ hideHeader = false }: PartnerSectionPro
         )}
 
         <div className={styles.partnerCategories}>
-          {partnerCategories.map((category, index) => (
-            <div
-              key={category.id}
-              className={`${styles.category} ${styles.animateItem} ${category.id === 'organized-by' ? styles.organizedBy : ''} ${category.id === 'media-partner' ? styles.mediaPartnerCategory : ''}`}
-              data-animate="true"
-              data-delay={String(index * 100)}
-            >
-              <div className={styles.categoryLabel}>{category.label}</div>
-              <div className={category.id === 'media-partner' ? styles.mediaPartnerGrid : styles.partnerGrid}>
-                {category.partners.map((partner) => (
-                  <div key={partner.id} className={category.id === 'media-partner' ? styles.mediaPartnerCard : getPartnerCardClass(category.id)}>
-                    {partner.website ? (
-                      <a
-                        href={partner.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.partnerLink}
-                        aria-label={`Visit ${partner.name} website`}
-                      >
-                        <div className={category.id === 'media-partner' ? styles.mediaPartnerLogo : styles.partnerLogo}>
-                          <Image
-                            src={partner.logo}
-                            alt={partner.alt}
-                            width={category.id === 'media-partner' ? 140 : 200}
-                            height={category.id === 'media-partner' ? 72 : 120}
-                            className={styles.logoImage}
-                          />
-                        </div>
-                      </a>
-                    ) : (
-                      <div className={category.id === 'media-partner' ? styles.mediaPartnerLogo : styles.partnerLogo}>
-                        <Image
-                          src={partner.logo}
-                          alt={partner.alt}
-                          width={category.id === 'media-partner' ? 140 : 200}
-                          height={category.id === 'media-partner' ? 72 : 120}
-                          className={styles.logoImage}
-                        />
-                      </div>
-                    )}
+          {partnerCategories
+            .filter((category) => !hiddenCategoryIds.has(category.id))
+            .map((category, index) => {
+              if (category.id === 'official-hotel-partner') {
+                const registrationCategory = partnerCategories.find((item) => item.id === 'registration-partner');
+
+                return (
+                  <div
+                    key="hotel-registration-row"
+                    className={`${styles.hotelPartnerRow} ${styles.animateItem}`}
+                    data-animate="true"
+                    data-delay={String(index * 100)}
+                  >
+                    {renderCategoryBlock(category)}
+                    {registrationCategory && renderCategoryBlock(registrationCategory)}
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
+                );
+              }
+
+              return (
+                <div
+                  key={category.id}
+                  className={`${styles.category} ${styles.animateItem} ${category.id === 'organized-by' ? styles.organizedBy : ''} ${category.id === 'media-partner' ? styles.mediaPartnerCategory : ''}`}
+                  data-animate="true"
+                  data-delay={String(index * 100)}
+                >
+                  <div className={styles.categoryLabel}>{category.label}</div>
+                  <div className={category.id === 'media-partner' ? styles.mediaPartnerGrid : styles.partnerGrid}>
+                    {category.partners.map((partner) => renderPartnerCard(partner, category.id))}
+                  </div>
+                </div>
+              );
+            })}
         </div>
 
         <div className={`${styles.ctaSection} ${styles.animateItem}`} data-animate="true" data-delay="0">
