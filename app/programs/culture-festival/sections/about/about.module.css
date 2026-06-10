@@ -28,7 +28,7 @@
 .introSection {
   width: 100%;
   padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 4vw, 3rem);
-  background: var(--background);
+  background: var;
   font-family: var(--font-plus-jakarta-sans), sans-serif;
   overflow: hidden;
 }

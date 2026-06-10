@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "predev": "node scripts/ensure-local-deps.mjs",
+    "dev": "NEXT_DIST_DIR=/tmp/hei-2026-next next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "favicon": "png-to-ico public/icon/icon-d8hei.png > app/favicon.ico"
+    "favicon": "png-to-ico public/icon/icon-d8hei.png > app/favicon.ico",
+    "postinstall": "node scripts/postinstall.mjs"
   },
   "dependencies": {
     "@react-email/components": "^1.0.12",
