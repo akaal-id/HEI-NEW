@@ -271,7 +271,7 @@ function FestivalHero() {
 
           <div className={styles.heroActions}>
             <Link href="/register/visitor" className={`${buttonStyles.button} ${buttonStyles.primary}`}>
-              <span className={buttonStyles.text}>Register as Visitor</span>
+              <span className={buttonStyles.text}>Get Tickets Now</span>
               <div className={buttonStyles.iconContainer}>
                 <ArrowUpRight className={buttonStyles.icon} aria-hidden="true" />
               </div>
@@ -519,7 +519,7 @@ function ClosingCTA() {
             href="/register/visitor"
             className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.closingRegisterButton}`}
           >
-            <span className={`${buttonStyles.text} ${styles.closingRegisterText}`}>Register as Visitor</span>
+            <span className={`${buttonStyles.text} ${styles.closingRegisterText}`}>Get Tickets Now</span>
             <div className={`${buttonStyles.iconContainer} ${styles.closingRegisterIcon}`}>
               <ArrowUpRight className={buttonStyles.icon} aria-hidden="true" />
             </div>
