@@ -436,7 +436,7 @@
   border-radius: 999px;
   color: var(--cf-white);
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 700;
   font-family: var(--font-dhcf);
   letter-spacing: 0.08em;
   line-height: 1;
@@ -478,7 +478,7 @@
   border-radius: 999px;
   color: var(--cf-deep);
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1;
   font-family: var(--font-dhcf);
@@ -520,7 +520,7 @@
   border-radius: 999px;
   color: var(--cf-deep);
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1;
   font-family: var(--font-dhcf);
@@ -744,7 +744,7 @@
   border-radius: 999px;
   /* background: rgba(255, 255, 255, 0.16); */
   color: var(--cf-gold);
-  border: 1.6px solid rgba(255, 255, 255, 0.18);
+  border: 1.6px solid rgba(255, 181, 70, 0.239);
 }
 
 .aboutMiniCard svg,
@@ -1487,48 +1487,44 @@
   .hero {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    height: 100dvh;
-    min-height: 100vh;
-    min-height: 100dvh;
-    max-height: 100vh;
-    max-height: 100dvh;
-    padding-top: clamp(4.5rem, 11vh, 5.25rem);
-    overflow: hidden;
+    height: 70dvh;
+    /* padding-top: clamp(4.5rem, 11vh, 5.25rem); */
+    overflow: visible;
     box-sizing: border-box;
   }
 
   .heroInner {
     flex: 1;
     min-height: 0;
-    height: 100%;
+    height: 70dvh;
     display: flex;
     flex-direction: column;
-    padding-bottom: 40vh;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 4rem;
     box-sizing: border-box;
   }
 
   .heroCopy {
     flex: 1;
-    min-height: 85vh;
-    height: 100%;
+    height: 70dvh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    /* align-items: center;
+    justify-content: space-between; */
     width: 100%;
-    gap: 0;
+    /* gap: 0; */
     box-sizing: border-box;
   }
 
   .logoWrap {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 100%;
     max-width: 17.5rem;
-    margin-top: clamp(0.5rem, 2vh, 1rem);
+    margin-top: 0;
     margin-inline: auto;
     justify-content: center;
     align-items: center;
@@ -1538,23 +1534,22 @@
   }
 
   .monogramLogo {
-    width: 8rem;
-    max-width: 8rem;
+    width: 6rem;
+    max-width: 6rem;
   }
 
   .wordmarkLogo {
     width: auto;
     max-width: 100%;
-    max-height: 5.25rem;
+    max-height: 5rem;
   }
 
   .heroPill {
-    margin-top: 1.2rem;
-    font-size: 0.68rem;
+    display: none;
   }
 
   .heroTitle {
-    font-size: clamp(2.75rem, 14vw, 4.4rem);
+    display: none;
   }
 
   .heroMeta {
@@ -1563,11 +1558,9 @@
     align-items: center;
     gap: 0.4rem;
     width: 100%;
-    margin-top: auto;
-    margin-bottom: 0.65rem;
     padding: 0.7rem 0.85rem;
     border-radius: 1rem;
-    text-wrap: balance;
+    margin-bottom: -18rem;
   }
 
   .heroMeta span {
@@ -1590,10 +1583,11 @@
 
   .heroActions {
     width: 100%;
-    margin-top: 0;
+    /* margin-top: 0; */
     flex-shrink: 0;
     box-sizing: border-box;
     border-radius: 0.8rem;
+    margin-bottom: 6rem;
   }
 
   .primaryButton,
@@ -1604,10 +1598,9 @@
 
   .heroLandscape {
     position: absolute;
-    inset: auto 0 0;
-    top: auto;
-    height: 52vh;
-    min-height: 13.5rem;
+    top: 5%;
+    height: 90dvh;
+    min-height: 100dvh;
     z-index: 1;
     overflow: visible;
     transform: none;
@@ -1618,10 +1611,10 @@
   .landscapeImage {
     position: absolute;
     left: -73%;
-    bottom: -5%;
+    top: 25%;
     width: 100%;
     min-width: 960px;
-    height: auto;
+    height: 540px;
     max-width: none;
     object-fit: cover;
     overflow: visible;
