@@ -1207,21 +1207,21 @@
   gap: 0.5rem;
   border-radius: 999px;
   color: #c7f5f2;
-  font-size: 0.78rem;
+  font-size: 1.15rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   line-height: 1;
-  text-transform: uppercase;
+  font-family: var(--font-dhcf);
 }
 
-.closingEyebrow::before {
+/* .closingEyebrow::before {
   content: "";
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 999px;
   background: var(--cf-gold);
   box-shadow: 0 0 0 5px rgba(244, 179, 33, 0.16);
-}
+} */
 
 .closingHeading {
   color: var(--cf-white);
@@ -1239,6 +1239,8 @@
   font-size: clamp(1rem, 1.8vw, 1.18rem);
   font-weight: 500;
   line-height: 1.8;
+  font-family: var(--font-dhcf);
+  text-wrap: balance;
 }
 
 .closingRegisterButton {

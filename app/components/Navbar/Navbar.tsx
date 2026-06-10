@@ -12,6 +12,9 @@ import styles from './Navbar.module.css';
 export default function Navbar() {
   const pathname = usePathname();
   const isArticlesPage = pathname === '/articles' || Boolean(pathname?.startsWith('/articles/'));
+  const isCultureFestivalPage =
+    pathname === '/programs/culture-festival' ||
+    Boolean(pathname?.startsWith('/programs/culture-festival/'));
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
@@ -114,7 +117,7 @@ export default function Navbar() {
     setOpenMobileDropdown(null);
   };
 
-  const showScrolledLogo = isScrolled || isArticlesPage;
+  const showScrolledLogo = isScrolled || isArticlesPage || isCultureFestivalPage;
 
   return (
     <nav className={`${styles.navbar} ${showScrolledLogo ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
