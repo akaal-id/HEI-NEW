@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import Hero from './components/Hero/Hero';
 import SituationSection from './components/SituationSection/SituationSection';
 
+const HomePromoPopup = dynamic(() => import('./components/HomePromoPopup/HomePromoPopup'));
+
 const OverviewSection = dynamic(() => import('./components/OverviewSection/OverviewSection'), {
   loading: () => <div style={{ height: '100vh', background: 'var(--hei26-linearblue)' }}></div>,
 });
@@ -59,6 +61,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
+      <HomePromoPopup />
       <Hero/>
       <SituationSection />
       <OverviewSection />
