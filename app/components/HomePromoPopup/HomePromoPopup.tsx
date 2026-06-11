@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import Link from 'next/link';
 import { X } from 'lucide-react';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import styles from './HomePromoPopup.module.css';
 
 /**
@@ -43,16 +44,7 @@ export default function HomePromoPopup() {
     return () => window.clearTimeout(timer);
   }, [open, activeIndex]);
 
-  useEffect(() => {
-    if (!open) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [open]);
+  useBodyScrollLock(open);
 
   const advanceOrClose = useCallback(() => {
     if (activeIndex < popups.length - 1) {
@@ -111,7 +103,10 @@ export default function HomePromoPopup() {
         <Link
           href={activePopup.href}
           className={styles.imageLink}
-          onClick={(event) => event.stopPropagation()}
+          onClick={(event) => {
+            event.stopPropagation();
+            setOpen(false);
+          }}
           aria-label={activePopup.alt}
         >
           <Image

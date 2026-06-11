@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { X, Mail, CheckCircle } from 'lucide-react';
 import styles from './SituationSection.module.css';
 import { useGoogleForm } from '../../hooks/useGoogleForm';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import Button from '../Button/Button';
 
 const BODY_COPY =
@@ -23,14 +24,7 @@ export default function SituationSection() {
     setOpen(false);
   }, []);
 
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
+  useBodyScrollLock(open);
 
   useEffect(() => {
     if (!open) return;

@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import Hero from './components/Hero/Hero';
-import SituationSection from './components/SituationSection/SituationSection';
 
 const HomePromoPopup = dynamic(() => import('./components/HomePromoPopup/HomePromoPopup'));
 
@@ -63,7 +62,6 @@ export default function Home() {
     <main>
       <HomePromoPopup />
       <Hero/>
-      <SituationSection />
       <OverviewSection />
       <ProgramSection />
       <VenueProfileSection />
