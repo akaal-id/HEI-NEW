@@ -1,0 +1,268 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 36, 52, 0.52);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.24s ease-out;
+  pointer-events: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: relative;
+  width: min(100%, 720px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow:
+    0 24px 60px rgba(0, 36, 52, 0.18),
+    0 8px 24px rgba(0, 36, 52, 0.08);
+  animation: slideUp 0.28s ease-out;
+  z-index: 10101;
+  pointer-events: auto;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10102;
+  pointer-events: auto;
+}
+
+.closeButton:hover {
+  background: rgba(0, 73, 102, 0.06);
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--hei26-dongkerblue, #004966);
+}
+
+.header {
+  padding-right: 2.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 0.55rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0, 73, 102, 0.62);
+}
+
+.title {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.45rem, 3.5vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--hei26-dongkerblue, #004966);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(0, 73, 102, 0.68);
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.section {
+  padding: 1.25rem;
+  border: 1px solid rgba(0, 73, 102, 0.1);
+  border-radius: 18px;
+  background: #f7fafb;
+}
+
+.sectionmain {
+  background: linear-gradient(180deg, rgba(38, 167, 223, 0.07) 0%, rgba(255, 255, 255, 0.9) 100%);
+}
+
+.sectionculfest {
+  background: linear-gradient(180deg, rgba(255, 196, 77, 0.14) 0%, rgba(255, 255, 255, 0.92) 100%);
+}
+
+.sectionHeader {
+  margin-bottom: 1rem;
+}
+
+.sectionEyebrow {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(0, 73, 102, 0.55);
+}
+
+.sectionTitle {
+  margin: 0 0 0.2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--hei26-dongkerblue, #004966);
+}
+
+.sectionSubtitle {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(0, 73, 102, 0.62);
+}
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.optionCard {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(0, 73, 102, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.optionCard:hover {
+  border-color: rgba(0, 73, 102, 0.22);
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 73, 102, 0.08);
+}
+
+.optionIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--hei26-linearblue);
+  color: #ffffff;
+}
+
+.sectionculfest .optionIconWrap {
+  background: linear-gradient(135deg, #f0b429 0%, #e8940f 100%);
+}
+
+.optionIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.optionCopy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.optionLabel {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--hei26-dongkerblue, #004966);
+}
+
+.optionDescription {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(0, 73, 102, 0.66);
+}
+
+.optionArrow {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: rgba(0, 73, 102, 0.45);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.optionCard:hover .optionArrow {
+  transform: translate(2px, -2px);
+  color: var(--hei26-dongkerblue, #004966);
+}
+
+@media (max-width: 640px) {
+  .modal {
+    padding: 1.35rem;
+    border-radius: 20px;
+  }
+
+  .header {
+    margin-bottom: 1.35rem;
+    padding-right: 2.25rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .optionCard {
+    align-items: flex-start;
+    padding: 0.85rem;
+  }
+
+  .optionArrow {
+    margin-top: 0.15rem;
+  }
+}

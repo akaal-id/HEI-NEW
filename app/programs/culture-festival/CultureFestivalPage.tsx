@@ -40,7 +40,7 @@ const aboutCards: Array<{ title: string; label: string; icon: LucideIcon }> = [
   { title: 'Food', label: 'Halal tastes across continents', icon: Wheat },
   { title: 'Performance', label: 'Music, dance, and living rituals', icon: Users },
   { title: 'Craft', label: 'Textiles, objects, and artisan detail', icon: Palette },
-  { title: 'Heritage', label: 'Stories carried by nine nations', icon: Globe2 },
+  { title: 'Heritage', label: 'Stories carried by worldwide nations', icon: Globe2 },
 ];
 
 const programs = [
@@ -90,7 +90,7 @@ const audiences = [
     title: 'For Visitors',
     icon: Star,
     description:
-      'Enjoy food, performances, crafts, and cultural experiences from nine nations in one family-friendly festival.',
+      'Enjoy food, performances, crafts, and cultural experiences from worldwide nations in one family-friendly festival.',
   },
   {
     title: 'For Delegates',
@@ -270,14 +270,20 @@ function FestivalHero() {
           </div>
 
           <div className={styles.heroActions}>
-            <Link href="/register/visitor" className={`${buttonStyles.button} ${buttonStyles.primary}`}>
+            <Link
+              href="/programs/culture-festival/register/visitor"
+              className={`${buttonStyles.button} ${buttonStyles.primary} ${styles.heroActionButton}`}
+            >
               <span className={buttonStyles.text}>Get Tickets Now</span>
               <div className={buttonStyles.iconContainer}>
                 <ArrowUpRight className={buttonStyles.icon} aria-hidden="true" />
               </div>
             </Link>
-            <Link href="#festival-programs" className={`${buttonStyles.button} ${buttonStyles.secondary}`}>
-              <span className={buttonStyles.text}>Explore Programs</span>
+            <Link
+              href="/programs/culture-festival/register/exhibitor"
+              className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.heroActionButton}`}
+            >
+              <span className={buttonStyles.text}>Book Your Space</span>
               <div className={buttonStyles.iconContainer}>
                 <ArrowUpRight className={buttonStyles.icon} aria-hidden="true" />
               </div>
@@ -309,12 +315,12 @@ function AboutFestival() {
           <SectionHeading
             variant="about"
             eyebrow="Festival Story"
-            title="A Cultural Journey Across Nine Nations"
-            copy="D-8 HEI Cultural Festival brings together the food, performances, crafts, and living heritage of nine nations in one immersive cultural celebration within D-8 Halal Expo Indonesia 2026."
+            title="A Cultural Journey Across Worldwide Nations"
+            copy="D-8 HEI Cultural Festival brings together the food, performances, crafts, and living heritage of worldwide nations in one immersive cultural celebration within D-8 Halal Expo Indonesia 2026."
             align="left"
           />
           <div className={`${styles.aboutNote} ${styles.reveal}`}>
-            <span>Nine nations</span>
+            <span>Worldside nations</span>
             <strong>One living cultural experience</strong>
           </div>
         </div>
@@ -345,7 +351,7 @@ function NineNations() {
         <SectionHeading
           variant="nations"
           eyebrow="Participating Nations"
-          title="Nine Nations, Nine Cultural Signatures"
+          title="Worldwide Nations, +9 Cultural Signatures"
           copy="A refined celebration of traditions from Southeast Asia, South Asia, West Asia, Africa, and the Caucasus."
         />
 
@@ -514,9 +520,9 @@ function ClosingCTA() {
         <div className={`${styles.closingContent} ${styles.reveal}`}>
           <span className={styles.closingEyebrow}>July 2026 / Jakarta</span>
           <h2 className={styles.closingHeading}>Be Part of the D-8 Culture Experience</h2>
-          <p className={styles.closingText}>Join the cultural celebration of nine nations at D-8 HEI Cultural Festival 2026.</p>
+          <p className={styles.closingText}>Join the cultural celebration of worldwide nations at D-8 HEI Cultural Festival 2026.</p>
           <Link
-            href="/register/visitor"
+            href="/programs/culture-festival/register/visitor"
             className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.closingRegisterButton}`}
           >
             <span className={`${buttonStyles.text} ${styles.closingRegisterText}`}>Get Tickets Now</span>

@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Button from '../Button/Button';
 import ContactModal from '../ContactModal/ContactModal';
+import RegisterHubModal from '../RegisterHubModal/RegisterHubModal';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -20,8 +21,9 @@ export default function Navbar() {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<'about' | 'programs' | 'register' | null>(null);
-  const [openMobileDropdown, setOpenMobileDropdown] = useState<'about' | 'programs' | 'register' | null>(null);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<'about' | 'programs' | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<'about' | 'programs' | null>(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -73,8 +75,7 @@ export default function Navbar() {
       const target = event.target as HTMLElement;
       if (
         !target.closest(`.${styles.menuItemWithDropdown}`) &&
-        !target.closest(`.${styles.mobileMenuItemWithDropdown}`) &&
-        !target.closest(`.${styles.registerDropdownWrapper}`)
+        !target.closest(`.${styles.mobileMenuItemWithDropdown}`)
       ) {
         setOpenDropdown(null);
         setOpenMobileDropdown(null);
@@ -104,12 +105,21 @@ export default function Navbar() {
     }
   };
 
-  const toggleDropdown = (menu: 'about' | 'programs' | 'register') => {
+  const toggleDropdown = (menu: 'about' | 'programs') => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
 
-  const toggleMobileDropdown = (menu: 'about' | 'programs' | 'register') => {
+  const toggleMobileDropdown = (menu: 'about' | 'programs') => {
     setOpenMobileDropdown(openMobileDropdown === menu ? null : menu);
+  };
+
+  const openRegisterModal = () => {
+    setOpenDropdown(null);
+    setOpenMobileDropdown(null);
+    setIsRegisterModalOpen(true);
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
   };
 
   const closeDropdowns = () => {
@@ -236,34 +246,18 @@ export default function Navbar() {
             Article & Media
           </Button>
 
-          <div className={styles.registerDropdownWrapper}>
-            <Button
-              variant="primary"
-              className={`${styles.menuItem} ${styles.registerButton} ${openDropdown === 'register' ? styles.menuItemDropdownOpen : ''}`}
-              textClassName={`${styles.menuItemText} ${styles.registerButtonText}`}
-              iconClassName={styles.registerButtonIcon}
-              icon={ChevronDown}
-              onClick={(e?: React.MouseEvent) => {
-                e?.preventDefault();
-                toggleDropdown('register');
-              }}
-            >
-              Register Now
-            </Button>
-            {openDropdown === 'register' && (
-              <div className={styles.registerDropdown}>
-                <Link href="/register/exhibitor" className={styles.registerDropdownItem} onClick={closeDropdowns}>
-                  Register as Exhibitor
-                </Link>
-                <Link href="/register/buyer" className={styles.registerDropdownItem} onClick={closeDropdowns}>
-                  Register as Buyer
-                </Link>
-                <Link href="/register/visitor" className={styles.registerDropdownItem} onClick={closeDropdowns}>
-                  Register as Visitor
-                </Link>
-              </div>
-            )}
-          </div>
+          <Button
+            variant="primary"
+            className={`${styles.menuItem} ${styles.registerButton}`}
+            textClassName={`${styles.menuItemText} ${styles.registerButtonText}`}
+            iconClassName={styles.registerButtonIcon}
+            onClick={(e?: React.MouseEvent) => {
+              e?.preventDefault();
+              openRegisterModal();
+            }}
+          >
+            Register Now
+          </Button>
         </div>
       </div>
 
@@ -401,36 +395,26 @@ export default function Navbar() {
             Article & Media
           </Button>
 
-          <div className={styles.mobileMenuItemWithDropdown}>
-            <Button
-              variant="primary"
-              className={`${styles.mobileMenuItem} ${styles.mobileRegisterButton} ${openMobileDropdown === 'register' ? styles.mobileMenuItemDropdownOpen : ''}`}
-              textClassName={`${styles.mobileMenuItemText} ${styles.mobileRegisterButtonText}`}
-              iconClassName={styles.primaryButtonIcon}
-              icon={ChevronDown}
-              onClick={(e?: React.MouseEvent) => {
-                e?.preventDefault();
-                toggleMobileDropdown('register');
-              }}
-            >
-              Register Now
-            </Button>
-            <div className={`${styles.mobileSubmenu} ${openMobileDropdown === 'register' ? styles.mobileSubmenuOpen : ''}`}>
-              <Link href="/register/exhibitor" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                Register as Exhibitor
-              </Link>
-              <Link href="/register/buyer" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                Register as Buyer
-              </Link>
-              <Link href="/register/visitor" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                Register as Visitor
-              </Link>
-            </div>
-          </div>
+          <Button
+            variant="primary"
+            className={`${styles.mobileMenuItem} ${styles.mobileRegisterButton}`}
+            textClassName={`${styles.mobileMenuItemText} ${styles.mobileRegisterButtonText}`}
+            iconClassName={styles.mobileRegisterButtonIcon}
+            onClick={(e?: React.MouseEvent) => {
+              e?.preventDefault();
+              openRegisterModal();
+            }}
+          >
+            Register Now
+          </Button>
         </div>
       </div>
 
       <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
+      <RegisterHubModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+      />
     </nav>
   );
 }

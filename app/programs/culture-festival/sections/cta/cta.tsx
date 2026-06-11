@@ -47,7 +47,7 @@ export default function CtaSection() {
 
         <div className={`${styles.callout} ${contentVisible ? styles.visible : ''}`}>
           <a
-            href="/register"
+            href="/programs/culture-festival/register/visitor"
             className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
           >
             <span className={buttonStyles.text}>Get Your Pass</span>

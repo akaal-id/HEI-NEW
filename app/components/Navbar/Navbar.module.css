@@ -161,7 +161,8 @@
 }
 
 .registerButtonText {
-  padding: 8px 24px !important;
+  height: 36px !important;
+  padding: 0 20px !important;
   width: auto !important;
   justify-content: center !important;
 }
@@ -170,6 +171,11 @@
   width: 36px !important;
   height: 36px !important;
   transition: transform 0.3s ease;
+}
+
+.registerButtonIcon svg {
+  width: 16px !important;
+  height: 16px !important;
 }
 
 .registerDropdownWrapper .menuItemDropdownOpen .registerButtonIcon {
@@ -499,14 +505,20 @@
   }
 
   .mobileRegisterButtonText {
-    padding: 12px 24px !important;
+    height: 40px !important;
+    padding: 0 24px !important;
     width: 100% !important;
     justify-content: center !important;
   }
 
   .mobileRegisterButtonIcon {
-    width: 24px !important;
-    height: 24px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .mobileRegisterButtonIcon svg {
+    width: 18px !important;
+    height: 18px !important;
   }
 
   .mobileNavbarContainer {
