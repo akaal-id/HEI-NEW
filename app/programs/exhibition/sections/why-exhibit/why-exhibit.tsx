@@ -17,10 +17,6 @@ const REASONS = [
     description: 'with D-8 HEI Talk featuring world-renowned experts and innovators.',
   },
   {
-    title: 'Future-Proofing Next Generation',
-    description: 'with specialized Youth Programs dedicated to nurturing tomorrow\'s halal industry leaders.',
-  },
-  {
     title: 'Cultural Diplomacy',
     description: 'in the Cultural Fest, fostering international relations through heritage and culinary arts.',
   },

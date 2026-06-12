@@ -53,11 +53,6 @@ export const faqItems: FAQItem[] = [
     answer: 'Investment Matchmaking connects businesses seeking funding with investors looking for halal economy opportunities, facilitating strategic investment partnerships.'
   },
   {
-    id: 'youth-summit',
-    question: 'What is the Youth Summit?',
-    answer: 'The Youth Program is a dedicated platform for young leaders and entrepreneurs to engage with the halal economy, featuring networking, mentorship, and innovation showcases.'
-  },
-  {
     id: 'register',
     question: 'How do I register for D-8 Halal Expo Indonesia 2026?',
     answer: 'You can register for D-8 Halal Expo Indonesia 2026 through our official website. Different registration options are available for exhibitors, buyers, and general attendees.'

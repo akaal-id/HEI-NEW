@@ -6,7 +6,7 @@ import styles from './page.module.css';
 
 export const metadata: Metadata = {
   title: "FAQ | HEI 2026 - Halal Expo Indonesia",
-  description: "Frequently asked questions about the 6th D-8 Halal Expo Indonesia 2026 — registration, exhibitors, buyers, business matching, investment matchmaking, youth events, and more.",
+  description: "Frequently asked questions about the 6th D-8 Halal Expo Indonesia 2026 — registration, exhibitors, buyers, business matching, investment matchmaking, and more.",
   keywords: [
     "HEI 2026 FAQ",
     "Halal Expo Indonesia Questions",

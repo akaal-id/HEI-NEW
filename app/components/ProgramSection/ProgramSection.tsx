@@ -37,13 +37,6 @@ const programs: Program[] = [
     href: '/programs/investment',
   },
   {
-    id: 'youth-event',
-    title: 'D-8 HEI Youth',
-    image: '/images/Programs/4-youth event.png',
-    description: 'A dedicated stage empowering the next generation of halal entrepreneurs through mentorship and innovation.',
-    href: '/programs/youth-event',
-  },
-  {
     id: 'hei-talk',
     title: 'D-8 HEI Talkshow',
     image: '/images/Programs/5-D-8 HEI Talkshow.png',

@@ -213,9 +213,6 @@ export default function Navbar() {
                 <Link href="/programs/investment" className={styles.dropdownItem} onClick={closeDropdowns}>
                   Investment Match Making
                 </Link>
-                <Link href="/programs/youth-event" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  D-8 HEI Youth
-                </Link>
                 <Link href="/programs/hei-talk" className={styles.dropdownItem} onClick={closeDropdowns}>
                   D-8 HEI Talk
                 </Link>
@@ -360,9 +357,6 @@ export default function Navbar() {
               </Link>
               <Link href="/programs/investment" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 Investment Match Making
-              </Link>
-              <Link href="/programs/youth-event" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                D-8 HEI Youth
               </Link>
               <Link href="/programs/hei-talk" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 D-8 HEI Talk

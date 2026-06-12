@@ -13,10 +13,6 @@ const InvestmentMatchMaking = dynamic(() => import('../components/ProgramDetailS
   loading: () => <div style={{ minHeight: '400px' }}></div>,
 });
 
-const YouthEvent = dynamic(() => import('../components/ProgramDetailSection/YouthEvent'), {
-  loading: () => <div style={{ minHeight: '400px' }}></div>,
-});
-
 const D8HEITalk = dynamic(() => import('../components/ProgramDetailSection/D8HEITalk'), {
   loading: () => <div style={{ minHeight: '400px' }}></div>,
 });
@@ -27,7 +23,7 @@ const D8CultureFestival = dynamic(() => import('../components/ProgramDetailSecti
 
 export const metadata: Metadata = {
   title: "Programs & Events | HEI 2026 - Halal Expo Indonesia",
-  description: "Explore comprehensive programs at HEI 2026 including exhibitions, business matching, investment matchmaking, youth events, D-8 HEI Talk, and cultural festivals. Join us in Jakarta, April 2026.",
+  description: "Explore comprehensive programs at HEI 2026 including exhibitions, business matching, investment matchmaking, D-8 HEI Talk, and cultural festivals. Join us in Jakarta, April 2026.",
   keywords: [
     "HEI 2026 Programs",
     "Halal Expo Events",
@@ -36,7 +32,6 @@ export const metadata: Metadata = {
     "D-8 HEI Talk",
     "Halal Exhibition Programs",
     "Halal Business Conference",
-    "D-8 HEI Youth Jakarta",
     "Halal Cultural Fest",
     "Halal Industry Summit"
   ],
@@ -56,7 +51,6 @@ export default function ProgramsPage() {
       <Exhibition />
       <BusinessMatching />
       <InvestmentMatchMaking />
-      <YouthEvent />
       <D8HEITalk />
       <D8CultureFestival />
     </main>
