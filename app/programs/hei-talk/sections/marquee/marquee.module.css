@@ -1,0 +1,37 @@
+/* =====================================================================
+   HEI TALK — TOPIC MARQUEE STRIP
+   ===================================================================== */
+
+.strip {
+  width: 100%;
+  overflow: hidden;
+  background: var(--hei26-linearyellow);
+  padding: clamp(0.8rem, 1.6vw, 1.1rem) 0;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  will-change: transform;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-right: 0.7rem;
+  margin-right: 0.7rem;
+  white-space: nowrap;
+  font-size: clamp(12px, 1.2vw, 15px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hei26-deepgreen);
+}
+
+.itemIcon {
+  flex-shrink: 0;
+  color: var(--hei26-deepgreen);
+}

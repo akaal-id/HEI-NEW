@@ -1,16 +1,66 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useIntersectionObserver } from '../../../../hooks/useIntersectionObserver';
-import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowUpRight, CalendarDays, MapPin, Ticket } from 'lucide-react';
 import buttonStyles from '../../../../components/Button/Button.module.css';
 import styles from './cta.module.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
+const DETAILS = [
+  { icon: CalendarDays, label: 'April 2026' },
+  { icon: MapPin, label: 'Jakarta, Indonesia' },
+  { icon: Ticket, label: 'Limited Seats' },
+];
+
 export default function CtaSection() {
-  const [contentRef, contentVisible] = useIntersectionObserver({ threshold: 0.15 });
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        `.${styles.content} > *`,
+        { y: 36, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: rootRef.current, start: 'top 70%' },
+        },
+      );
+
+      // Slow ambient spin on the D-8 circle decoration
+      gsap.to(`.${styles.decorationImage}`, {
+        rotation: 360,
+        duration: 90,
+        ease: 'none',
+        repeat: -1,
+      });
+
+      gsap.fromTo(
+        `.${styles.decoration}`,
+        { scale: 0.85, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1.6,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: rootRef.current, start: 'top 75%' },
+        },
+      );
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className={styles.section}>
+    <section ref={rootRef} className={styles.section}>
       <div className={styles.decoration} aria-hidden="true">
         <Image
           src="/D8-assets/circle_D8.svg"
@@ -22,39 +72,42 @@ export default function CtaSection() {
       </div>
 
       <div className={styles.container}>
-        <div
-          ref={contentRef as React.RefObject<HTMLDivElement>}
-          className={`${styles.content} ${contentVisible ? styles.visible : ''}`}
-        >
+        <div className={styles.content}>
           <span className={styles.eyebrow}>Reserve Your Seat</span>
           <h2 className={styles.title}>
             Learn From the Voices{' '}
-            <span className={styles.titleAccent}>Shaping the Halal Future</span>
+            <em className={styles.titleAccent}>Shaping the Halal Future</em>
           </h2>
           <p className={styles.lead}>
-            Join 15 expert-led sessions and gain direct access to the insights, strategies,
-            and people driving the global halal economy forward.
+            Join 15 expert-led sessions—including the D-8 HEI Youth program—and gain
+            direct access to the insights, strategies, and people driving the global
+            halal economy forward.
           </p>
 
-          <div className={styles.subBlock}>
-            <h3 className={styles.subTitle}>Secure Your Pass Today</h3>
-            <p className={styles.body}>
-              Seats for D-8 HEI Talk are limited. Register now to lock in your place at the
-              most influential halal industry forum of 2026.
+          <div className={styles.detailRow}>
+            {DETAILS.map(({ icon: Icon, label }) => (
+              <span key={label} className={styles.detailChip}>
+                <Icon size={15} strokeWidth={1.75} />
+                {label}
+              </span>
+            ))}
+          </div>
+
+          <div className={styles.actions}>
+            <Link
+              href="/register"
+              className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
+            >
+              <span className={buttonStyles.text}>Register Now</span>
+              <div className={buttonStyles.iconContainer}>
+                <ArrowUpRight className={buttonStyles.icon} />
+              </div>
+            </Link>
+            <p className={styles.note}>
+              Seats for D-8 HEI Talk are limited—lock in your place at the most
+              influential halal industry forum of 2026.
             </p>
           </div>
-        </div>
-
-        <div className={`${styles.callout} ${contentVisible ? styles.visible : ''}`}>
-          <a
-            href="/register"
-            className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
-          >
-            <span className={buttonStyles.text}>Register Now</span>
-            <div className={buttonStyles.iconContainer}>
-              <ArrowUpRight className={buttonStyles.icon} />
-            </div>
-          </a>
         </div>
       </div>
     </section>

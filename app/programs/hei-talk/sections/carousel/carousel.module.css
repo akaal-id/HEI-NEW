@@ -1,0 +1,103 @@
+/* =====================================================================
+   HEI TALK — 3D MOMENTS CAROUSEL (Three.js)
+   ===================================================================== */
+
+.section {
+  width: 100%;
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 4vw, 3rem);
+  background:
+    radial-gradient(
+      90% 70% at 50% 110%,
+      color-mix(in srgb, var(--hei26-skyblue) 35%, transparent) 0%,
+      transparent 60%
+    ),
+    var(--hei26-deepgreen);
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* ─── HEADER ─── */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: clamp(11px, 1.05vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--hei26-gold-soft);
+}
+
+.title {
+  margin: 0;
+  color: var(--hei26-white);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.title em {
+  font-family: var(--font-lora), serif;
+  font-style: italic;
+  font-weight: 500;
+  background: linear-gradient(95deg, var(--hei26-gold-soft) 0%, var(--hei26-amber) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.lead {
+  margin: 0;
+  color: color-mix(in srgb, var(--hei26-white) 75%, transparent);
+  font-size: clamp(14.5px, 1.25vw, 17px);
+  line-height: 1.8;
+}
+
+/* ─── 3D STAGE ─── */
+.stage {
+  width: 100%;
+  height: clamp(320px, 52vw, 540px);
+  cursor: grab;
+  touch-action: pan-y;
+  will-change: transform, opacity;
+}
+
+.stage canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ─── HINT ─── */
+.hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 auto;
+  color: color-mix(in srgb, var(--hei26-white) 55%, transparent);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
