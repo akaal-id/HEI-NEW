@@ -67,10 +67,16 @@
   max-width: min(92vw, 420px);
   max-height: min(78vh, 560px);
   line-height: 0;
-  border-radius: 4px;
-  overflow: hidden;
   animation: imageFadeIn 0.35s ease-out;
   transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.imageFrame {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .imageLink:hover {
@@ -99,6 +105,32 @@
   max-width: min(92vw, 420px);
   max-height: min(78vh, 560px);
   object-fit: contain;
+}
+
+.sticker {
+  position: absolute;
+  top: 1rem;
+  right: 0.55rem;
+  z-index: 1;
+  height: 6rem;
+  width: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 999px;
+  background: #f4b321;
+  color: #12373d;
+  font-size: clamp(0.525rem, 2.6vw, 1rem);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transform: rotate(7deg);
+  transform-origin: top right;
+  pointer-events: none;
 }
 
 .closeButton {
@@ -154,5 +186,13 @@
   .closeButton {
     width: 40px;
     height: 40px;
+  }
+
+  .sticker {
+    height: 5rem;
+    width: 5rem;
+    font-size: clamp(1rem, 2.6vw, 1rem);
+    top: 0.5rem;
+    right: 0rem;
   }
 }

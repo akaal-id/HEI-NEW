@@ -17,6 +17,7 @@ export const HOME_PROMO_POPUPS = [
     imageSrc: '/culture-festival/popup-culfest.png',
     href: '/programs/culture-festival',
     alt: 'D-8 Culture Festival promotion',
+    sticker: 'FREE ENTRY!',
   },
 ] as const;
 
@@ -96,6 +97,7 @@ export default function HomePromoPopup() {
       )}
 
       <div
+        id="homepromo-modal"
         className={styles.overlay}
         onClick={onBackdropClick}
         role="presentation"
@@ -109,15 +111,22 @@ export default function HomePromoPopup() {
           }}
           aria-label={activePopup.alt}
         >
-          <Image
-            src={activePopup.imageSrc}
-            alt={activePopup.alt}
-            width={1080}
-            height={1350}
-            className={styles.image}
-            priority
-            sizes="(max-width: 480px) 94vw, 420px"
-          />
+          <div className={styles.imageFrame}>
+            <Image
+              src={activePopup.imageSrc}
+              alt={activePopup.alt}
+              width={1080}
+              height={1350}
+              className={styles.image}
+              priority
+              sizes="(max-width: 480px) 94vw, 420px"
+            />
+            {activePopup.sticker && (
+              <span className={styles.sticker} aria-hidden="true">
+                {activePopup.sticker}
+              </span>
+            )}
+          </div>
         </Link>
       </div>
 
