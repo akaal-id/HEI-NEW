@@ -110,7 +110,7 @@
 .sticker {
   position: absolute;
   top: 1rem;
-  right: 0.55rem;
+  right: 0rem;
   z-index: 1;
   height: 6rem;
   width: 6rem;
@@ -119,6 +119,7 @@
   justify-content: center;
   text-align: center;
   border-radius: 999px;
+  border: 2px solid #fefff8;
   background: #f4b321;
   color: #12373d;
   font-size: clamp(0.525rem, 2.6vw, 1rem);

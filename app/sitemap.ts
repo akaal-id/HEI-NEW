@@ -82,12 +82,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/programs/culture-festival/register/visitor`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/programs/culture-festival/register/exhibitor`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

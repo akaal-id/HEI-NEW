@@ -8,7 +8,6 @@ import {
   Palette,
   ShoppingBag,
   Store,
-  Ticket,
   Users,
   X,
   type LucideIcon,
@@ -66,12 +65,6 @@ const REGISTER_SECTIONS: RegisterSection[] = [
     subtitle: 'Jakarta · July 2026',
     variant: 'culfest',
     options: [
-      {
-        href: '/programs/culture-festival/register/visitor',
-        label: 'Get Tickets',
-        description: 'Join as a visitor for food, performances, and crafts.',
-        icon: Ticket,
-      },
       {
         href: '/programs/culture-festival/register/exhibitor',
         label: 'Book Your Space',

@@ -271,7 +271,7 @@ function FestivalHero() {
 
           <div className={styles.heroActions}>
             <Link
-              href="/programs/culture-festival/register/visitor"
+              href="/register/visitor"
               className={`${buttonStyles.button} ${buttonStyles.primary} ${styles.heroActionButton}`}
             >
               <span className={buttonStyles.text}>Get Tickets Now</span>
@@ -522,7 +522,7 @@ function ClosingCTA() {
           <h2 className={styles.closingHeading}>Be Part of the D-8 Culture Experience</h2>
           <p className={styles.closingText}>Join the cultural celebration of worldwide nations at D-8 HEI Cultural Festival 2026.</p>
           <Link
-            href="/programs/culture-festival/register/visitor"
+            href="/register/visitor"
             className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.closingRegisterButton}`}
           >
             <span className={`${buttonStyles.text} ${styles.closingRegisterText}`}>Get Tickets Now</span>
