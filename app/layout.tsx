@@ -7,6 +7,7 @@ import ContactButton from "./components/ContactButton/ContactButton";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import MetaPixel from "./components/MetaPixel/MetaPixel";
 import StructuredData from "./components/StructuredData/StructuredData";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -123,6 +124,7 @@ export default function RootLayout({
         <Footer />
         <ScrollToTop />
         <ContactButton />
+        <Analytics />
       </body>
     </html>
   );

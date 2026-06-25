@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 
-const META_PIXEL_ID = '119637337790471';
+const META_PIXEL_ID = '108904366278703';
 
 declare global {
   interface Window {
