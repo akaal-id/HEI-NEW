@@ -12,7 +12,6 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
-import { BUYER_REGISTRATION_FORM_URL } from '../../lib/registration-data';
 import styles from './RegisterHubModal.module.css';
 
 type RegisterOption = {
@@ -20,7 +19,6 @@ type RegisterOption = {
   label: string;
   description: string;
   icon: LucideIcon;
-  external?: boolean;
 };
 
 type RegisterSection = {
@@ -47,11 +45,10 @@ const REGISTER_SECTIONS: RegisterSection[] = [
         icon: Store,
       },
       {
-        href: BUYER_REGISTRATION_FORM_URL,
+        href: '/register/buyer',
         label: 'Register as Buyer',
         description: 'Source certified products and join business matching.',
         icon: ShoppingBag,
-        external: true,
       },
       {
         href: '/register/visitor',
@@ -179,9 +176,6 @@ export default function RegisterHubModal({ isOpen, onClose }: RegisterHubModalPr
                       href={option.href}
                       className={styles.optionCard}
                       onClick={onClose}
-                      {...(option.external
-                        ? { target: '_blank', rel: 'noopener noreferrer' }
-                        : {})}
                     >
                       <span className={styles.optionIconWrap} aria-hidden="true">
                         <Icon className={styles.optionIcon} />
