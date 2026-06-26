@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-const GOOGLE_FORM_RESPONSE_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSf7SvdkCx2BMbRN46twBF1NCBCY_joYbwTEvvU9uJ9T8Q2mJQ/formResponse';
+import { BUYER_REGISTRATION_FORM_RESPONSE_URL } from '../../lib/registration-data';
 
 // Entry IDs from the HEI 2026 Register Buyer form (from prefill URL)
 const ENTRY_IDS = {
@@ -31,7 +29,7 @@ export async function POST(request: NextRequest) {
     formData.append(ENTRY_IDS.companyName, body.companyName ?? '');
     formData.append(ENTRY_IDS.sourceOfInfo, body.sourceOfInfo ?? '');
 
-    const response = await fetch(GOOGLE_FORM_RESPONSE_URL, {
+    const response = await fetch(BUYER_REGISTRATION_FORM_RESPONSE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

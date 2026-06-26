@@ -3,6 +3,7 @@
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { Users, KeyRound, Globe } from 'lucide-react';
 import Button from '../Button/Button';
+import { BUYER_REGISTRATION_FORM_URL } from '../../lib/registration-data';
 import styles from './ProgramPage.module.css';
 
 export default function ProgramBusinessMatching() {
@@ -42,7 +43,7 @@ export default function ProgramBusinessMatching() {
                 With approximately 100 business matching sessions expected, participants can maximize their networking opportunities and accelerate their business growth in the halal market. Our platform ensures that each meeting is strategically aligned with participants' business objectives and market interests.
               </p>
               <Button
-                href="/register/buyer"
+                href={BUYER_REGISTRATION_FORM_URL}
                 variant="primary"
                 className={styles.actionButton}
               >
@@ -152,7 +153,7 @@ export default function ProgramBusinessMatching() {
             The global halal economy is rapidly expanding across food, technology, cosmetics, and beyond. Relying on chance encounters on the exhibition floor isn&apos;t enough to scale a modern business. By registering for the Business Matching program at D-8 Halal Expo Indonesia 2026, you position your brand squarely in front of active investors and international delegates actively seeking halal-certified collaborations. Guarantee your high-value meetings before the doors even open.
           </p>
           <Button
-            href="/register/buyer"
+            href={BUYER_REGISTRATION_FORM_URL}
             variant="yellow"
             className={styles.ctaButton}
           >

@@ -86,6 +86,12 @@ export const MARKET_SECTORS = [
   { value: 'other', label: 'Other' },
 ];
 
+export const BUYER_REGISTRATION_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSfg5l09MCg9gVjnCl_hUDEycCuT8WUEvQDIRq5MLB484S-2-w/viewform?usp=pp_url&entry.269312168=a&entry.1991638139=a&entry.1934559686=a&entry.285454750=a&entry.933067454=a&entry.1465173196=a&entry.1707425376=a&entry.1689011549=a&entry.1384552284=a';
+
+export const BUYER_REGISTRATION_FORM_RESPONSE_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSfg5l09MCg9gVjnCl_hUDEycCuT8WUEvQDIRq5MLB484S-2-w/formResponse';
+
 export const BUYER_SECTOR_INTERESTS = [
   { value: 'Halal Food, Beverage & Agribusiness', label: 'Halal Food, Beverage & Agribusiness' },
   { value: 'Halal Lifestyle, Consumer Goods & Creative Economy', label: 'Halal Lifestyle, Consumer Goods & Creative Economy' },
