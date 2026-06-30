@@ -143,7 +143,7 @@ export default function HeroSection() {
 
         <div className={styles.actions}>
           <Link
-            href="/register"
+            href="/programs/hei-talk/register"
             className={`${buttonStyles.button} ${buttonStyles.yellow}`}
           >
             <span className={buttonStyles.text}>Reserve Your Seat</span>

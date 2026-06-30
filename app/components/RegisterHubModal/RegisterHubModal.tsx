@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import {
   ArrowUpRight,
+  Mic2,
   Palette,
   ShoppingBag,
   Store,
@@ -55,6 +56,21 @@ const REGISTER_SECTIONS: RegisterSection[] = [
         label: 'Register as Visitor',
         description: 'Explore the exhibition, sessions, and programs.',
         icon: Users,
+      },
+    ],
+  },
+  {
+    id: 'hei-talk',
+    eyebrow: 'Conference Program',
+    title: 'D-8 HEI Talk',
+    subtitle: 'Jakarta · April 2026',
+    variant: 'main',
+    options: [
+      {
+        href: '/programs/hei-talk/register',
+        label: 'Reserve Your Seat',
+        description: 'Register for expert-led sessions and panel discussions.',
+        icon: Mic2,
       },
     ],
   },

@@ -95,7 +95,7 @@ export default function CtaSection() {
 
           <div className={styles.actions}>
             <Link
-              href="/register"
+              href="/programs/hei-talk/register"
               className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
             >
               <span className={buttonStyles.text}>Register Now</span>
