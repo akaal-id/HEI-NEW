@@ -37,7 +37,7 @@ export const heroMedia: HeroMediaItem[] = [
     date: '08-12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Now',
-    buttonHref: '/register/visitors'
+    buttonHref: '/register/visitor'
   },
   {
     type: 'image',
@@ -51,7 +51,7 @@ export const heroMedia: HeroMediaItem[] = [
     date: '08-12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Your Booth Now',
-    buttonHref: '/programs/culture-festival/'
+    buttonHref: '/register/visitor'
   },
   {
     type: 'image',
@@ -65,7 +65,7 @@ export const heroMedia: HeroMediaItem[] = [
     date: '08-12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Now',
-    buttonHref: '/register/exhibitor'
+    buttonHref: '/register/visitor'
   },
   {
     type: 'image',
@@ -79,6 +79,6 @@ export const heroMedia: HeroMediaItem[] = [
     date: '01 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Now',
-    buttonHref: '/register/exhibitor'
+    buttonHref: '/register/visitor'
   }
 ];
