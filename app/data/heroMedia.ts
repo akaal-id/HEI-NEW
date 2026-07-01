@@ -27,17 +27,17 @@ export type HeroMediaItem =
 export const heroMedia: HeroMediaItem[] = [
   {
     type: 'image',
-    src: '/hero/KV-heitalk.jpg',
-    alt: 'D-8 HEI Talk Youth Session',
+    src: '/hero/KV-d8hei26.png',
+    alt: 'D-8 HEI 2026',
     duration: 12000,
-    contentKey: 'hei-main',
-    eyebrow: 'Join The D-8 HEI Talk',
+    contentKey: 'd8hei26',
+    eyebrow: 'D-8 HEI 2026',
     eyebrowDateTime: '2026-07',
-    title: 'Youth Session',
-    date: '01 July 2026',
+    title: 'D-8 HEI 2026',
+    date: '08-12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Now',
-    buttonHref: '/register/exhibitor'
+    buttonHref: '/register/visitors'
   },
   {
     type: 'image',
@@ -48,9 +48,37 @@ export const heroMedia: HeroMediaItem[] = [
     eyebrow: 'Join & Feel The Diversity at',
     eyebrowDateTime: '2026-04',
     title: 'D-8 HEI Cultural Festival',
-    date: '12 July 2026',
+    date: '08-12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Your Booth Now',
-    buttonHref: '#overview'
+    buttonHref: '/programs/culture-festival/'
+  },
+  {
+    type: 'image',
+    src: '/hero/KV-heitalk-1.png',
+    alt: 'D-8 HEI Talk Youth Session',
+    duration: 12000,
+    contentKey: 'hei-talk-1',
+    eyebrow: 'Join The D-8 HEI Talk',
+    eyebrowDateTime: '2026-07',
+    title: 'Youth Session',
+    date: '08-12 July 2026',
+    location: 'Senayan Indoor Tennis Complex, Jakarta',
+    buttonLabel: 'Register Now',
+    buttonHref: '/register/exhibitor'
+  },
+  {
+    type: 'image',
+    src: '/hero/KV-heitalk.jpg',
+    alt: 'D-8 HEI Talk Youth Session',
+    duration: 12000,
+    contentKey: 'hei-talk-youth',
+    eyebrow: 'Join The D-8 HEI Talk Youth',
+    eyebrowDateTime: '2026-07',
+    title: 'Youth Session',
+    date: '01 July 2026',
+    location: 'Senayan Indoor Tennis Complex, Jakarta',
+    buttonLabel: 'Register Now',
+    buttonHref: '/register/exhibitor'
   }
 ];

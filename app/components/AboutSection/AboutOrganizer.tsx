@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
+import { runAnimeReveal } from '../../lib/animeReveal';
 import styles from './AboutSection.module.css';
 
 export default function AboutOrganizer() {
@@ -15,26 +16,13 @@ export default function AboutOrganizer() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             import('animejs').then((animeModule) => {
-              const animate = animeModule.animate as any;
-              const stagger = animeModule.stagger;
-
-              const elements = [
-                textRef.current,
-                imageRef.current,
-              ].filter(Boolean);
-
-              if (elements.length > 0) {
-                animate(
-                  elements,
-                  {
-                    opacity: [0, 1],
-                    translateY: [30, 0],
-                    delay: stagger(200),
-                    duration: 800,
-                    easing: 'easeOutQuad',
-                  }
-                );
-              }
+              runAnimeReveal(animeModule, [textRef.current, imageRef.current], {
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: animeModule.stagger(200),
+                duration: 800,
+                easing: 'easeOutQuad',
+              });
             });
             observer.disconnect();
           }

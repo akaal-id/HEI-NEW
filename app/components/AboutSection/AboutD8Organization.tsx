@@ -6,7 +6,7 @@ import styles from './AboutPage.module.css';
 
 export default function AboutD8Organization() {
   const [heroRef, isHeroVisible] = useIntersectionObserver({ threshold: 0.1 });
-  const [contentRef, isContentVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [contentRef] = useIntersectionObserver({ threshold: 0.1 });
   const [textRef, isTextVisible] = useIntersectionObserver({ threshold: 0.1 });
   const [imageRef, isImageVisible] = useIntersectionObserver({ threshold: 0.1 });
 
@@ -25,7 +25,7 @@ export default function AboutD8Organization() {
           <div className={styles.content}>
             <div ref={textRef as React.RefObject<HTMLDivElement>} className={`${styles.textContent} ${isTextVisible ? styles.fadeInUp : ''}`}>
               <p className={styles.description}>
-                The D-8 Organization for Economic Cooperation is an international economic forum comprising Bangladesh, Egypt, Indonesia, Iran, Malaysia, Nigeria, Pakistan, and Türkiye, with Azerbaijan joining in 2025. Established through the Istanbul Declaration on 15 June 1997, the D-8 aims to strengthen member states' roles in the global economy, expand trade, and improve living standards. The organization is led by Secretary General Ambassador Isiaka Abdulqadir Imam, with its Secretariat based in Istanbul, Türkiye.
+                The D-8 Organization for Economic Cooperation is an international economic forum comprising Bangladesh, Egypt, Indonesia, Iran, Malaysia, Nigeria, Pakistan, and Türkiye, with Azerbaijan joining in 2025. Established through the Istanbul Declaration on 15 June 1997, the D-8 aims to strengthen member states&apos; roles in the global economy, expand trade, and improve living standards. The organization is led by Secretary General Ambassador Isiaka Abdulqadir Imam, with its Secretariat based in Istanbul, Türkiye.
               </p>
             </div>
             <div ref={imageRef as React.RefObject<HTMLDivElement>} className={`${styles.imageContent} ${isImageVisible ? styles.fadeInUp : ''}`}>

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Button from '../../components/Button/Button';
 import styles from './not-found.module.css';
 

@@ -1,10 +1,12 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 10060;
+  z-index: 11000;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   padding: max(1rem, env(safe-area-inset-top))
     max(1rem, env(safe-area-inset-right))
     max(4.5rem, env(safe-area-inset-bottom))
@@ -14,6 +16,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   animation: overlayFadeIn 0.3s ease-out;
+  isolation: isolate;
 }
 
 @keyframes overlayFadeIn {
@@ -30,7 +33,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10061;
+  z-index: 11001;
   display: flex;
   gap: 6px;
   padding: max(0.65rem, env(safe-area-inset-top)) 1rem 0;
@@ -138,7 +141,7 @@
   position: fixed;
   right: max(1rem, env(safe-area-inset-right));
   bottom: max(1rem, env(safe-area-inset-bottom));
-  z-index: 10062;
+  z-index: 11002;
   width: 44px;
   height: 44px;
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -178,6 +181,12 @@
 }
 
 @media (max-width: 480px) {
+  .overlay {
+    width: 100svw;
+    height: 100svh;
+    min-height: 100dvh;
+  }
+
   .imageLink,
   .image {
     max-width: min(94vw, 360px);

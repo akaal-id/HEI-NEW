@@ -28,7 +28,7 @@ export default function IntroSection() {
             D-8 Halal Expo Indonesia 2026 serves as a strategic global platform dedicated to strengthening collaboration and driving the growth of the global halal economy through robust and sustainable international partnerships.
           </p>
           <p>
-            As a part of the D-8 Summit, fully supported by the Ministry of Foreign Affairs of the Republic of Indonesia, this B2B exhibition brings together government leaders and industry players to foster <strong>"Halal Diplomacy."</strong> This platform further solidifies Indonesia’s position as a global hub for sustainable halal trade.
+            As a part of the D-8 Summit, fully supported by the Ministry of Foreign Affairs of the Republic of Indonesia, this B2B exhibition brings together government leaders and industry players to foster <strong>&ldquo;Halal Diplomacy.&rdquo;</strong> This platform further solidifies Indonesia’s position as a global hub for sustainable halal trade.
           </p>
         </div>
       </div>

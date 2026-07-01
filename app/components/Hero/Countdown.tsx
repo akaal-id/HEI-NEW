@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Button from '../Button/Button';
+import { runAnimeReveal } from '../../lib/animeReveal';
 import styles from './Countdown.module.css';
 
 interface TimeLeft {
@@ -45,24 +46,17 @@ export default function Countdown() {
 
     // Intro animation
     import('animejs').then((animeModule) => {
-      const animate = animeModule.animate as any;
-      
       if (containerRef.current) {
-        // Start with container hidden
         containerRef.current.style.opacity = '0';
         containerRef.current.style.transform = 'translateY(50px)';
-        
-        // Animate in
-        animate(
-          containerRef.current,
-          {
-            opacity: [0, 1],
-            translateY: [50, 0],
-            duration: 1000,
-            delay: 500,
-            easing: 'easeOutCubic',
-          }
-        );
+
+        runAnimeReveal(animeModule, [containerRef.current], {
+          opacity: [0, 1],
+          translateY: [50, 0],
+          duration: 1000,
+          delay: 500,
+          easing: 'easeOutCubic',
+        });
       }
     });
 

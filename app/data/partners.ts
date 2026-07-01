@@ -56,9 +56,8 @@ export const officialHotelPartners: HotelPartnerContact[] = [
   {
     id: 'hotel-artotel',
     name: 'Hotel Artotel Senayan',
-    logo: '/partner-logo/official-hotel-partner/artotel-placeholder.svg',
-    alt: 'Hotel Artotel Senayan logo placeholder',
-    isPlaceholder: true,
+    logo: '/partner-logo/official-hotel-partner/artotel-logo.svg',
+    alt: 'Hotel Artotel Senayan logo',
     emails: ['nova@artotelgroup.com'],
     contacts: [
       {
@@ -236,7 +235,7 @@ export const partnerCategories: PartnerCategory[] = [
   },
   {
     id: 'official-hotel-partner',
-    label: 'Official Hotel Partner',
+    label: 'Hotel Partner',
     partners: officialHotelPartners.map(({ id, name, logo, alt, website }) => ({
       id,
       name,
@@ -247,7 +246,7 @@ export const partnerCategories: PartnerCategory[] = [
   },
   {
     id: 'official-contractor-partner',
-    label: 'Official Contractor Partner',
+    label: 'Contractor Partner',
     partners: [
       {
         id: 'kuat',
@@ -259,7 +258,7 @@ export const partnerCategories: PartnerCategory[] = [
   },
   {
     id: 'official-freight-forwarder-partner',
-    label: 'Official Freight Forwarder Partner',
+    label: 'Freight Forwarder Partner',
     partners: [
       {
         id: 'vissasa',
@@ -285,7 +284,7 @@ export const partnerCategories: PartnerCategory[] = [
   },
   {
     id: 'registration-partner',
-    label: 'Official Registration Partner',
+    label: 'Registration Partner',
     partners: [
       {
         id: 'hegira',

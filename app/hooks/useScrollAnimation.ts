@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { runAnimeReveal } from '../lib/animeReveal';
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -24,23 +25,13 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             import('animejs').then((animeModule) => {
-              const animate = animeModule.animate as any;
-              const stagger = animeModule.stagger;
-
-              const elements = elementRefs.current.filter(Boolean);
-
-              if (elements.length > 0) {
-                animate(
-                  elements,
-                  {
-                    opacity: [0, 1],
-                    translateY: [30, 0],
-                    delay: stagger(staggerDelay, { start: animationDelay }),
-                    duration: 800,
-                    easing: 'easeOutQuad',
-                  }
-                );
-              }
+              runAnimeReveal(animeModule, elementRefs.current, {
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: animeModule.stagger(staggerDelay, { start: animationDelay }),
+                duration: 800,
+                easing: 'easeOutQuad',
+              });
             });
             observer.disconnect();
           }

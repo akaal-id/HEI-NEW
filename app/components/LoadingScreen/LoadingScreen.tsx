@@ -81,8 +81,10 @@ export default function LoadingScreen() {
       clearAllTimeouts();
 
       // Show loading screen immediately
-      setIsVisible(true);
-      setIsLoading(true);
+      requestAnimationFrame(() => {
+        setIsVisible(true);
+        setIsLoading(true);
+      });
       previousPathnameRef.current = pathname;
 
       const startTime = Date.now();

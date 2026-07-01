@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { Mail, CheckCircle, Phone } from 'lucide-react';
 import Button from '../Button/Button';
+import { runAnimeReveal } from '../../lib/animeReveal';
 import styles from './Footer.module.css';
 import { useGoogleForm } from '../../hooks/useGoogleForm';
 
@@ -20,26 +21,13 @@ export default function Footer() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             import('animejs').then((animeModule) => {
-              const animate = animeModule.animate as any;
-              const stagger = animeModule.stagger;
-
-              const elements = [
-                topSectionRef.current,
-                bottomSectionRef.current,
-              ].filter(Boolean);
-
-              if (elements.length > 0) {
-                animate(
-                  elements,
-                  {
-                    opacity: [0, 1],
-                    translateY: [30, 0],
-                    delay: stagger(200),
-                    duration: 800,
-                    easing: 'easeOutQuad',
-                  }
-                );
-              }
+              runAnimeReveal(animeModule, [topSectionRef.current, bottomSectionRef.current], {
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: animeModule.stagger(200),
+                duration: 800,
+                easing: 'easeOutQuad',
+              });
             });
             observer.disconnect();
           }
@@ -91,7 +79,7 @@ export default function Footer() {
             
             {status === 'success' ? (
               <div className={styles.successContainer}>
-                <p className={styles.successMessage}>Thank you! You've been subscribed.</p>
+                <p className={styles.successMessage}>Thank you! You&apos;ve been subscribed.</p>
                 <Button 
                   onClick={resetForm} 
                   className={styles.subscribeButton} 
@@ -163,12 +151,12 @@ export default function Footer() {
 
         <div ref={bottomSectionRef} className={styles.bottomSection}>
           <p className={styles.copyright}>
-            © D-8 Halal Expo Indonesia 2026. All rights reserved.
+            © D-8 Halal Expo Indonesia 2026. All rights reserved. - Managed and Designed by Akaal Creative.
           </p>
           <div className={styles.legalLinks}>
             <Link href="/faq" className={styles.legalLink}>FAQ</Link>
-            <Link href="#" className={styles.legalLink}>Privacy Policy</Link>
-            <Link href="#" className={styles.legalLink}>Terms of Service</Link>
+            <Link href="/privacy" className={styles.legalLink}>Privacy Policy</Link>
+            <Link href="/terms" className={styles.legalLink}>Terms of Service</Link>
           </div>
         </div>
       </div>

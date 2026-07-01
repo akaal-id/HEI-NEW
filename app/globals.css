@@ -2,6 +2,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 :root {
@@ -50,6 +51,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
+  overflow-x: clip;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+#modal-root {
+  position: relative;
+  z-index: 11000;
+  isolation: isolate;
 }
 
 /* Global content wrapper — keeps inner content from sprawling on ultra-wide screens

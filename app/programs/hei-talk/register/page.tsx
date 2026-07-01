@@ -29,10 +29,8 @@ export default function RegisterHeiTalkPage() {
   const [email, setEmail] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [gender, setGender] = useState('');
-  const [genderOther, setGenderOther] = useState('');
 
   const getCountryCodeValue = () => resolveOtherFieldValue(countryCode, countryCodeOther);
-  const getGenderValue = () => resolveOtherFieldValue(gender, genderOther);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -53,7 +51,6 @@ export default function RegisterHeiTalkPage() {
     setEmail('');
     setBirthDate('');
     setGender('');
-    setGenderOther('');
     setErrors({});
     setTouched({});
     setFormMessage(null);
@@ -67,7 +64,7 @@ export default function RegisterHeiTalkPage() {
     { label: 'Mobile Number', value: `${getCountryCodeValue()} ${mobile.trim()}` },
     { label: 'Email Address', value: email.trim() },
     { label: 'Birth Date', value: birthDate },
-    { label: 'Gender', value: getGenderValue() },
+    { label: 'Gender', value: gender },
   ];
 
   const validate = () => {
@@ -81,7 +78,6 @@ export default function RegisterHeiTalkPage() {
       email: true,
       birthDate: true,
       gender: true,
-      genderOther: true,
     });
     const next: Record<string, string> = {};
     if (!salutation) next.salutation = 'Required';
@@ -95,7 +91,6 @@ export default function RegisterHeiTalkPage() {
     else if (!EMAIL_REGEX.test(email)) next.email = 'Invalid email address';
     if (!birthDate) next.birthDate = 'Required';
     if (!gender) next.gender = 'Required';
-    if (isOtherOption(gender) && !genderOther?.trim()) next.genderOther = 'Please specify';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -132,7 +127,7 @@ export default function RegisterHeiTalkPage() {
           mobileNumber: mobile.trim(),
           email: email.trim(),
           birthDate,
-          gender: getGenderValue(),
+          gender,
         }),
       });
       const data = await res.json();
@@ -270,35 +265,16 @@ export default function RegisterHeiTalkPage() {
                   error={touched.birthDate ? errors.birthDate : undefined}
                   onBlur={() => setTouched((t) => ({ ...t, birthDate: true }))}
                 />
-                <div>
-                  <EditorialSelect
-                    label="Gender"
-                    required
-                    options={GENDERS}
-                    placeholder="Select"
-                    value={gender}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setGender(value);
-                      if (!isOtherOption(value)) setGenderOther('');
-                    }}
-                    error={touched.gender ? errors.gender : undefined}
-                    onBlur={() => setTouched((t) => ({ ...t, gender: true }))}
-                  />
-                  {isOtherOption(gender) && (
-                    <div className={styles.otherFieldBlock}>
-                      <EditorialInput
-                        label="Please specify"
-                        required
-                        value={genderOther}
-                        onChange={(e) => setGenderOther(e.target.value)}
-                        error={touched.genderOther ? errors.genderOther : undefined}
-                        onBlur={() => setTouched((t) => ({ ...t, genderOther: true }))}
-                        placeholder=""
-                      />
-                    </div>
-                  )}
-                </div>
+                <EditorialSelect
+                  label="Gender"
+                  required
+                  options={GENDERS}
+                  placeholder="Select"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  error={touched.gender ? errors.gender : undefined}
+                  onBlur={() => setTouched((t) => ({ ...t, gender: true }))}
+                />
               </div>
             </div>
 

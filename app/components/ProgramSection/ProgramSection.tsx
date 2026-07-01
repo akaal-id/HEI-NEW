@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
+import { useIsClient } from '../../hooks/useIsClient';
+import { runAnimeReveal } from '../../lib/animeReveal';
 import Button from '../Button/Button';
 import styles from './ProgramSection.module.css';
 import { ArrowUpRight } from 'lucide-react';
@@ -49,14 +51,10 @@ export default function ProgramSection() {
   // Track which card is expanded (only one card is expanded, others are default)
   // Initially: exhibition is expanded, all others are default
   const [expandedCard, setExpandedCard] = useState<string>('exhibition');
-  const [mounted, setMounted] = useState(false);
+  const isClient = useIsClient();
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -64,26 +62,13 @@ export default function ProgramSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             import('animejs').then((animeModule) => {
-              const animate = animeModule.animate as any;
-              const stagger = animeModule.stagger;
-
-              const elements = [
-                headerRef.current,
-                cardsRef.current,
-              ].filter(Boolean);
-
-              if (elements.length > 0) {
-                animate(
-                  elements,
-                  {
-                    opacity: [0, 1],
-                    translateY: [30, 0],
-                    delay: stagger(200),
-                    duration: 800,
-                    easing: 'easeOutQuad',
-                  }
-                );
-              }
+              runAnimeReveal(animeModule, [headerRef.current, cardsRef.current], {
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: animeModule.stagger(200),
+                duration: 800,
+                easing: 'easeOutQuad',
+              });
             });
             observer.disconnect();
           }
@@ -104,7 +89,7 @@ export default function ProgramSection() {
   };
 
   // Exhibition is active initially; before mount match SSR state.
-  const activeId = mounted ? expandedCard : 'exhibition';
+  const activeId = isClient ? expandedCard : 'exhibition';
   const activeProgram = programs.find((p) => p.id === activeId) ?? programs[0];
 
   return (

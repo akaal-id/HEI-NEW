@@ -376,7 +376,7 @@ async function fetchFromGoogleSheets(
       
       seenIds.add(idValue);
 
-      const row: any = {};
+      const row: Record<string, string> = {};
       Object.keys(headerMap).forEach(header => {
         const index = headerMap[header];
         if (index >= 0 && index < values.length) {
@@ -430,7 +430,7 @@ async function fetchFromGoogleSheets(
         console.warn(`Article ${idValue} (${titleValue}) has no Text content`);
       }
       
-      resultRows.push(row as GoogleSheetRow);
+      resultRows.push(row as unknown as GoogleSheetRow);
       rowIndex++;
     }
 
@@ -502,41 +502,6 @@ function parseCSV(csvText: string): string[][] {
 }
 
 /**
- * Parse a CSV line handling quoted fields (legacy function for single-line parsing)
- */
-function parseCSVLine(line: string): string[] {
-  const result: string[] = [];
-  let current = '';
-  let inQuotes = false;
-
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
-    const nextChar = line[i + 1];
-
-    if (char === '"') {
-      if (inQuotes && nextChar === '"') {
-        // Escaped quote
-        current += '"';
-        i++; // Skip next quote
-      } else {
-        // Toggle quote state
-        inQuotes = !inQuotes;
-      }
-    } else if (char === ',' && !inQuotes) {
-      // End of field
-      result.push(current);
-      current = '';
-    } else {
-      current += char;
-    }
-  }
-  
-  // Add last field
-  result.push(current);
-  return result;
-}
-
-/**
  * Maps Google Sheets data to Article interface
  */
 function mapToArticle(row: GoogleSheetRow): Article {
@@ -605,7 +570,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     let normalizedSearchSlug: string;
     try {
       normalizedSearchSlug = decodeURIComponent(slug);
-    } catch (e) {
+    } catch {
       // If decoding fails, use the slug as-is
       normalizedSearchSlug = slug;
     }

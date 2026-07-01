@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { X } from 'lucide-react';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
+import { usePortalRoot } from '../../hooks/usePortalRoot';
 import styles from './HomePromoPopup.module.css';
 
 /**
@@ -25,7 +26,7 @@ const CLOSE_BUTTON_DELAY_MS = 3000;
 
 export default function HomePromoPopup() {
   const popups = HOME_PROMO_POPUPS;
-  const [mounted, setMounted] = useState(false);
+  const portalRoot = usePortalRoot();
   const [open, setOpen] = useState(popups.length > 0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [closeReady, setCloseReady] = useState(false);
@@ -34,15 +35,13 @@ export default function HomePromoPopup() {
   const hasMultiple = popups.length > 1;
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     if (!open) return;
 
-    setCloseReady(false);
     const timer = window.setTimeout(() => setCloseReady(true), CLOSE_BUTTON_DELAY_MS);
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timer);
+      setCloseReady(false);
+    };
   }, [open, activeIndex]);
 
   useBodyScrollLock(open);
@@ -74,7 +73,7 @@ export default function HomePromoPopup() {
     advanceOrClose();
   };
 
-  if (!mounted || !open || !activePopup) return null;
+  if (!portalRoot || !open || !activePopup) return null;
 
   return createPortal(
     <>
@@ -140,6 +139,6 @@ export default function HomePromoPopup() {
         <X className={styles.closeIcon} aria-hidden />
       </button>
     </>,
-    document.body,
+    portalRoot,
   );
 }

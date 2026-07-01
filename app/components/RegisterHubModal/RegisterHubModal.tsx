@@ -1,95 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
-import {
-  ArrowUpRight,
-  Mic2,
-  Palette,
-  ShoppingBag,
-  Store,
-  Users,
-  X,
-  type LucideIcon,
-} from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
+import { useIsClient } from '../../hooks/useIsClient';
+import { REGISTER_SECTIONS } from '../../data/registerSections';
 import styles from './RegisterHubModal.module.css';
-
-type RegisterOption = {
-  href: string;
-  label: string;
-  description: string;
-  icon: LucideIcon;
-};
-
-type RegisterSection = {
-  id: string;
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-  variant: 'main' | 'culfest';
-  options: RegisterOption[];
-};
-
-const REGISTER_SECTIONS: RegisterSection[] = [
-  {
-    id: 'main',
-    eyebrow: 'Main Event',
-    title: 'D-8 Halal Expo Indonesia 2026',
-    subtitle: 'Jakarta · April 2026',
-    variant: 'main',
-    options: [
-      {
-        href: '/register/exhibitor',
-        label: 'Register as Exhibitor',
-        description: 'Showcase halal products and connect with global buyers.',
-        icon: Store,
-      },
-      {
-        href: '/register/buyer',
-        label: 'Register as Buyer',
-        description: 'Source certified products and join business matching.',
-        icon: ShoppingBag,
-      },
-      {
-        href: '/register/visitor',
-        label: 'Register as Visitor',
-        description: 'Explore the exhibition, sessions, and programs.',
-        icon: Users,
-      },
-    ],
-  },
-  {
-    id: 'hei-talk',
-    eyebrow: 'Conference Program',
-    title: 'D-8 HEI Talk',
-    subtitle: 'Jakarta · April 2026',
-    variant: 'main',
-    options: [
-      {
-        href: '/programs/hei-talk/register',
-        label: 'Reserve Your Seat',
-        description: 'Register for expert-led sessions and panel discussions.',
-        icon: Mic2,
-      },
-    ],
-  },
-  {
-    id: 'culfest',
-    eyebrow: 'Cultural Program',
-    title: 'D-8 HEI Cultural Festival 2026',
-    subtitle: 'Jakarta · July 2026',
-    variant: 'culfest',
-    options: [
-      {
-        href: '/programs/culture-festival/register/exhibitor',
-        label: 'Book Your Space',
-        description: 'Reserve a booth for cultural products and heritage offerings.',
-        icon: Palette,
-      },
-    ],
-  },
-];
 
 interface RegisterHubModalProps {
   isOpen: boolean;
@@ -97,11 +14,7 @@ interface RegisterHubModalProps {
 }
 
 export default function RegisterHubModal({ isOpen, onClose }: RegisterHubModalProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const isClient = useIsClient();
 
   useEffect(() => {
     if (isOpen) {
@@ -131,7 +44,7 @@ export default function RegisterHubModal({ isOpen, onClose }: RegisterHubModalPr
     };
   }, [isOpen, onClose]);
 
-  if (!mounted || !isOpen) return null;
+  if (!isClient || !isOpen) return null;
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Send, CheckCircle } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import Button from '../Button/Button';
+import { runAnimeReveal } from '../../lib/animeReveal';
 import styles from './D8Section.module.css';
 import { useGoogleForm } from '../../hooks/useGoogleForm';
 
@@ -23,30 +24,23 @@ export default function D8Section() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             import('animejs').then((animeModule) => {
-              // @ts-ignore - animejs animate function signature
-              const animate = animeModule.animate as any;
-              const stagger = animeModule.stagger;
-
-              const elements = [
-                eyebrowRef.current,
-                titleRef.current,
-                imageRef.current,
-                bodyRef.current,
-                formRef.current,
-              ].filter(Boolean);
-
-              if (elements.length > 0) {
-                animate(
-                  elements,
-                  {
-                    opacity: [0, 1],
-                    translateY: [20, 0],
-                    delay: stagger(600),
-                    duration: 1200,
-                    easing: 'easeOutQuad'
-                  }
-                );
-              }
+              runAnimeReveal(
+                animeModule,
+                [
+                  eyebrowRef.current,
+                  titleRef.current,
+                  imageRef.current,
+                  bodyRef.current,
+                  formRef.current,
+                ],
+                {
+                  opacity: [0, 1],
+                  translateY: [20, 0],
+                  delay: animeModule.stagger(600),
+                  duration: 1200,
+                  easing: 'easeOutQuad',
+                }
+              );
             });
             observer.disconnect();
           }
@@ -102,7 +96,7 @@ export default function D8Section() {
 
       {status === 'success' ? (
         <div className={styles.successContainer}>
-          <p className={styles.successMessage}>Thank you! You've been subscribed.</p>
+          <p className={styles.successMessage}>Thank you! You&apos;ve been subscribed.</p>
           <Button onClick={resetForm} className={styles.button} icon={CheckCircle}>
             Add another email
           </Button>

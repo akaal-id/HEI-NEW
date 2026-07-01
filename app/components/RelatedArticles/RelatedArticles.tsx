@@ -1,9 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Calendar, User } from 'lucide-react';
 import ArticleCard from '../ArticleCard/ArticleCard';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './RelatedArticles.module.css';
@@ -32,7 +29,7 @@ export default function RelatedArticles({
 }: RelatedArticlesProps) {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sectionRef, isSectionVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [sectionRef] = useIntersectionObserver({ threshold: 0.1 });
   const [gridRef, isGridVisible] = useIntersectionObserver({ threshold: 0.1 });
 
   useEffect(() => {

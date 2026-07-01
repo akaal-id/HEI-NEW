@@ -18,8 +18,7 @@ export default function OfficialHotelPartnerSection() {
       const animeModule = await import('animejs');
       if (!isMounted || !sectionRef.current) return;
 
-      const animate = animeModule.animate as any;
-      const stagger = animeModule.stagger;
+      const { animate, stagger } = animeModule;
 
       observer = new IntersectionObserver(
         (entries) => {

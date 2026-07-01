@@ -6,7 +6,7 @@ import styles from './ProgramPage.module.css';
 
 export default function ProgramInvestment() {
   const [heroRef, isHeroVisible] = useIntersectionObserver({ threshold: 0.1 });
-  const [contentRef, isContentVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [contentRef] = useIntersectionObserver({ threshold: 0.1 });
   const [textRef, isTextVisible] = useIntersectionObserver({ threshold: 0.1 });
 
   return (

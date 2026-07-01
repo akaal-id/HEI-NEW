@@ -10,24 +10,85 @@ import styles from './Hero.module.css';
 
 export default function Hero() {
   const defaultSlideDuration = 6000;
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const slideCount = heroMedia.length;
+  const hasMultipleSlides = slideCount > 1;
+  const extendedSlides = hasMultipleSlides
+    ? [...heroMedia, ...heroMedia, ...heroMedia]
+    : heroMedia;
+
+  const [trackIndex, setTrackIndex] = useState(hasMultipleSlides ? slideCount : 0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
   const slideTimeoutRef = useRef<number | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const stageRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const goToSlide = useCallback((index: number) => {
-    if (heroMedia.length <= 1) return;
-    setActiveSlideIndex(index);
-  }, []);
+  const activeSlideIndex = hasMultipleSlides ? trackIndex % slideCount : 0;
+
+  const goToSlide = useCallback(
+    (index: number) => {
+      if (!hasMultipleSlides) return;
+      setTrackIndex(slideCount + index);
+    },
+    [hasMultipleSlides, slideCount]
+  );
 
   const goToPreviousSlide = () => {
-    goToSlide((activeSlideIndex - 1 + heroMedia.length) % heroMedia.length);
+    if (!hasMultipleSlides) return;
+    setTrackIndex((current) => current - 1);
   };
 
   const goToNextSlide = () => {
-    goToSlide((activeSlideIndex + 1) % heroMedia.length);
+    if (!hasMultipleSlides) return;
+    setTrackIndex((current) => current + 1);
   };
+
+  const resetTrackPosition = useCallback(() => {
+    setTrackIndex((current) => {
+      if (current < slideCount) {
+        return current + slideCount;
+      }
+
+      if (current >= slideCount * 2) {
+        return current - slideCount;
+      }
+
+      return current;
+    });
+  }, [slideCount]);
+
+  useEffect(() => {
+    if (!hasMultipleSlides) return;
+
+    const track = trackRef.current;
+    if (!track) return;
+
+    const needsReset = trackIndex < slideCount || trackIndex >= slideCount * 2;
+    if (!needsReset) return;
+
+    const handleTransitionEnd = (event: TransitionEvent) => {
+      if (event.target !== track || event.propertyName !== 'transform') return;
+
+      setIsTransitioning(false);
+      resetTrackPosition();
+    };
+
+    track.addEventListener('transitionend', handleTransitionEnd);
+
+    return () => {
+      track.removeEventListener('transitionend', handleTransitionEnd);
+    };
+  }, [trackIndex, hasMultipleSlides, slideCount, resetTrackPosition]);
+
+  useEffect(() => {
+    if (!hasMultipleSlides || isTransitioning) return;
+
+    const frameId = window.requestAnimationFrame(() => {
+      setIsTransitioning(true);
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [isTransitioning, hasMultipleSlides]);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -40,10 +101,15 @@ export default function Hero() {
 
       const slideWidth = slide.offsetWidth;
       const gap = Number.parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+      const carousel = stage.parentElement;
 
       stage.style.setProperty('--slide-width', `${slideWidth}px`);
       stage.style.setProperty('--slide-gap', `${gap}px`);
       stage.style.setProperty('--slide-step', `${slideWidth + gap}px`);
+
+      if (carousel) {
+        carousel.style.setProperty('--slide-width', `${slideWidth}px`);
+      }
     };
 
     updateMetrics();
@@ -56,13 +122,13 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (heroMedia.length <= 1) return;
+    if (!hasMultipleSlides) return;
 
     const currentSlide = heroMedia[activeSlideIndex];
     const slideDuration = currentSlide?.duration ?? defaultSlideDuration;
 
     slideTimeoutRef.current = window.setTimeout(() => {
-      setActiveSlideIndex((prev) => (prev + 1) % heroMedia.length);
+      setTrackIndex((current) => current + 1);
     }, slideDuration);
 
     return () => {
@@ -70,7 +136,7 @@ export default function Hero() {
         window.clearTimeout(slideTimeoutRef.current);
       }
     };
-  }, [activeSlideIndex, defaultSlideDuration]);
+  }, [activeSlideIndex, defaultSlideDuration, hasMultipleSlides]);
 
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
@@ -98,15 +164,16 @@ export default function Hero() {
               <div ref={stageRef} className={styles.carouselStage}>
                 <div
                   ref={trackRef}
-                  className={styles.carouselTrack}
-                  style={{ '--active-index': activeSlideIndex } as React.CSSProperties}
+                  className={`${styles.carouselTrack} ${!isTransitioning ? styles.carouselTrackInstant : ''}`}
+                  style={{ '--active-index': trackIndex } as React.CSSProperties}
                 >
-                  {heroMedia.map((mediaItem, index) => {
-                    const isActive = index === activeSlideIndex;
+                  {extendedSlides.map((mediaItem, index) => {
+                    const isActive = index === trackIndex;
+                    const realIndex = index % slideCount;
 
                     return (
                       <div
-                        key={mediaItem.contentKey}
+                        key={`${mediaItem.contentKey}-${index}`}
                         className={`${styles.slide} ${isActive ? styles.slideActive : ''}`}
                         aria-hidden={!isActive}
                       >
@@ -122,14 +189,14 @@ export default function Hero() {
                                 src={mediaItem.src}
                                 alt={mediaItem.alt}
                                 fill
-                                priority={index === 0}
+                                priority={realIndex === 0 && index < slideCount}
                                 className={styles.media}
-                                sizes="(max-width: 768px) 100vw, 960px"
+                                sizes="(max-width: 768px) 82vw, 960px"
                               />
                             ) : isActive ? (
                               <video
                                 ref={(element) => {
-                                  videoRefs.current[index] = element;
+                                  videoRefs.current[realIndex] = element;
                                 }}
                                 className={styles.media}
                                 src={mediaItem.src}
@@ -137,7 +204,7 @@ export default function Hero() {
                                 muted
                                 loop
                                 playsInline
-                                preload={index === 0 ? 'metadata' : 'none'}
+                                preload={realIndex === 0 ? 'metadata' : 'none'}
                               />
                             ) : (
                               <video
@@ -160,7 +227,7 @@ export default function Hero() {
               </div>
 
               {heroMedia.length > 1 && (
-                <>
+                <div className={styles.carouselControls}>
                   <button
                     type="button"
                     className={`${styles.navButton} ${styles.navPrev}`}
@@ -172,19 +239,6 @@ export default function Hero() {
                     aria-label="Previous slide"
                   >
                     <ChevronLeft size={22} aria-hidden />
-                  </button>
-
-                  <button
-                    type="button"
-                    className={`${styles.navButton} ${styles.navNext}`}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      goToNextSlide();
-                    }}
-                    aria-label="Next slide"
-                  >
-                    <ChevronRight size={22} aria-hidden />
                   </button>
 
                   <div className={styles.dots} role="tablist" aria-label="Hero carousel slides">
@@ -204,7 +258,20 @@ export default function Hero() {
                       />
                     ))}
                   </div>
-                </>
+
+                  <button
+                    type="button"
+                    className={`${styles.navButton} ${styles.navNext}`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      goToNextSlide();
+                    }}
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight size={22} aria-hidden />
+                  </button>
+                </div>
               )}
             </div>
           </div>

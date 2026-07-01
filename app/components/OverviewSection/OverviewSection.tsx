@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { runAnimeReveal } from '../../lib/animeReveal';
 import styles from './OverviewSection.module.css';
 import type { LucideIcon } from 'lucide-react';
 import { Globe, Flag, SquareStack } from 'lucide-react';
@@ -59,26 +60,13 @@ export default function OverviewSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             import('animejs').then((animeModule) => {
-              const animate = animeModule.animate as any;
-              const stagger = animeModule.stagger;
-
-              const elements = [
-                metricsRef.current,
-                introRef.current,
-              ].filter(Boolean);
-
-              if (elements.length > 0) {
-                animate(
-                  elements,
-                  {
-                    opacity: [0, 1],
-                    translateY: [30, 0],
-                    delay: stagger(200),
-                    duration: 800,
-                    easing: 'easeOutQuad'
-                  }
-                );
-              }
+              runAnimeReveal(animeModule, [metricsRef.current, introRef.current], {
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: animeModule.stagger(200),
+                duration: 800,
+                easing: 'easeOutQuad',
+              });
             });
             observer.disconnect();
           }

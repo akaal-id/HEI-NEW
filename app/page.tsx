@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import Hero from './components/Hero/Hero';
-
-const HomePromoPopup = dynamic(() => import('./components/HomePromoPopup/HomePromoPopup'));
+import HomePromoPopup from './components/HomePromoPopup/HomePromoPopup';
 
 const PartnerSneakPeek = dynamic(() => import('./components/PartnerSneakPeek/PartnerSneakPeek'), {
   loading: () => <div style={{ minHeight: '400px', background: 'white' }}></div>,

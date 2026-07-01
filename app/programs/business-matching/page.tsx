@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Header, { headerTitleAccentClass } from '../../about/header/header';
-import Cta from '../../about/cta/cta';
 import AboutSection from './sections/about/about';
 import FlowSection from './sections/flow/flow';
 

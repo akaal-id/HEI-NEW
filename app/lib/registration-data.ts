@@ -103,8 +103,6 @@ export const BUYER_SECTOR_INTERESTS = [
 export const GENDERS = [
   { value: 'Male', label: 'Male' },
   { value: 'Female', label: 'Female' },
-  { value: 'Prefer not to say', label: 'Prefer not to say' },
-  { value: 'Other', label: 'Other' },
 ];
 
 export const SOURCE_OF_INFO = [

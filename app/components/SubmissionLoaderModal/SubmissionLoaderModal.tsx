@@ -19,12 +19,11 @@ export default function SubmissionLoaderModal({
   const [processedCount, setProcessedCount] = useState(0);
 
   useEffect(() => {
-    if (!isOpen) {
-      setProcessedCount(0);
-      return;
-    }
+    if (!isOpen) return;
 
-    setProcessedCount(Math.min(1, totalCount));
+    const frame = window.requestAnimationFrame(() => {
+      setProcessedCount(Math.min(1, totalCount));
+    });
 
     const interval = window.setInterval(() => {
       setProcessedCount((prev) => {
@@ -33,7 +32,10 @@ export default function SubmissionLoaderModal({
       });
     }, TICK_MS);
 
-    return () => window.clearInterval(interval);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearInterval(interval);
+    };
   }, [isOpen, totalCount]);
 
   useEffect(() => {

@@ -11,9 +11,9 @@ declare global {
     fbq: (
       action: string,
       event: string,
-      params?: Record<string, any>
+      params?: Record<string, unknown>
     ) => void;
-    _fbq: any;
+    _fbq: typeof window.fbq;
   }
 }
 
@@ -48,6 +48,8 @@ export default function MetaPixel() {
         }}
       />
       <noscript>
+        {/* Meta Pixel requires a raw img tag for no-JS tracking */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           height="1"
           width="1"

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans, Lora, Mulish } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
+import MobileBottomNav from "./components/MobileBottomNav/MobileBottomNav";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import ContactButton from "./components/ContactButton/ContactButton";
@@ -118,10 +119,12 @@ export default function RootLayout({
       >
         <StructuredData />
         <MetaPixel />
+        <div id="modal-root" />
         <LoadingScreen />
         <Navbar />
         {children}
         <Footer />
+        <MobileBottomNav />
         <ScrollToTop />
         <ContactButton />
         <Analytics />

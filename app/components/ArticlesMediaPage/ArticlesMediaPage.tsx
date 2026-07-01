@@ -2,11 +2,10 @@
 
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import Button from '../Button/Button';
 import ArticleCard from '../ArticleCard/ArticleCard';
 import ArticleHeroSlider from '../ArticleHeroSlider/ArticleHeroSlider';
 import MediaCarousel from '../MediaCarousel/MediaCarousel';
-import { User, Calendar, Search, Filter, ArrowUpDown, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Search, Filter, ArrowUpDown, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './ArticlesMediaPage.module.css';
 import { getAllArticles } from '../../lib/articles';
@@ -20,14 +19,6 @@ interface Article {
   date: string;
   title: string;
   description: string;
-}
-
-interface MediaItem {
-  id: string;
-  image: string;
-  title: string;
-  category?: string;
-  year?: string;
 }
 
 interface YearGallery {
@@ -116,7 +107,7 @@ const yearGalleries: YearGallery[] = [
 ];
 
 // Media carousel items (all highlight images from all years)
-const mediaCarouselItems = yearGalleries.map((gallery, index) => ({
+const mediaCarouselItems = yearGalleries.map((gallery) => ({
   id: `carousel-${gallery.year}`,
   image: gallery.highlightImage,
   title: `${gallery.displayName || `Halal Expo Indonesia ${gallery.year}`} Highlights`,
@@ -132,7 +123,6 @@ export default function ArticlesMediaPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<SortOption>('newest');
-  const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [sectionRef, isSectionVisible] = useIntersectionObserver({ threshold: 0.1 });
@@ -153,15 +143,14 @@ export default function ArticlesMediaPage() {
 
   // Filter and sort articles
   const filteredArticles = useMemo(() => {
-    let filtered = articles.filter(article => {
+    const filtered = articles.filter(article => {
       const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                            article.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'all' || article.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
 
-    // Sort by date
-    filtered.sort((a, b) => {
+    return [...filtered].sort((a, b) => {
       // Try to parse dates, fallback to string comparison if parsing fails
       const dateA = new Date(a.date).getTime() || 0;
       const dateB = new Date(b.date).getTime() || 0;
@@ -175,8 +164,6 @@ export default function ArticlesMediaPage() {
       
       return sortBy === 'newest' ? dateB - dateA : dateA - dateB;
     });
-
-    return filtered;
   }, [articles, searchQuery, selectedCategory, sortBy]);
 
   // Pagination logic
@@ -184,11 +171,6 @@ export default function ArticlesMediaPage() {
   const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
   const endIndex = startIndex + ARTICLES_PER_PAGE;
   const paginatedArticles = filteredArticles.slice(startIndex, endIndex);
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, selectedCategory, sortBy]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -272,7 +254,10 @@ export default function ArticlesMediaPage() {
                   type="text"
                   placeholder="Search by article name..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setCurrentPage(1);
+                  }}
                   className={styles.searchInput}
                 />
               </div>
@@ -281,7 +266,10 @@ export default function ArticlesMediaPage() {
                 <Filter className={styles.filterIcon} />
                 <select
                   value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedCategory(e.target.value);
+                    setCurrentPage(1);
+                  }}
                   className={styles.categorySelect}
                 >
                   {categories.map(cat => (
@@ -296,7 +284,10 @@ export default function ArticlesMediaPage() {
                 <ArrowUpDown className={styles.filterIcon} />
                 <select
                   value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as SortOption)}
+                  onChange={(e) => {
+                    setSortBy(e.target.value as SortOption);
+                    setCurrentPage(1);
+                  }}
                   className={styles.sortSelect}
                 >
                   <option value="newest">Newest First</option>
@@ -311,7 +302,10 @@ export default function ArticlesMediaPage() {
                 paginatedArticles.map((article, index) => (
                   <ArticleCard
                     key={`${article.id}-${article.slug}-${index}`}
-                    article={article as any}
+                    article={{
+                      ...article,
+                      slug: article.slug ?? article.id,
+                    }}
                     index={index}
                     variant="listing"
                   />

@@ -7,7 +7,7 @@
     "dev": "NEXT_DIST_DIR=/tmp/hei-2026-next next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint app scripts --max-warnings 0",
     "favicon": "png-to-ico public/icon/icon-d8hei.png > app/favicon.ico",
     "postinstall": "node scripts/postinstall.mjs"
   },

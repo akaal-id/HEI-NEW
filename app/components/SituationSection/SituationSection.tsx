@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Mail, CheckCircle } from 'lucide-react';
+import { useIsClient } from '../../hooks/useIsClient';
 import styles from './SituationSection.module.css';
 import { useGoogleForm } from '../../hooks/useGoogleForm';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
@@ -12,13 +13,9 @@ const BODY_COPY =
   'Subscribe for the latest news on event highlights, exhibitor slots, partnership opportunities, and program announcements<br></br>Stay updated on D-8 Halal Expo Indonesia 2026!';
 
 export default function SituationSection() {
-  const [mounted, setMounted] = useState(false);
+  const isClient = useIsClient();
   const [open, setOpen] = useState(true);
   const { email, setEmail, status, handleSubmit, resetForm } = useGoogleForm();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const dismiss = useCallback(() => {
     setOpen(false);
@@ -39,7 +36,7 @@ export default function SituationSection() {
     if (e.target === e.currentTarget) dismiss();
   };
 
-  if (!mounted || !open) return null;
+  if (!isClient || !open) return null;
 
   return createPortal(
     <div

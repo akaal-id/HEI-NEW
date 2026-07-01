@@ -29,7 +29,7 @@ export async function generateMetadata({
   let slug: string;
   try {
     slug = decodeURIComponent(resolvedParams.slug);
-  } catch (e) {
+  } catch {
     slug = resolvedParams.slug;
   }
 
@@ -87,7 +87,7 @@ export async function generateMetadata({
         canonical: `https://halalexpoindonesia.com/articles/${article.slug}`,
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Article | HEI 2026 - Halal Expo Indonesia',
       description: 'Read the latest articles and news about Halal Expo Indonesia 2026.',
@@ -120,7 +120,7 @@ export default async function ArticlePage({
   let slug: string;
   try {
     slug = decodeURIComponent(resolvedParams.slug);
-  } catch (e) {
+  } catch {
     // If decoding fails, use the raw slug
     slug = resolvedParams.slug;
   }
