@@ -56,7 +56,7 @@ export default function PartnersPage() {
       </section>
 
       <div className={styles.content}>
-        <PartnerSection hideHeader />
+        <PartnerSection hideHeader variant="full" />
       </div>
     </main>
   );

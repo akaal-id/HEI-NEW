@@ -169,7 +169,7 @@
 /* Nested selector */
 .selector {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   background: var(--hei26-deepgreen);
 }
 
@@ -178,7 +178,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 1.25rem 1.25rem;
+  padding: 1.25rem 1.5rem;
   background: transparent;
   border: none;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -187,7 +187,7 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.selectorItem:last-child {
+.selectorItem:nth-child(4n) {
   border-right: none;
 }
 
@@ -277,11 +277,24 @@
   }
 
   .selector {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .selectorItem {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .selectorItem:nth-child(4n) {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .selectorItem:nth-child(2n) {
+    border-right: none;
+  }
+
+  .selectorItem:nth-last-child(-n + 2) {
+    border-bottom: none;
   }
 
   .showcaseStage {

@@ -4,6 +4,10 @@ import Hero from './components/Hero/Hero';
 
 const HomePromoPopup = dynamic(() => import('./components/HomePromoPopup/HomePromoPopup'));
 
+const PartnerSneakPeek = dynamic(() => import('./components/PartnerSneakPeek/PartnerSneakPeek'), {
+  loading: () => <div style={{ minHeight: '400px', background: 'white' }}></div>,
+});
+
 const OverviewSection = dynamic(() => import('./components/OverviewSection/OverviewSection'), {
   loading: () => <div style={{ height: '100vh', background: 'var(--hei26-linearblue)' }}></div>,
 });
@@ -15,6 +19,11 @@ const ProgramSection = dynamic(() => import('./components/ProgramSection/Program
 const VenueProfileSection = dynamic(() => import('./components/VenueProfileSection/VenueProfileSection'), {
   loading: () => <div style={{ minHeight: '320px' }}></div>,
 });
+
+const OfficialHotelPartnerSection = dynamic(
+  () => import('./components/OfficialHotelPartnerSection/OfficialHotelPartnerSection'),
+  { loading: () => <div style={{ minHeight: '360px', background: 'var(--hei26-cream)' }}></div> }
+);
 
 const BrochureSection = dynamic(() => import('./components/BrochureSection/BrochureSection'), {
   loading: () => <div style={{ minHeight: '400px' }}></div>,
@@ -62,9 +71,11 @@ export default function Home() {
     <main>
       <HomePromoPopup />
       <Hero/>
+      <PartnerSneakPeek />
       <OverviewSection />
       <ProgramSection />
       <VenueProfileSection />
+      <OfficialHotelPartnerSection />
       <BrochureSection />
       <FAQSection />
       <PartnerSection />

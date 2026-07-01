@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         destination: '/register/visitor',
         permanent: true,
       },
+      {
+        source: '/programs/investment',
+        destination: '/programs',
+        permanent: true,
+      },
     ];
   },
   images: {

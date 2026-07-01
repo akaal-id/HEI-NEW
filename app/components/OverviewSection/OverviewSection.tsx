@@ -1,12 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useRef } from 'react';
-import Button from '../Button/Button';
 import styles from './OverviewSection.module.css';
-import buttonStyles from '../Button/Button.module.css';
 import type { LucideIcon } from 'lucide-react';
-import { Globe, Briefcase, Mic, Building2, ArrowUpRight, Flag, SquareStack} from 'lucide-react';
+import { Globe, Flag, SquareStack } from 'lucide-react';
 
 type IntroMetricCard = {
   icon: LucideIcon;
@@ -44,19 +41,17 @@ const INTRO_METRIC_CARDS: IntroMetricCard[] = [
 
 ];
 
-const ABOUTUS_SNEAKPEAK: { title: string; description: string }[] = [
-  {
-    title: 'A Strategic Diplomatic Bridge',
-    description: 'D-8 Halal Expo Indonesia (HEI) 2026 is where high-level diplomacy meets global commerce. As Part of the D-8 Summit, we provide an unrivaled platform for "Halal Diplomacy," supported by the Ministry of Foreign Affairs of the Republic of Indonesia.<br /><br />From our humble beginnings in 2018 to becoming a global sourcing hub, we have consistently bridged the gap between local innovation and international trade.',
-  },
-];
+// const ABOUTUS_SNEAKPEAK: { title: string; description: string }[] = [
+//   {
+//     title: 'A Strategic Diplomatic Bridge',
+//     description: 'D-8 Halal Expo Indonesia (HEI) 2026 is where high-level diplomacy meets global commerce. As Part of the D-8 Summit, we provide an unrivaled platform for "Halal Diplomacy," supported by the Ministry of Foreign Affairs of the Republic of Indonesia.<br /><br />From our humble beginnings in 2018 to becoming a global sourcing hub, we have consistently bridged the gap between local innovation and international trade.',
+//   },
+// ];
 
 export default function OverviewSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
   const metricsRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
-  const valuePropRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -68,10 +63,8 @@ export default function OverviewSection() {
               const stagger = animeModule.stagger;
 
               const elements = [
-                imageRef.current,
                 metricsRef.current,
                 introRef.current,
-                valuePropRef.current,
               ].filter(Boolean);
 
               if (elements.length > 0) {
@@ -130,7 +123,7 @@ export default function OverviewSection() {
           <div className={styles.introDescription}>source: <a href="https://developing8.org/about-d-8/brief-history-of-d-8/" target="_blank" rel="noopener noreferrer">https://developing8.org/about-d-8/brief-history-of-d-8/</a></div>
         </div>
 
-        {/* 2. Visual asset */}
+        {/* 2. Visual asset
         <div ref={imageRef} className={styles.imageContainer}>
           <Image
             src="/images/overview.jpg"
@@ -140,9 +133,9 @@ export default function OverviewSection() {
             className={styles.image}
             priority={false}
           />
-        </div>
+        </div> */}
 
-        {/* 3. Sneak peek CTA */}
+        {/* 3. Sneak peek CTA
         <div ref={valuePropRef} className={styles.aboutUsSneakpeakWrapper}>
           <div className={styles.aboutUsSneakpeak}>
             <div className={styles.aboutUsSneakpeakItem}>
@@ -155,10 +148,10 @@ export default function OverviewSection() {
               <span className={buttonStyles.text}>Get to Know D-8 More</span>
               <div className={buttonStyles.iconContainer}>
                 <ArrowUpRight className={buttonStyles.icon} />
-              </div> 
+              </div>
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
         {/* <div ref={metricsRef} className={styles.metricsContainerWrapper}>
           <div className={styles.metricsContainer}>

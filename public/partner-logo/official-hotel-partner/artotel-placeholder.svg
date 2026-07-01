@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80" viewBox="0 0 240 80" fill="none" role="img" aria-label="Hotel logo placeholder">
+  <rect width="240" height="80" rx="8" fill="#F3F5F8"/>
+  <rect x="1" y="1" width="238" height="78" rx="7" stroke="#D5DCE6" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="120" y="38" text-anchor="middle" fill="#8A96A8" font-family="system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.08em">LOGO</text>
+  <text x="120" y="54" text-anchor="middle" fill="#A8B2C1" font-family="system-ui, sans-serif" font-size="10">Coming Soon</text>
+</svg>

@@ -9,7 +9,7 @@ const REASONS = [
     description: 'and government leaders through our official partnership with the Ministry of Foreign Affairs, D-8 Secretariat, KNEKS, KADIN, and Bank Indonesia.',
   },
   {
-    title: 'Business Matching & Investment Matchmaking',
+    title: 'Business Matching',
     description: 'to facilitate serious trade discussions and high-value transactions.',
   },
   {

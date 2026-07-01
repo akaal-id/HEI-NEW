@@ -30,13 +30,6 @@ const programs: Program[] = [
     href: '/programs/business-matching',
   },
   {
-    id: 'investment',
-    title: 'Investment Matchmaking',
-    image: '/images/Programs/3-Investment Matchmaking.png',
-    description: 'Connect high-potential ventures with the investors and capital funding the next wave of the halal economy.',
-    href: '/programs/investment',
-  },
-  {
     id: 'hei-talk',
     title: 'D-8 HEI Talkshow',
     image: '/images/Programs/5-D-8 HEI Talkshow.png',

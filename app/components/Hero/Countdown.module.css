@@ -1,14 +1,13 @@
 .countdownContainer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  width: 100%;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.4rem 8rem;
-  background: #094949b2;
-  backdrop-filter: blur(1rem);
+  background: #094949;
+  /* backdrop-filter: blur(1rem); */
   z-index: 10;
   gap: 2rem;
 }
@@ -139,7 +138,7 @@
     width: 100%;
   }
 
-  .buttonWrapper button {
+  .buttonWrapper a {
     width: 100%;
   }
 

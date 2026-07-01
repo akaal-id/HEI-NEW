@@ -48,11 +48,6 @@ export const faqItems: FAQItem[] = [
     answer: 'The Business Matching program connects exhibitors with qualified buyers through pre-scheduled meetings, facilitating direct B2B transactions and partnerships.'
   },
   {
-    id: 'investment-matchmaking',
-    question: 'What is Investment Matchmaking?',
-    answer: 'Investment Matchmaking connects businesses seeking funding with investors looking for halal economy opportunities, facilitating strategic investment partnerships.'
-  },
-  {
     id: 'register',
     question: 'How do I register for D-8 Halal Expo Indonesia 2026?',
     answer: 'You can register for D-8 Halal Expo Indonesia 2026 through our official website. Different registration options are available for exhibitors, buyers, and general attendees.'

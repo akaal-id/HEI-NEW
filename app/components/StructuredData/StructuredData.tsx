@@ -134,21 +134,15 @@ export default function StructuredData() {
           },
           {
             '@type': 'SiteNavigationElement',
-            name: 'Investment Matchmaking',
-            url: `${baseUrl}/programs/investment`,
-            position: 3,
-          },
-          {
-            '@type': 'SiteNavigationElement',
             name: 'D-8 HEI Talk',
             url: `${baseUrl}/programs/hei-talk`,
-            position: 4,
+            position: 3,
           },
           {
             '@type': 'SiteNavigationElement',
             name: 'D-8 HEI Cultural Fest',
             url: `${baseUrl}/programs/culture-festival`,
-            position: 5,
+            position: 4,
           },
         ],
       },

@@ -127,7 +127,8 @@ export default function Navbar() {
     setOpenMobileDropdown(null);
   };
 
-  const showScrolledLogo = isScrolled || isArticlesPage || isCultureFestivalPage;
+  const isHomePage = pathname === '/';
+  const showScrolledLogo = isScrolled || isHomePage || isArticlesPage || isCultureFestivalPage;
 
   return (
     <nav className={`${styles.navbar} ${showScrolledLogo ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
@@ -209,9 +210,6 @@ export default function Navbar() {
                 </Link>
                 <Link href="/programs/business-matching" className={styles.dropdownItem} onClick={closeDropdowns}>
                   Business Matching
-                </Link>
-                <Link href="/programs/investment" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  Investment Match Making
                 </Link>
                 <Link href="/programs/hei-talk" className={styles.dropdownItem} onClick={closeDropdowns}>
                   D-8 HEI Talk
@@ -354,9 +352,6 @@ export default function Navbar() {
               </Link>
               <Link href="/programs/business-matching" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 Business Matching
-              </Link>
-              <Link href="/programs/investment" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                Investment Match Making
               </Link>
               <Link href="/programs/hei-talk" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
                 D-8 HEI Talk
