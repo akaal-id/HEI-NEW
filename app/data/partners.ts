@@ -31,6 +31,8 @@ export type HotelPartnerContact = {
   logo: string;
   alt: string;
   website?: string;
+  mapEmbedUrl: string;
+  specialRateHref: string;
   isPlaceholder?: boolean;
   emails: string[];
   contacts: { name: string; phone: string; whatsappHref: string }[];
@@ -42,7 +44,11 @@ export const officialHotelPartners: HotelPartnerContact[] = [
     name: 'Hotel Mulia',
     logo: '/partner-logo/official-hotel-partner/hotelmulia-logo.png',
     alt: 'Hotel Mulia logo',
-    website: 'https://www.themulia.com/jakarta/hotel-mulia',
+    website: 'https://be.synxis.com/?adult=1&arrive=2026-07-08&chain=17715&child=0&currency=IDR&depart=2026-07-12&hotel=64525&level=hotel&locale=en-GB&productcurrency=IDR&rate=HALALEXPO&rooms=1',
+    mapEmbedUrl:
+      'https://www.google.com/maps?q=Hotel+Mulia+Jakarta+Senayan&output=embed',
+    specialRateHref:
+      'https://be.synxis.com/?adult=1&arrive=2026-07-08&chain=17715&child=0&currency=IDR&depart=2026-07-12&hotel=64525&level=hotel&locale=en-GB&productcurrency=IDR&rate=HALALEXPO&rooms=1',
     emails: ['reservation@hotelmulia.com', 'rohelin.purdjiati@hotelmulia.com'],
     contacts: [
       {
@@ -58,6 +64,10 @@ export const officialHotelPartners: HotelPartnerContact[] = [
     name: 'Hotel Artotel Senayan',
     logo: '/partner-logo/official-hotel-partner/artotel-logo.svg',
     alt: 'Hotel Artotel Senayan logo',
+    mapEmbedUrl:
+      'https://www.google.com/maps?q=Artotel+Senayan+Jakarta&output=embed',
+    specialRateHref:
+      'https://wa.me/6281293201756?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20D-8%20Halal%20Expo%20Indonesia%202026%20special%20room%20rates%20at%20Hotel%20Artotel%20Senayan.',
     emails: ['nova@artotelgroup.com'],
     contacts: [
       {

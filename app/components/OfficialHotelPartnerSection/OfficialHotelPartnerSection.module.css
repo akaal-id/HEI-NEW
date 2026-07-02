@@ -36,7 +36,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5rem, 5vw, 3.5rem);
+  gap: clamp(2rem, 4vw, 2.75rem);
 }
 
 .reveal {
@@ -59,10 +59,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  /* padding: 0.45rem 1rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--hei26-skyblue) 12%, white);
-  border: 1px solid color-mix(in srgb, var(--hei26-skyblue) 28%, transparent); */
   color: var(--hei26-skyblue);
   font-size: clamp(11px, 1.1vw, 13px);
   font-weight: 600;
@@ -101,97 +97,73 @@
   max-width: 640px;
 }
 
-.perkRow {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.65rem;
-  margin-top: 0.35rem;
-}
-
-.perk {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0.85rem;
-  border-radius: 999px;
-  background: white;
-  border: 1px solid color-mix(in srgb, var(--hei26-dongkerblue) 10%, transparent);
-  color: var(--hei26-dongkerblue);
-  font-size: clamp(0.78rem, 1.3vw, 0.88rem);
-  font-weight: 600;
-  box-shadow: 0 8px 24px -18px rgba(15, 92, 92, 0.45);
-}
-
-.perkIcon {
-  width: 0.85rem;
-  height: 0.85rem;
-  color: var(--hei26-gold);
-}
-
 .hotelGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 1.5rem);
+  width: min(1220px, 100%);
+  margin: 0 auto;
+  align-items: stretch;
 }
 
 .hotelCard {
   position: relative;
-  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 14px;
   background: white;
   border: 1px solid color-mix(in srgb, var(--hei26-skyblue) 18%, transparent);
   box-shadow:
-    0 24px 60px -32px rgba(15, 92, 92, 0.35),
-    0 8px 20px -12px rgba(15, 92, 92, 0.12);
+    0 16px 40px -28px rgba(15, 92, 92, 0.35),
+    0 6px 16px -10px rgba(15, 92, 92, 0.12);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hotelCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow:
-    0 32px 70px -28px rgba(15, 92, 92, 0.4),
-    0 12px 28px -14px rgba(15, 92, 92, 0.16);
+    0 22px 50px -24px rgba(15, 92, 92, 0.38),
+    0 8px 20px -12px rgba(15, 92, 92, 0.14);
 }
 
-.cardAccent {
-  display: none;
+.mapWrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.mapFrame {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .cardBody {
-  display: grid;
-  grid-template-columns: minmax(9rem, 34%) 1fr;
-  gap: 0;
-  min-height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem 1rem;
 }
 
 .logoPanel {
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: clamp(1.25rem, 2.5vw, 1.75rem) 1rem;
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--hei26-skyblue) 8%, white) 0%,
-      color-mix(in srgb, var(--hei26-turquoise) 12%, white) 100%
-    );
-  border-right: 1px solid color-mix(in srgb, var(--hei26-skyblue) 14%, transparent);
+  justify-content: flex-start;
 }
 
 .comingSoon {
   position: absolute;
-  top: 0.85rem;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.2rem 0.55rem;
+  top: -0.35rem;
+  left: 0;
+  padding: 0.15rem 0.45rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--hei26-dongkerblue) 88%, #000);
   color: white;
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -199,19 +171,17 @@
 }
 
 .logoLink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 5rem;
 }
 
 .logoImage {
   object-fit: contain;
-  max-width: 100%;
-  max-height: 4.5rem;
+  max-width: clamp(8rem, 18vw, 12rem);
   width: auto;
-  height: auto;
+  height: clamp(3.5rem, 5vw, 5rem);;
+  /* max-height: clamp(3.5rem, 5vw, 5rem); */
+  padding: 0.5rem 0 0.5rem 0;
 }
 
 .logoPlaceholder {
@@ -220,46 +190,33 @@
 
 .cardContent {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: 1.1rem;
-  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  gap: 0.55rem;
   min-width: 0;
-}
-
-.cardHeading {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
 }
 
 .hotelName {
   margin: 0;
-  font-size: clamp(1.05rem, 1.9vw, 1.25rem);
+  font-size: clamp(0.92rem, 1.5vw, 1.05rem);
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.25;
   color: var(--hei26-dongkerblue);
   letter-spacing: -0.02em;
-}
-
-.hotelEventTag {
-  margin: 0;
-  font-size: clamp(0.75rem, 1.2vw, 0.84rem);
-  font-weight: 500;
-  color: color-mix(in srgb, var(--hei26-dongkerblue) 58%, #666);
+  display: none;
 }
 
 .contactGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  flex: 1;
+  gap: 0.35rem;
 }
 
 .contactLabel {
   margin: 0;
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--hei26-dongkerblue) 50%, #888);
 }
@@ -270,22 +227,22 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 .contactChip {
   display: inline-flex;
   align-items: flex-start;
-  gap: 0.55rem;
+  gap: 0.4rem;
   width: 100%;
-  padding: 0.55rem 0.7rem;
-  border-radius: 10px;
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
   background: color-mix(in srgb, var(--hei26-skyblue) 7%, white);
   border: 1px solid color-mix(in srgb, var(--hei26-skyblue) 14%, transparent);
   color: var(--hei26-dongkerblue);
   text-decoration: none;
-  font-size: clamp(0.78rem, 1.25vw, 0.88rem);
-  line-height: 1.45;
+  font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+  line-height: 1.35;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -295,30 +252,16 @@
 }
 
 .contactIcon {
-  width: 0.95rem;
-  height: 0.95rem;
+  width: 0.8rem;
+  height: 0.8rem;
   flex-shrink: 0;
-  margin-top: 0.1rem;
+  margin-top: 0.05rem;
   color: var(--hei26-skyblue);
 }
 
 .contactDivider {
-  margin: 0 0.3rem;
+  margin: 0 0.25rem;
   opacity: 0.5;
-}
-
-.whatsappHint {
-  display: inline-block;
-  margin-left: 0.45rem;
-  padding: 0.1rem 0.45rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, #25d366 14%, white);
-  color: #128c7e;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  vertical-align: middle;
 }
 
 .contactButton {
@@ -329,6 +272,7 @@
 @media (max-width: 1024px) {
   .hotelGrid {
     grid-template-columns: 1fr;
+    width: min(560px, 100%);
   }
 }
 
@@ -341,18 +285,18 @@
     max-width: none;
   }
 
-  .perkRow {
-    flex-direction: column;
-    align-items: stretch;
+  .mapWrap {
+    aspect-ratio: 4 / 3;
   }
 
-  .cardBody {
-    grid-template-columns: 1fr;
+  .logoImage {
+    max-width: clamp(12rem, 14vw, 16rem);
+    height: clamp(5rem, 14vw, 7rem);
+    padding: 0.5rem 0 0.5rem 0;
   }
 
   .logoPanel {
-    border-right: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--hei26-skyblue) 14%, transparent);
-    min-height: 7rem;
+    align-items: center;
+    justify-content: center;  
   }
 }

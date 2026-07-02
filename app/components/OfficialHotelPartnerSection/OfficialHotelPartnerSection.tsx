@@ -87,22 +87,20 @@ export default function OfficialHotelPartnerSection() {
             Indonesia 2026. Book through our official hotel partners and enjoy premium
             accommodation minutes from the venue.
           </p>
-          {/* <div className={styles.perkRow}>
-            <span className={styles.perk}>
-              <Sparkles className={styles.perkIcon} aria-hidden />
-              Special delegate rates
-            </span>
-            <span className={styles.perk}>
-              <Sparkles className={styles.perkIcon} aria-hidden />
-              Priority reservation support
-            </span>
-          </div> */}
         </header>
 
         <div className={styles.hotelGrid}>
           {officialHotelPartners.map((hotel) => (
             <article key={hotel.id} className={`${styles.hotelCard} ${styles.reveal}`}>
-              <div className={styles.cardAccent} aria-hidden="true" />
+              <div className={styles.mapWrap}>
+                <iframe
+                  title={`${hotel.name} map`}
+                  src={hotel.mapEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className={styles.mapFrame}
+                />
+              </div>
 
               <div className={styles.cardBody}>
                 <div className={styles.logoPanel}>
@@ -120,8 +118,8 @@ export default function OfficialHotelPartnerSection() {
                       <Image
                         src={hotel.logo}
                         alt={hotel.alt}
-                        width={240}
-                        height={96}
+                        width={192}
+                        height={64}
                         className={styles.logoImage}
                       />
                     </a>
@@ -129,18 +127,15 @@ export default function OfficialHotelPartnerSection() {
                     <Image
                       src={hotel.logo}
                       alt={hotel.alt}
-                      width={240}
-                      height={96}
+                      width={192}
+                      height={64}
                       className={`${styles.logoImage} ${hotel.isPlaceholder ? styles.logoPlaceholder : ''}`}
                     />
                   )}
                 </div>
 
                 <div className={styles.cardContent}>
-                  <div className={styles.cardHeading}>
-                    <h3 className={styles.hotelName}>{hotel.name}</h3>
-                    <p className={styles.hotelEventTag}>D-8 Halal Expo Indonesia 2026</p>
-                  </div>
+                  <h3 className={styles.hotelName}>{hotel.name}</h3>
 
                   <div className={styles.contactGroup}>
                     <p className={styles.contactLabel}>Reservation contact</p>
@@ -167,7 +162,6 @@ export default function OfficialHotelPartnerSection() {
                               {contact.name}
                               <span className={styles.contactDivider}>·</span>
                               {contact.phone}
-                              <span className={styles.whatsappHint}>WhatsApp</span>
                             </span>
                           </a>
                         </li>
@@ -176,11 +170,11 @@ export default function OfficialHotelPartnerSection() {
                   </div>
 
                   <Button
-                    href={`mailto:${hotel.emails[0]}?subject=${encodeURIComponent(`${hotel.name} — D-8 Halal Expo Indonesia 2026 Reservation`)}`}
+                    href={hotel.specialRateHref}
                     variant="yellow"
                     className={styles.contactButton}
                   >
-                    Request Special Rate
+                    Book Special Rate Now
                   </Button>
                 </div>
               </div>
