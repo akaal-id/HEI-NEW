@@ -36,7 +36,11 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "/tmp/hei-2026-next/types/**/*.ts",
-    "/tmp/hei-2026-next/dev/types/**/*.ts"
+    "/tmp/hei-2026-next/dev/types/**/*.ts",
+    "/var/folders/jk/8930bmds7f9325r7j_d6tpym0000gn/T/hei-2026-next/types/**/*.ts",
+    "/var/folders/jk/8930bmds7f9325r7j_d6tpym0000gn/T/hei-2026-next/dev/types/**/*.ts",
+    "../../../../../../../../../../../../var/folders/jk/8930bmds7f9325r7j_d6tpym0000gn/T/hei-2026-next/types/**/*.ts",
+    "../../../../../../../../../../../../var/folders/jk/8930bmds7f9325r7j_d6tpym0000gn/T/hei-2026-next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

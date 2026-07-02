@@ -55,6 +55,20 @@ export const heroMedia: HeroMediaItem[] = [
   },
   {
     type: 'image',
+    src: '/hero/KV-bena.jpg',
+    alt: 'D-8 HEI Talk with @Benakribo',
+    duration: 12000,
+    contentKey: 'benakribo',
+    eyebrow: 'Join The D-8 HEI Talk',
+    eyebrowDateTime: '2026-07',
+    title: 'Talk with @Benakribo',
+    date: '12 July 2026',
+    location: 'Senayan Indoor Tennis Complex, Jakarta',
+    buttonLabel: 'Register Now',
+    buttonHref: '/register/visitor'
+  },
+  {
+    type: 'image',
     src: '/hero/KV-heitalk-1.png',
     alt: 'D-8 HEI Talk Youth Session',
     duration: 12000,
