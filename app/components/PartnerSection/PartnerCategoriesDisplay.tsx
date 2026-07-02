@@ -220,6 +220,28 @@ export default function PartnerCategoriesDisplay({
 
       if (categories.length === 0) return null;
 
+      if (section.layout === 'balanced') {
+        return (
+          <div
+            key={`triple-balanced-${section.categoryIds.join('-')}`}
+            className={`${styles.balancedPairSection} ${animate ? animationProps.className : ''}`.trim()}
+            data-animate={animate ? animationProps['data-animate'] : undefined}
+            data-delay={animate ? animationProps['data-delay'] : undefined}
+          >
+            <div className={styles.balancedTripleGrid}>
+              {categories.map((category) => (
+                <div key={category.id} className={styles.balancedPairCell}>
+                  <div className={styles.balancedPairLabel}>{category.label}</div>
+                  <div className={styles.balancedPairCardWrap}>
+                    {category.partners.map((partner) => renderPartnerCard(partner, category.id))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div
           key={`triple-${section.categoryIds.join('-')}`}

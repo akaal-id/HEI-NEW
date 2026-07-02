@@ -33,7 +33,7 @@ const programs: Program[] = [
   },
   {
     id: 'hei-talk',
-    title: 'D-8 HEI Talkshow',
+    title: 'D-8 HEI Talk',
     image: '/images/Programs/5-D-8 HEI Talkshow.png',
     description: 'Insights from policymakers and industry leaders shaping the regulations of the global halal trade.',
     href: '/programs/hei-talk',

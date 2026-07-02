@@ -22,7 +22,7 @@ export type LayoutType =
 export type DisplaySection =
   | { type: 'single'; categoryId: string; layout?: LayoutType }
   | { type: 'pair'; categoryIds: [string, string]; layout?: 'default' | 'balanced' }
-  | { type: 'triple'; categoryIds: [string, string, string] }
+  | { type: 'triple'; categoryIds: [string, string, string]; layout?: 'default' | 'balanced' }
   | { type: 'quad'; categoryIds: [string, string, string, string] };
 
 export type HotelPartnerContact = {
@@ -61,20 +61,20 @@ export const officialHotelPartners: HotelPartnerContact[] = [
   },
   {
     id: 'hotel-artotel',
-    name: 'Hotel Artotel Senayan',
+    name: 'ARTOTEL Gelora Senayan Jakarta',
     logo: '/partner-logo/official-hotel-partner/artotel-logo.svg',
     alt: 'Hotel Artotel Senayan logo',
     mapEmbedUrl:
       'https://www.google.com/maps?q=Artotel+Senayan+Jakarta&output=embed',
     specialRateHref:
-      'https://wa.me/6281293201756?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20D-8%20Halal%20Expo%20Indonesia%202026%20special%20room%20rates%20at%20Hotel%20Artotel%20Senayan.',
+      'https://wa.me/628119004490?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20D-8%20Halal%20Expo%20Indonesia%202026%20special%20room%20rates%20at%20Hotel%20Artotel%20Senayan.',
     emails: ['nova@artotelgroup.com'],
     contacts: [
       {
         name: 'Nova',
-        phone: '+62 812-9320-1756',
+        phone: '+62 811-9004-490',
         whatsappHref:
-          'https://wa.me/6281293201756?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20D-8%20Halal%20Expo%20Indonesia%202026%20special%20room%20rates%20at%20Hotel%20Artotel%20Senayan.',
+          'https://wa.me/628119004490?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20D-8%20Halal%20Expo%20Indonesia%202026%20special%20room%20rates%20at%20Hotel%20Artotel%20Senayan.',
       },
     ],
   },
@@ -86,11 +86,13 @@ export const STANDARD_CATEGORY_IDS = new Set([
   'strategic-partner',
   'organized-by',
   'sponsor',
+  'banking-partner',
   'event-partner',
   'business-matching-platform',
   'registration-partner',
   'official-contractor-partner',
   'official-freight-forwarder-partner',
+  'internet-partner',
 ]);
 
 export const partnerCategories: PartnerCategory[] = [
@@ -169,6 +171,19 @@ export const partnerCategories: PartnerCategory[] = [
     ],
   },
   {
+    id: 'banking-partner',
+    label: 'Banking Partner',
+    partners: [
+      {
+        id: 'bsi',
+        name: 'Bank Syariah Indonesia',
+        logo: '/partner-logo/banking-sponsor/bsi-logo.svg',
+        alt: 'BSI - Bank Syariah Indonesia',
+        website: 'https://www.bankbsi.co.id/',
+      },
+    ],
+  },
+  {
     id: 'event-partner',
     label: 'Event Partner',
     partners: [
@@ -240,6 +255,19 @@ export const partnerCategories: PartnerCategory[] = [
         logo: '/partner-logo/local-community-partner/inspigo-logopng.png',
         alt: 'Inspigo logo',
         website: 'https://inspigo.id/',
+      },
+    ],
+  },
+  {
+    id: 'internet-partner',
+    label: 'Official Internet Provider Powered by',
+    partners: [
+      {
+        id: 'iforte',
+        name: 'PT iForte Solusi Infotek',
+        logo: '/partner-logo/internet-partner/Iforte.png',
+        alt: 'iForte - PT iForte Solusi Infotek',
+        website: 'https://www.iforte.id/',
       },
     ],
   },
@@ -359,7 +387,7 @@ export const partnerCategories: PartnerCategory[] = [
       { id: 'cyber-islam', name: 'Cyber Islam', logo: '/partner-logo/media-partner/cyberislam-logo.png', alt: 'Cyber Islam' },
       { id: 'berita-unggulan', name: 'Berita Unggulan', logo: '/partner-logo/media-partner/beritaunggulan-logo.png', alt: 'Berita Unggulan' },
       { id: 'berita-info-jitu', name: 'Berita Info Jitu', logo: '/partner-logo/media-partner/beritainfojitu-logo.png', alt: 'Berita Info Jitu' },
-      { id: 'info-filantropi', name: 'Info Filantropi', logo: '/partner-logo/media-partner/infofilantropi-logo.png', alt: 'Info Filantropi' },
+      // { id: 'info-filantropi', name: 'Info Filantropi', logo: '/partner-logo/media-partner/infofilantropi-logo.png', alt: 'Info Filantropi' },
       { id: 'oumma', name: 'Oumma', logo: '/partner-logo/media-partner/oumma-logo.png', alt: 'Oumma' },
     ],
   },
@@ -397,16 +425,18 @@ export const homeDisplaySections: DisplaySection[] = [
   { type: 'single', categoryId: 'event-partner', layout: 'event-grid' },
   { type: 'quad', categoryIds: [...supportPartnerIds] },
   { type: 'single', categoryId: 'community-partner', layout: 'default' },
+  { type: 'single', categoryId: 'internet-partner', layout: 'single-logo' },
   { type: 'single', categoryId: 'media-partner', layout: 'media-grid-5' },
 ];
 
 export const partnersPageDisplaySections: DisplaySection[] = [
   { type: 'single', categoryId: 'official-host', layout: 'default' },
   { type: 'single', categoryId: 'strategic-partner', layout: 'grid-4' },
-  { type: 'pair', categoryIds: ['organized-by', 'sponsor'] },
+  { type: 'triple', categoryIds: ['organized-by', 'sponsor', 'banking-partner'], layout: 'balanced' },
   { type: 'single', categoryId: 'event-partner', layout: 'event-grid' },
   { type: 'quad', categoryIds: [...supportPartnerIds] },
   { type: 'single', categoryId: 'community-partner', layout: 'default' },
+  { type: 'single', categoryId: 'internet-partner', layout: 'single-logo' },
   { type: 'single', categoryId: 'media-partner', layout: 'media-grid-5' },
 ];
 
@@ -416,7 +446,7 @@ export const displaySections = homeDisplaySections;
 export const sneakPeekSections: DisplaySection[] = [
   { type: 'single', categoryId: 'official-host', layout: 'default' },
   { type: 'single', categoryId: 'strategic-partner', layout: 'grid-4' },
-  { type: 'pair', categoryIds: ['organized-by', 'sponsor'], layout: 'balanced' },
+  { type: 'triple', categoryIds: ['organized-by', 'sponsor', 'banking-partner'], layout: 'balanced' },
 ];
 
 export function getPartnerCardTier(categoryId: string): 'host' | 'standard' | 'media' {
