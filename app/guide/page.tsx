@@ -9,6 +9,11 @@ const VenueProfileSection = dynamic(
   { loading: () => <div style={{ minHeight: '320px' }} /> }
 );
 
+const OurDelegatesSection = dynamic(
+  () => import('../components/OurDelegates/OurDelegatesSection'),
+  { loading: () => <div style={{ minHeight: '280px', background: 'white' }} /> }
+);
+
 const OfficialHotelPartnerSection = dynamic(
   () => import('../components/OfficialHotelPartnerSection/OfficialHotelPartnerSection'),
   { loading: () => <div style={{ minHeight: '360px', background: 'var(--hei26-cream)' }} /> }
@@ -68,6 +73,7 @@ export default function GuidePage() {
       </section>
 
       <VenueProfileSection />
+      <OurDelegatesSection preview />
       <OfficialHotelPartnerSection />
       <FAQSection
         limit={0}
