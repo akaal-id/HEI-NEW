@@ -14,6 +14,8 @@ export default function ContactButton() {
 
   const isGuide =
     pathname === '/guide' || Boolean(pathname?.startsWith('/guide/'));
+  const isSchedule =
+    pathname === '/schedule' || Boolean(pathname?.startsWith('/schedule/'));
 
   useEffect(() => {
     const checkDesktop = () => {
@@ -52,15 +54,14 @@ export default function ContactButton() {
           <span className={styles.buttonText}>Guide</span>
         </Link>
 
-        <button
-          type="button"
-          className={`${styles.sideButton} ${styles.scheduleButton}`}
-          disabled
-          aria-label="Schedule (coming soon)"
+        <Link
+          href="/schedule"
+          className={`${styles.sideButton} ${styles.scheduleButton} ${isSchedule ? styles.scheduleButtonActive : ''}`}
+          aria-current={isSchedule ? 'page' : undefined}
         >
           <Calendar className={styles.buttonIcon} aria-hidden="true" />
           <span className={styles.buttonText}>Schedule</span>
-        </button>
+        </Link>
       </div>
 
       <ContactModal

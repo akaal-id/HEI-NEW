@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export default function MetaPixel() {
+export default function MetaPixel({ nonce }: { nonce?: string }) {
   const pathname = usePathname();
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export default function MetaPixel() {
       <Script
         id="meta-pixel"
         strategy="afterInteractive"
+        nonce={nonce}
         dangerouslySetInnerHTML={{
           __html: `
             !function(f,b,e,v,n,t,s)

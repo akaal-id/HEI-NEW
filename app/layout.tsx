@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Inter, Plus_Jakarta_Sans, Lora, Mulish } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
 import MobileBottomNav from "./components/MobileBottomNav/MobileBottomNav";
@@ -107,18 +108,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export const dynamic = "force-dynamic";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
   return (
     <html lang="en">
       <body
         className={`${inter.variable} ${plusJakartaSans.variable} ${lora.variable} ${mulish.variable} antialiased`}
       >
         <StructuredData />
-        <MetaPixel />
+        <MetaPixel nonce={nonce} />
         <div id="modal-root" />
         <LoadingScreen />
         <Navbar />

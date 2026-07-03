@@ -1,30 +1,6 @@
 import type { NextConfig } from "next";
 import path from "path";
 
-const isDev = process.env.NODE_ENV === "development";
-
-const contentSecurityPolicy = [
-  "default-src 'self'",
-  [
-    "script-src 'self' 'unsafe-inline'",
-    isDev ? "'unsafe-eval'" : null,
-    "https://connect.facebook.net",
-    "https://va.vercel-scripts.com",
-  ]
-    .filter(Boolean)
-    .join(" "),
-  "style-src 'self' 'unsafe-inline' https://use.typekit.net",
-  "img-src 'self' blob: data: https://images.unsplash.com https://res.cloudinary.com https://www.facebook.com",
-  "font-src 'self' https://use.typekit.net https://p.typekit.net",
-  "connect-src 'self' https://vitals.vercel-insights.com https://docs.google.com https://www.facebook.com https://connect.facebook.net",
-  "frame-src 'self' https://www.google.com",
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self' https://docs.google.com",
-  "frame-ancestors 'self'",
-  ...(isDev ? [] : ["upgrade-insecure-requests"]),
-].join("; ");
-
 const securityHeaders = [
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -34,7 +10,6 @@ const securityHeaders = [
     value:
       "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
   },
-  { key: "Content-Security-Policy", value: contentSecurityPolicy },
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",

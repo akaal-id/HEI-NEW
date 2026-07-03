@@ -10,6 +10,8 @@ export default function MobileBottomNav() {
 
   const isHome = pathname === '/';
   const isGuide = pathname === '/guide' || Boolean(pathname?.startsWith('/guide/'));
+  const isSchedule =
+    pathname === '/schedule' || Boolean(pathname?.startsWith('/schedule/'));
   const isRegister =
     pathname === '/register' || Boolean(pathname?.startsWith('/register/'));
 
@@ -37,18 +39,16 @@ export default function MobileBottomNav() {
         <span className={styles.label}>Guide</span>
       </Link>
 
-      <button
-        type="button"
-        className={`${styles.item} ${styles.itemDisabled}`}
-        disabled
-        aria-disabled="true"
-        aria-label="Schedule (coming soon)"
+      <Link
+        href="/schedule"
+        className={`${styles.item} ${isSchedule ? styles.itemActive : ''}`}
+        aria-current={isSchedule ? 'page' : undefined}
       >
         <span className={styles.iconWrap} aria-hidden="true">
           <CalendarDays className={styles.icon} />
         </span>
         <span className={styles.label}>Schedule</span>
-      </button>
+      </Link>
 
       <Link
         href="/register"

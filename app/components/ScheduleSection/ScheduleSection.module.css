@@ -1,0 +1,582 @@
+.section {
+  width: 100%;
+  padding: 3.5rem 0 6rem;
+  background:
+    radial-gradient(
+      80% 50% at 100% 0%,
+      color-mix(in srgb, var(--hei26-turquoise) 12%, transparent) 0%,
+      transparent 55%
+    ),
+    var(--background);
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--container-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hei26-skyblue);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--hei26-dongkerblue);
+}
+
+.description {
+  margin: 0;
+  font-size: clamp(15px, 1.6vw, 17px);
+  line-height: 1.65;
+  color: rgba(28, 43, 43, 0.68);
+  max-width: 48ch;
+}
+
+/* Tabs */
+.tabsScroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.15rem;
+}
+
+.tabsScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs {
+  display: inline-flex;
+  min-width: min-content;
+  background: rgba(15, 92, 92, 0.07);
+  border-radius: 999px;
+  padding: 0.28rem;
+  border: 1px solid rgba(15, 92, 92, 0.08);
+}
+
+.tab {
+  padding: 0.62rem 1.15rem;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: clamp(13px, 1.35vw, 14px);
+  font-weight: 600;
+  color: rgba(15, 92, 92, 0.68);
+  cursor: pointer;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tab:hover:not(.tabActive) {
+  color: var(--hei26-dongkerblue);
+}
+
+.tabActive {
+  color: #ffffff;
+  background: var(--hei26-linearblue);
+  box-shadow: 0 2px 10px rgba(15, 92, 92, 0.22);
+}
+
+/* Panel */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 920px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.panelToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0.15rem;
+}
+
+.panelHint {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(28, 43, 43, 0.5);
+}
+
+.panelAction {
+  flex-shrink: 0;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid rgba(15, 92, 92, 0.16);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--hei26-dongkerblue);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.panelAction:hover {
+  background: rgba(15, 92, 92, 0.04);
+  border-color: rgba(15, 92, 92, 0.28);
+}
+
+.dayList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Day accordion */
+.dayAccordion {
+  background: #ffffff;
+  border: 1px solid rgba(15, 92, 92, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 92, 92, 0.04);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dayAccordion:hover {
+  border-color: rgba(15, 92, 92, 0.16);
+}
+
+.dayAccordionExpanded {
+  border-color: rgba(15, 92, 92, 0.18);
+  box-shadow: 0 4px 20px rgba(15, 92, 92, 0.07);
+}
+
+.dayTrigger {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.2s ease;
+}
+
+.dayTrigger:hover {
+  background: rgba(15, 92, 92, 0.03);
+}
+
+.dayAccordionExpanded .dayTrigger {
+  background: rgba(15, 92, 92, 0.04);
+  border-bottom: 1px solid rgba(15, 92, 92, 0.08);
+}
+
+.dayIndex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 10px;
+  background: var(--hei26-linearblue);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.dayTriggerText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.dayName {
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 700;
+  color: var(--hei26-dongkerblue);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.dayDate {
+  font-size: clamp(13px, 1.4vw, 14px);
+  font-weight: 500;
+  color: rgba(28, 43, 43, 0.52);
+  line-height: 1.3;
+}
+
+.dayTriggerMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+.sessionCount {
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(15, 92, 92, 0.07);
+  color: rgba(15, 92, 92, 0.75);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.dayChevron {
+  width: 18px;
+  height: 18px;
+  color: var(--hei26-dongkerblue);
+  transition: transform 0.28s ease;
+  flex-shrink: 0;
+}
+
+.dayAccordionExpanded .dayChevron {
+  transform: rotate(180deg);
+}
+
+.dayPanel {
+  animation: dayPanelIn 0.28s ease;
+}
+
+@keyframes dayPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dayPanelInner {
+  padding: 1rem 1rem 1.15rem;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(251, 248, 241, 0.65) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Cards */
+.card {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 0 0.85rem;
+  padding: 0.85rem 0.5rem 0.85rem 0.25rem;
+}
+
+.cardLast {
+  padding-bottom: 0.25rem;
+}
+
+.cardRail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.55rem;
+}
+
+.cardDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--hei26-skyblue);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1.5px rgba(21, 122, 122, 0.35);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.cardLine {
+  flex: 1;
+  width: 2px;
+  margin-top: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(21, 122, 122, 0.28) 0%,
+    rgba(21, 122, 122, 0.08) 100%
+  );
+  min-height: 1rem;
+}
+
+.cardTrack_hei-talk .cardDot {
+  background: var(--hei26-dongkerblue);
+  box-shadow: 0 0 0 1.5px rgba(15, 92, 92, 0.35);
+}
+
+.cardTrack_cultural-festival .cardDot {
+  background: var(--hei26-amber);
+  box-shadow: 0 0 0 1.5px rgba(242, 169, 0, 0.4);
+}
+
+.cardTrack_business-matching .cardDot {
+  background: var(--hei26-coral);
+  box-shadow: 0 0 0 1.5px rgba(226, 114, 91, 0.4);
+}
+
+.cardTrack_business-lounge .cardDot {
+  background: var(--hei26-turquoise);
+  box-shadow: 0 0 0 1.5px rgba(124, 198, 198, 0.5);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.65rem 0.85rem;
+  background: #ffffff;
+  border: 1px solid rgba(15, 92, 92, 0.09);
+  border-radius: 12px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover .cardContent {
+  border-color: rgba(15, 92, 92, 0.16);
+  box-shadow: 0 2px 12px rgba(15, 92, 92, 0.06);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.cardTime {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hei26-dongkerblue);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+
+.cardMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: clamp(14px, 1.55vw, 16px);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
+}
+
+.cardPerformers {
+  margin-top: 0.1rem;
+}
+
+.performerList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.performerList li {
+  position: relative;
+  padding-left: 0.85rem;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(28, 43, 43, 0.62);
+}
+
+.performerList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(15, 92, 92, 0.35);
+}
+
+.performerTba {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(28, 43, 43, 0.45);
+}
+
+.cardHost {
+  margin: 0;
+  padding-top: 0.15rem;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(15, 92, 92, 0.7);
+}
+
+/* Track badges */
+.trackBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.18rem 0.5rem;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.track_hei-talk {
+  background: rgba(15, 92, 92, 0.1);
+  color: var(--hei26-dongkerblue);
+}
+
+.track_cultural-festival {
+  background: rgba(242, 169, 0, 0.15);
+  color: #8a6400;
+}
+
+.track_business-matching {
+  background: rgba(226, 114, 91, 0.12);
+  color: var(--hei26-coral-dark);
+}
+
+.track_business-lounge {
+  background: rgba(124, 198, 198, 0.22);
+  color: #0a5a5a;
+}
+
+/* Status badges */
+.statusBadge {
+  flex-shrink: 0;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1.35;
+}
+
+.statusConfirmed {
+  background: var(--hei26-dongkerblue);
+  color: #ffffff;
+}
+
+.statusTbc {
+  background: rgba(28, 43, 43, 0.04);
+  color: rgba(28, 43, 43, 0.5);
+  border: 1px solid rgba(28, 43, 43, 0.14);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .dayPanelInner {
+    padding: 1.15rem 1.25rem 1.25rem;
+  }
+
+  .card {
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0 1rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.35rem;
+  }
+
+  .cardContent {
+    padding: 0.85rem 1rem;
+  }
+
+  .dayTrigger {
+    padding: 1.1rem 1.35rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .tabsScroll {
+    justify-content: flex-start;
+  }
+
+  .panelToolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .sessionCount {
+    display: none;
+  }
+
+  .dayTrigger {
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .dayIndex {
+    width: 2rem;
+    height: 2rem;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+
+  .cardTop {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0 4.5rem;
+  }
+
+  .dayList {
+    gap: 0.6rem;
+  }
+}
