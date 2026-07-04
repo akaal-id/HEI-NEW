@@ -4,6 +4,8 @@ export interface Partner {
   logo: string;
   alt: string;
   website?: string;
+  /** Media marquee layout variant — `wide` hugs logo width with a minimum slide width. */
+  logoVariant?: 'wide';
 }
 
 export interface PartnerCategory {
@@ -351,7 +353,7 @@ export const partnerCategories: PartnerCategory[] = [
     label: 'Media Partner',
     partners: [
       { id: 'katadata', name: 'Katadata', logo: '/partner-logo/media-partner/katadata-logo.png', alt: 'Katadata', website: 'https://katadata.co.id/' },
-      { id: 'databooks', name: 'Databooks', logo: '/partner-logo/media-partner/databooks-logo.png', alt: 'Databooks', website: 'https://databooks.co.id/' },
+      { id: 'databoks', name: 'Databoks', logo: '/partner-logo/media-partner/databoks-logo.png', alt: 'Databoks', website: 'https://databoks.katadata.co.id/' },
       { id: 'republika', name: 'Republika', logo: '/partner-logo/media-partner/republika-logo.png', alt: 'Republika', website: 'https://republika.co.id/' },
       { id: 'bisnis-indonesia', name: 'Bisnis Indonesia', logo: '/partner-logo/media-partner/bisnisindonesia-logo.png', alt: 'Bisnis Indonesia' },
       { id: 'bisnis-com', name: 'Bisnis.com', logo: '/partner-logo/media-partner/bisnis-logo.png', alt: 'Bisnis.com' },
@@ -389,6 +391,13 @@ export const partnerCategories: PartnerCategory[] = [
       { id: 'berita-info-jitu', name: 'Berita Info Jitu', logo: '/partner-logo/media-partner/beritainfojitu-logo.png', alt: 'Berita Info Jitu' },
       // { id: 'info-filantropi', name: 'Info Filantropi', logo: '/partner-logo/media-partner/infofilantropi-logo.png', alt: 'Info Filantropi' },
       { id: 'oumma', name: 'Oumma', logo: '/partner-logo/media-partner/oumma-logo.png', alt: 'Oumma' },
+      { id: 'halal-expo-turki', name: 'Halal Expo Turki', logo: '/partner-logo/media-partner/halal-expo-turki-logo.png', alt: 'Halal Expo Turki' },
+      { id: 'b-universe', name: 'B Universe', logo: '/partner-logo/media-partner/b-universe-logo.png', alt: 'B Universe', logoVariant: 'wide' },
+      { id: 'jakarta-weekly', name: 'Jakarta Weekly', logo: '/partner-logo/media-partner/jakarta-weekly-logo.png', alt: 'Jakarta Weekly' },
+      { id: 'hello-digital-today', name: 'Hello Digital Today', logo: '/partner-logo/media-partner/hello-digital-today-logo.png', alt: 'Hello Digital Today (Narayaone)' },
+      { id: 'madani-news', name: 'Madani News', logo: '/partner-logo/media-partner/madani-news-logo.png', alt: 'Madani News' },
+      { id: 'top-business', name: 'Top Business', logo: '/partner-logo/media-partner/top-business-logo.png', alt: 'Top Business' },
+      { id: 'gac-media', name: 'GAC Media', logo: '/partner-logo/media-partner/gac-media-logo.png', alt: 'GAC Media' },
     ],
   },
   {

@@ -14,31 +14,37 @@ function MediaPartnerSlide({
   index: number;
   originalCount: number;
 }) {
+  const isWideLogo = partner.logoVariant === 'wide';
+
   const content = (
     <Image
       src={partner.logo}
       alt={partner.alt}
-      width={140}
+      width={isWideLogo ? 280 : 140}
       height={72}
-      className={styles.mediaCarouselLogo}
+      className={`${styles.mediaCarouselLogo} ${isWideLogo ? styles.mediaCarouselLogoWide : ''}`}
     />
   );
 
+  const slideClassName = `${styles.mediaCarouselSlide} ${isWideLogo ? styles.mediaCarouselSlideWide : ''}`;
+
   return (
-    <div className={styles.mediaCarouselSlide}>
+    <div className={slideClassName}>
       {partner.website ? (
         <a
           href={partner.website}
           target="_blank"
           rel="noopener noreferrer"
-          className={styles.mediaCarouselLink}
+          className={`${styles.mediaCarouselLink} ${isWideLogo ? styles.mediaCarouselLinkWide : ''}`}
           aria-label={`Visit ${partner.name} website`}
           tabIndex={index < originalCount ? 0 : -1}
         >
           {content}
         </a>
       ) : (
-        <div className={styles.mediaCarouselLink}>{content}</div>
+        <div className={`${styles.mediaCarouselLink} ${isWideLogo ? styles.mediaCarouselLinkWide : ''}`}>
+          {content}
+        </div>
       )}
     </div>
   );
