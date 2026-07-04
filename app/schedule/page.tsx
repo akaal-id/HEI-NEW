@@ -6,7 +6,7 @@ import styles from './page.module.css';
 export const metadata: Metadata = {
   title: 'Event Schedule | HEI 2026 - Halal Expo Indonesia',
   description:
-    'Full event schedule for D-8 Halal Expo Indonesia 2026 — HEI Talk sessions, Cultural Festival performances, Business Matching, and Business Lounge meetings across 8–12 July 2026.',
+    'Full event schedule for D-8 Halal Expo Indonesia 2026 — HEI Talk sessions, Cultural Festival performances, and Business Matching across 8–12 July 2026 at Senayan Indoor Tennis Complex, Jakarta.',
   keywords: [
     'HEI 2026 schedule',
     'Halal Expo Indonesia program',
@@ -48,7 +48,7 @@ export default function SchedulePage() {
             <span className={styles.heroTitleAccent}>D-8 Halal Expo Indonesia</span>
           </h1>
           <p className={styles.heroSubtitle}>
-            Explore the full program across HEI Talk, Cultural Festival, Business Matching, and the Business Lounge — 8 to 12 July 2026 at ICE BSD City, Tangerang.
+            Explore the full program across HEI Talk, Cultural Festival, and Business Matching — 8 to 12 July 2026 at Senayan Indoor Tennis Complex, Jakarta.
           </p>
         </div>
       </section>

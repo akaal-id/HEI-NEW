@@ -5,7 +5,7 @@ const TRACK_LABELS: Record<ScheduleTrack, string> = {
   'hei-talk': 'Talk',
   'cultural-festival': 'Cultural Festival',
   'business-matching': 'Business Matching',
-  'business-lounge': 'Business Lounge',
+  // 'business-lounge': 'Business Lounge',
 };
 
 interface ScheduleCardProps {
@@ -16,7 +16,7 @@ interface ScheduleCardProps {
 
 function shouldShowPerformersLine(item: ScheduleItem): boolean {
   if (item.performers.length > 0) return true;
-  return item.track !== 'business-matching' && item.track !== 'business-lounge';
+  return item.track !== 'business-matching'; // && item.track !== 'business-lounge';
 }
 
 export default function ScheduleCard({

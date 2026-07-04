@@ -359,10 +359,12 @@
   box-shadow: 0 0 0 1.5px rgba(226, 114, 91, 0.4);
 }
 
+/*
 .cardTrack_business-lounge .cardDot {
   background: var(--hei26-turquoise);
   box-shadow: 0 0 0 1.5px rgba(124, 198, 198, 0.5);
 }
+*/
 
 .cardContent {
   display: flex;
@@ -489,10 +491,12 @@
   color: var(--hei26-coral-dark);
 }
 
+/*
 .track_business-lounge {
   background: rgba(124, 198, 198, 0.22);
   color: #0a5a5a;
 }
+*/
 
 /* Status badges */
 .statusBadge {

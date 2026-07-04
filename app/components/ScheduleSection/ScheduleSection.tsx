@@ -6,7 +6,7 @@ import {
   heiTalkSchedule,
   culturalFestivalSchedule,
   businessMatchingSchedule,
-  businessLoungeSchedule,
+  // businessLoungeSchedule,
 } from '../../data/schedule';
 import { groupByDay } from './scheduleUtils';
 import ScheduleDayGroup from './ScheduleDayGroup';
@@ -17,7 +17,8 @@ type ScheduleViewId =
   | 'hei-talk'
   | 'cultural-festival'
   | 'business-matching'
-  | 'business-lounge';
+  // | 'business-lounge'
+  ;
 
 interface ScheduleView {
   id: ScheduleViewId;
@@ -41,12 +42,12 @@ const SCHEDULE_VIEWS: ScheduleView[] = [
     items: businessMatchingSchedule,
     showTrack: false,
   },
-  {
-    id: 'business-lounge',
-    label: 'Business Lounge',
-    items: businessLoungeSchedule,
-    showTrack: false,
-  },
+  // {
+  //   id: 'business-lounge',
+  //   label: 'Business Lounge',
+  //   items: businessLoungeSchedule,
+  //   showTrack: false,
+  // },
 ];
 
 function getDefaultExpandedDate(dates: string[]): Set<string> {
@@ -100,7 +101,7 @@ export default function ScheduleSection() {
             Full Event Schedule
           </h2>
           <p className={styles.description}>
-            Browse sessions across HEI Talk, Cultural Festival, Business Matching, and the Business Lounge — or view everything in one timeline.
+            Browse sessions across HEI Talk, Cultural Festival, and Business Matching — or view everything in one timeline.
           </p>
         </header>
 

@@ -13,7 +13,8 @@ export type ScheduleTrack =
   | "hei-talk"
   | "cultural-festival"
   | "business-matching"
-  | "business-lounge";
+  // | "business-lounge"
+  ;
 
 export type ScheduleStatus = "confirmed" | "to-be-confirmed";
 
@@ -643,6 +644,7 @@ export const businessMatchingSchedule: ScheduleItem[] = [
 // ---------------------------------------------------------------------------
 // BUSINESS LOUNGE — derived from the "GRAND SCHEDULE" sheet
 // ---------------------------------------------------------------------------
+/*
 export const businessLoungeSchedule: ScheduleItem[] = [
   {
     "id": "bl-01",
@@ -705,11 +707,12 @@ export const businessLoungeSchedule: ScheduleItem[] = [
     "status": "confirmed"
   }
 ];
+*/
 
 // ---------------------------------------------------------------------------
 // GRAND SCHEDULE — derived (not separately parsed) from the four arrays above,
 // so it can never drift out of sync with HEI Talk / Cultural Festival / Business
-// Matching / Business Lounge. Merge + sort chronologically by date then start time.
+// Matching. Merge + sort chronologically by date then start time.
 // ---------------------------------------------------------------------------
 
 function parseSortKey(item: ScheduleItem): number {
@@ -724,5 +727,5 @@ export const grandSchedule: ScheduleItem[] = [
   ...heiTalkSchedule,
   ...culturalFestivalSchedule,
   ...businessMatchingSchedule,
-  ...businessLoungeSchedule,
+  // ...businessLoungeSchedule,
 ].sort((a, b) => parseSortKey(a) - parseSortKey(b));
