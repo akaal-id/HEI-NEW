@@ -595,7 +595,7 @@ export const businessMatchingSchedule: ScheduleItem[] = [
     "agendaName": "One-on-One Business Matching Session (Flowing)",
     "day": "Wednesday",
     "date": "8 July 2026",
-    "time": "13.30 - 20.00",
+    "time": "13.30 - 17.00",
     "performers": [],
     "status": "confirmed"
   },
@@ -605,7 +605,7 @@ export const businessMatchingSchedule: ScheduleItem[] = [
     "agendaName": "One-on-One Business Matching Session (Flowing)",
     "day": "Thursday",
     "date": "9 July 2026",
-    "time": "09.00 - 20.00",
+    "time": "09.00 - 17.00",
     "performers": [],
     "status": "confirmed"
   },
@@ -615,7 +615,7 @@ export const businessMatchingSchedule: ScheduleItem[] = [
     "agendaName": "One-on-One Business Matching Session (Flowing)",
     "day": "Friday",
     "date": "10 July 2026",
-    "time": "09.30 - 20.00",
+    "time": "09.00 - 17.00",
     "performers": [],
     "status": "confirmed"
   },
@@ -625,7 +625,7 @@ export const businessMatchingSchedule: ScheduleItem[] = [
     "agendaName": "One-on-One Business Matching Session (Flowing)",
     "day": "Saturday",
     "date": "11 July 2026",
-    "time": "09.00 - 20.00",
+    "time": "09.00 - 17.00",
     "performers": [],
     "status": "confirmed"
   },
@@ -635,7 +635,7 @@ export const businessMatchingSchedule: ScheduleItem[] = [
     "agendaName": "One-on-One Business Matching Session (Flowing)",
     "day": "Sunday",
     "date": "12 July 2026",
-    "time": "09.00 - 20.00",
+    "time": "09.00 - 17.00",
     "performers": [],
     "status": "confirmed"
   }
