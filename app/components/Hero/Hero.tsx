@@ -170,6 +170,44 @@ export default function Hero() {
                   {extendedSlides.map((mediaItem, index) => {
                     const isActive = index === trackIndex;
                     const realIndex = index % slideCount;
+                    const slideContent = (
+                      <div className={styles.mediaFrame}>
+                        {mediaItem.type === 'image' ? (
+                          <Image
+                            src={mediaItem.src}
+                            alt={mediaItem.alt}
+                            fill
+                            priority={realIndex === 0 && index < slideCount}
+                            className={styles.media}
+                            sizes="(max-width: 768px) 82vw, 960px"
+                          />
+                        ) : isActive ? (
+                          <video
+                            ref={(element) => {
+                              videoRefs.current[realIndex] = element;
+                            }}
+                            className={styles.media}
+                            src={mediaItem.src}
+                            poster={mediaItem.poster}
+                            muted
+                            loop
+                            playsInline
+                            preload={realIndex === 0 ? 'metadata' : 'none'}
+                          />
+                        ) : (
+                          <video
+                            className={styles.media}
+                            src={mediaItem.src}
+                            poster={mediaItem.poster}
+                            muted
+                            playsInline
+                            preload="none"
+                            tabIndex={-1}
+                            aria-hidden
+                          />
+                        )}
+                      </div>
+                    );
 
                     return (
                       <div
@@ -177,49 +215,23 @@ export default function Hero() {
                         className={`${styles.slide} ${isActive ? styles.slideActive : ''}`}
                         aria-hidden={!isActive}
                       >
-                        <Link
-                          href={mediaItem.buttonHref}
-                          className={styles.slideLink}
-                          tabIndex={isActive ? 0 : -1}
-                          aria-label={`${mediaItem.title} — ${mediaItem.buttonLabel}`}
-                        >
-                          <div className={styles.mediaFrame}>
-                            {mediaItem.type === 'image' ? (
-                              <Image
-                                src={mediaItem.src}
-                                alt={mediaItem.alt}
-                                fill
-                                priority={realIndex === 0 && index < slideCount}
-                                className={styles.media}
-                                sizes="(max-width: 768px) 82vw, 960px"
-                              />
-                            ) : isActive ? (
-                              <video
-                                ref={(element) => {
-                                  videoRefs.current[realIndex] = element;
-                                }}
-                                className={styles.media}
-                                src={mediaItem.src}
-                                poster={mediaItem.poster}
-                                muted
-                                loop
-                                playsInline
-                                preload={realIndex === 0 ? 'metadata' : 'none'}
-                              />
-                            ) : (
-                              <video
-                                className={styles.media}
-                                src={mediaItem.src}
-                                poster={mediaItem.poster}
-                                muted
-                                playsInline
-                                preload="none"
-                                tabIndex={-1}
-                                aria-hidden
-                              />
-                            )}
+                        {mediaItem.buttonDisabled ? (
+                          <div
+                            className={`${styles.slideLink} ${styles.slideLinkDisabled}`}
+                            aria-label={`${mediaItem.title} — registration coming soon`}
+                          >
+                            {slideContent}
                           </div>
-                        </Link>
+                        ) : (
+                          <Link
+                            href={mediaItem.buttonHref}
+                            className={styles.slideLink}
+                            tabIndex={isActive ? 0 : -1}
+                            aria-label={`${mediaItem.title} — ${mediaItem.buttonLabel}`}
+                          >
+                            {slideContent}
+                          </Link>
+                        )}
                       </div>
                     );
                   })}

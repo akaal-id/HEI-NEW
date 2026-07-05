@@ -33,6 +33,24 @@ export default function RegisterPage() {
                 {section.options.map((option) => {
                   const Icon = option.icon;
 
+                  if (option.disabled) {
+                    return (
+                      <div
+                        key={option.label}
+                        className={`${styles.optionCard} ${styles.optionCardDisabled}`}
+                        aria-disabled="true"
+                      >
+                        <span className={styles.optionIconWrap} aria-hidden="true">
+                          <Icon className={styles.optionIcon} />
+                        </span>
+                        <span className={styles.optionCopy}>
+                          <span className={styles.optionLabel}>{option.label}</span>
+                          <span className={styles.optionDescription}>{option.description}</span>
+                        </span>
+                      </div>
+                    );
+                  }
+
                   return (
                     <Link
                       key={option.href}

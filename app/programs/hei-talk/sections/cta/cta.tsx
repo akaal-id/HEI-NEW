@@ -6,6 +6,7 @@ import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, CalendarDays, MapPin, Ticket } from 'lucide-react';
+import { HEI_TALK_REGISTRATION_ENABLED } from '../../../../data/registerSections';
 import buttonStyles from '../../../../components/Button/Button.module.css';
 import styles from './cta.module.css';
 
@@ -94,15 +95,29 @@ export default function CtaSection() {
           </div>
 
           <div className={styles.actions}>
-            <Link
-              href="/programs/hei-talk/register"
-              className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
-            >
-              <span className={buttonStyles.text}>Register Now</span>
-              <div className={buttonStyles.iconContainer}>
-                <ArrowUpRight className={buttonStyles.icon} />
-              </div>
-            </Link>
+            {HEI_TALK_REGISTRATION_ENABLED ? (
+              <Link
+                href="/programs/hei-talk/register"
+                className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
+              >
+                <span className={buttonStyles.text}>Register Now</span>
+                <div className={buttonStyles.iconContainer}>
+                  <ArrowUpRight className={buttonStyles.icon} />
+                </div>
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled
+                className={`${buttonStyles.button} ${buttonStyles.yellow} ${buttonStyles.disabled} ${styles.ctaButton}`}
+                aria-disabled="true"
+              >
+                <span className={buttonStyles.text}>Register Now</span>
+                <div className={buttonStyles.iconContainer}>
+                  <ArrowUpRight className={buttonStyles.icon} />
+                </div>
+              </button>
+            )}
             <p className={styles.note}>
               Seats for D-8 HEI Talk are limited—lock in your place at the most
               influential halal industry forum of 2026.

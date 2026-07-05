@@ -242,6 +242,19 @@
   color: var(--hei26-dongkerblue, #004966);
 }
 
+.optionCardDisabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.optionCardDisabled:hover {
+  border-color: rgba(0, 73, 102, 0.1);
+  background: rgba(255, 255, 255, 0.92);
+  transform: none;
+  box-shadow: none;
+}
+
 @media (max-width: 640px) {
   .modal {
     padding: 1.35rem;

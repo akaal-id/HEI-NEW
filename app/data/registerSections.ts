@@ -7,11 +7,15 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
+/** Set to true when the HEI Talk registration URL is ready. */
+export const HEI_TALK_REGISTRATION_ENABLED = false;
+
 export type RegisterOption = {
   href: string;
   label: string;
   description: string;
   icon: LucideIcon;
+  disabled?: boolean;
 };
 
 export type RegisterSection = {
@@ -68,10 +72,11 @@ export const REGISTER_SECTIONS: RegisterSection[] = [
     variant: 'main',
     options: [
       {
-        href: '/programs/hei-talk/register',
+        href: HEI_TALK_REGISTRATION_ENABLED ? '/programs/hei-talk/register' : '',
         label: 'Reserve Your Seat',
         description: 'Register for expert-led sessions and panel discussions.',
         icon: Mic2,
+        disabled: !HEI_TALK_REGISTRATION_ENABLED,
       },
     ],
   },

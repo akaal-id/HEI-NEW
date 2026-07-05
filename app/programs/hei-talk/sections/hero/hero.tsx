@@ -6,6 +6,7 @@ import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ArrowDown, CalendarDays, MapPin } from 'lucide-react';
+import { HEI_TALK_REGISTRATION_ENABLED } from '../../../../data/registerSections';
 import buttonStyles from '../../../../components/Button/Button.module.css';
 import styles from './hero.module.css';
 
@@ -142,15 +143,29 @@ export default function HeroSection() {
         </p>
 
         <div className={styles.actions}>
-          <Link
-            href="/programs/hei-talk/register"
-            className={`${buttonStyles.button} ${buttonStyles.yellow}`}
-          >
-            <span className={buttonStyles.text}>Reserve Your Seat</span>
-            <div className={buttonStyles.iconContainer}>
-              <ArrowUpRight className={buttonStyles.icon} />
-            </div>
-          </Link>
+          {HEI_TALK_REGISTRATION_ENABLED ? (
+            <Link
+              href="/programs/hei-talk/register"
+              className={`${buttonStyles.button} ${buttonStyles.yellow}`}
+            >
+              <span className={buttonStyles.text}>Reserve Your Seat</span>
+              <div className={buttonStyles.iconContainer}>
+                <ArrowUpRight className={buttonStyles.icon} />
+              </div>
+            </Link>
+          ) : (
+            <button
+              type="button"
+              disabled
+              className={`${buttonStyles.button} ${buttonStyles.yellow} ${buttonStyles.disabled}`}
+              aria-disabled="true"
+            >
+              <span className={buttonStyles.text}>Reserve Your Seat</span>
+              <div className={buttonStyles.iconContainer}>
+                <ArrowUpRight className={buttonStyles.icon} />
+              </div>
+            </button>
+          )}
           <a href="#agenda" className={styles.ghostLink}>
             View the Agenda
             <ArrowDown size={16} strokeWidth={1.75} />

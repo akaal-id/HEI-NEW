@@ -22,8 +22,8 @@ export default function Countdown() {
   });
 
   useEffect(() => {
-    // Target date: April 14th, 2026
-    const targetDate = new Date('2026-07-08T00:00:00').getTime();
+    // Target date: July 8th, 2026 at 10:00 AM WIB (UTC+7)
+    const targetDate = new Date('2026-07-08T10:00:00+07:00').getTime();
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
