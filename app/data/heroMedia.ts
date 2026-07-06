@@ -1,4 +1,4 @@
-import { HEI_TALK_REGISTRATION_ENABLED } from './registerSections';
+import { HEI_TALK_REGISTRATION_ENABLED, HEI_TALK_REGISTRATION_URL } from './registerSections';
 
 type HeroContent = {
   contentKey: string;
@@ -68,7 +68,7 @@ export const heroMedia: HeroMediaItem[] = [
     date: '12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Now',
-    buttonHref: '/register/visitor',
+    buttonHref: HEI_TALK_REGISTRATION_URL,
     buttonDisabled: !HEI_TALK_REGISTRATION_ENABLED,
   },
   {
@@ -83,7 +83,7 @@ export const heroMedia: HeroMediaItem[] = [
     date: '08-12 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Now',
-    buttonHref: '/register/visitor',
+    buttonHref: HEI_TALK_REGISTRATION_URL,
     buttonDisabled: !HEI_TALK_REGISTRATION_ENABLED,
   },
   {
@@ -98,7 +98,7 @@ export const heroMedia: HeroMediaItem[] = [
     date: '01 July 2026',
     location: 'Senayan Indoor Tennis Complex, Jakarta',
     buttonLabel: 'Register Now',
-    buttonHref: '/register/visitor',
+    buttonHref: HEI_TALK_REGISTRATION_URL,
     buttonDisabled: !HEI_TALK_REGISTRATION_ENABLED,
   }
 ];

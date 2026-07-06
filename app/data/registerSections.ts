@@ -7,8 +7,11 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
+/** External HEI Talk registration site. */
+export const HEI_TALK_REGISTRATION_URL = 'https://talk.halalexpoindonesia.com';
+
 /** Set to true when the HEI Talk registration URL is ready. */
-export const HEI_TALK_REGISTRATION_ENABLED = false;
+export const HEI_TALK_REGISTRATION_ENABLED = true;
 
 export type RegisterOption = {
   href: string;
@@ -72,7 +75,7 @@ export const REGISTER_SECTIONS: RegisterSection[] = [
     variant: 'main',
     options: [
       {
-        href: HEI_TALK_REGISTRATION_ENABLED ? '/programs/hei-talk/register' : '',
+        href: HEI_TALK_REGISTRATION_ENABLED ? HEI_TALK_REGISTRATION_URL : '',
         label: 'Reserve Your Seat',
         description: 'Register for expert-led sessions and panel discussions.',
         icon: Mic2,

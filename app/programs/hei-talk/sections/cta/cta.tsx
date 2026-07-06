@@ -6,7 +6,7 @@ import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, CalendarDays, MapPin, Ticket } from 'lucide-react';
-import { HEI_TALK_REGISTRATION_ENABLED } from '../../../../data/registerSections';
+import { HEI_TALK_REGISTRATION_ENABLED, HEI_TALK_REGISTRATION_URL } from '../../../../data/registerSections';
 import buttonStyles from '../../../../components/Button/Button.module.css';
 import styles from './cta.module.css';
 
@@ -97,7 +97,7 @@ export default function CtaSection() {
           <div className={styles.actions}>
             {HEI_TALK_REGISTRATION_ENABLED ? (
               <Link
-                href="/programs/hei-talk/register"
+                href={HEI_TALK_REGISTRATION_URL}
                 className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
               >
                 <span className={buttonStyles.text}>Register Now</span>

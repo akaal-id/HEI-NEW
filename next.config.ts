@@ -50,6 +50,11 @@ const nextConfig: NextConfig = {
         destination: '/programs',
         permanent: true,
       },
+      {
+        source: '/programs/hei-talk/register',
+        destination: 'https://talk.halalexpoindonesia.com',
+        permanent: false,
+      },
     ];
   },
   images: {

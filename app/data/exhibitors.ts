@@ -72,7 +72,7 @@ export const EXHIBITORS: Exhibitor[] = [
   { boothNumber: "17", companyName: "Bakwan Malang Blok M", country: "Indonesia", zone: "Outdoor" },
   { boothNumber: "18", companyName: "Dapur Bang Izzi & Soto Mie Bang Asep", country: "Indonesia", zone: "Outdoor" },
   { boothNumber: "19", companyName: "Yunus Emre Enstitüsü", country: "Türkiye", zone: "Outdoor" },
-  { boothNumber: "20", companyName: "Bang Syariah Indonesia", country: "Indonesia", zone: "Outdoor" }, // NOTE: likely a typo for "Bank Syariah Indonesia" in source PDF — verify
+  { boothNumber: "20", companyName: "Bank Syariah Indonesia", country: "Indonesia", zone: "Outdoor" }, // NOTE: likely a typo for "Bank Syariah Indonesia" in source PDF — verify
   { boothNumber: "21", companyName: "Sri Lanka Pavilion", country: "Sri Lanka", zone: "Outdoor" },
   { boothNumber: "22", companyName: "Pasar Palestina", country: "Palestine", zone: "Outdoor" },
   { boothNumber: "23", companyName: "Iran Pavilion", country: "Iran", zone: "Outdoor" },
