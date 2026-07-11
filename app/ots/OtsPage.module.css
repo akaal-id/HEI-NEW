@@ -1,0 +1,70 @@
+.heroCompact {
+  padding-top: 8rem;
+  padding-bottom: 2rem;
+}
+
+.sectionCompact {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+.staffBadge {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+}
+
+.successOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 40, 58, 0.55);
+}
+
+.successCard {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 40, 58, 0.25);
+}
+
+.successIcon {
+  width: 3rem;
+  height: 3rem;
+  color: #0f7a4a;
+  margin-bottom: 1rem;
+}
+
+.successTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--hei26-dongkerblue, #004966);
+}
+
+.successText {
+  margin: 0 0 1.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(0, 73, 102, 0.8);
+}
+
+@media (max-width: 640px) {
+  .heroCompact {
+    padding-top: 7rem;
+  }
+}
