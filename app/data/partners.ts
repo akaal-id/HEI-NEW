@@ -392,7 +392,7 @@ export const partnerCategories: PartnerCategory[] = [
       // { id: 'info-filantropi', name: 'Info Filantropi', logo: '/partner-logo/media-partner/infofilantropi-logo.png', alt: 'Info Filantropi' },
       { id: 'oumma', name: 'Oumma', logo: '/partner-logo/media-partner/oumma-logo.png', alt: 'Oumma' },
       { id: 'halal-expo-turki', name: 'Halal Expo Turki', logo: '/partner-logo/media-partner/halal-expo-turki-logo.png', alt: 'Halal Expo Turki' },
-      { id: 'b-universe', name: 'B Universe', logo: '/partner-logo/media-partner/b-universe-logo.png', alt: 'B Universe' },
+      { id: 'b-universe', name: 'B Universe', logo: '/partner-logo/media-partner/b-universe-logo.png', alt: 'B Universe', logoVariant: 'wide' },
       { id: 'btv', name: 'BTV', logo: '/partner-logo/media-partner/btv-logo.png', alt: 'BTV' },
       { id: 'berita-satu', name: 'Berita Satu', logo: '/partner-logo/media-partner/berita-satu-logo.png', alt: 'Berita Satu' },
       { id: 'beritasatu-com', name: 'BeritaSatu.com', logo: '/partner-logo/media-partner/beritasatu-com-logo.png', alt: 'BeritaSatu.com', website: 'https://www.beritasatu.com/' },
