@@ -8,7 +8,6 @@ import MediaCarousel from '../MediaCarousel/MediaCarousel';
 import { Search, Filter, ArrowUpDown, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './ArticlesMediaPage.module.css';
-import { getAllArticles } from '../../lib/articles';
 
 interface Article {
   id: string;
@@ -132,7 +131,14 @@ export default function ArticlesMediaPage() {
 
   // Fetch articles on mount
   useEffect(() => {
-    getAllArticles().then(setArticles);
+    fetch('/api/articles')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setArticles(data);
+        }
+      })
+      .catch(console.error);
   }, []);
 
   // Get unique categories from articles
