@@ -4,11 +4,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { heroMedia } from '../../data/heroMedia';
-import Countdown from './Countdown';
+import { heroMedia as defaultHeroMedia, type HeroMediaItem } from '../../data/heroMedia';
 import styles from './Hero.module.css';
 
-export default function Hero() {
+interface HeroProps {
+  slides?: HeroMediaItem[];
+}
+
+export default function Hero({ slides = defaultHeroMedia }: HeroProps) {
+  const heroMedia = slides;
   const defaultSlideDuration = 6000;
   const slideCount = heroMedia.length;
   const hasMultipleSlides = slideCount > 1;
@@ -136,7 +140,7 @@ export default function Hero() {
         window.clearTimeout(slideTimeoutRef.current);
       }
     };
-  }, [activeSlideIndex, defaultSlideDuration, hasMultipleSlides]);
+  }, [activeSlideIndex, defaultSlideDuration, hasMultipleSlides, heroMedia]);
 
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
@@ -288,7 +292,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <Countdown />
       </section>
     </div>
   );
