@@ -14,6 +14,8 @@ import styles from './Navbar.module.css';
 
 interface NavbarProps {
   navMenu?: NavMenuItem[];
+  registerButtonVisible?: boolean;
+  registerButtonEnabled?: boolean;
 }
 
 function isPathActive(pathname: string | null, href: string): boolean {
@@ -22,7 +24,11 @@ function isPathActive(pathname: string | null, href: string): boolean {
   return Boolean(pathname?.startsWith(`${href}/`));
 }
 
-export default function Navbar({ navMenu = DEFAULT_NAV_MENU }: NavbarProps) {
+export default function Navbar({
+  navMenu = DEFAULT_NAV_MENU,
+  registerButtonVisible = true,
+  registerButtonEnabled = true,
+}: NavbarProps) {
   const pathname = usePathname();
   const isArticlesPage = pathname === '/articles' || Boolean(pathname?.startsWith('/articles/'));
   const isCultureFestivalPage =
@@ -337,18 +343,32 @@ export default function Navbar({ navMenu = DEFAULT_NAV_MENU }: NavbarProps) {
         <div className={`${styles.menuContainer} ${isScrollingDown ? styles.menuHidden : ''}`}>
           {visibleMenu.map(renderDesktopItem)}
 
-          <Button
-            variant="primary"
-            className={`${styles.menuItem} ${styles.registerButton}`}
-            textClassName={`${styles.menuItemText} ${styles.registerButtonText}`}
-            iconClassName={styles.registerButtonIcon}
-            onClick={(e?: React.MouseEvent) => {
-              e?.preventDefault();
-              openRegisterModal();
-            }}
-          >
-            Register Now
-          </Button>
+          {registerButtonVisible && (
+            registerButtonEnabled ? (
+              <Button
+                variant="primary"
+                className={`${styles.menuItem} ${styles.registerButton}`}
+                textClassName={`${styles.menuItemText} ${styles.registerButtonText}`}
+                iconClassName={styles.registerButtonIcon}
+                onClick={(e?: React.MouseEvent) => {
+                  e?.preventDefault();
+                  openRegisterModal();
+                }}
+              >
+                Register Now
+              </Button>
+            ) : (
+              <Button
+                variant="primary"
+                disabled
+                className={`${styles.menuItem} ${styles.registerButton} ${buttonStyles.disabled}`}
+                textClassName={`${styles.menuItemText} ${styles.registerButtonText}`}
+                iconClassName={styles.registerButtonIcon}
+              >
+                Register Now
+              </Button>
+            )
+          )}
         </div>
       </div>
 
@@ -390,18 +410,32 @@ export default function Navbar({ navMenu = DEFAULT_NAV_MENU }: NavbarProps) {
         <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
           {visibleMenu.map(renderMobileItem)}
 
-          <Button
-            variant="primary"
-            className={`${styles.mobileMenuItem} ${styles.mobileRegisterButton}`}
-            textClassName={`${styles.mobileMenuItemText} ${styles.mobileRegisterButtonText}`}
-            iconClassName={styles.mobileRegisterButtonIcon}
-            onClick={(e?: React.MouseEvent) => {
-              e?.preventDefault();
-              openRegisterModal();
-            }}
-          >
-            Register Now
-          </Button>
+          {registerButtonVisible && (
+            registerButtonEnabled ? (
+              <Button
+                variant="primary"
+                className={`${styles.mobileMenuItem} ${styles.mobileRegisterButton}`}
+                textClassName={`${styles.mobileMenuItemText} ${styles.mobileRegisterButtonText}`}
+                iconClassName={styles.mobileRegisterButtonIcon}
+                onClick={(e?: React.MouseEvent) => {
+                  e?.preventDefault();
+                  openRegisterModal();
+                }}
+              >
+                Register Now
+              </Button>
+            ) : (
+              <Button
+                variant="primary"
+                disabled
+                className={`${styles.mobileMenuItem} ${styles.mobileRegisterButton} ${buttonStyles.disabled}`}
+                textClassName={`${styles.mobileMenuItemText} ${styles.mobileRegisterButtonText}`}
+                iconClassName={styles.mobileRegisterButtonIcon}
+              >
+                Register Now
+              </Button>
+            )
+          )}
         </div>
       </div>
 

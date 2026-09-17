@@ -27,7 +27,13 @@ export default function SiteChrome({ children, settings }: SiteChromeProps) {
   return (
     <>
       <LoadingScreen />
-      {settings.navbarVisible && <Navbar navMenu={settings.navMenu} />}
+      {settings.navbarVisible && (
+        <Navbar
+          navMenu={settings.navMenu}
+          registerButtonVisible={settings.registerButtonVisible}
+          registerButtonEnabled={settings.registerButtonEnabled}
+        />
+      )}
       {children}
       {settings.footerVisible && <Footer />}
       {settings.navbarVisible && <MobileBottomNav />}

@@ -4,6 +4,8 @@ import { DEFAULT_NAV_MENU, type NavMenuItem } from './navMenu';
 export interface SiteSettings {
   navbarVisible: boolean;
   navMenu: NavMenuItem[];
+  registerButtonVisible: boolean;
+  registerButtonEnabled: boolean;
   sidebarContactVisible: boolean;
   sidebarGuideVisible: boolean;
   sidebarScheduleVisible: boolean;
@@ -13,6 +15,8 @@ export interface SiteSettings {
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   navbarVisible: true,
   navMenu: DEFAULT_NAV_MENU,
+  registerButtonVisible: true,
+  registerButtonEnabled: true,
   sidebarContactVisible: true,
   sidebarGuideVisible: true,
   sidebarScheduleVisible: true,
@@ -23,6 +27,8 @@ interface SiteSettingsRow {
   id: string;
   navbar_visible: boolean;
   nav_menu: NavMenuItem[] | null;
+  register_button_visible: boolean;
+  register_button_enabled: boolean;
   sidebar_contact_visible: boolean;
   sidebar_guide_visible: boolean;
   sidebar_schedule_visible: boolean;
@@ -33,6 +39,8 @@ export function rowToSiteSettings(row: SiteSettingsRow): SiteSettings {
   return {
     navbarVisible: row.navbar_visible,
     navMenu: row.nav_menu && row.nav_menu.length > 0 ? row.nav_menu : DEFAULT_NAV_MENU,
+    registerButtonVisible: row.register_button_visible,
+    registerButtonEnabled: row.register_button_enabled,
     sidebarContactVisible: row.sidebar_contact_visible,
     sidebarGuideVisible: row.sidebar_guide_visible,
     sidebarScheduleVisible: row.sidebar_schedule_visible,
@@ -44,6 +52,8 @@ export function siteSettingsToRow(settings: SiteSettings) {
   return {
     navbar_visible: settings.navbarVisible,
     nav_menu: settings.navMenu,
+    register_button_visible: settings.registerButtonVisible,
+    register_button_enabled: settings.registerButtonEnabled,
     sidebar_contact_visible: settings.sidebarContactVisible,
     sidebar_guide_visible: settings.sidebarGuideVisible,
     sidebar_schedule_visible: settings.sidebarScheduleVisible,

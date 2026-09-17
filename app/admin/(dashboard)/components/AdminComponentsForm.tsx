@@ -265,6 +265,19 @@ export default function AdminComponentsForm() {
                   )}
                 </div>
               ))}
+
+              <NavItemRow
+                item={{
+                  key: 'register',
+                  label: 'Register Now',
+                  href: '',
+                  visible: settings.registerButtonVisible,
+                  enabled: settings.registerButtonEnabled,
+                }}
+                indent={false}
+                onVisibleChange={(visible) => setField('registerButtonVisible', visible)}
+                onEnabledChange={(enabled) => setField('registerButtonEnabled', enabled)}
+              />
             </div>
           </div>
 
