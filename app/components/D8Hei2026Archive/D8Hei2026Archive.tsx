@@ -84,9 +84,12 @@ export default function D8Hei2026Archive() {
               aria-labelledby="d8hei2026-archive-title"
             >
               <div className={styles.modalBar}>
-                <span id="d8hei2026-archive-title" className={styles.modalBarTitle}>
-                  D-8 HEI 2026
-                </span>
+                <div className={styles.modalBarTitleGroup}>
+                  <span id="d8hei2026-archive-title" className={styles.modalBarTitle}>
+                    D-8 HEI 2026
+                  </span>
+                  <span className={styles.previewBadge}>Showcase &middot; not interactive</span>
+                </div>
                 <button
                   type="button"
                   className={styles.closeButton}
@@ -97,15 +100,19 @@ export default function D8Hei2026Archive() {
                 </button>
               </div>
 
-              <OurDelegatesSection preview />
-              <PartnerSneakPeek />
-              <OverviewSection />
-              <ProgramSection />
-              <VenueProfileSection />
-              <OfficialHotelPartnerSection />
-              <BrochureSection />
-              <FAQSection />
-              <PartnerSection />
+              {/* `inert` blocks all clicks, keyboard focus, and interaction within this
+                  preview — it's meant to be looked at, not used. */}
+              <div className={styles.showcaseContent} inert>
+                <OurDelegatesSection preview />
+                <PartnerSneakPeek />
+                <OverviewSection />
+                <ProgramSection />
+                <VenueProfileSection />
+                <OfficialHotelPartnerSection />
+                <BrochureSection />
+                <FAQSection />
+                <PartnerSection />
+              </div>
             </div>
           </div>,
           document.body

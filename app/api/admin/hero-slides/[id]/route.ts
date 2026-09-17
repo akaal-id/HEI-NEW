@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isAdminAuthenticated } from '../../../../lib/adminAuth';
+import { getAuthenticatedAdmin } from '../../../../lib/supabaseServerAuth';
 import { getSupabaseAdminClient } from '../../../../lib/supabase';
 import { heroSlideInputToRow, type HeroSlideInput } from '../../../../lib/heroSlides';
 
@@ -8,7 +8,7 @@ interface RouteParams {
 }
 
 export async function PUT(request: NextRequest, { params }: RouteParams) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getAuthenticatedAdmin())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -34,7 +34,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 }
 
 export async function DELETE(_request: NextRequest, { params }: RouteParams) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getAuthenticatedAdmin())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

@@ -14,9 +14,9 @@ export function buildContentSecurityPolicy(nonce: string): string {
       .filter(Boolean)
       .join(" "),
     "style-src 'self' 'unsafe-inline' https://use.typekit.net",
-    "img-src 'self' blob: data: https://images.unsplash.com https://res.cloudinary.com https://www.facebook.com",
+    "img-src 'self' blob: data: https://images.unsplash.com https://res.cloudinary.com https://www.facebook.com https://*.supabase.co",
     "font-src 'self' https://use.typekit.net https://p.typekit.net",
-    "connect-src 'self' https://vitals.vercel-insights.com https://docs.google.com https://www.facebook.com https://connect.facebook.net",
+    "connect-src 'self' https://vitals.vercel-insights.com https://docs.google.com https://www.facebook.com https://connect.facebook.net https://*.supabase.co",
     "frame-src 'self' https://www.google.com",
     "object-src 'none'",
     "base-uri 'self'",

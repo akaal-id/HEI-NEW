@@ -31,6 +31,7 @@ export default function AdminHeroDashboard() {
   const router = useRouter();
   const [slides, setSlides] = useState<HeroSlideRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<HeroSlideInput>(EMPTY_FORM);
   const [isUploading, setIsUploading] = useState(false);
@@ -54,10 +55,18 @@ export default function AdminHeroDashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const closeForm = () => {
+    setIsFormOpen(false);
+    setEditingId(null);
+    setForm(EMPTY_FORM);
+    setError('');
+  };
+
   const startCreate = () => {
     setEditingId(null);
     setForm({ ...EMPTY_FORM, position: slides.length });
     setError('');
+    setIsFormOpen(true);
   };
 
   const startEdit = (slide: HeroSlideRow) => {
@@ -80,6 +89,7 @@ export default function AdminHeroDashboard() {
       buttonDisabled: slide.button_disabled,
     });
     setError('');
+    setIsFormOpen(true);
   };
 
   const handleUpload = async (file: File) => {
@@ -119,8 +129,7 @@ export default function AdminHeroDashboard() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Save failed');
 
-      setEditingId(null);
-      setForm(EMPTY_FORM);
+      closeForm();
       await loadSlides();
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : 'Save failed');
@@ -133,8 +142,7 @@ export default function AdminHeroDashboard() {
     if (!confirm(`Delete "${slide.title}"?`)) return;
     await fetch(`/api/admin/hero-slides/${slide.id}`, { method: 'DELETE' });
     if (editingId === slide.id) {
-      setEditingId(null);
-      setForm(EMPTY_FORM);
+      closeForm();
     }
     await loadSlides();
   };
@@ -161,22 +169,12 @@ export default function AdminHeroDashboard() {
     await loadSlides();
   };
 
-  const handleLogout = async () => {
-    await fetch('/api/admin/logout', { method: 'POST' });
-    router.push('/admin/login');
-  };
-
   return (
-    <main className={styles.page}>
-      <header className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Hero Carousel</h1>
-          <p className={styles.subtitle}>Manage the slides shown on the homepage hero.</p>
-        </div>
-        <Button variant="tertiary" onClick={handleLogout}>
-          Log out
-        </Button>
-      </header>
+    <div className={styles.page}>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.title}>Hero Carousel</h1>
+        <p className={styles.subtitle}>Manage the slides shown on the homepage hero.</p>
+      </div>
 
       <section className={styles.list}>
         {isLoading ? (
@@ -218,14 +216,14 @@ export default function AdminHeroDashboard() {
           ))
         )}
 
-        {editingId === null && (
+        {!isFormOpen && (
           <button type="button" className={styles.addButton} onClick={startCreate}>
             <Plus size={16} /> Add new slide
           </button>
         )}
       </section>
 
-      {(editingId !== null || slides.length === 0) && (
+      {isFormOpen && (
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2 className={styles.formTitle}>{editingId ? 'Edit slide' : 'New slide'}</h2>
 
@@ -357,22 +355,13 @@ export default function AdminHeroDashboard() {
             <Button type="submit" variant="primary" disabled={isSaving}>
               {isSaving ? 'Saving…' : editingId ? 'Save changes' : 'Add slide'}
             </Button>
-            {editingId !== null && (
-              <Button
-                type="button"
-                variant="tertiary"
-                onClick={() => {
-                  setEditingId(null);
-                  setForm(EMPTY_FORM);
-                }}
-              >
-                Cancel
-              </Button>
-            )}
+            <Button type="button" variant="tertiary" onClick={closeForm}>
+              Cancel
+            </Button>
           </div>
         </form>
       )}
-    </main>
+    </div>
   );
 }
 

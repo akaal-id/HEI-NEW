@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthenticatedAdmin } from '../../../lib/supabaseServerAuth';
 import { getSupabaseAdminClient } from '../../../lib/supabase';
-import { heroSlideInputToRow, type HeroSlideInput } from '../../../lib/heroSlides';
+import {
+  DEFAULT_SITE_SETTINGS,
+  rowToSiteSettings,
+  siteSettingsToRow,
+  type SiteSettings,
+} from '../../../lib/siteSettings';
 
 export async function GET() {
   if (!(await getAuthenticatedAdmin())) {
@@ -14,18 +19,19 @@ export async function GET() {
   }
 
   const { data, error } = await supabase
-    .from('hero_slides')
+    .from('site_settings')
     .select('*')
-    .order('position', { ascending: true });
+    .eq('id', 'default')
+    .maybeSingle();
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ slides: data });
+  return NextResponse.json({ settings: data ? rowToSiteSettings(data) : DEFAULT_SITE_SETTINGS });
 }
 
-export async function POST(request: NextRequest) {
+export async function PUT(request: NextRequest) {
   if (!(await getAuthenticatedAdmin())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -35,10 +41,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Supabase is not configured' }, { status: 500 });
   }
 
-  const input = (await request.json()) as HeroSlideInput;
+  const input = (await request.json()) as SiteSettings;
   const { data, error } = await supabase
-    .from('hero_slides')
-    .insert(heroSlideInputToRow(input))
+    .from('site_settings')
+    .upsert({ id: 'default', ...siteSettingsToRow(input) })
     .select()
     .single();
 
@@ -46,5 +52,5 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ slide: data });
+  return NextResponse.json({ settings: rowToSiteSettings(data) });
 }

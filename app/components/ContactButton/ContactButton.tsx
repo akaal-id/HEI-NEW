@@ -7,7 +7,17 @@ import { BookOpen, Calendar, Phone } from 'lucide-react';
 import ContactModal from '../ContactModal/ContactModal';
 import styles from './ContactButton.module.css';
 
-export default function ContactButton() {
+interface ContactButtonProps {
+  contactVisible?: boolean;
+  guideVisible?: boolean;
+  scheduleVisible?: boolean;
+}
+
+export default function ContactButton({
+  contactVisible = true,
+  guideVisible = true,
+  scheduleVisible = true,
+}: ContactButtonProps) {
   const pathname = usePathname();
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -31,37 +41,44 @@ export default function ContactButton() {
   }, []);
 
   if (!isDesktop) return null;
+  if (!contactVisible && !guideVisible && !scheduleVisible) return null;
 
   return (
     <>
       <div className={styles.sideActions} aria-label="Quick actions">
-        <button
-          type="button"
-          className={`${styles.sideButton} ${styles.contactButton}`}
-          onClick={() => setIsContactModalOpen(true)}
-          aria-label="Contact us"
-        >
-          <Phone className={styles.buttonIcon} aria-hidden="true" />
-          <span className={styles.buttonText}>Contact Us</span>
-        </button>
+        {contactVisible && (
+          <button
+            type="button"
+            className={`${styles.sideButton} ${styles.contactButton}`}
+            onClick={() => setIsContactModalOpen(true)}
+            aria-label="Contact us"
+          >
+            <Phone className={styles.buttonIcon} aria-hidden="true" />
+            <span className={styles.buttonText}>Contact Us</span>
+          </button>
+        )}
 
-        <Link
-          href="/guide"
-          className={`${styles.sideButton} ${styles.guideButton} ${isGuide ? styles.guideButtonActive : ''}`}
-          aria-current={isGuide ? 'page' : undefined}
-        >
-          <BookOpen className={styles.buttonIcon} aria-hidden="true" />
-          <span className={styles.buttonText}>Guide</span>
-        </Link>
+        {guideVisible && (
+          <Link
+            href="/guide"
+            className={`${styles.sideButton} ${styles.guideButton} ${isGuide ? styles.guideButtonActive : ''}`}
+            aria-current={isGuide ? 'page' : undefined}
+          >
+            <BookOpen className={styles.buttonIcon} aria-hidden="true" />
+            <span className={styles.buttonText}>Guide</span>
+          </Link>
+        )}
 
-        <Link
-          href="/schedule"
-          className={`${styles.sideButton} ${styles.scheduleButton} ${isSchedule ? styles.scheduleButtonActive : ''}`}
-          aria-current={isSchedule ? 'page' : undefined}
-        >
-          <Calendar className={styles.buttonIcon} aria-hidden="true" />
-          <span className={styles.buttonText}>Schedule</span>
-        </Link>
+        {scheduleVisible && (
+          <Link
+            href="/schedule"
+            className={`${styles.sideButton} ${styles.scheduleButton} ${isSchedule ? styles.scheduleButtonActive : ''}`}
+            aria-current={isSchedule ? 'page' : undefined}
+          >
+            <Calendar className={styles.buttonIcon} aria-hidden="true" />
+            <span className={styles.buttonText}>Schedule</span>
+          </Link>
+        )}
       </div>
 
       <ContactModal

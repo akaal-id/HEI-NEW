@@ -4,11 +4,7 @@
   padding: clamp(1.5rem, 4vw, 3rem) var(--container-pad) 4rem;
 }
 
-.header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
+.pageHeader {
   margin-bottom: 2rem;
 }
 

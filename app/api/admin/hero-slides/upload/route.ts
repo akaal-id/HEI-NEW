@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isAdminAuthenticated } from '../../../../lib/adminAuth';
+import { getAuthenticatedAdmin } from '../../../../lib/supabaseServerAuth';
 import { getSupabaseAdminClient } from '../../../../lib/supabase';
 
 export async function POST(request: NextRequest) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getAuthenticatedAdmin())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

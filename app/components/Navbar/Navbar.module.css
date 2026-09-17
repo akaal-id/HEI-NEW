@@ -155,6 +155,48 @@
   color: var(--hei26-skyblue);
 }
 
+.dropdownItemDisabled {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--hei26-dongkerblue);
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.mobileSubmenuItemDisabled {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--hei26-dongkerblue);
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Visual-only muting for a dropdown parent (About Us / Our Programs) marked
+   disabled — the dropdown itself still opens so visitors can preview the
+   submenu; only the individual items inside are actually non-interactive. */
+.menuItemDisabled {
+  opacity: 0.55;
+}
+
+
 /* Register Now Button & Dropdown */
 .registerDropdownWrapper {
   position: relative;

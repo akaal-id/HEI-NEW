@@ -1,0 +1,242 @@
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--hei26-cream);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 1.5rem;
+  background: white;
+  border-bottom: 1px solid rgba(15, 92, 92, 0.12);
+}
+
+.topbarTitle {
+  font-weight: 700;
+  color: var(--hei26-deepgreen);
+}
+
+.userMenu {
+  position: relative;
+}
+
+.userMenuTrigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.7rem 0.35rem 0.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 92, 92, 0.15);
+  background: white;
+  cursor: pointer;
+}
+
+.userMenuTrigger:hover {
+  background: var(--hei26-cream);
+}
+
+.userAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--hei26-linearblue);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.userEmail {
+  font-size: 0.85rem;
+  color: var(--hei26-deepgreen);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.userDropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.85rem;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 16px 40px rgba(0, 36, 52, 0.14);
+  z-index: 30;
+}
+
+.userDropdownStatus {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--foreground);
+  opacity: 0.75;
+}
+
+.userDropdownStatus strong {
+  width: 100%;
+  color: var(--hei26-deepgreen);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #2fb344;
+  flex-shrink: 0;
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(200, 90, 67, 0.3);
+  background: transparent;
+  color: var(--hei26-coral-dark);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logoutButton:hover {
+  background: var(--hei26-coral-soft);
+}
+
+.body {
+  display: flex;
+  min-height: 0;
+}
+
+.sidebar {
+  flex-shrink: 0;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem 1rem;
+  background: white;
+  border-right: 1px solid rgba(15, 92, 92, 0.12);
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+.sidebarLogoLink {
+  display: flex;
+  padding: 0 0.5rem;
+}
+
+.sidebarLogo {
+  height: auto;
+  width: auto;
+  max-width: 140px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  color: var(--foreground);
+  opacity: 0.75;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.navItem:hover {
+  background: var(--hei26-cream);
+  opacity: 1;
+}
+
+.navItemActive {
+  background: var(--hei26-sand);
+  color: var(--hei26-deepgreen);
+  opacity: 1;
+  font-weight: 700;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.footer {
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--foreground);
+  opacity: 0.55;
+  background: white;
+  border-top: 1px solid rgba(15, 92, 92, 0.12);
+}
+
+@media (max-width: 720px) {
+  .userEmail {
+    display: none;
+  }
+
+  .sidebar {
+    width: 72px;
+    padding: 1.5rem 0.5rem;
+  }
+
+  .sidebarLogoLink {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .sidebarLogo {
+    max-width: 32px;
+  }
+
+  .navItem span,
+  .navItem {
+    font-size: 0;
+  }
+
+  .navItem svg {
+    flex-shrink: 0;
+  }
+
+  .navItem {
+    justify-content: center;
+  }
+}

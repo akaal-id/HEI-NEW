@@ -1,15 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Inter, Plus_Jakarta_Sans, Lora, Mulish } from "next/font/google";
-import Navbar from "./components/Navbar/Navbar";
-import MobileBottomNav from "./components/MobileBottomNav/MobileBottomNav";
-import Footer from "./components/Footer/Footer";
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import ContactButton from "./components/ContactButton/ContactButton";
-import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import SiteChrome from "./components/SiteChrome/SiteChrome";
 import MetaPixel from "./components/MetaPixel/MetaPixel";
 import StructuredData from "./components/StructuredData/StructuredData";
 import { Analytics } from "@vercel/analytics/next";
+import { getSiteSettings } from "./lib/siteSettings";
 import "./globals.css";
 
 const inter = Inter({
@@ -116,6 +112,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const siteSettings = await getSiteSettings();
 
   return (
     <html lang="en">
@@ -125,13 +122,7 @@ export default async function RootLayout({
         <StructuredData />
         <MetaPixel nonce={nonce} />
         <div id="modal-root" />
-        <LoadingScreen />
-        <Navbar />
-        {children}
-        <Footer />
-        <MobileBottomNav />
-        <ScrollToTop />
-        <ContactButton />
+        <SiteChrome settings={siteSettings}>{children}</SiteChrome>
         <Analytics />
       </body>
     </html>

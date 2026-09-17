@@ -8,9 +8,21 @@ import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Button from '../Button/Button';
 import ContactModal from '../ContactModal/ContactModal';
 import RegisterHubModal from '../RegisterHubModal/RegisterHubModal';
+import { DEFAULT_NAV_MENU, type NavMenuItem, type NavMenuLink } from '../../lib/navMenu';
+import buttonStyles from '../Button/Button.module.css';
 import styles from './Navbar.module.css';
 
-export default function Navbar() {
+interface NavbarProps {
+  navMenu?: NavMenuItem[];
+}
+
+function isPathActive(pathname: string | null, href: string): boolean {
+  if (pathname === href) return true;
+  if (href === '/') return false;
+  return Boolean(pathname?.startsWith(`${href}/`));
+}
+
+export default function Navbar({ navMenu = DEFAULT_NAV_MENU }: NavbarProps) {
   const pathname = usePathname();
   const isArticlesPage = pathname === '/articles' || Boolean(pathname?.startsWith('/articles/'));
   const isCultureFestivalPage =
@@ -22,8 +34,8 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<'about' | 'programs' | null>(null);
-  const [openMobileDropdown, setOpenMobileDropdown] = useState<'about' | 'programs' | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -105,11 +117,11 @@ export default function Navbar() {
     }
   };
 
-  const toggleDropdown = (menu: 'about' | 'programs') => {
+  const toggleDropdown = (menu: string) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
 
-  const toggleMobileDropdown = (menu: 'about' | 'programs') => {
+  const toggleMobileDropdown = (menu: string) => {
     setOpenMobileDropdown(openMobileDropdown === menu ? null : menu);
   };
 
@@ -130,6 +142,181 @@ export default function Navbar() {
   const isHomePage = pathname === '/';
   const showScrolledLogo = isScrolled || isHomePage || isArticlesPage || isCultureFestivalPage;
 
+  const visibleMenu = navMenu.filter((item) => item.visible);
+
+  const renderDesktopChild = (child: NavMenuLink, parentEnabled: boolean) => {
+    if (!child.visible) return null;
+
+    if (!child.enabled || !parentEnabled) {
+      return (
+        <button
+          key={child.key}
+          type="button"
+          className={`${styles.dropdownItem} ${styles.dropdownItemDisabled}`}
+          disabled
+        >
+          {child.label}
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        key={child.key}
+        href={child.href}
+        className={styles.dropdownItem}
+        onClick={closeDropdowns}
+      >
+        {child.label}
+      </Link>
+    );
+  };
+
+  const renderDesktopItem = (item: NavMenuItem) => {
+    const isActive = isPathActive(pathname, item.href);
+
+    if (item.children && item.children.length > 0) {
+      const isOpen = openDropdown === item.key;
+      return (
+        <div key={item.key} className={styles.menuItemWithDropdown}>
+          <Button
+            href={item.href}
+            variant="secondary"
+            className={`${styles.menuItem} ${isActive ? styles.menuItemActive : ''} ${isOpen ? styles.menuItemDropdownOpen : ''} ${!item.enabled ? styles.menuItemDisabled : ''}`}
+            textClassName={styles.menuItemText}
+            iconClassName={styles.menuItemIcon}
+            icon={ChevronDown}
+            onClick={(e?: React.MouseEvent) => {
+              e?.preventDefault();
+              toggleDropdown(item.key);
+            }}
+          >
+            {item.label}
+          </Button>
+          {isOpen && (
+            <div className={styles.dropdown}>
+              {item.children.map((child) => renderDesktopChild(child, item.enabled))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    if (!item.enabled) {
+      return (
+        <Button
+          key={item.key}
+          variant="tertiary"
+          disabled
+          className={`${styles.menuItem} ${buttonStyles.disabled}`}
+          textClassName={styles.menuItemText}
+          icon={undefined}
+        >
+          {item.label}
+        </Button>
+      );
+    }
+
+    return (
+      <Button
+        key={item.key}
+        href={item.href}
+        variant="tertiary"
+        className={`${styles.menuItem} ${isActive ? styles.menuItemActive : ''}`}
+        textClassName={styles.menuItemText}
+        icon={undefined}
+      >
+        {item.label}
+      </Button>
+    );
+  };
+
+  const renderMobileChild = (child: NavMenuLink, parentEnabled: boolean) => {
+    if (!child.visible) return null;
+
+    if (!child.enabled || !parentEnabled) {
+      return (
+        <button
+          key={child.key}
+          type="button"
+          className={`${styles.mobileSubmenuItem} ${styles.mobileSubmenuItemDisabled}`}
+          disabled
+        >
+          {child.label}
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        key={child.key}
+        href={child.href}
+        className={styles.mobileSubmenuItem}
+        onClick={closeMobileMenu}
+      >
+        {child.label}
+      </Link>
+    );
+  };
+
+  const renderMobileItem = (item: NavMenuItem) => {
+    const isActive = isPathActive(pathname, item.href);
+
+    if (item.children && item.children.length > 0) {
+      const isOpen = openMobileDropdown === item.key;
+      return (
+        <div key={item.key} className={styles.mobileMenuItemWithDropdown}>
+          <Button
+            href={item.href}
+            variant="secondary"
+            className={`${styles.mobileMenuItem} ${isActive ? styles.mobileMenuItemActive : ''} ${isOpen ? styles.mobileMenuItemDropdownOpen : ''} ${!item.enabled ? styles.menuItemDisabled : ''}`}
+            textClassName={styles.mobileMenuItemText}
+            iconClassName={styles.mobileMenuItemIcon}
+            icon={ChevronDown}
+            onClick={(e?: React.MouseEvent) => {
+              e?.preventDefault();
+              toggleMobileDropdown(item.key);
+            }}
+          >
+            {item.label}
+          </Button>
+          <div className={`${styles.mobileSubmenu} ${isOpen ? styles.mobileSubmenuOpen : ''}`}>
+            {item.children.map((child) => renderMobileChild(child, item.enabled))}
+          </div>
+        </div>
+      );
+    }
+
+    if (!item.enabled) {
+      return (
+        <Button
+          key={item.key}
+          variant="tertiary"
+          disabled
+          className={`${styles.mobileMenuItem} ${buttonStyles.disabled}`}
+          textClassName={styles.mobileMenuItemText}
+          icon={undefined}
+        >
+          {item.label}
+        </Button>
+      );
+    }
+
+    return (
+      <Button
+        key={item.key}
+        href={item.href}
+        variant="tertiary"
+        className={`${styles.mobileMenuItem} ${isActive ? styles.mobileMenuItemActive : ''}`}
+        textClassName={styles.mobileMenuItemText}
+        icon={undefined}
+        onClick={closeMobileMenu}
+      >
+        {item.label}
+      </Button>
+    );
+  };
+
   return (
     <nav className={`${styles.navbar} ${showScrolledLogo ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
       {/* Desktop Navbar */}
@@ -148,98 +335,7 @@ export default function Navbar() {
         </div>
 
         <div className={`${styles.menuContainer} ${isScrollingDown ? styles.menuHidden : ''}`}>
-          <Button
-            href="/"
-            variant="tertiary"
-            className={`${styles.menuItem} ${pathname === '/' ? styles.menuItemActive : ''}`}
-            textClassName={styles.menuItemText}
-            icon={undefined}
-          >
-            Home
-          </Button>
-
-          <div className={styles.menuItemWithDropdown}>
-            <Button
-              href="/about"
-              variant="secondary"
-              className={`${styles.menuItem} ${pathname === '/about' ? styles.menuItemActive : ''} ${openDropdown === 'about' ? styles.menuItemDropdownOpen : ''}`}
-              textClassName={styles.menuItemText}
-              iconClassName={styles.menuItemIcon}
-              icon={ChevronDown}
-              onClick={(e?: React.MouseEvent) => {
-                e?.preventDefault();
-                toggleDropdown('about');
-              }}
-            >
-              About Us
-            </Button>
-            {openDropdown === 'about' && (
-              <div className={styles.dropdown}>
-                <Link href="/about/d8-organization" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  About D-8 Summit
-                </Link>
-                <Link href="/about/d8-expo" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  About D-8 HEI 2026
-                </Link>
-                <Link href="/about/organizer" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  About Organizer
-                </Link>
-              </div>
-            )}
-          </div>
-
-          <div className={styles.menuItemWithDropdown}>
-            <Button
-              href="/programs"
-              variant="secondary"
-              className={`${styles.menuItem} ${pathname === '/programs' || pathname?.startsWith('/programs/') ? styles.menuItemActive : ''} ${openDropdown === 'programs' ? styles.menuItemDropdownOpen : ''}`}
-              textClassName={styles.menuItemText}
-              iconClassName={styles.menuItemIcon}
-              icon={ChevronDown}
-              onClick={(e?: React.MouseEvent) => {
-                e?.preventDefault();
-                toggleDropdown('programs');
-              }}
-            >
-              Our Programs
-            </Button>
-            {openDropdown === 'programs' && (
-              <div className={styles.dropdown}>
-                <Link href="/programs/exhibition" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  Exhibition
-                </Link>
-                <Link href="/programs/business-matching" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  Business Matching
-                </Link>
-                <Link href="/programs/hei-talk" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  D-8 HEI Talk
-                </Link>
-                <Link href="/programs/culture-festival" className={styles.dropdownItem} onClick={closeDropdowns}>
-                  D-8 HEI Cultural Fest
-                </Link>
-              </div>
-            )}
-          </div>
-
-          <Button
-            href="/partners"
-            variant="tertiary"
-            className={`${styles.menuItem} ${pathname === '/partners' ? styles.menuItemActive : ''}`}
-            textClassName={styles.menuItemText}
-            icon={undefined}
-          >
-            Our Partner
-          </Button>
-
-          <Button
-            href="/articles"
-            variant="tertiary"
-            className={`${styles.menuItem} ${pathname === '/articles' || pathname?.startsWith('/articles/') ? styles.menuItemActive : ''}`}
-            textClassName={styles.menuItemText}
-            icon={undefined}
-          >
-            Article & Media
-          </Button>
+          {visibleMenu.map(renderDesktopItem)}
 
           <Button
             variant="primary"
@@ -292,97 +388,7 @@ export default function Navbar() {
         </div>
 
         <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
-          <Button
-            href="/"
-            variant="tertiary"
-            className={`${styles.mobileMenuItem} ${pathname === '/' ? styles.mobileMenuItemActive : ''}`}
-            textClassName={styles.mobileMenuItemText}
-            icon={undefined}
-            onClick={closeMobileMenu}
-          >
-            Home
-          </Button>
-
-          <div className={styles.mobileMenuItemWithDropdown}>
-            <Button
-              href="/about"
-              variant="secondary"
-              className={`${styles.mobileMenuItem} ${pathname === '/about' ? styles.mobileMenuItemActive : ''} ${openMobileDropdown === 'about' ? styles.mobileMenuItemDropdownOpen : ''}`}
-              textClassName={styles.mobileMenuItemText}
-              iconClassName={styles.mobileMenuItemIcon}
-              icon={ChevronDown}
-              onClick={(e?: React.MouseEvent) => {
-                e?.preventDefault();
-                toggleMobileDropdown('about');
-              }}
-            >
-              About Us
-            </Button>
-            <div className={`${styles.mobileSubmenu} ${openMobileDropdown === 'about' ? styles.mobileSubmenuOpen : ''}`}>
-              <Link href="/about/d8-organization" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                About D-8 Summit
-              </Link>
-              <Link href="/about/d8-expo" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                About D8 HEI 2026
-              </Link>
-              <Link href="/about/organizer" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                About Organizer
-              </Link>
-            </div>
-          </div>
-
-          <div className={styles.mobileMenuItemWithDropdown}>
-            <Button
-              href="/programs"
-              variant="secondary"
-              className={`${styles.mobileMenuItem} ${pathname === '/programs' || pathname?.startsWith('/programs/') ? styles.mobileMenuItemActive : ''} ${openMobileDropdown === 'programs' ? styles.mobileMenuItemDropdownOpen : ''}`}
-              textClassName={styles.mobileMenuItemText}
-              iconClassName={styles.mobileMenuItemIcon}
-              icon={ChevronDown}
-              onClick={(e?: React.MouseEvent) => {
-                e?.preventDefault();
-                toggleMobileDropdown('programs');
-              }}
-            >
-              D8 HEI Programs
-            </Button>
-            <div className={`${styles.mobileSubmenu} ${openMobileDropdown === 'programs' ? styles.mobileSubmenuOpen : ''}`}>
-              <Link href="/programs/exhibition" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                Exhibition
-              </Link>
-              <Link href="/programs/business-matching" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                Business Matching
-              </Link>
-              <Link href="/programs/hei-talk" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                D-8 HEI Talk
-              </Link>
-              <Link href="/programs/culture-festival" className={styles.mobileSubmenuItem} onClick={closeMobileMenu}>
-                D-8 HEI Cultural Fest
-              </Link>
-            </div>
-          </div>
-
-          <Button
-            href="/partners"
-            variant="tertiary"
-            className={`${styles.mobileMenuItem} ${pathname === '/partners' ? styles.mobileMenuItemActive : ''}`}
-            textClassName={styles.mobileMenuItemText}
-            icon={undefined}
-            onClick={closeMobileMenu}
-          >
-            Our Partner
-          </Button>
-
-          <Button
-            href="/articles"
-            variant="tertiary"
-            className={`${styles.mobileMenuItem} ${pathname === '/articles' || pathname?.startsWith('/articles/') ? styles.mobileMenuItemActive : ''}`}
-            textClassName={styles.mobileMenuItemText}
-            icon={undefined}
-            onClick={closeMobileMenu}
-          >
-            Article & Media
-          </Button>
+          {visibleMenu.map(renderMobileItem)}
 
           <Button
             variant="primary"
@@ -407,4 +413,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
