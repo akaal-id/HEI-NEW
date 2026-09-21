@@ -13,10 +13,15 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 interface BrochureSectionProps {
   headingLevel?: 'h1' | 'h2';
+  mode?: 'full' | 'preview';
 }
 
-export default function BrochureSection({ headingLevel = 'h2' }: BrochureSectionProps) {
+export default function BrochureSection({
+  headingLevel = 'h2',
+  mode = 'full',
+}: BrochureSectionProps) {
   const Heading = headingLevel;
+  const isPreview = mode === 'preview';
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -79,12 +84,13 @@ export default function BrochureSection({ headingLevel = 'h2' }: BrochureSection
             Get the official <em>D-8 HEI 2027</em> Brochure
           </Heading>
           <p className={styles.description}>
-            Discover programs, partnership opportunities, venue details, and the full agenda
-            in one downloadable file. Drop your email below to get instant access.
+            {isPreview
+              ? 'Explore the programs, exhibitor opportunities, venue details, and essential event information inside the official brochure.'
+              : 'Discover programs, partnership opportunities, venue details, and the full agenda in one downloadable file. Drop your email below to get instant access.'}
           </p>
         </div>
 
-        <div ref={cardRef} className={styles.card}>
+        <div ref={cardRef} className={`${styles.card} ${isPreview ? styles.previewCard : ''}`}>
           <div className={styles.imageColumn}>
             <div className={styles.imageFrame}>
               <Image
@@ -99,6 +105,19 @@ export default function BrochureSection({ headingLevel = 'h2' }: BrochureSection
             <span className={styles.fileBadge}>D-8 HEI 2027 Brochure</span>
           </div>
 
+          {isPreview ? (
+            <div className={styles.previewColumn}>
+              <span className={styles.formEyebrow}>Official Event Guide</span>
+              <h3 className={styles.formTitle}>Discover what awaits at D-8 HEI 2027.</h3>
+              <p className={styles.previewText}>
+                See the trade floor, integrated programs, exhibitor and visitor categories,
+                participation packages, and official event contacts.
+              </p>
+              <Button href="/brochure" variant="yellow" className={styles.previewButton}>
+                View Brochure
+              </Button>
+            </div>
+          ) : (
           <div className={styles.formColumn}>
             <span className={styles.formEyebrow}>Free Download</span>
             <h3 className={styles.formTitle}>
@@ -175,6 +194,7 @@ export default function BrochureSection({ headingLevel = 'h2' }: BrochureSection
               </p>
             </form>
           </div>
+          )}
         </div>
       </div>
     </section>

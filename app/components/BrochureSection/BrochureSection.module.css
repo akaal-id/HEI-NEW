@@ -152,6 +152,40 @@
   min-width: 0;
 }
 
+.previewCard {
+  width: min(100%, 860px);
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  padding: 2.25rem;
+  box-sizing: border-box;
+}
+
+.previewCard .imageColumn {
+  width: clamp(220px, 25vw, 250px);
+  flex: 0 0 clamp(220px, 25vw, 250px);
+}
+
+.previewColumn {
+  display: flex;
+  max-width: 390px;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.previewText {
+  margin: 0;
+  color: color-mix(in srgb, var(--hei26-dongkerblue) 72%, #000);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.previewButton {
+  margin-top: 0.5rem;
+}
+
 .formEyebrow {
   font-size: 0.75rem;
   font-weight: 600;
@@ -336,6 +370,10 @@
   .formColumn {
     padding: 0;
   }
+
+  .previewColumn {
+    max-width: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -369,6 +407,15 @@
   .actionButton {
     align-self: stretch;
     width: 100%;
+  }
+
+  .previewColumn {
+    width: 100%;
+  }
+
+  .previewCard .imageColumn {
+    width: 100%;
+    flex-basis: auto;
   }
 
   .actionButton > span:first-child {

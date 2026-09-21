@@ -17,10 +17,10 @@ export default function StructuredData() {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'D-8 Halal Expo Indonesia 2026',
-    alternateName: 'HEI 2026',
+    name: 'D-8 Halal Expo Indonesia 2027',
+    alternateName: 'HEI 2027',
     url: baseUrl,
-    description: 'The 6th Halal Expo Indonesia 2026 - Strengthening D-8 Halal Economy Through International Collaboration. B2B halal exhibition, business matching, investment opportunities, and networking events in Jakarta, April 2026.',
+    description: 'D-8 Halal Expo Indonesia 2027 connects the global halal economy through international trade, business matching, investment opportunities, and industry collaboration in Jakarta.',
     publisher: {
       '@type': 'Organization',
       name: 'Skyconnection',
@@ -41,17 +41,17 @@ export default function StructuredData() {
     ? {
         '@context': 'https://schema.org',
         '@type': 'Event',
-        name: 'D-8 Halal Expo Indonesia 2026',
-        alternateName: 'The 6th Halal Expo Indonesia',
+        name: 'D-8 Halal Expo Indonesia 2027',
+        alternateName: 'HEI 2027',
         description:
           'International B2B halal exhibition and strategic global platform that advances the halal economy while supporting the objectives of the D-8 Organization for Economic Cooperation.',
-        startDate: '2026-04-14',
-        endDate: '2026-04-18',
+        startDate: '2027-07-07',
+        endDate: '2027-07-10',
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
         location: {
           '@type': 'Place',
-          name: 'Senayan Indoor Tennis Complex',
+          name: 'Kartika Expo Center',
           address: {
             '@type': 'PostalAddress',
             addressLocality: 'Jakarta',
@@ -66,11 +66,11 @@ export default function StructuredData() {
         image: `${baseUrl}/icon/icon-d8hei.png`,
         offers: {
           '@type': 'Offer',
-          url: `${baseUrl}#register`,
+          url: `${baseUrl}/register/exhibitor`,
           price: '0',
           priceCurrency: 'IDR',
           availability: 'https://schema.org/InStock',
-          validFrom: '2025-01-01',
+          validFrom: '2026-09-21',
         },
       }
     : null;
@@ -161,7 +161,7 @@ export default function StructuredData() {
       {
         '@type': 'SiteNavigationElement',
         name: 'Register',
-        url: `${baseUrl}#register`,
+        url: `${baseUrl}/register/exhibitor`,
         position: 6,
       },
     ],
@@ -171,12 +171,12 @@ export default function StructuredData() {
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'D-8 Halal Expo Indonesia 2026',
-    alternateName: 'HEI 2026',
+    name: 'D-8 Halal Expo Indonesia 2027',
+    alternateName: 'HEI 2027',
     url: baseUrl,
     logo: `${baseUrl}/icon/icon-d8hei.png`,
     description:
-      'The 6th Halal Expo Indonesia 2026 - International B2B halal exhibition and strategic global platform advancing the halal economy.',
+      'D-8 Halal Expo Indonesia 2027 is an international B2B exhibition and strategic platform advancing the global halal economy.',
     sameAs: [
       // Add social media links if available
     ],

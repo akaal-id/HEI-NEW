@@ -11,11 +11,11 @@ const ArticleSection = dynamic(() => import('./components/ArticleSection/Article
 });
 
 export const metadata: Metadata = {
-  title: "HEI 2026 - The 6th Halal Expo Indonesia | Home",
-  description: "Join the 6th Halal Expo Indonesia 2026 in Jakarta. Strengthening D-8 Halal Economy Through International Collaboration. Discover halal products, services, business opportunities, and networking events. April 2026.",
+  title: "HEI 2027 | D-8 Halal Expo Indonesia",
+  description: "Join D-8 Halal Expo Indonesia 2027 in Jakarta. Discover halal products, international trade opportunities, business matching, investment, and industry networking.",
   keywords: [
-    "Halal Expo Indonesia 2026",
-    "HEI 2026 Jakarta",
+    "Halal Expo Indonesia 2027",
+    "HEI 2027 Jakarta",
     "D-8 Halal Economy Summit",
     "Halal Exhibition Indonesia",
     "Halal Products Trade Fair",
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
     "Halal Industry Jakarta"
   ],
   openGraph: {
-    title: "HEI 2026 - The 6th Halal Expo Indonesia | Home",
-    description: "Join the 6th Halal Expo Indonesia 2026 in Jakarta. Strengthening D-8 Halal Economy Through International Collaboration.",
+    title: "HEI 2027 | D-8 Halal Expo Indonesia",
+    description: "Join D-8 Halal Expo Indonesia 2027 in Jakarta for international halal trade, business matching, investment, and industry collaboration.",
     url: "https://halalexpoindonesia.com",
   },
   alternates: {
@@ -42,7 +42,7 @@ export default async function Home() {
     <main>
       <Hero slides={heroSlides} />
       <BusinessMatchingHome />
-      <BrochureSection />
+      <BrochureSection mode="preview" />
       <ArticleSection />
       <D8Hei2026Archive />
     </main>

@@ -40,11 +40,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://halalexpoindonesia.com'),
-  title: "HEI 2026 - The 6th Halal Expo Indonesia | D-8 Halal Economy Summit",
-  description: "Join the 6th Halal Expo Indonesia 2026 in Jakarta. Strengthening D-8 Halal Economy Through International Collaboration. Discover halal products, services, and business opportunities. April 2026.",
+  title: "HEI 2027 | D-8 Halal Expo Indonesia",
+  description: "Join D-8 Halal Expo Indonesia 2027 in Jakarta for international halal trade, business matching, investment, and industry collaboration.",
   keywords: [
     "Halal Expo Indonesia",
-    "HEI 2026",
+    "HEI 2027",
     "D-8 Halal Economy",
     "Halal Exhibition Jakarta",
     "Halal Products Indonesia",
@@ -69,8 +69,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "HEI 2026 - The 6th Halal Expo Indonesia | D-8 Halal Economy Summit",
-    description: "Join the 6th Halal Expo Indonesia 2026 in Jakarta. Strengthening D-8 Halal Economy Through International Collaboration. Discover halal products, services, and business opportunities.",
+    title: "HEI 2027 | D-8 Halal Expo Indonesia",
+    description: "Join D-8 Halal Expo Indonesia 2027 in Jakarta for international halal trade, business matching, investment, and industry collaboration.",
     siteName: "Halal Expo Indonesia",
     url: "https://halalexpoindonesia.com",
     images: [
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
         url: "/icon/icon-d8hei.png",
         width: 1200,
         height: 630,
-        alt: "D-8 Halal Expo Indonesia 2026",
+        alt: "D-8 Halal Expo Indonesia 2027",
       },
     ],
     locale: "en_US",
@@ -86,8 +86,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "HEI 2026 - The 6th Halal Expo Indonesia",
-    description: "Join the 6th Halal Expo Indonesia 2026 in Jakarta. Strengthening D-8 Halal Economy Through International Collaboration.",
+    title: "HEI 2027 | D-8 Halal Expo Indonesia",
+    description: "Join D-8 Halal Expo Indonesia 2027 in Jakarta for international halal trade, business matching, investment, and industry collaboration.",
     images: ["/icon/icon-d8hei.png"],
     creator: "@HalalExpoID",
   },
