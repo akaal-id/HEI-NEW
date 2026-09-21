@@ -188,9 +188,7 @@ export default function OverviewSection() {
             </p>
             <div className={styles.buttonGroup}>
               <a 
-                href="https://drive.google.com/drive/folders/1Hhl1Bp-z1jwlsGrVGhwGylOibyhOzi9c" 
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/brochure"
                 className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.button}`}
               >
                 <span className={buttonStyles.text}>Download Brochure</span>

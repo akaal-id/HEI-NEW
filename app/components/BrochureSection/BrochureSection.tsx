@@ -8,10 +8,15 @@ import Button from '../Button/Button';
 import { useGoogleForm } from '../../hooks/useGoogleForm';
 
 const BROCHURE_PDF = '/brochure/D8-HEI%202026_Brochure.pdf';
-const BROCHURE_PREVIEW = '/brochure/HEI-brochure-prev.jpg';
+const BROCHURE_PREVIEW = '/brochure/HEI-brochure-prev.jpg?v=2027';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function BrochureSection() {
+interface BrochureSectionProps {
+  headingLevel?: 'h1' | 'h2';
+}
+
+export default function BrochureSection({ headingLevel = 'h2' }: BrochureSectionProps) {
+  const Heading = headingLevel;
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -53,7 +58,7 @@ export default function BrochureSection() {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = BROCHURE_PDF;
-    link.download = 'D8-HEI-2026-Brochure.pdf';
+    link.download = 'D8-HEI-2027-Brochure.pdf';
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
@@ -70,9 +75,9 @@ export default function BrochureSection() {
       <div className={styles.container}>
         <div ref={headerRef} className={styles.header}>
           <span className={styles.eyebrow}>BROCHURE</span>
-          <h2 className={styles.title}>
-            Get the official <em>D-8 HEI 2026</em> Brochure
-          </h2>
+          <Heading className={styles.title}>
+            Get the official <em>D-8 HEI 2027</em> Brochure
+          </Heading>
           <p className={styles.description}>
             Discover programs, partnership opportunities, venue details, and the full agenda
             in one downloadable file. Drop your email below to get instant access.
@@ -84,14 +89,14 @@ export default function BrochureSection() {
             <div className={styles.imageFrame}>
               <Image
                 src={BROCHURE_PREVIEW}
-                alt="D-8 Halal Expo Indonesia 2026 brochure preview"
+                alt="D-8 Halal Expo Indonesia 2027 brochure preview"
                 fill
                 sizes="(max-width: 1024px) 100vw, 480px"
                 className={styles.image}
                 priority={false}
               />
             </div>
-            <span className={styles.fileBadge}>D-8 HEI 2026 Brochure</span>
+            <span className={styles.fileBadge}>D-8 HEI 2027 Brochure</span>
           </div>
 
           <div className={styles.formColumn}>
@@ -166,7 +171,7 @@ export default function BrochureSection() {
               )}
 
               <p id="brochure-helper" className={styles.helperText}>
-                We&apos;ll only use your email to send official D-8 HEI 2026 updates.
+                We&apos;ll only use your email to send official D-8 HEI 2027 updates.
               </p>
             </form>
           </div>
