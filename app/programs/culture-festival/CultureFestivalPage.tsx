@@ -271,16 +271,16 @@ function FestivalHero() {
 
           <div className={styles.heroActions}>
             <Link
-              href="/register/visitor"
+              href="/register/exhibitor"
               className={`${buttonStyles.button} ${buttonStyles.primary} ${styles.heroActionButton}`}
             >
-              <span className={buttonStyles.text}>Get Tickets Now</span>
+              <span className={buttonStyles.text}>Register as Exhibitor</span>
               <div className={buttonStyles.iconContainer}>
                 <ArrowUpRight className={buttonStyles.icon} aria-hidden="true" />
               </div>
             </Link>
             <Link
-              href="/programs/culture-festival/register/exhibitor"
+              href="/register/exhibitor"
               className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.heroActionButton}`}
             >
               <span className={buttonStyles.text}>Book Your Space</span>
@@ -522,10 +522,10 @@ function ClosingCTA() {
           <h2 className={styles.closingHeading}>Be Part of the D-8 Culture Experience</h2>
           <p className={styles.closingText}>Join the cultural celebration of worldwide nations at D-8 HEI Cultural Festival 2026.</p>
           <Link
-            href="/register/visitor"
+            href="/register/exhibitor"
             className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.closingRegisterButton}`}
           >
-            <span className={`${buttonStyles.text} ${styles.closingRegisterText}`}>Get Tickets Now</span>
+            <span className={`${buttonStyles.text} ${styles.closingRegisterText}`}>Register as Exhibitor</span>
             <div className={`${buttonStyles.iconContainer} ${styles.closingRegisterIcon}`}>
               <ArrowUpRight className={buttonStyles.icon} aria-hidden="true" />
             </div>

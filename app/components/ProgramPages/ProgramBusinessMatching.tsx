@@ -42,11 +42,11 @@ export default function ProgramBusinessMatching() {
                 With approximately 100 business matching sessions expected, participants can maximize their networking opportunities and accelerate their business growth in the halal market. Our platform ensures that each meeting is strategically aligned with participants&apos; business objectives and market interests.
               </p>
               <Button
-                href="/register/buyer"
+                href="/register/exhibitor"
                 variant="primary"
                 className={styles.actionButton}
               >
-                Register as Buyer
+                Register as Exhibitor
               </Button>
             </div>
           </div>
@@ -152,11 +152,11 @@ export default function ProgramBusinessMatching() {
             The global halal economy is rapidly expanding across food, technology, cosmetics, and beyond. Relying on chance encounters on the exhibition floor isn&apos;t enough to scale a modern business. By registering for the Business Matching program at D-8 Halal Expo Indonesia 2026, you position your brand squarely in front of active investors and international delegates actively seeking halal-certified collaborations. Guarantee your high-value meetings before the doors even open.
           </p>
           <Button
-            href="/register/buyer"
+            href="/register/exhibitor"
             variant="yellow"
             className={styles.ctaButton}
           >
-            Register as Buyer
+            Register as Exhibitor
           </Button>
         </div>
       </section>

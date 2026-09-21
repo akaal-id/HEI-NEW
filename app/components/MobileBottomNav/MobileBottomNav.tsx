@@ -51,7 +51,7 @@ export default function MobileBottomNav() {
       </Link>
 
       <Link
-        href="/register"
+        href="/register/exhibitor"
         className={`${styles.item} ${isRegister ? styles.itemActive : ''}`}
         aria-current={isRegister ? 'page' : undefined}
       >

@@ -91,7 +91,7 @@ export default function Cta() {
             expand your business reach with us.
           </p>
           <a
-            href="/register"
+            href="/register/exhibitor"
             className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
           >
             <span className={buttonStyles.text}>Secure Your Spot</span>

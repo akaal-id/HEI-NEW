@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import Hero from './components/Hero/Hero';
-import HomePromoPopup from './components/HomePromoPopup/HomePromoPopup';
+import BusinessMatchingHome from './components/BusinessMatching/BusinessMatchingHome';
 import D8Hei2026Archive from './components/D8Hei2026Archive/D8Hei2026Archive';
 import { getHeroSlides } from './lib/heroSlides';
 
@@ -39,8 +39,8 @@ export default async function Home() {
 
   return (
     <main>
-      <HomePromoPopup />
       <Hero slides={heroSlides} />
+      <BusinessMatchingHome />
       <ArticleSection />
       <D8Hei2026Archive />
     </main>

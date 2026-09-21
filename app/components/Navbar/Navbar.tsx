@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Button from '../Button/Button';
 import ContactModal from '../ContactModal/ContactModal';
-import RegisterHubModal from '../RegisterHubModal/RegisterHubModal';
 import { DEFAULT_NAV_MENU, type NavMenuItem, type NavMenuLink } from '../../lib/navMenu';
 import buttonStyles from '../Button/Button.module.css';
 import styles from './Navbar.module.css';
@@ -39,7 +38,6 @@ export default function Navbar({
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const lastScrollY = useRef(0);
@@ -129,15 +127,6 @@ export default function Navbar({
 
   const toggleMobileDropdown = (menu: string) => {
     setOpenMobileDropdown(openMobileDropdown === menu ? null : menu);
-  };
-
-  const openRegisterModal = () => {
-    setOpenDropdown(null);
-    setOpenMobileDropdown(null);
-    setIsRegisterModalOpen(true);
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
   };
 
   const closeDropdowns = () => {
@@ -346,14 +335,11 @@ export default function Navbar({
           {registerButtonVisible && (
             registerButtonEnabled ? (
               <Button
+                href="/register/exhibitor"
                 variant="primary"
                 className={`${styles.menuItem} ${styles.registerButton}`}
                 textClassName={`${styles.menuItemText} ${styles.registerButtonText}`}
                 iconClassName={styles.registerButtonIcon}
-                onClick={(e?: React.MouseEvent) => {
-                  e?.preventDefault();
-                  openRegisterModal();
-                }}
               >
                 Register Now
               </Button>
@@ -413,14 +399,12 @@ export default function Navbar({
           {registerButtonVisible && (
             registerButtonEnabled ? (
               <Button
+                href="/register/exhibitor"
                 variant="primary"
                 className={`${styles.mobileMenuItem} ${styles.mobileRegisterButton}`}
                 textClassName={`${styles.mobileMenuItemText} ${styles.mobileRegisterButtonText}`}
                 iconClassName={styles.mobileRegisterButtonIcon}
-                onClick={(e?: React.MouseEvent) => {
-                  e?.preventDefault();
-                  openRegisterModal();
-                }}
+                onClick={closeMobileMenu}
               >
                 Register Now
               </Button>
@@ -440,10 +424,6 @@ export default function Navbar({
       </div>
 
       <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
-      <RegisterHubModal
-        isOpen={isRegisterModalOpen}
-        onClose={() => setIsRegisterModalOpen(false)}
-      />
     </nav>
   );
 }

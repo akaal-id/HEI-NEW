@@ -47,10 +47,10 @@ export default function CtaSection() {
 
         <div className={`${styles.callout} ${contentVisible ? styles.visible : ''}`}>
           <a
-            href="/register/visitor"
+            href="/register/exhibitor"
             className={`${buttonStyles.button} ${buttonStyles.yellow} ${styles.ctaButton}`}
           >
-            <span className={buttonStyles.text}>Get Your Pass</span>
+            <span className={buttonStyles.text}>Register as Exhibitor</span>
             <div className={buttonStyles.iconContainer}>
               <ArrowUpRight className={buttonStyles.icon} />
             </div>

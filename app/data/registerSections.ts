@@ -7,8 +7,8 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-/** External HEI Talk registration site. */
-export const HEI_TALK_REGISTRATION_URL = 'https://talk.halalexpoindonesia.com';
+/** Temporary destination while all public registration CTAs lead to the exhibitor form. */
+export const HEI_TALK_REGISTRATION_URL = '/register/exhibitor';
 
 /** Set to true when the HEI Talk registration URL is ready. */
 export const HEI_TALK_REGISTRATION_ENABLED = true;
@@ -39,8 +39,8 @@ export const REGISTER_SECTIONS: RegisterSection[] = [
     variant: 'main',
     options: [
       {
-        href: '/register/visitor',
-        label: 'Register as Visitor',
+        href: '/register/exhibitor',
+        label: 'Register as Exhibitor',
         description: 'Explore the exhibition, sessions, and programs.',
         icon: Users,
       },
@@ -60,8 +60,8 @@ export const REGISTER_SECTIONS: RegisterSection[] = [
         icon: Store,
       },
       {
-        href: '/register/buyer',
-        label: 'Register as Buyer',
+        href: '/register/exhibitor',
+        label: 'Register as Exhibitor',
         description: 'Source certified products and join business matching.',
         icon: ShoppingBag,
       },
@@ -91,8 +91,8 @@ export const REGISTER_SECTIONS: RegisterSection[] = [
     variant: 'culfest',
     options: [
       {
-        href: '/programs/culture-festival/register/exhibitor',
-        label: 'Book Your Space',
+        href: '/register/exhibitor',
+        label: 'Register as Exhibitor',
         description: 'Reserve a booth for cultural products and heritage offerings.',
         icon: Palette,
       },
