@@ -288,10 +288,6 @@
   background: var(--hei26-cream);
 }
 
-.milestone > .container {
-  max-width: none;
-}
-
 .sectionEyebrow {
   color: var(--hei26-forest);
 }
@@ -310,9 +306,7 @@
 .milestoneHeader {
   display: grid;
   width: 100%;
-  max-width: var(--container-max);
   margin-bottom: clamp(32px, 4vw, 44px);
-  margin-inline: auto;
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.55fr);
   align-items: end;
   gap: clamp(40px, 6vw, 88px);
@@ -358,7 +352,7 @@
 
 .timeline {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border-top: 1px solid rgba(15, 92, 92, 0.14);
   border-bottom: 1px solid rgba(15, 92, 92, 0.14);
   background: transparent;
@@ -407,8 +401,12 @@
   border-right: 0;
 }
 
-.milestoneCard:last-child {
-  color: inherit;
+.milestoneCard:nth-child(3n) {
+  border-right: 0;
+}
+
+.milestoneCard:nth-child(-n + 3) {
+  border-bottom: 1px solid rgba(15, 92, 92, 0.12);
 }
 
 .timelineMarker {
@@ -449,15 +447,16 @@
   transform: translateY(-50%);
 }
 
-.milestoneYear {
-  display: block;
-  margin-top: 22px;
-  color: var(--hei26-deepgreen);
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
-  font-size: clamp(2.35rem, 2.8vw, 3.1rem);
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.055em;
+.milestoneLogo {
+  position: relative;
+  width: min(100%, 220px);
+  height: 80px;
+  margin-top: 24px;
+}
+
+.milestoneLogo img {
+  object-fit: contain;
+  object-position: left center;
 }
 
 .milestoneMeta {
@@ -511,24 +510,6 @@
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1.45;
-}
-
-@media (max-width: 1040px) {
-  .timeline {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .milestoneCard:nth-child(3n) {
-    border-right: 0;
-  }
-
-  .milestoneCard:nth-child(-n + 3) {
-    border-bottom: 1px solid rgba(15, 92, 92, 0.12);
-  }
-}
-
-.milestoneCard:last-child .milestoneYear {
-  color: var(--hei26-skyblue);
 }
 
 .audience {
@@ -1212,10 +1193,6 @@
 
   .milestoneCard:last-child {
     border-bottom: 0;
-  }
-
-  .milestoneYear {
-    font-size: 2.75rem;
   }
 
   .matchingShowcase {

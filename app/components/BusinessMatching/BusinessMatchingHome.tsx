@@ -142,14 +142,21 @@ export default function BusinessMatchingHome() {
 
           <div className={styles.timelineViewport}>
             <div className={styles.timeline}>
-              {milestones.map((milestone, index) => (
+              {milestones.map((milestone) => (
                 <article key={milestone.year} className={styles.milestoneCard}>
                   <div className={styles.timelineMarker}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <span>{milestone.year}</span>
                     <i aria-hidden="true" />
                   </div>
 
-                  <strong className={styles.milestoneYear}>{milestone.year}</strong>
+                  <div className={styles.milestoneLogo}>
+                    <Image
+                      src={`/milestones/hei-${milestone.year}.png`}
+                      alt={`Halal Expo Indonesia ${milestone.year} logo`}
+                      fill
+                      sizes="(max-width: 760px) 80vw, 360px"
+                    />
+                  </div>
 
                   <div className={styles.milestoneMeta}>
                     <p className={styles.milestoneDate}>

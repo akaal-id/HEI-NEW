@@ -320,7 +320,7 @@ export default function Navbar({
           <Link href="/" className={styles.logoLink}>
             <Image
               src="/icon/D8 HEI Logo Long.svg"
-              alt="D-8 Halal Expo Indonesia 2026"
+              alt="D-8 Halal Expo Indonesia 2027"
               width={200}
               height={60}
               className={styles.logo}
@@ -364,7 +364,7 @@ export default function Navbar({
           <Link href="/" className={styles.mobileLogoLink} onClick={closeMobileMenu}>
             <Image
               src="/icon/D8 HEI Logo Long.svg"
-              alt="D-8 Halal Expo Indonesia 2026"
+              alt="D-8 Halal Expo Indonesia 2027"
               width={150}
               height={45}
               className={styles.mobileLogo}
