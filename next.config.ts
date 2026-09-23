@@ -55,6 +55,11 @@ const nextConfig: NextConfig = {
         destination: 'https://talk.halalexpoindonesia.com',
         permanent: false,
       },
+      {
+        source: '/programs/business-matching',
+        destination: 'https://business.halalexpoindonesia.com',
+        permanent: false,
+      },
     ];
   },
   images: {

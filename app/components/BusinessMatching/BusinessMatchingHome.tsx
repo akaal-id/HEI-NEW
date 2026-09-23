@@ -90,7 +90,7 @@ export default function BusinessMatchingHome() {
               <span>Recorded transaction value</span>
               <strong>US$13,200,915</strong>
               <p>Across letters of intent, purchase orders, and memoranda of understanding.</p>
-              <Button href="/register/exhibitor" variant="yellow">
+              <Button href="https://business.halalexpoindonesia.com" variant="yellow">
                 Join Business Matching
               </Button>
             </div>

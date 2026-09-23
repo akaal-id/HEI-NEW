@@ -29,7 +29,7 @@ const programs: Program[] = [
     title: 'Business Matching',
     image: '/images/Programs/2-Business Matching.png',
     description: 'Pre-scheduled, curated B2B meetings that turn introductions into cross-border deals across the D-8 halal market.',
-    href: '/programs/business-matching',
+    href: 'https://business.halalexpoindonesia.com',
   },
   {
     id: 'hei-talk',

@@ -68,7 +68,7 @@ export const DEFAULT_NAV_MENU: NavMenuItem[] = [
       {
         key: 'programs-business-matching',
         label: 'Business Matching',
-        href: '/programs/business-matching',
+        href: 'https://business.halalexpoindonesia.com',
         visible: true,
         enabled: true,
       },
