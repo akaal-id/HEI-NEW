@@ -7,7 +7,7 @@ import styles from './BrochureSection.module.css';
 import Button from '../Button/Button';
 import { useGoogleForm } from '../../hooks/useGoogleForm';
 
-const BROCHURE_PDF = '/brochure/D8-HEI%202026_Brochure.pdf';
+const BROCHURE_PDF = '/brochure/D8-HEI-2027-Brochure.pdf';
 const BROCHURE_PREVIEW = '/brochure/HEI-brochure-prev.jpg?v=2027';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

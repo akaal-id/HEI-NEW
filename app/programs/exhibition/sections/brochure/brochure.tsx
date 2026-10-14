@@ -6,7 +6,7 @@ import { ArrowUpRight } from 'lucide-react';
 import buttonStyles from '../../../../components/Button/Button.module.css';
 import styles from './brochure.module.css';
 
-const BROCHURE_FILE = '/files/D8-HEI-2025_Brochure.pdf';
+const BROCHURE_FILE = '/brochure/D8-HEI-2027-Brochure.pdf';
 const SWITCH_DURATION_MS = 320;
 const SUCCESS_DISPLAY_MS = 1100;
 
@@ -58,7 +58,7 @@ export default function BrochureSection() {
           <article className={styles.previewCard}>
             <div className={styles.previewHeader}>
               <span className={styles.previewEyebrow}>Brochure Preview</span>
-              <p className={styles.previewTitle}>D-8 HEI Exhibition 2025</p>
+              <p className={styles.previewTitle}>D-8 HEI Exhibition 2027</p>
             </div>
             <div className={styles.previewFrame}>
               <iframe
@@ -102,7 +102,7 @@ export default function BrochureSection() {
               <div className={styles.downloadWrap}>
                 <a
                   href={BROCHURE_FILE}
-                  download="D8-HEI-2025_Brochure.pdf"
+                  download="D8-HEI-2027-Brochure.pdf"
                   onClick={handleDownloadClick}
                   className={`${styles.submitBtn} ${buttonStyles.button} ${buttonStyles.yellow}`}
                 >
